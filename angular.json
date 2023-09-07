@@ -32,7 +32,14 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/libs.min.js",
+              "src/assets/vendor/gsap/gsap.min.js",
+              "src/assets/vendor/gsap/ScrollTrigger.min.js",
+              "src/assets/js/app.js" ,
+              "src/assets/js/gsap.js",
+              "src/assets/js/slider.js"
+            ]
           },
           "configurations": {
             "production": {
