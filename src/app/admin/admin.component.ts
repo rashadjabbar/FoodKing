@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AdminComponent {
 
+  constructor(private router: Router){}
+
+  logOut(){
+    sessionStorage.removeItem('token')
+    this.router.navigate(['/login-adminpanel']);
+
+  }
 }

@@ -33,58 +33,28 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <div id="iq-menu-container" class="menu-main-menu-container">
                 <ul id="top-menu" class="navbar-nav">
-                  <li class="active ">
-                    <a href="javascript:void(0)" aria-current="page" class="menu-item">Ana səhİfə
+                  <li  >
+                    <a routerLink="" aria-current="page" [routerLinkActive]="['active-menu']" [routerLinkActiveOptions]="{exact:true}" class="menu-item">Ana səhİfə
                       </a>
                   </li>
-                  <li class="">
-                    <a href="javascript:void(0)" class="menu-item">Katİqorİyalar
+                  <li >
+                    <a [routerLink]="['category-list']" [routerLinkActive]="['active-menu']" [routerLinkActiveOptions]="{exact:true}"  class="menu-item">Katİqorİyalar
                       <i class="fas fa-chevron-down  toggledrop"></i></a>
                     <ul class="sub-menu">
-                      <li class=""><a href="about-us.html">Mağaza</a></li>
+                      <li class=""><a >Mağaza</a></li>
                       <li class=""><a href="our-team.html">Şirniyyat evi</a></li>
                       <li class=""><a href="contact-us.html">Aptek</a></li>
                     </ul>
                   </li>
-                  <li class="">
-                    <a href="javascript:void(0)" class="menu-item">Sevİmlİlər</a>
+                  <li >
+                    <a [routerLink]="['wishlist']" [routerLinkActive]="['active-menu']" [routerLinkActiveOptions]="{exact:true}" class="menu-item">Sevİmlİlər</a>
                   </li>
                   <li class="">
-                    <a href="javascript:void(0)" class="menu-item">Səbət
+                    <a [routerLink]="['cart']" [routerLinkActive]="['active-menu']" [routerLinkActiveOptions]="{exact:true}" class="menu-item">Səbət
                     </a>
                   </li>
                 </ul>
               </div>
-            </div>
-            <div class="iq-shop-btn-holder">
-              <ul>
-                <li>
-                  <div class="search_count">
-                    <a href="javascript:void(0)" id="btn-search-2"><i class="fa fa-search" data-bs-backdrop="false"
-                        data-bs-toggle="modal" data-bs-target="#exampleModalFullscreen"></i></a>
-                    <div class="modal fade bg-transparent" data-bs-backdrop="false" id="exampleModalFullscreen"
-                      tabindex="-1" aria-hidden="false">
-                      <div class="modal-dialog modal-fullscreen iq-search-modal">
-                        <div class="modal-content">
-                          <div class="modal-header border-0">
-                            <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"
-                              aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body d-flex align-items-center justify-content-center my-5">
-                            <div class="my-5">
-                              <div class="d-flex justify-content-center align-items-center flex-wrap">
-                                <input class="border-0 border-bottom w-75 bg-black rounded-bottom" type="text"
-                                  placeholder="Search Website" aria-label=".form-control-lg example">
-                                <a href="javascript:void(0)" id="btn-search-3"><i class="fa fa-search"></i></a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
             </div>
           </nav>
         </div>
@@ -197,3 +167,4 @@
   </div>
   <!--Nav End-->
 </main>
+

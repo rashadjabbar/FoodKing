@@ -1,0 +1,33 @@
+.table-div{
+  width: 100%;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+}
+
+.operation-div{
+  width: 100%;
+  text-align: end;
+}
+
+.operation-button{
+  margin-right: 5%;
+}
+
+.mat-mdc-row{
+  transition: 0.2s;
+
+}
+
+.mat-mdc-row:hover {
+  background-color: #74baff1a;
+  color: black;
+  transition: 0.2s;
+}
+
+.selected-row{
+  background-color: #8394ff!important;
+  color: white;
+}

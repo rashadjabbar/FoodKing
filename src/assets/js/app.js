@@ -233,4 +233,4 @@ Index Of Script
     }
 })(jQuery);
 
-}, 400);
+}, 1000);

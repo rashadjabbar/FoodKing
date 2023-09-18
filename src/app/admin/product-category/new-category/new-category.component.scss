@@ -1,0 +1,23 @@
+.row, .col-lg-8, .col-lg-4{
+	margin: 0!important;
+	padding: 0!important;
+}
+
+.add-button{
+	display: flex;
+	justify-content: end;
+}
+
+.dialog-button{
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+.input-container{
+	align-items: end;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper{
+	display: none;
+  }
+

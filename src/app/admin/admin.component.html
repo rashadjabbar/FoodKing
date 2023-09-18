@@ -1,1 +1,45 @@
-<p>admin works!</p>
+<nav class="navbar navbar-expand-custom navbar-mainbg">
+    <div class="admin-logo">
+        <img src="../../assets/images/logo.png" alt="">
+        <a [routerLink]="['']">
+            <h4>Food King</h4>
+        </a>
+    </div>
+    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <i class="fas fa-bars text-white"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <div class="hori-selector">
+                <div class="left"></div>
+                <div class="right"></div>
+            </div>
+            <li class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a class="nav-link" [routerLink]="['dashboard']"><i class="fas fa-poll"></i>İdarə paneli</a>
+            </li>
+            <li class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a class="nav-link" [routerLink]="['products']"><i class="fas fa-utensils"></i>Məhsullar</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a class="nav-link" [routerLink]="['product-category']"><i class="fas fa-list-alt"></i>Kateqoriyalar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Calendar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+            </li>
+        </ul>
+    </div>
+    <div>
+      <button type="button" class="button" (click)="logOut()">Çıxış et</button>
+
+    </div>
+</nav>
+<div class="container-1">
+    <router-outlet></router-outlet>
+</div>

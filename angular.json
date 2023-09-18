@@ -30,6 +30,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/ngx-spinner/animations/ball-scale-pulse.css",
+              "src/assets/css/theme.scss",
               "src/styles.scss"
             ],
             "scripts": [
@@ -38,7 +40,8 @@
               "src/assets/vendor/gsap/ScrollTrigger.min.js",
               "src/assets/js/app.js" ,
               "src/assets/js/gsap.js",
-              "src/assets/js/slider.js"
+              "src/assets/js/slider.js",
+              "src/assets/admin/js/app.js"
             ]
           },
           "configurations": {
@@ -100,6 +103,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
