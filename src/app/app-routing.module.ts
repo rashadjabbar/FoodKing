@@ -14,7 +14,7 @@ import { AdminLogin } from 'src/guards/admin-login.guard';
 
 const routes: Routes = [
   {
-    path: '', component: PublicComponent,canActivate: [AdminLogin],
+    path: '', component: PublicComponent,
     children: [
       { path: '', component: HomeComponent },
       { path: 'category-list', component: CategoryListComponent },

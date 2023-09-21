@@ -41,9 +41,7 @@
                     <a [routerLink]="['category-list']" [routerLinkActive]="['active-menu']" [routerLinkActiveOptions]="{exact:true}"  class="menu-item">Katİqorİyalar
                       <i class="fas fa-chevron-down  toggledrop"></i></a>
                     <ul class="sub-menu">
-                      <li class=""><a >Mağaza</a></li>
-                      <li class=""><a href="our-team.html">Şirniyyat evi</a></li>
-                      <li class=""><a href="contact-us.html">Aptek</a></li>
+                      <li class="" *ngFor="let category of categories"><a >{{category.value}}</a></li>
                     </ul>
                   </li>
                   <li >

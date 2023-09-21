@@ -3,13 +3,14 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Category } from 'src/models/category';
+import { Category, SubCategory } from 'src/models/category';
 import { CategoryService } from 'src/services/category.service';
 import { NewCategoryComponent } from './new-category/new-category.component';
 import Swal from 'sweetalert2';
 import { StatusRequest } from 'src/models/status';
 import { showInfoAlert } from 'src/utils/alert';
 import { Router } from '@angular/router';
+import { NewSubcategoryComponent } from './new-subcategory/new-subcategory.component';
 
 @Component({
   selector: 'app-product-category',
@@ -24,9 +25,12 @@ export class ProductCategoryComponent {
     private router: Router) { }
 
   catData: Category[] = []
+  subCatData: SubCategory[] = []
   statusRequest!: StatusRequest;
 
-  @ViewChild('paginator') paginator!: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatPaginator) subPaginator!: MatPaginator;
+
   displayedColumns: string[] = [
     'id',
     'name',
@@ -41,37 +45,41 @@ export class ProductCategoryComponent {
   ];
 
   length!: number
+  sublength!: number
   pageSize!: number;
   pageSizeOptions: number[] = [5, 10, 25];
   pageEvent!: PageEvent;
+  tabID: number = 0;
 
   activeRow: any = -1;
   selectedId: any = 0;
 
   dataSource = new MatTableDataSource<Category>(this.catData);
-  subDataSource = new MatTableDataSource<Category>(this.catData);
+  subDataSource = new MatTableDataSource<SubCategory>(this.subCatData);
   selection = new SelectionModel<Category>(true, []);
 
   requestData: any = {
     nextPageNumber: 1,
-    visibleItemCount: 10,
+    visibleItemCount: 5,
   }
 
   isActive = (index: number) => { return this.activeRow === index };
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
     this.getCategory();
+    // this.getSubCategory()
   }
 
   getCategory() {
     this.categoryServices.getCategory(this.requestData).subscribe({
       next: res => {
-        this.length = res.data.count
         this.dataSource = new MatTableDataSource<Category>(res.data.result);
-        this.dataSource.paginator = this.paginator
+        debugger
+        // this.dataSource.paginator = this.paginator
+        debugger
+        this.length = res.data.count
       },
-      error: res =>{
+      error: res => {
         if (res.status == 401) {
           Swal.fire({
             icon: 'error',
@@ -82,6 +90,44 @@ export class ProductCategoryComponent {
         }
       }
     })
+  }
+
+  getSubCategory() {
+    this.categoryServices.getSubCategory(this.requestData).subscribe({
+      next: res => {
+        console.log(res.data.count)
+        this.sublength = res.data.count
+        this.subDataSource = new MatTableDataSource<SubCategory>(res.data.result);
+        // this.subDataSource.paginator = this.subPaginator
+      },
+      error: res => {
+        if (res.status == 401) {
+          Swal.fire({
+            icon: 'error',
+            title: 'İcazəsiz giriş...',
+            text: 'Login sehifesinden daxil olun!',
+          })
+          this.router.navigate(['/login-adminpanel']);
+        }
+      }
+    })
+  }
+
+  onChangePage(pe: PageEvent) {
+    this.requestData.nextPageNumber = pe.pageIndex + 1
+    this.requestData.visibleItemCount = pe.pageSize
+    if (this.tabID == 0) {
+      this.getCategory()
+    } else
+      this.getSubCategory();
+  }
+
+  tabChange(id: number) {
+    this.tabID = id
+    if (id == 0) {
+      this.getCategory()
+    } else
+      this.getSubCategory()
   }
 
   status(id: number, event: any) {
@@ -89,21 +135,41 @@ export class ProductCategoryComponent {
       id: id,
       status: event.target.checked
     }
-    this.categoryServices.changeCategoryStatus(this.statusRequest).subscribe({
-      next: res => {
-        this.getCategory()
-      },
-      error: res =>{
-        if (res.status == 401) {
-          Swal.fire({
-            icon: 'error',
-            title: 'İcazəsiz giriş...',
-            text: 'Login sehifesinden daxil olun!',
-          })
-          this.router.navigate(['/login-adminpanel']);
+
+    if (this.tabID == 0) {
+      this.categoryServices.changeCategoryStatus(this.statusRequest).subscribe({
+        next: res => {
+          this.getCategory()
+        },
+        error: res => {
+          if (res.status == 401) {
+            Swal.fire({
+              icon: 'error',
+              title: 'İcazəsiz giriş...',
+              text: 'Login sehifesinden daxil olun!',
+            })
+            this.router.navigate(['/login-adminpanel']);
+          }
         }
-      }
-    })
+      })
+    } else
+      this.categoryServices.changeSubCategoryStatus(this.statusRequest).subscribe({
+
+
+        next: res => {
+          this.getSubCategory()
+        },
+        error: res => {
+          if (res.status == 401) {
+            Swal.fire({
+              icon: 'error',
+              title: 'İcazəsiz giriş...',
+              text: 'Login sehifesinden daxil olun!',
+            })
+            this.router.navigate(['/login-adminpanel']);
+          }
+        }
+      })
 
   }
 
@@ -114,19 +180,39 @@ export class ProductCategoryComponent {
       id = this.selection['selected'][0].id;
     } else id = 0
 
-    const dialogRef = this.dialog.open(NewCategoryComponent, {
-      data: { id: id, typeView: type },
-      height: 'max-content',
-      width: '30%',
-      hasBackdrop: true,
-      disableClose: true
-    })
-    dialogRef.afterClosed().subscribe(result => {
-      this.selection.clear()
-      this.activeRow = -1;
-      this.selectedId = 0;
-      this.getCategory();
-    });
+    if (this.tabID == 0) {
+      const dialogRef = this.dialog.open(NewCategoryComponent, {
+        data: { id: id, typeView: type },
+        height: 'max-content',
+        width: '30%',
+        hasBackdrop: true,
+        disableClose: true
+      })
+      dialogRef.afterClosed().subscribe(result => {
+        this.selection.clear()
+        this.activeRow = -1;
+        this.selectedId = 0;
+        this.getCategory();
+      });
+    } else {
+      const dialogRef = this.dialog.open(NewSubcategoryComponent, {
+        data: { id: id, typeView: type },
+        height: 'max-content',
+        width: '30%',
+        hasBackdrop: true,
+        disableClose: true
+      })
+      dialogRef.afterClosed().subscribe(result => {
+        this.selection.clear()
+        this.activeRow = -1;
+        this.selectedId = 0;
+        this.getCategory();
+        this.getSubCategory()
+      });
+    }
+
+
+
   }
 
 

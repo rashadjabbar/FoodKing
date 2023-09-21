@@ -11,15 +11,16 @@ export class PublicComponent {
 
   constructor(
     private categoryServices: CategoryService) { }
-    protocolData: AllCategory[] = []
+    categories: AllCategory[] = []
 
     ngOnInit() {
-      this.getProtocolData()
+      this.getCategories()
     }
     
-  getProtocolData() {
-    this.categoryServices.getAllCategory().subscribe((data: AllCategory[]) => {
-      console.log(data)
+  getCategories() {
+    this.categoryServices.getAllCategory().subscribe((res: any) => {
+      this.categories = res.data
+      console.log(res.data)
     })
   }
 }

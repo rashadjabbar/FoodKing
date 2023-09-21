@@ -37,12 +37,6 @@ export class NewCategoryComponent {
     status: [true],
   })
 
-  // telegramVal() {
-  //   this.categoryForm = this.formBuilder.group({
-  //     id: [0, Validators.required],
-  //     name: ['', Validators.required],
-  //   })
-  // }
 
   get Tf(): { [key: string]: AbstractControl } {
     return this.categoryForm.controls;
@@ -74,27 +68,6 @@ export class NewCategoryComponent {
         confirmButtonText: 'Bağla'
       })
     })
-
-    // if (this.data.id == 0) {
-    //   this.categoryService.postandputCategory(this.categoryForm.value as Category).subscribe(res => {
-    //     this.dialogRef.close()
-    //     Swal.fire({
-    //       icon: 'success',
-    //       title: 'Uğurla əlavə olundu!',
-    //       confirmButtonText: 'Bağla'
-    //     })
-    //   })
-    // }
-    // else {
-    //   this.categoryService.putCategory(this.data.id, this.categoryForm.value as Category).subscribe(res => {
-    //     this.dialogRef.close()
-    //     Swal.fire({
-    //       icon: 'success',
-    //       title: 'Uğurla dəyişdirildi!',
-    //       confirmButtonText: 'Bağla'
-    //     })
-    //   })
-    // }
 
   }
 

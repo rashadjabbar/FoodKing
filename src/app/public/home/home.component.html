@@ -61,64 +61,9 @@
                   </div>
                   <div class="chat-list-main">
                     <ul class="list-unstyled">
-                      <li class="chat-list">
-                        <a href="javascript:void(0)" class="pointer">
-                          Bakery <span class="text-primary">(5)</span>
-                        </a>
-                      </li>
-                      <li class="chat-list">
-                        <a href="javascript:void(0)" class="pointer">
-                          Breakfast Cereals <span class="text-primary">(9)</span>
-                        </a>
-                      </li>
-                      <li class="chat-list">
-                        <a href="javascript:void(0)" class="pointer">
-                          Corn <span class="text-primary">(2)</span>
-                        </a>
-                      </li>
-                      <li class="chat-list">
-                        <a href="javascript:void(0)" class="pointer">
-                          Fruit Yogurt <span class="text-primary">(4)</span>
-                        </a>
-                      </li>
-                      <li class="chat-list">
-                        <a href="javascript:void(0)" class="pointer">
-                          Fruits <span class="text-primary">(7)</span>
-                        </a>
-                      </li>
-                      <li class="chat-list">
-                        <a href="javascript:void(0)" class="pointer">
-                          Maggi <span class="text-primary">(3)</span>
-                        </a>
-                      </li>
-                      <li class="chat-list">
-                        <a href="javascript:void(0)" class="pointer">
-                          Pizza <span class="text-primary">(2)</span>
-                        </a>
-                      </li>
-                      <li class="chat-list">
-                        <a href="javascript:void(0)" class="pointer">
-                          Salads <span class="text-primary">(4)</span>
-                        </a>
-                      </li>
-                      <li class="chat-list">
-                        <a href="javascript:void(0)" class="pointer">
-                          Snacks <span class="text-primary">(3)</span>
-                        </a>
-                      </li>
-                      <li class="chat-list">
-                        <a href="javascript:void(0)" class="pointer">
-                          Soups <span class="text-primary">(8)</span>
-                        </a>
-                      </li>
-                      <li class="chat-list">
-                        <a href="javascript:void(0)" class="pointer">
-                          Spices <span class="text-primary">(6)</span>
-                        </a>
-                      </li>
-                      <li class="chat-list">
-                        <a href="javascript:void(0)" class="pointer">
-                          Vegetables <span class="text-primary">(7)</span>
+                      <li class="chat-list" *ngFor="let category of categories">
+                        <a >
+                          {{category.value}}
                         </a>
                       </li>
                     </ul>
