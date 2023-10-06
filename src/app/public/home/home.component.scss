@@ -1,0 +1,23 @@
+.chat-list{
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.chat-list div a:hover {
+    cursor: pointer;
+}
+
+.subLi{
+    padding: 5px!important;
+    list-style: none;
+    border-radius: 5px;
+}
+
+.subLi:hover {
+    background-color: #3bb77e;
+    color: white;
+    transition: 0.4s;
+    cursor: pointer;
+}
+

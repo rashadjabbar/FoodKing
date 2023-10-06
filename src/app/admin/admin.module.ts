@@ -2,7 +2,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import { RouterModule } from '@angular/router';
-import { AddProductComponent } from './product/add-product.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -25,6 +24,8 @@ import { AdminLogin } from 'src/guards/admin-login.guard';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AddProductComponent } from './product/product.component';
+import { NewProductComponent } from './product/new-product/new-product.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem("token");
@@ -37,7 +38,8 @@ export function tokenGetter() {
     DashboardComponent,
     ProductCategoryComponent,
     NewCategoryComponent,
-    NewSubcategoryComponent
+    NewSubcategoryComponent,
+    NewProductComponent
   ],
   imports: [
     CommonModule,

@@ -16,3 +16,10 @@ export class SubCategory {
     status?: true
 }
 
+
+export class AllCategoryBrowse {
+    id?: number
+    name?: string
+    subCategoryData?: AllCategory[]
+}
+

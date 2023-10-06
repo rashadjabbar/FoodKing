@@ -59,49 +59,25 @@
                     <h5 class="iq-title">Məhsul kateqoriyaları</h5>
                     <div class="iq-title-divider"></div>
                   </div>
-                  <div class="chat-list-main">
+                  <div class="chat-list-main" id="#leftside-navigation" id="accordionExample">
+
                     <ul class="list-unstyled">
-                      <li class="chat-list" *ngFor="let category of categories">
-                        <a >
-                          {{category.value}}
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-body">
-                  <div class="iq-title-box1">
-                    <h5 class="iq-title">Populyar Məhsullar</h5>
-                    <div class="iq-title-divider"></div>
-                  </div>
-                  <div class="mt-2">
-                    <ul class="list-inline m-0 p-0">
-                      <li class="d-flex mb-3 align-items-center active">
-                        <img src="../assets/images/product/03.jpg" alt="product-image" class="rounded avatar-70 w-25">
-                        <div class="ms-3">
-                          <a href="../product/onSale.html" class="iq-product-title-link h5">Bread Breakfast</a>
-                          <p class="mb-0"> ₼7.50</p>
+                      <li class="chat-list" id="chat-list" *ngFor="let category of categories;  index as i">
+                        <div style="display: flex;justify-content: space-between;">
+                          <a (click)="categoryClick(category.id)">
+                            {{category.name}}
+                          </a>
+                          <i *ngIf="category.subCategoryData?.length !== 0" class="fas fa-chevron-down" type="button"
+                            data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + '-' + i"
+                            aria-expanded="false" [attr.aria-controls]="'#collapse'  + '-' + i"></i>
                         </div>
+                        <ul id="collapse-{{i}}" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
+                          <li class="subLi" *ngFor="let item of category.subCategoryData"
+                            (click)="subCategoryClick(category.id , item.key)">{{item.value}}</li>
+
+                        </ul>
                       </li>
-                      <li class="d-flex mb-3 align-items-center active">
-                        <img src="../assets/images/product/06.jpg" alt="product-image" class="rounded avatar-70 w-25">
-                        <div class="ms-3">
-                          <a href="../product/onSale.html" class="iq-product-title-link h5">Heinz Ketchup</a>
-                          <p class="mb-0"> ₼25</p>
-                        </div>
-                      </li>
-                      <li class="d-flex align-items-center active">
-                        <img src="../assets/images/product/02.jpg" alt="product-image" class="rounded avatar-70 w-25">
-                        <div class="ms-3">
-                          <a href="../product/onSale.html" class="iq-product-title-link h5">Side Dish</a>
-                          <div class="d-flex ">
-                            <p class="text-decoration-line-through text-secondary me-1"> ₼10</p>
-                            <p class="mb-0"> ₼8</p>
-                          </div>
-                        </div>
-                      </li>
+
                     </ul>
                   </div>
                 </div>
@@ -111,9 +87,7 @@
           <div class="col-xl-9 col-lg-12" data-iq-gsap="onStart" data-iq-position-x="150" data-iq-rotate="0"
             data-iq-trigger="scroll" data-iq-ease="power.inOut">
             <div class="mb-3 d-flex justify-content-between align-items-center">
-              <p class="mb-0">
-                41 nəticədən 1&ndash;12 arası göstərilir
-              </p>
+
               <select name="orderby" class="orderby" aria-label="Shop order">
                 <option value="menu_order" selected='selected'>Defolt çeşidləmə</option>
                 <option value="popularity">Populyarlığa görə sırala</option>
@@ -125,438 +99,21 @@
               <input type="hidden" name="paged" value="1" />
             </div>
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
-              <div class="col">
+              <div class="col" *ngFor="let product of productData">
                 <div class="card card-product">
                   <div class="card-body">
                     <div class="iq-product-image">
-                      <img src="../assets/images/product/04.png" class="hover_image" alt="img">
+                      <img src="http://192.168.37.49:3005/{{product.imagePath}}" class="hover_image" alt="img">
                     </div>
                     <div class="iq-product-content mt-3">
-                      <p class="mb-0"><small>Breakfast Cereals,Snacks</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">Bolthouse</a>
+                      <p class="mb-0"><small>{{product.categoryName}}</small> →
+                        <small>{{product.subCategoryName}}</small></p>
+                      <a href="../product/new-product.html" class="iq-product-title-link h5">{{product.productName}}</a>
                       <div class="d-flex align-items-center justify-content-between my-2">
                         <h6 class="m-0">
                           <span class="text-decoration-line-through"></span>
-                          <span class="text-primary"><b> ₼100</b></span>
+                          <span class="text-primary"><b> ₼{{product.price}}</b></span>
                         </h6>
-                      </div>
-                      <div class="d-flex justify-content-between mb-3">
-                        <div class="iq-btn-container">
-                          <a class="" href="javascript:void(0)" data-alert="sweetalert-product">
-                            <div class="btn btn-secondary animation-btn">
-                              Səbətə at
-                              <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="iq-product-icon">
-                            <a href="javascript:void(0)" data-alert="sweetalert-heart">
-                              <i class="far fa-heart"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-product">
-                  <div class="card-body">
-                    <div class="iq-product-image">
-                      <img src="../assets/images/product/14.jpg" class="hover_image" alt="img">
-                    </div>
-                    <div class="iq-product-content mt-3">
-                      <p class="mb-0"><small>Bakery,Snacks</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">Bread</a>
-                      <div class="d-flex align-items-center justify-content-between my-2">
-                        <h6 class="m-0">
-                          <span class="text-decoration-line-through"> ₼1200</span>
-                          <span class="text-primary"><b> ₼1000</b></span>
-                        </h6>
-                         
-                      </div>
-                      <div class="d-flex justify-content-between mb-3">
-                        <div class="iq-btn-container">
-                          <a class="" href="javascript:void(0)" data-alert="sweetalert-product">
-                            <div class="btn btn-secondary animation-btn">
-                              Səbətə at
-                              <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="iq-product-icon">
-                            <a href="javascript:void(0)" data-alert="sweetalert-heart">
-                              <i class="far fa-heart"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-product">
-                  <div class="card-body">
-                    <div class="iq-product-image">
-                      <img src="../assets/images/product/03.jpg" class="hover_image" alt="img">
-                    </div>
-                    <div class="iq-product-content mt-3">
-                      <p class="mb-0"><small>Breakfast Cereals</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">Bread Breakfast</a>
-                      <div class="d-flex align-items-center justify-content-between my-2">
-                        <h6 class="m-0">
-                          <span class="text-decoration-line-through"></span>
-                          <span class="text-primary"><b> ₼7.50</b></span>
-                        </h6>
-                        
-                      </div>
-                      <div class="d-flex justify-content-between mb-3">
-                        <div class="iq-btn-container">
-                          <a class="" href="javascript:void(0)" data-alert="sweetalert-product">
-                            <div class="btn btn-secondary animation-btn">
-                              Səbətə at
-                              <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="iq-product-icon">
-                            <a href="javascript:void(0)" data-alert="sweetalert-heart">
-                              <i class="far fa-heart"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-product">
-                  <div class="card-body">
-                    <div class="iq-product-image">
-                      <img src="../assets/images/product/13.jpg" class="hover_image" alt="img">
-                    </div>
-                    <div class="iq-product-content mt-3">
-                      <p class="mb-0"><small>Salads,Soups</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">Broccoli</a>
-                      <div class="d-flex align-items-center justify-content-between my-2">
-                        <h6 class="m-0">
-                          <span class="text-decoration-line-through"></span>
-                          <span class="text-primary"><b> ₼15</b></span>
-                        </h6>
-                         
-                      </div>
-                      <div class="d-flex justify-content-between mb-3">
-                        <div class="iq-btn-container">
-                          <a class="" href="javascript:void(0)" data-alert="sweetalert-product">
-                            <div class="btn btn-secondary animation-btn">
-                              Səbətə at
-                              <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="iq-product-icon">
-                            <a href="javascript:void(0)" data-alert="sweetalert-heart">
-                              <i class="far fa-heart"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-product">
-                  <div class="card-body">
-                    <div class="iq-product-image">
-                      <img src="../assets/images/product/15.jpg" class="hover_image" alt="img">
-                    </div>
-                    <div class="iq-product-content mt-3">
-                      <p class="mb-0"><small>Soups,Vegetables</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">Cardamom</a>
-                      <div class="d-flex align-items-center justify-content-between my-2">
-                        <h6 class="m-0">
-                          <span class="text-decoration-line-through"></span>
-                          <span class="text-primary"><b> ₼22</b></span>
-                        </h6>
-                         
-                      </div>
-                      <div class="d-flex justify-content-between mb-3">
-                        <div class="iq-btn-container">
-                          <a class="" href="javascript:void(0)" data-alert="sweetalert-product">
-                            <div class="btn btn-secondary animation-btn">
-                              Səbətə at
-                              <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="iq-product-icon">
-                            <a href="javascript:void(0)" data-alert="sweetalert-heart">
-                              <i class="far fa-heart"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-product">
-                  <div class="card-body">
-                    <div class="iq-product-image">
-                      <img src="../assets/images/product/16.png" class="hover_image" alt="img">
-                    </div>
-                    <div class="iq-product-content mt-3">
-                      <p class="mb-0"><small>maggi</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">Cheese maggi</a>
-                      <div class="d-flex align-items-center justify-content-between my-2">
-                        <h6 class="m-0">
-                          <span class="text-decoration-line-through"> ₼20</span>
-                          <span class="text-primary"><b> ₼10</b></span>
-                        </h6>
-                        
-                      </div>
-                      <div class="d-flex justify-content-between mb-3">
-                        <div class="iq-btn-container">
-                          <a class="" href="javascript:void(0)" data-alert="sweetalert-product">
-                            <div class="btn btn-secondary animation-btn">
-                              Səbətə at
-                              <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="iq-product-icon">
-                            <a href="javascript:void(0)" data-alert="sweetalert-heart">
-                              <i class="far fa-heart"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-product">
-                  <div class="card-body">
-                    <div class="iq-product-image">
-                      <img src="../assets/images/product/05.jpg" class="hover_image" alt="img">
-                    </div>
-                    <div class="iq-product-content mt-3">
-                      <p class="mb-0"><small>Bakery,Breakfast Cereals</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">Green Machine</a>
-                      <div class="d-flex align-items-center justify-content-between my-2">
-                        <h6 class="m-0">
-                          <span class="text-decoration-line-through"> ₼45</span>
-                          <span class="text-primary"><b> ₼40</b></span>
-                        </h6>
-                         
-                      </div>
-                      <div class="d-flex justify-content-between mb-3">
-                        <div class="iq-btn-container">
-                          <a class="" href="javascript:void(0)" data-alert="sweetalert-product">
-                            <div class="btn btn-secondary animation-btn">
-                              Səbətə at
-                              <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="iq-product-icon">
-                            <a href="javascript:void(0)" data-alert="sweetalert-heart">
-                              <i class="far fa-heart"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-product">
-                  <div class="card-body">
-                    <div class="iq-product-image">
-                      <img src="../assets/images/product/01.jpg" class="hover_image" alt="img">
-                    </div>
-                    <div class="iq-product-content mt-3">
-                      <p class="mb-0"><small>Breakfast Cereals,Snacks</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">Chips</a>
-                      <div class="d-flex align-items-center justify-content-between my-2">
-                        <h6 class="m-0">
-                          <span class="text-decoration-line-through"></span>
-                          <span class="text-primary"><b> ₼10</b></span>
-                        </h6>
-                        
-                      </div>
-                      <div class="d-flex justify-content-between mb-3">
-                        <div class="iq-btn-container">
-                          <a class="" href="javascript:void(0)" data-alert="sweetalert-product">
-                            <div class="btn btn-secondary animation-btn">
-                              Səbətə at
-                              <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="iq-product-icon">
-                            <a href="javascript:void(0)" data-alert="sweetalert-heart">
-                              <i class="far fa-heart"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-product">
-                  <div class="card-body">
-                    <div class="iq-product-image">
-                      <img src="../assets/images/product/13.jpg" class="hover_image" alt="img">
-                    </div>
-                    <div class="iq-product-content mt-3">
-                      <p class="mb-0"><small>Salads,Soups</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">Broccoli</a>
-                      <div class="d-flex align-items-center justify-content-between my-2">
-                        <h6 class="m-0">
-                          <span class="text-decoration-line-through"></span>
-                          <span class="text-primary"><b> ₼15</b></span>
-                        </h6>
-                         
-                      </div>
-                      <div class="d-flex justify-content-between mb-3">
-                        <div class="iq-btn-container">
-                          <a class="" href="javascript:void(0)" data-alert="sweetalert-product">
-                            <div class="btn btn-secondary animation-btn">
-                              Səbətə at
-                              <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="iq-product-icon">
-                            <a href="javascript:void(0)" data-alert="sweetalert-heart">
-                              <i class="far fa-heart"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-product">
-                  <div class="card-body">
-                    <div class="iq-product-image">
-                      <img src="../assets/images/product/13.jpg" class="hover_image" alt="img">
-                    </div>
-                    <div class="iq-product-content mt-3">
-                      <p class="mb-0"><small>Salads,Soups</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">Broccoli</a>
-                      <div class="d-flex align-items-center justify-content-between my-2">
-                        <h6 class="m-0">
-                          <span class="text-decoration-line-through"></span>
-                          <span class="text-primary"><b> ₼15</b></span>
-                        </h6>
-                        
-                      </div>
-                      <div class="d-flex justify-content-between mb-3">
-                        <div class="iq-btn-container">
-                          <a class="" href="javascript:void(0)" data-alert="sweetalert-product">
-                            <div class="btn btn-secondary animation-btn">
-                              Səbətə at
-                              <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="iq-product-icon">
-                            <a href="javascript:void(0)" data-alert="sweetalert-heart">
-                              <i class="far fa-heart"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-product">
-                  <div class="card-body">
-                    <div class="iq-product-image">
-                      <img src="../assets/images/product/15.jpg" class="hover_image" alt="img">
-                    </div>
-                    <div class="iq-product-content mt-3">
-                      <p class="mb-0"><small>Soups,Vegetables</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">Cardamom</a>
-                      <div class="d-flex align-items-center justify-content-between my-2">
-                        <h6 class="m-0">
-                          <span class="text-decoration-line-through"></span>
-                          <span class="text-primary"><b> ₼22</b></span>
-                        </h6>
-                         
-                      </div>
-                      <div class="d-flex justify-content-between mb-3">
-                        <div class="iq-btn-container">
-                          <a class="" href="javascript:void(0)" data-alert="sweetalert-product">
-                            <div class="btn btn-secondary animation-btn">
-                              Səbətə at
-                              <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="iq-product-icon">
-                            <a href="javascript:void(0)" data-alert="sweetalert-heart">
-                              <i class="far fa-heart"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-product">
-                  <div class="card-body">
-                    <div class="iq-product-image">
-                      <img src="../assets/images/product/16.png" class="hover_image" alt="img">
-                    </div>
-                    <div class="iq-product-content mt-3">
-                      <p class="mb-0"><small>maggi</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">Cheese maggi</a>
-                      <div class="d-flex align-items-center justify-content-between my-2">
-                        <h6 class="m-0">
-                          <span class="text-decoration-line-through"> ₼20</span>
-                          <span class="text-primary"><b> ₼10</b></span>
-                        </h6>
-                        
                       </div>
                       <div class="d-flex justify-content-between mb-3">
                         <div class="iq-btn-container">
@@ -582,7 +139,11 @@
               </div>
             </div>
             <div class="d-flex justify-content-center">
-              <nav aria-label="Page navigation">
+
+              <mat-paginator *ngIf="productData.length !== 0" [length]="length" #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                (page)="onChangePage($event)" showFirstLastButtons>
+              </mat-paginator>
+              <!-- <nav aria-label="Page navigation" *ngIf="productData.length !== 0">
                 <ul class="pagination pagination-lg custom-pagination">
                   <li class="page-item"><a class="page-link" href="javascript:void(0)"><i
                         class="fas fa-arrow-left"></i></a></li>
@@ -592,7 +153,8 @@
                   <li class="page-item"><a class="page-link" href="javascript:void(0)"><i
                         class="fas fa-arrow-right"></i></a></li>
                 </ul>
-              </nav>
+              </nav> -->
+              <h3 *ngIf="productData.length == 0" style="margin-top: 10%;">Məhsul tapılmadı</h3>
             </div>
           </div>
         </div>

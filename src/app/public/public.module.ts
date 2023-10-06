@@ -8,6 +8,8 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { CartComponent } from './cart/cart.component';
 import { AdminLogin } from 'src/guards/admin-login.guard';
 import { JwtModule } from '@auth0/angular-jwt';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export function tokenGetter() {
   return sessionStorage.getItem("token");
@@ -23,6 +25,8 @@ export function tokenGetter() {
   imports: [
     CommonModule,
     AppRoutingModule,
+    MatExpansionModule,
+    MatPaginatorModule,
 
     // JwtModule.forRoot({
     //   config: {

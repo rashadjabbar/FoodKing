@@ -1,4 +1,4 @@
-export interface Request {
-    nextPageNumber: number;
-    visibleItemCount: number;
+export class RequestData {
+    nextPageNumber?: number;
+    visibleItemCount?: number;
 }

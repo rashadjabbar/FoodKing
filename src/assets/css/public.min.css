@@ -13969,6 +13969,7 @@ body {
     color: #fff;
 }
 .iq-product-image {
+    height: 306px;
     position: relative;
     overflow: hidden;
 }

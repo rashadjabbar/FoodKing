@@ -6,7 +6,7 @@ import { HomeComponent } from './public/home/home.component';
 import { CategoryListComponent } from './public/category-list/category-list.component';
 import { WishlistComponent } from './public/wishlist/wishlist.component';
 import { CartComponent } from './public/cart/cart.component';
-import { AddProductComponent } from './admin/product/add-product.component';
+import { AddProductComponent } from './admin/product/product.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ProductCategoryComponent } from './admin/product-category/product-category.component';
 import { LoginComponent } from './admin-auth/login/login.component';

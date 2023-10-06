@@ -20,7 +20,6 @@ export class PublicComponent {
   getCategories() {
     this.categoryServices.getAllCategory().subscribe((res: any) => {
       this.categories = res.data
-      console.log(res.data)
     })
   }
 }

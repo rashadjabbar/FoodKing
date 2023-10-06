@@ -1,0 +1,70 @@
+<div class="dialogHeader">
+    <div [ngSwitch]="data.id">
+        <div *ngSwitchCase="0">
+            <h3>Yeni məhsul</h3>
+        </div>
+        <div *ngSwitchDefault>Düzəliş et</div>
+    </div>
+    <i class="far fa-window-close" (click)="dialogRef.close()"></i>
+</div>
+<div class="form-container">
+    <form [formGroup]="productForm" (ngSubmit)="productFunc()">
+        <div class="row input-container">
+            <div class="col-lg-6">
+                <mat-form-field>
+                    <mat-label>Alt kateqoriya</mat-label>
+                    <mat-select formControlName="subCategoryId">
+                        <mat-option *ngFor="let category of allCategory"
+                            [value]="category.key">{{category.value}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Məhsul adı</mat-label>
+                    <input type="text" matInput placeholder="Maksimum 15 simvol" #message maxlength="15"
+                        formControlName="name" required>
+                    <mat-hint align="end">{{message.value.length}} / 15</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row input-container">
+            <div class="col-lg-6">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Qiymət</mat-label>
+                    <input type="number" matInput formControlName="price" required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <div class='file-input'>
+                    <input type='file' accept="image/png, image/gif, image/jpeg" (input)="getFile($event)" >
+                    <span class='button'>Fayl seç</span>
+
+                </div>
+                <div class="file">
+                    <span class='label' data-js-label>
+                        <span *ngIf="fileName == '' ">Fayl seçilmədi</span>
+                        <span>{{fileName}}</span>
+                    </span>
+                  <div *ngIf="fileUrl !== ''" class="image-div">
+                    <span>
+                        <i class="far fa-eye"></i>
+                        <img src="http://192.168.37.49:3005/{{fileUrl}}" alt="" class="image">
+                    </span>
+                    
+                  </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="add-button">
+            <div [ngSwitch]="data.id">
+                <div *ngSwitchCase="0"><button type="submit" mat-raised-button color="primary"
+                        class="dialog-button" [disabled]="productForm.invalid">Əlavə et</button></div>
+                <div *ngSwitchDefault><button type="submit" mat-raised-button color="primary"
+                        class="dialog-button">Dəyişdir</button></div>
+            </div>
+
+        </div>
+    </form>
+</div>

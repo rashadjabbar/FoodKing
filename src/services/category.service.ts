@@ -3,9 +3,7 @@ import { environment } from 'src/environments/environments';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs-compat/Observable';
 import { AllCategory, Category, SubCategory } from 'src/models/category';
-import { Request } from 'src/models/request';
-import { GlobalPositionStrategy } from '@angular/cdk/overlay';
-import { GlobalService } from './global.service';
+import { RequestData } from 'src/models/request';
 
 @Injectable({
   providedIn: 'root'
@@ -13,22 +11,21 @@ import { GlobalService } from './global.service';
 export class CategoryService {
 
 
-  constructor(private http: HttpClient,
-    private globalService: GlobalService) { }
+  constructor(private http: HttpClient) { }
 
   baseUrl = environment.apiCategoryUrl;
   allCategoryUrl = environment.apiCommonUrl
 
-  token = sessionStorage.getItem('token')
-
-  // postToken = {headers: {'Authorization': `Bearer ${this.token}`}}
-
-  getCategory(request: Request): Observable<any> {
+  getCategory(request: RequestData): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}GetCategories`, request );
   }
 
   getAllCategory(): Observable<any> {
     return this.http.get<any>(`${this.allCategoryUrl}ComboBox/GetCategories` );
+  }
+
+  getCategoryAndSubCategory(): Observable<any> {
+    return this.http.get<any>(`${this.allCategoryUrl}ComboBox/GetCategoryAndSubCategory` );
   }
 
   postandputCategory(category: Category): Observable<any> {
@@ -51,7 +48,7 @@ export class CategoryService {
     return this.http.put<any>(`${this.baseUrl}ChangeStatus` ,  status);
   }
 
-  getSubCategory(request: Request): Observable<any> {
+  getSubCategory(request: RequestData): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}GetSubCategories`, request );
   }
 

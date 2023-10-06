@@ -74,9 +74,6 @@ export class ProductCategoryComponent {
     this.categoryServices.getCategory(this.requestData).subscribe({
       next: res => {
         this.dataSource = new MatTableDataSource<Category>(res.data.result);
-        debugger
-        // this.dataSource.paginator = this.paginator
-        debugger
         this.length = res.data.count
       },
       error: res => {
