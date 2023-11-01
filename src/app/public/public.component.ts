@@ -15,6 +15,7 @@ import { BasketService } from 'src/services/public/basket.service';
 })
 export class PublicComponent {
   message: any;
+  totalBasketAmount?: number = 0;
 
   constructor(
     private router: Router,
@@ -28,6 +29,9 @@ export class PublicComponent {
     this.getCategories()
     this.getBasket()
 
+    this.globalService.basketObservable$.subscribe(res => {
+      this.getBasket()
+    })
   }
 
 
@@ -50,8 +54,15 @@ export class PublicComponent {
 
   getBasket(){
     this.basketService.getBasket().subscribe(res => {
-     this.basketItems =  res.data.basketItems
+      this.basketItems = res.data.basketItems
+     this.totalBasketAmount = isNaN(res.data.amountInfo?.amount + res.data.amountInfo?.serviceFee)? 0 : res.data.amountInfo?.amount + res.data.amountInfo?.serviceFee; 
     }) 
+  }
+
+  removeBasketItem(id: number){
+    this.basketService.removeBasketItem(id).subscribe(res => {
+      this.getBasket();
+     }) 
   }
 
 }

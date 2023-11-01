@@ -16,4 +16,12 @@ export class BasketService {
     return this.http.get<any>(`${this.baseUrl}GetBasket`, );
   }
 
+  addProductToBasket(request: {productId: number}): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}SaveBasket`, request );
+  }
+
+  removeBasketItem(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}DeleteProduct?id=${id}`);
+  }
+
 }

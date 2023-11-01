@@ -8,6 +8,7 @@ import { CategoryService } from 'src/services/category.service';
 import { GlobalService } from 'src/services/global.service';
 import { ProductService } from 'src/services/product.service';
 import { BasketService } from 'src/services/public/basket.service';
+import { showInfoAlert } from 'src/utils/alert';
 
 @Component({
   selector: 'app-home',
@@ -91,5 +92,14 @@ export class HomeComponent {
     })
   }
 
+  
+  addProductToBasket(productId: number){
+    this.basketService.addProductToBasket({productId}).subscribe({
+      next: res => {
+        showInfoAlert('', "Səbətə əlavə edildi", false, false, 'Bağla','', 1000);
+        this.globalService.refreshBasket({itemAddedToBasket: true})
+      }
+    })
+  }
 
 }

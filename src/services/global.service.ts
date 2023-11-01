@@ -19,6 +19,8 @@ export class User{
 export class GlobalService {
 
 constructor() { }
+private basketEmitter = new BehaviorSubject({ itemAddedToBasket: false });
+basketObservable$ = this.basketEmitter.asObservable();
 
   tokenValue = new BehaviorSubject(this.token);
   private categoryId = new BehaviorSubject({ catId: 0 });
@@ -34,6 +36,11 @@ constructor() { }
    get token() {
     return sessionStorage.getItem('token') ?? "";
    }
+
+   
+ refreshBasket(model: {itemAddedToBasket: boolean}) {
+  this.basketEmitter.next(model) 
+}
 
  getCategoryId(model: {catId: number}) {
     this.categoryId.next(model) 
