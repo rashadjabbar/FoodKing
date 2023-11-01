@@ -12943,11 +12943,11 @@ body.home-3 header {
     }
     header .navbar-light .navbar-toggler-icon {
         background-image: none;
-        font-size: 30px;
-        line-height: 30px;
+        font-size: 21px;
+        line-height: 24px;
         height: auto;
         width: auto;
-        padding: 6px 15px;
+        padding: 6px 10px;
     }
     header .navbar-collapse {
         position: absolute;
@@ -13093,11 +13093,11 @@ body.home-3 header {
         right: 0;
     }
     header .logo_block .logo {
-        width: 172px;
+        width: 40px;
         height: auto;
     }
     header .logo_block .logo-sticky {
-        width: 172px;
+        width: 40px;
         height: auto;
     }
     .sub-header {
@@ -13120,11 +13120,11 @@ body.home-3 header {
 }
 @media (max-width: 365px) {
     header .logo_block .logo {
-        width: 140px;
+        width: 40px;
         height: auto;
     }
     header .logo_block .logo-sticky {
-        width: 140px;
+        width: 40px;
         height: auto;
     }
     header .iq-shop-btn-holder li.iq-cart .dropdown-menu-mini-cart {

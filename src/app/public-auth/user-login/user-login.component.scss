@@ -1,0 +1,356 @@
+$theme-signup: #ffba43;
+$theme-signup-darken: #ffba43;
+$theme-signup-background: #f9f9f9;
+$theme-login: #3bb77e;
+$theme-login-darken: 3bb77e;
+$theme-login-background: #f9f9f9;
+$theme-dark: #212121;
+$theme-light: #e3e3e3;
+$font-default: 'Roboto', sans-serif;
+
+$success: #5cb85c;
+$error: #d9534f;
+
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    width: 100% !important;
+    box-sizing: border-box;
+    font-family: $font-default;
+}
+
+div:where(.swal2-container) .swal2-html-container{
+    font-family: $font-default!important;
+}
+
+.backRight {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: $theme-signup;
+    background-image: url('../../../assets/images/signup.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position-x: 127%;
+    background-position-y: 40px;
+
+
+}
+
+.backLeft {
+    position: absolute;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: $theme-login;
+    background-image: url('../../../assets/images/login.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position-x: 27%;
+    background-position-y: 40px;
+
+}
+
+#back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -999;
+}
+
+.canvas-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+#slideBox {
+    width: 50%;
+    max-height: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin-left: 50%;
+    position: absolute;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.topLayer {
+    width: 200%;
+    height: 100%;
+    position: relative;
+    left: 0;
+    left: -100%;
+}
+
+label {
+    font-size: 0.9em;
+    font-weight: 300;
+    text-transform: none;
+}
+
+input {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 1em;
+    padding: 8px 1px;
+    margin-top: 0.1em;
+}
+
+.left {
+    padding: 30px 0;
+    width: 50%;
+    height: 100%;
+    overflow: scroll;
+    background: $theme-signup-background;
+    left: 0;
+    position: absolute;
+
+    label {
+        color: $theme-dark;
+    }
+
+    input {
+        border-bottom: 1px solid $theme-light;
+        color: $theme-dark;
+
+        &:focus,
+        &:active {
+            border-color: $theme-signup;
+            color: $theme-signup;
+        }
+
+        &:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px $theme-signup-background inset;
+            -webkit-text-fill-color: $theme-dark;
+        }
+    }
+
+    a {
+        color: $theme-signup;
+    }
+}
+
+.right {
+    width: 50%;
+    height: 100%;
+    overflow: scroll;
+    background: $theme-login-background;
+    right: 0;
+    position: absolute;
+
+    label {
+        color: $theme-dark;
+    }
+
+    input {
+        border-bottom: 1px solid $theme-dark;
+
+        &:focus,
+        &:active {
+            border-color: $theme-login;
+            color: $theme-login;
+        }
+
+        &:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px $theme-signup-background inset;
+            -webkit-text-fill-color: $theme-dark;
+        }
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.content h2 {
+    font-weight: 300;
+    font-size: 2.6em;
+    margin: 0.2em 0 0.1em;
+}
+
+.left .content h2 {
+    color: $theme-signup;
+}
+
+.right .content h2 {
+    color: $theme-login;
+}
+
+.form-element {
+    position: relative;
+    margin: 1.6em 0;
+
+    &.form-submit {
+        margin: 1.6em 0 0;
+    }
+}
+
+
+
+.form-stack {
+    display: flex;
+    flex-direction: column;
+}
+
+
+button {
+    padding: 0.8em 1.2em;
+    margin: 0 10px 0 0;
+    width: auto;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1em;
+    color: #fff;
+    line-height: 1em;
+    letter-spacing: 0.6px;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+    border: 0;
+    outline: 0;
+    transition: all 0.25s;
+
+    &.signup {
+        background: $theme-signup;
+    }
+
+    &.login {
+        background: $theme-login;
+    }
+
+    &.off {
+        background: none;
+        box-shadow: none;
+        margin: 0;
+
+        &.signup {
+            color: $theme-signup;
+        }
+
+        &.login {
+            color: $theme-login;
+        }
+    }
+}
+
+button:focus,
+button:active,
+button:hover {
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+
+    &.signup {
+        background: $theme-signup-darken;
+    }
+
+    &.login {
+        background: $theme-login-darken;
+    }
+
+    &.off {
+        box-shadow: none;
+
+        &.signup {
+            color: $theme-login-darken;
+            background: $theme-light;
+        }
+
+        &.login {
+            color: $theme-login-darken;
+            background: $theme-light;
+        }
+    }
+}
+
+button:disabled{
+    opacity: 0.6;
+}
+
+::ng-deep.mat-calendar-body-selected{
+    background-color: #5cb85c!important;
+}
+
+::ng-deep.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+    background-color: #ffba438f!important;
+}
+
+::ng-deep.mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+    border-color:#ffba438f;
+    background-color: #5cb85c34!important;
+
+}
+
+::ng-deep.mat-datepicker-content .mat-calendar {
+    width: 296px;
+    height: 370px!important;
+}
+
+.invalid-text{
+    line-height: 24px;
+    color: red !important;
+    opacity: 0.6 !important;
+    overflow: hidden;
+}
+
+.info-icon{
+    color: #0984e3 !important;
+}
+
+.info-icon span{
+    color: #0984e3 !important;
+    border: 1px solid #0984e3!important;
+
+}
+
+
+
+
+.invalid-text span{
+    margin-right: 30px;
+    opacity: 0;
+    white-space: nowrap;
+    transition: 0.3s;
+    overflow: hidden;
+    font-weight: 500 !important;
+    font-family: $font-default;
+    border: 1px solid red;
+    padding: 1px 3px;
+    border-radius: 3px;
+}
+
+.invalid-text:hover span{
+    margin-right: 6px;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+
+.info-div{
+    position: absolute;
+    right: 0;
+    top: 39px;
+}
+
+@media only screen and (max-width: 768px) {
+    #slideBox {
+        width: 100%;
+        margin-left: 0%;
+    }
+
+    .signup-info,
+    .login-info {
+        display: none;
+    }
+}

@@ -10,10 +10,11 @@ import { AdminLogin } from 'src/guards/admin-login.guard';
 import { JwtModule } from '@auth0/angular-jwt';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatBadgeModule} from '@angular/material/badge';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
 
-export function tokenGetter() {
-  return sessionStorage.getItem("token");
-}
 @NgModule({
   declarations: [
     PublicComponent,
@@ -27,16 +28,14 @@ export function tokenGetter() {
     AppRoutingModule,
     MatExpansionModule,
     MatPaginatorModule,
+    MatMenuModule,
+    MatBadgeModule,
 
-    // JwtModule.forRoot({
-    //   config: {
-    //     tokenGetter: tokenGetter,
-    //     allowedDomains: ["192.168.37.49:3006"],
-    //   },
-    // }),
 
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
+
   ]
 })
 export class PublicModule { }

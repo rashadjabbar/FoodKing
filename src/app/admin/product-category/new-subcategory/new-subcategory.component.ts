@@ -52,8 +52,6 @@ export class NewSubcategoryComponent {
     })
     if (this.data.id !== 0) {
       this.categoryService.GetSubCategoryById(this.data.id).subscribe((res: any) => {
-        console.log(res.data[0])
-
         this.categoryForm.patchValue(res.data[0])
       })
     }
@@ -61,7 +59,6 @@ export class NewSubcategoryComponent {
 
   categoryFunc() {
     this.submitted = true;
-    console.log(this.categoryForm.value)
     if (this.categoryForm.invalid) {
       return;
     }

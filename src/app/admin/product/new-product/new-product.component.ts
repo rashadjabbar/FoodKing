@@ -91,8 +91,7 @@ export class NewProductComponent implements OnInit {
     });
 
     this.productService.postandputProduct(this.formData).subscribe(res => {
-      console.log(res)
-      // this.dialogRef.close()
+      this.dialogRef.close()
     })
   }
 

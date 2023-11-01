@@ -92,7 +92,6 @@ export class ProductCategoryComponent {
   getSubCategory() {
     this.categoryServices.getSubCategory(this.requestData).subscribe({
       next: res => {
-        console.log(res.data.count)
         this.sublength = res.data.count
         this.subDataSource = new MatTableDataSource<SubCategory>(res.data.result);
         // this.subDataSource.paginator = this.subPaginator

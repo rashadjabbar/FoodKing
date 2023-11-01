@@ -7,7 +7,7 @@ import { showInfoAlert } from 'src/utils/alert';
 import Swal from 'sweetalert2';
 import { GlobalService } from './global.service';
 import { Router } from '@angular/router';
-
+import jwt_decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
@@ -34,9 +34,10 @@ export class LoginService {
           sessionStorage.removeItem('token')
           return
         }
-
+        data = jwt_decode(result.data.token)
+        this.globalService.getUserData(data);
         this.loginned = result.status
-        this.globalService.token = result.data.token!;
+        // this.globalService.token = result.data.token!;
         sessionStorage.setItem('token', result.data.token);
         this.router.navigate(['/admin']);
       },
@@ -51,4 +52,32 @@ export class LoginService {
       }
     })
   }
+
+  userRegister(data: any) {
+    this.http.post<LoginResult>(this.baseUrl + `Auth/register`, data).subscribe({
+      next: (result: any) => {
+        if (result.status == false) {
+          showInfoAlert('Məlumat', result.message, false, true, 'Bağla')
+          sessionStorage.removeItem('token')
+          return
+        }
+
+        this.loginned = result.status
+        this.globalService.token = result.data.token!;
+        // sessionStorage.setItem('token', result.data.token);
+        // this.router.navigate(['/']);
+      },
+      error: (res: any) => {
+        sessionStorage.removeItem('token')
+        Swal.fire({
+          icon: 'error',
+          title: 'Xəta',
+          text: res.error.message ,
+          showConfirmButton: true,
+          confirmButtonText: 'Bağla'
+        })
+      }
+    })
+  }
+
 }

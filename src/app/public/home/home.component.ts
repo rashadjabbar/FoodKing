@@ -1,10 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { AllCategory, AllCategoryBrowse } from 'src/models/category';
 import { ProductBrowseData } from 'src/models/product';
 import { CategoryService } from 'src/services/category.service';
+import { GlobalService } from 'src/services/global.service';
 import { ProductService } from 'src/services/product.service';
+import { BasketService } from 'src/services/public/basket.service';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +17,13 @@ import { ProductService } from 'src/services/product.service';
 export class HomeComponent {
   constructor(
     private categoryServices: CategoryService,
-    private productService: ProductService) { }
-
+    private productService: ProductService,
+    private basketService: BasketService,
+    private router: Router,
+    private globalService: GlobalService
+    ) {
+      this.catId = sessionStorage.getItem('catId') as any
+  }
   categories: AllCategoryBrowse[] = []
 
   requestData: any = {
@@ -25,6 +33,8 @@ export class HomeComponent {
 
   catId = 0
   subCatId = 0
+
+  message = 'Hello!';
 
   productData: ProductBrowseData[] = []
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -36,48 +46,50 @@ export class HomeComponent {
 
 
   ngOnInit() {
+    this.globalService.data$.subscribe(res =>  this.getProduct(res.catId))
     this.dataSource.paginator = this.paginator;
-
+    if (this.catId !== null) {
+      this.router.navigate(['/'],{fragment: 'products'});
+    }
     this.getCategories()
-    this.getProduct()
+   
   }
 
   onChangePage(pe: PageEvent) {
     this.requestData.nextPageNumber = pe.pageIndex + 1
     this.requestData.visibleItemCount = pe.pageSize
-    console.log(pe)
-    this.getProduct()
+    this.getProduct(this.catId)
   }
+
+
 
   getCategories() {
     this.categoryServices.getCategoryAndSubCategory().subscribe((res: any) => {
       this.categories = res.data
-      console.log(res.data)
     })
   }
 
-
-
-  categoryClick(categoryId: any){
+  categoryClick(categoryId: any) {
     this.catId = categoryId
     this.subCatId = 0
-    this.getProduct()
+    this.getProduct(categoryId)
 
   }
 
-  subCategoryClick(catId: any , subCatId: any){
+  subCategoryClick(catId: any, subCatId: any) {
     this.catId = catId
     this.subCatId = subCatId
-    this.getProduct()
+    this.getProduct(catId)
   }
 
-  getProduct() {
-    this.productService.getProductClientBrowseData(this.requestData, this.catId, this.subCatId).subscribe({
+  getProduct(categoryId: number) {
+    this.productService.getProductClientBrowseData(this.requestData, categoryId, this.subCatId).subscribe({
       next: res => {
-        console.log(res.data.result)
         this.productData = res.data.result
         this.length = res.data.count
       }
     })
   }
+
+
 }

@@ -1,0 +1,163 @@
+<div id="back">
+  <canvas id="canvas" class="canvas-back"></canvas>
+  <div class="backRight">
+  </div>
+  <div class="backLeft">
+  </div>
+</div>
+
+<div id="slideBox">
+  <div class="topLayer">
+    <div class="left">
+      <div class="content">
+        <h2>Qeydiyyatdan keç</h2>
+        <form id="form-signup" [formGroup]="signUpForm">
+          <div class="form-element form-stack">
+            <label for="name-signup" class="form-label">Ad</label>
+            <input id="name-signup" type="text" name="name" formControlName="firstName" maxlength="15">
+            <div *ngIf="signUp['firstName'].invalid && (signUp['firstName'].dirty || signUp['firstName'].touched)"
+              class="info-div">
+              <label for="name-signup" class="invalid-text" *ngIf="signUp['firstName'].errors?.['required']">
+                <span>Ad tələb olunur</span>
+                <i class="fas fa-exclamation-circle">
+                </i>
+              </label>
+            </div>
+          </div>
+          <div class="form-element form-stack">
+            <label for="surname-signup" class="form-label">Soyad</label>
+            <input id="surname-signup" type="text" name="surname" formControlName="lastName" maxlength="15">
+            <div *ngIf="signUp['lastName'].invalid && (signUp['lastName'].dirty || signUp['lastName'].touched)"
+              class="info-div">
+
+              <label for="surname-signup" class="invalid-text" *ngIf="signUp['lastName'].errors?.['required']">
+                <span>Soyad tələb olunur</span>
+                <i class="fas fa-exclamation-circle">
+                </i>
+              </label>
+            </div>
+          </div>
+          <div class="form-element form-stack">
+            <label for="birthday-signup" class="form-label">Doğum tarixi</label>
+            <input id="birthday-signup" type="text" name="birthday" [matDatepicker]="picker" (click)="picker.open()"
+              formControlName="birthday">
+            <mat-datepicker #picker></mat-datepicker>
+
+            <div *ngIf="signUp['birthday'].invalid && (signUp['birthday'].dirty || signUp['birthday'].touched)"
+              class="info-div">
+              <label for="birthday-signup" class="invalid-text" *ngIf="signUp['birthday'].errors?.['required']">
+                <span>Doğum günü tələb olunur</span>
+                <i class="fas fa-exclamation-circle">
+                </i>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-element form-stack">
+            <label for="username-signup" class="form-label">İstİfadəçi adı</label>
+            <input id="username-signup" type="text" name="username" formControlName="username">
+            <div *ngIf="signUp['username'].invalid && (signUp['username'].dirty || signUp['username'].touched)"
+              class="info-div">
+              <label for="username-signup" class="invalid-text" *ngIf="signUp['username'].errors?.['required']">
+                <span>İstİfadəçi adı tələb olunur</span>
+                <div class="fas fa-exclamation-circle">
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="form-element form-stack">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" type="email" name="email" formControlName="email">
+            <div *ngIf="signUp['email'].invalid && (signUp['email'].dirty || signUp['email'].touched)" class="info-div">
+              <label for="email" class="invalid-text" *ngIf="signUp['email'].errors?.['required']">
+                <span>Email tələb olunur</span>
+                <i class="fas fa-exclamation-circle">
+                </i>
+              </label>
+              <label for="email" class="invalid-text info-icon" *ngIf="signUp['email'].errors?.['pattern']">
+                <span>Nümunə: test@test.com</span>
+                <i class="fas fa-info-circle">
+                </i>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-element form-stack">
+            <label for="tel" class="form-label">Telefon nömrəsi</label>
+            <input id="tel" type="text" name="tel" formControlName="phone1" [imask]="{mask: '+{(994)}00-000-00-00'}"
+              minlength="18">
+            <div *ngIf="signUp['phone1'].invalid && (signUp['phone1'].dirty || signUp['phone1'].touched)"
+              class="info-div">
+              <label for="tel" class="invalid-text" *ngIf="signUp['phone1'].errors?.['required']">
+                <span> Telefon nömrəsi tələb olunur</span>
+                <i class="fas fa-exclamation-circle">
+                </i>
+              </label>
+              <label for="tel" class="invalid-text info-icon" *ngIf="signUp['phone1'].errors?.['minlength']">
+                <span> Nümünə: +(994)00-000-00-00</span>
+                <i class="fas fa-info-circle">
+                </i>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-element form-stack">
+            <label for="password-signup" class="form-label">Şifrə</label>
+            <input id="password-signup" type="password" name="password" formControlName="password">
+            <div *ngIf="signUp['password'].invalid && (signUp['password'].dirty || signUp['password'].touched)"
+              class="info-div">
+              <label for="password-signup" class="invalid-text" *ngIf="signUp['password'].errors?.['required']">
+                <span>Şifrə tələb olunur</span>
+                <i class="fas fa-exclamation-circle">
+                </i>
+              </label>
+            </div>
+          </div>
+          <div class="form-element form-submit">
+            <button id="signUp" class="signup" type="submit" name="signup" [disabled]="signUpForm.invalid"
+              (click)="createUser()">Qeydiyyatdan keç</button>
+            <button id="goLeft" class="signup off">Daxil ol</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="right">
+      <div class="content">
+        <h2>Daxil ol</h2>
+        <form id="form-login" [formGroup]="loginForm">
+          <div class="form-element form-stack">
+            <label for="username-login" class="form-label">İstifadəçi adınız</label>
+            <input id="username-login" type="text" name="username" formControlName="loginUsername">
+            <div
+              *ngIf="loginF['loginUsername'].invalid && (loginF['loginUsername'].dirty || loginF['loginUsername'].touched)"
+              class="info-div">
+              <label for="username-login" class="invalid-text" *ngIf="loginF['loginUsername'].errors?.['required']">
+                <span>İstifadəçi adınız tələb olunur</span>
+                <i class="fas fa-exclamation-circle">
+                </i>
+              </label>
+            </div>
+          </div>
+          <div class="form-element form-stack">
+            <label for="password-login" class="form-label">Şifrəniz</label>
+            <input id="password-login" type="password" name="password" formControlName="loginPassword">
+            <div
+            *ngIf="loginF['loginPassword'].invalid && (loginF['loginPassword'].dirty || loginF['loginPassword'].touched)"
+            class="info-div">
+            <label for="password-login" class="invalid-text" *ngIf="loginF['loginPassword'].errors?.['required']">
+              <span>Şifrəniz tələb olunur</span>
+              <i class="fas fa-exclamation-circle">
+              </i>
+            </label>
+          </div>
+          </div>
+          <div class="form-element form-submit">
+            <button id="logIn" class="login" type="submit" name="login" (click)="loginFunc()"
+              [disabled]="loginForm.invalid">Daxİl ol</button>
+            <button id="goRight" class="login off" name="signup">Qeydİyyatdan keç</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

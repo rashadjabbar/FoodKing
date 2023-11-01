@@ -11,6 +11,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ProductCategoryComponent } from './admin/product-category/product-category.component';
 import { LoginComponent } from './admin-auth/login/login.component';
 import { AdminLogin } from 'src/guards/admin-login.guard';
+import { UserLoginComponent } from './public-auth/user-login/user-login.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
     ]
   },
   {path: 'login-adminpanel' , component: LoginComponent},
+  {path: 'user-login' , component: UserLoginComponent},
 ];
 
 @NgModule({

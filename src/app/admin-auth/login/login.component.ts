@@ -54,7 +54,7 @@ export class LoginComponent {
       return;
     }
 
-    this.logindata.emailUsername = this.loginForm.get('username')?.value!;
+    this.logindata.username = this.loginForm.get('username')?.value!;
     this.logindata.password = this.loginForm.get('password')?.value!;
 
     this.login.login(this.loginForm.value)

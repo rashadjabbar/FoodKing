@@ -26,10 +26,9 @@ import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AddProductComponent } from './product/product.component';
 import { NewProductComponent } from './product/new-product/new-product.component';
+import {GlobalService} from '../../services/global.service'
 
-export function tokenGetter() {
-  return sessionStorage.getItem("token");
-}
+
 
 @NgModule({
   declarations: [
@@ -50,12 +49,7 @@ export function tokenGetter() {
     MatMenuModule,
     MatButtonModule,
     HttpClientModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: ["192.168.37.49:3005"],
-      },
-    }),
+
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,

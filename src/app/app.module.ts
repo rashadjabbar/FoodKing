@@ -14,8 +14,11 @@ import { AdminAuthModule } from './admin-auth/admin-auth.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
+import { PublicAuthModule } from './public-auth/public-auth.module';
 
-
+export function tokenGetter() {
+  return sessionStorage.getItem("token");
+}
 
 @NgModule({
   declarations: [
@@ -30,8 +33,15 @@ import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     AdminAuthModule,
+    PublicAuthModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["192.168.37.49:3008" , "192.168.37.49:3005" ],
+      },
+    }),
   ],
 
   providers: [
