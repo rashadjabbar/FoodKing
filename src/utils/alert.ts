@@ -22,7 +22,7 @@ const showSuccessAlert = (title: string, text?: string) => {
   });
 }
 
-const showConfirmAlert = (title: string, text?: string,btnConfirmText?:string,btnCancelText?:string) => {
+const showConfirmAlert = (title: string, text?: string, btnConfirmText?:string, btnCancelText?:string, customClass?: string) => {
   return Swal.fire({
     titleText: title,
     text: text,
@@ -30,7 +30,7 @@ const showConfirmAlert = (title: string, text?: string,btnConfirmText?:string,bt
     showCancelButton: true,
     confirmButtonText: btnConfirmText ?? "Bəli",
     cancelButtonText:  btnCancelText ?? "Ləğv et",
-    customClass: 'custom-with'
+    customClass: customClass ?? 'custom-with'
   });
 }
 

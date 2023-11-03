@@ -15,16 +15,19 @@ import { MatMenuTrigger } from '@angular/material/menu';
 })
 
 export class PublicComponent {
-  message: any;
-  totalBasketAmount?: number = 0;
-
-  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
-
   constructor(
     private router: Router,
     private basketService: BasketService,
     private categoryServices: CategoryService,
     private globalService: GlobalService) { appJs }
+
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
+  message: any;
+  totalBasketAmount?: number = 0;
+  basketAmount?: number = 0;
+  serviceFee?: number = 0;
+
+
   categories: AllCategory[] = []
   basketItems: any = []
 
@@ -57,10 +60,13 @@ export class PublicComponent {
 
   getBasket(){
     this.basketService.getBasket().subscribe(res => {
-      this.basketItems = res.data.basketItems
-      console.log(this.basketItems)
-     this.totalBasketAmount = isNaN(res.data.amountInfo?.amount + res.data.amountInfo?.serviceFee)? 0 : res.data.amountInfo?.amount + res.data.amountInfo?.serviceFee; 
-    }) 
+    this.basketItems = res.data.basketItems
+    console.log(res.data)
+    this.basketAmount = res.data.amountInfo?.amount;
+    this.serviceFee = res.data.amountInfo?.serviceFee;
+
+   this.totalBasketAmount = isNaN(this.basketAmount! + this.serviceFee!)? 0 : this.basketAmount! + this.serviceFee!; 
+    })
   }
 
   removeBasketItem(id: number){

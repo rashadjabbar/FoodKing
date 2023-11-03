@@ -28,33 +28,38 @@ style="background: url(assets/images/banner/pages-banner.png) no-repeat scroll r
                         <tr>
                            <th scope="col">&nbsp;</th>
                            <th scope="col">&nbsp;</th>
-                           <th scope="col"><span class="h5 mb-0">Product</span></th>
-                           <th scope="col"><span class="h5 mb-0">Price</span></th>
-                           <th scope="col"><span class="h5 mb-0">Quantity</span></th>
-                           <th scope="col"><span class="h5 mb-0">Subtotal</span></th>
+                           <th scope="col"><span class="h5 mb-0">Məhsul</span></th>
+                           <th scope="col"><span class="h5 mb-0">Qiymət</span></th>
+                           <th scope="col"><span class="h5 mb-0">Miqdar</span></th>
+                           <th scope="col"><span class="h5 mb-0">Məbləğ</span></th>
                         </tr>
                      </thead>
                      <tbody>
-                        <tr class="align-items-center product">
+                        <tr class="align-items-center product" *ngFor="let basketItem of basketItems">
                            <td class="vertical-middle">
-                              <button type="button" class="cross"><i class="fas fa-times"></i></button>
+                              <button type="button" (click)="removeBasketItem(basketItem.id)" class="cross"><i class="fas fa-times"></i></button>
                            </td>
                            <td class="vertical-middle">
-                              <a href="#"><img src="assets/images/cart/snack-1.jpg" class="img-width-100"
+                              <a href="#"><img [src]="'http://192.168.37.49:3005/'+basketItem.imageUrl" class="img-width-100"
                                     alt="01"></a>
                            </td>
-                           <td class="vertical-middle">Side Dish</td>
-                           <td class="vertical-middle">$ <span class="price">8.00</span></td>
+                           <td class="vertical-middle">{{ basketItem.name }}</td>
+                           <td class="vertical-middle"><span class="price">{{ basketItem.price }} ₼</span></td>
                            <td class="vertical-middle">
                               <div class="buttons_added" data-qty="btn">
                                  <button type="button" class="minus"><i class="fas fa-minus"></i></button>
                                  <input type="number" id="quantity" data-qty="input" class=" qty text" step="1"
-                                    min="0" name="cart" value="1" title="Qty" placeholder="">
+                                    min="0" name="cart" [value]="basketItem.count" title="Qty" placeholder="">
                                  <button type="button" class="plus"><i class="fas fa-plus"></i></button>
                               </div>
                            </td>
-                           <td class="vertical-middle">$ <span class="sub-total">8.00</span></td>
+                           <td class="vertical-middle"><span class="sub-total">{{ basketItem.count * basketItem.price }} ₼</span></td>
                         </tr>
+
+                        <tr *ngIf="basketItems.length=='0'">
+                           <td colspan="6" class="text-center">Səbətdə məhsul yoxdur</td>
+                        </tr>
+
                      </tbody>
                   </table>
                </div>
@@ -73,7 +78,7 @@ style="background: url(assets/images/banner/pages-banner.png) no-repeat scroll r
                   <div class="iq-btn-container">
                      <a class="" href="javascript:void(0)">
                         <div class="btn btn-secondary animation-btn">
-                           Proceed To Checkout
+                           Sifariş et
                            <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
                         </div>
                      </a>
