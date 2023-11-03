@@ -45,4 +45,26 @@ export class CartComponent {
       }
     });
   }
+
+  changeQuantity(index:number, increase:boolean){
+    if(increase)
+    this.basketItems[index].count = Number(this.basketItems[index].count + 1);
+    else
+      this.basketItems[index].count = Number(this.basketItems[index].count - 1);
+
+    this.calculateTotals();
+  }
+
+  calculateSubAmount(count:number, price:number){
+    return Number(count*price).toFixed(2)
+  }
+
+  calculateTotals(){
+    let total=0;
+    for(let i=0;i<this.basketItems.length;i++){
+      total += Number(this.calculateSubAmount(this.basketItems[i].count, this.basketItems[i].price))
+    }
+
+    this.basketAmount=total;
+  }
 }

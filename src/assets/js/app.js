@@ -112,25 +112,25 @@ Index Of Script
 
     const minusBtns = document.querySelectorAll('.minus')
 
-    const updateQtyBtn = (elem, value) => {
-        const oldValue = elem.closest('[data-qty="btn"]').querySelector('[data-qty="input"]').value
-        const newValue = Number(oldValue) + Number(value)
-        if (newValue >= 1) {
-            elem.closest('[data-qty="btn"]').querySelector('[data-qty="input"]').value = newValue
-        }
-    }
+    // const updateQtyBtn = (elem, value) => {
+    //     const oldValue = elem.closest('[data-qty="btn"]').querySelector('[data-qty="input"]').value
+    //     const newValue = Number(oldValue) + Number(value)
+    //     if (newValue >= 1) {
+    //         elem.closest('[data-qty="btn"]').querySelector('[data-qty="input"]').value = newValue
+    //     }
+    // }
 
-    Array.from(plusBtns, (elem) => {
-        elem.addEventListener('click', (e) => {
-            updateQtyBtn(elem, 1)
-        })
-    })
+    // Array.from(plusBtns, (elem) => {
+    //     elem.addEventListener('click', (e) => {
+    //         updateQtyBtn(elem, 1)
+    //     })
+    // })
 
-    Array.from(minusBtns, (elem) => {
-        elem.addEventListener('click', (e) => {
-            updateQtyBtn(elem, -1)
-        })
-    })
+    // Array.from(minusBtns, (elem) => {
+    //     elem.addEventListener('click', (e) => {
+    //         updateQtyBtn(elem, -1)
+    //     })
+    // })
 
 
     /*---------------------------------------------------------------------

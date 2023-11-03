@@ -14,6 +14,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatBadgeModule} from '@angular/material/badge';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
     MatPaginatorModule,
     MatMenuModule,
     MatBadgeModule,
-
+    FormsModule
 
   ],
   providers: [
