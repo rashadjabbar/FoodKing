@@ -37,7 +37,7 @@ style="background: url(assets/images/banner/pages-banner.png) no-repeat scroll r
                      <tbody>
                         <tr class="align-items-center product" *ngFor="let basketItem of basketItems; let i=index">
                            <td class="vertical-middle">
-                              <button type="button" (click)="removeBasketItem(basketItem.id)" class="cross"><i class="fas fa-times"></i></button>
+                              <button type="button" *ngIf="basketItems.length > 1" (click)="removeBasketItem(basketItem.id)" class="cross"><i class="fas fa-times"></i></button>
                            </td>
                            <td class="vertical-middle">
                               <a href="#"><img [src]="'http://192.168.37.49:3005/'+basketItem.imageUrl" class="img-width-100"
@@ -74,7 +74,7 @@ style="background: url(assets/images/banner/pages-banner.png) no-repeat scroll r
                   </table>
                   <div class="iq-btn-container">
                      <a class="" href="javascript:void(0)">
-                        <div class="btn btn-secondary animation-btn">
+                        <div class="btn btn-secondary animation-btn" (click)="submitOrder()">
                            Sifariş et
                            <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
                         </div>

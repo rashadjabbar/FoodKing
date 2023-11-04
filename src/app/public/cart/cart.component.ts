@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SaveOrder } from 'src/models/save-order';
 import { GlobalService } from 'src/services/global.service';
 import { BasketService } from 'src/services/public/basket.service';
 import { showConfirmAlert, showInfoAlert } from 'src/utils/alert';
@@ -19,6 +20,7 @@ export class CartComponent {
   basketAmount?: number = 0;
   serviceFee?: number = 0;
   totalBasketAmount?: number = 0;
+  orderData: SaveOrder = {orderItems:[]}
 
   ngOnInit() {
     this.getBasket()
@@ -70,5 +72,34 @@ export class CartComponent {
     this.basketService.getServiceFeeByAmount({amount: this.basketAmount}).subscribe(res => {
       this.serviceFee  = res.data
      }) 
+  }
+
+
+  submitOrder(){
+    showConfirmAlert('', "Sifariş etmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res =>{
+      if (res.isConfirmed){
+        this.orderData!.id=0
+        this.orderData!.serviceFee=this.serviceFee
+        this.orderData!.amount=this.basketAmount
+        
+        this.basketItems.map((item: any) => {
+          this.orderData.orderItems!.push({
+            productId: item.productId,
+            productName: item.name,
+            count: item.count,
+            price: item.price,
+          })
+        });
+        
+        console.log(this.orderData!)
+    
+        this.basketService.SaveOrder(this.orderData!).subscribe(res => {
+          showInfoAlert('', "Sifariş qəbul edildi", false, false, 'Bağla','', 1000);
+          this.router.navigate(['/']);
+        }) 
+      }
+    });
+    
+   
   }
 }
