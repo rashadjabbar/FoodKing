@@ -24,4 +24,7 @@ export class BasketService {
     return this.http.delete<any>(`${this.baseUrl}DeleteProduct?id=${id}`);
   }
 
+  getServiceFeeByAmount(request: {amount: number}): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}GetServiceFeeByAmount`, request );
+  }
 }

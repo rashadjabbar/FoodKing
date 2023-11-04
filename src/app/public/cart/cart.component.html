@@ -67,9 +67,9 @@ style="background: url(assets/images/banner/pages-banner.png) no-repeat scroll r
                   <!-- <h3 class="mb-3 mt-2">Cart totals</h3> -->
                   <table class="table table-borderless product-table">
                      <thead>
-                        <th><span class="h6">Total: {{basketAmount ?? 0}} ₼</span></th>
+                        <th><span class="h6">Total: {{basketAmount | number: '1.2-2'}} ₼</span></th>
                         <th><span class="h6">Servis haqqı: {{serviceFee ?? 0}} ₼</span></th>
-                        <th><span class="h6">Ödəniləcək məbləğ: {{basketAmount! + serviceFee!}} ₼</span></th>
+                        <th><span class="h6">Ödəniləcək məbləğ: {{(basketAmount! + serviceFee!) | number: '1.2-2' }} ₼</span></th>
                      </thead>
                   </table>
                   <div class="iq-btn-container">

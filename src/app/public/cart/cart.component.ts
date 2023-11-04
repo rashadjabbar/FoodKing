@@ -66,5 +66,9 @@ export class CartComponent {
     }
 
     this.basketAmount=total;
+
+    this.basketService.getServiceFeeByAmount({amount: this.basketAmount}).subscribe(res => {
+      this.serviceFee  = res.data
+     }) 
   }
 }
