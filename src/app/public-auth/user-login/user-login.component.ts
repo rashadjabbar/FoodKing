@@ -12,7 +12,8 @@ import { Login } from 'src/models/login';
 export class UserLoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
-    private login: LoginService,) { loginJs }
+    private login: LoginService,
+    ) { loginJs }
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   logindata: Login = new Login();
@@ -60,7 +61,6 @@ export class UserLoginComponent implements OnInit {
 
     this.logindata.username = this.loginForm.get('loginUsername')?.value!;
     this.logindata.password = this.loginForm.get('loginPassword')?.value!;
-
     this.login.login(this.logindata)
   }
 

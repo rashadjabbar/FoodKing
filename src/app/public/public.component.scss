@@ -23,6 +23,12 @@
     cursor: pointer;
 }
 
+.fa-user-circle {
+    margin-left: 35px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
 .basket-div {
     width: 350px;
     padding: 30px;
@@ -36,7 +42,7 @@
 }
 
 .product-list {
-    height: fit-content;
+    max-height: 220px;
     overflow-y: auto;
 }
 
@@ -101,4 +107,61 @@
 .mat-badge-content{
     background: #3bb77e !important;
     font-weight: 400;
+}
+
+.user-info{
+    padding: 12px 13px;
+    
+}
+
+.user-info>span{
+    font-family: 'Dosis', sans-serif;
+    color: #3bb77e;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.logOut{
+    width: 100%;
+}
+
+.logOut img {
+    height: 30px;
+}
+
+.logOut span {
+    font-family: 'Dosis', sans-serif;
+    color: #3bb77e;
+    font-size: 18px;
+    font-weight: 400;
+    margin-left: 7px;
+    cursor: pointer;
+}
+
+.basket-icon{
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.user-icon-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    margin-left: 20px;
+
+}
+
+.user-icon{
+    cursor: pointer;
+    width: 23px;
+    height: 23px;
+}
+
+::ng-deep.mat-badge-content{
+    margin-left: 20px;
 }

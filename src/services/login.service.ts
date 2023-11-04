@@ -65,7 +65,7 @@ export class LoginService {
         this.loginned = result.status
         this.globalService.token = result.data.token!;
         // sessionStorage.setItem('token', result.data.token);
-        // this.router.navigate(['/']);
+        this.router.navigate(['/']);
       },
       error: (res: any) => {
         sessionStorage.removeItem('token')

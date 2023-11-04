@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GlobalService } from 'src/services/global.service';
+import { GlobalService, User } from 'src/services/global.service';
+import jwt_decode from 'jwt-decode';
+
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -11,13 +14,13 @@ export class AdminComponent implements OnInit{
   constructor(private router: Router,
     private globalService: GlobalService){}
 
+    userData?: User;
+
   ngOnInit(){
-    this.globalService.userData$.subscribe(res => {
-      console.log(res.userType)
-      if ( res.userType == 1) {
-        this.router.navigate(['/admin']);
-      }else this.router.navigate(['']);
-    })
+    this.userData = jwt_decode(sessionStorage.getItem('token')!)
+    if ( this.userData.userType == 1) {
+      this.router.navigate(['/admin']);
+    }else this.router.navigate(['']);
    
   }
 

@@ -94,12 +94,18 @@ export class HomeComponent {
 
   
   addProductToBasket(productId: number){
-    this.basketService.addProductToBasket({productId}).subscribe({
-      next: res => {
-        showInfoAlert('', "Səbətə əlavə edildi", false, false, 'Bağla','', 1000);
-        this.globalService.refreshBasket({itemAddedToBasket: true})
-      }
-    })
+    if (sessionStorage.getItem('token') == null) {
+      this.router.navigate(['user-login'])
+      
+    }else {
+      this.basketService.addProductToBasket({productId}).subscribe({
+        next: res => {
+          showInfoAlert('', "Səbətə əlavə edildi", false, false, 'Bağla','', 1000);
+          this.globalService.refreshBasket({itemAddedToBasket: true})
+        }
+      })
+    }
+    
   }
 
 }

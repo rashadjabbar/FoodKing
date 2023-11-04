@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PublicComponent } from './public.component';
 import { AppRoutingModule } from '../app-routing.module';
@@ -15,6 +15,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
 import { FormsModule } from '@angular/forms';
+import { defineElement } from '@lordicon/element';
+import lottie from 'lottie-web';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     CategoryListComponent,
     WishlistComponent,
-    CartComponent
+    CartComponent,
   ],
   imports: [
     CommonModule,
@@ -31,12 +33,14 @@ import { FormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatMenuModule,
     MatBadgeModule,
-    FormsModule
-
+    FormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
 
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class PublicModule { }
+export class PublicModule {constructor() {
+  defineElement(lottie.loadAnimation);
+} }

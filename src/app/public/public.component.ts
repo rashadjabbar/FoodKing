@@ -4,9 +4,10 @@ import { CategoryService } from 'src/services/category.service';
 import { appJs } from '../../assets/js/app.js'
 import { Router } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { GlobalService } from 'src/services/global.service';
+import { GlobalService, User } from 'src/services/global.service';
 import { BasketService } from 'src/services/public/basket.service';
 import { MatMenuTrigger } from '@angular/material/menu';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-public',
@@ -31,15 +32,24 @@ export class PublicComponent {
   categories: AllCategory[] = []
   basketItems: any = []
 
+  userData?: User
+
+  loginnedUser = sessionStorage.getItem('token')
+
   ngOnInit() {
     this.getCategories()
     this.getBasket()
+    this.getUserData()
 
     this.globalService.basketObservable$.subscribe(res => {
       this.getBasket()
     })
+    
   }
 
+  getUserData(){
+    this.userData = jwt_decode(sessionStorage.getItem('token')!)
+  }
 
   getCategories() {
     this.categoryServices.getAllCategory().subscribe((res: any) => {
@@ -81,5 +91,10 @@ export class PublicComponent {
 
   confirmOrder(){
     
+  }
+
+  logOut(){
+    sessionStorage.removeItem('token')
+    this.router.navigate(['user-login']);
   }
 }

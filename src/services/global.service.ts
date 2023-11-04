@@ -23,8 +23,10 @@ private basketEmitter = new BehaviorSubject({ itemAddedToBasket: false });
 basketObservable$ = this.basketEmitter.asObservable();
 
   tokenValue = new BehaviorSubject(this.token);
+  
   private categoryId = new BehaviorSubject({ catId: 0 });
   data$ = this.categoryId.asObservable();
+
   private userData = new BehaviorSubject(new User);
   userData$ = this.userData.asObservable();
 
