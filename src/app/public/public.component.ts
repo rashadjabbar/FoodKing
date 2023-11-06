@@ -37,11 +37,15 @@ export class PublicComponent {
   basketItems: any = []
 
   userData?: User
-  isAuthenticated: boolean=_isAuthenticated;
+  isAuthenticated: boolean=false;
 
   loginnedUser = sessionStorage.getItem('token')
 
   ngOnInit() {
+    this.authService.identityCheck();
+
+    this.isAuthenticated= _isAuthenticated;
+    console.log(_isAuthenticated)
     this.getCategories()
 
     if(this.isAuthenticated){
