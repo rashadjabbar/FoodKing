@@ -7,6 +7,9 @@ import { GlobalService, User } from 'src/services/global.service';
 import { BasketService } from 'src/services/public/basket.service';
 import { MatMenuTrigger } from '@angular/material/menu';
 import jwt_decode from 'jwt-decode';
+import { showConfirmAlert, showInfoAlert } from 'src/utils/alert';
+import { SaveOrder } from 'src/models/save-order';
+import { AuthService, _isAuthenticated } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-public',
@@ -19,6 +22,7 @@ export class PublicComponent {
     private router: Router,
     private basketService: BasketService,
     private categoryServices: CategoryService,
+    private authService: AuthService,
     private globalService: GlobalService) {  }
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
@@ -26,24 +30,30 @@ export class PublicComponent {
   totalBasketAmount?: number = 0;
   basketAmount?: number = 0;
   serviceFee?: number = 0;
+  orderData: SaveOrder = {orderItems:[]}
 
 
   categories: AllCategory[] = []
   basketItems: any = []
 
   userData?: User
+  isAuthenticated: boolean=_isAuthenticated;
 
   loginnedUser = sessionStorage.getItem('token')
 
   ngOnInit() {
     this.getCategories()
-    this.getBasket()
-    this.getUserData()
-    this.loadJsFile('../../../assets/js/app.js')
-    this.globalService.basketObservable$.subscribe(res => {
+
+    if(this.isAuthenticated){
       this.getBasket()
-    })
-    
+      this.getUserData()
+
+      this.globalService.basketObservable$.subscribe(res => {
+        this.getBasket()
+      })
+    }
+
+    this.loadJsFile('../../../assets/js/app.js')
   }
 
   public loadJsFile(url) {  
@@ -94,12 +104,35 @@ export class PublicComponent {
     this.trigger.closeMenu();
   }
 
-  confirmOrder(){
+  submitOrder(){
+    showConfirmAlert('', "Sifariş etmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res =>{
+      if (res.isConfirmed){
+        this.orderData!.id=0
+        this.orderData!.serviceFee=this.serviceFee
+        this.orderData!.amount=this.basketAmount
+        
+        this.basketItems.map((item: any) => {
+          this.orderData.orderItems!.push({
+            productId: item.productId,
+            productName: item.name,
+            count: item.count,
+            price: item.price,
+          })
+        });
+        
     
+        this.basketService.SaveOrder(this.orderData!).subscribe(res => {
+          showInfoAlert('', "Sifariş qəbul edildi", false, false, 'Bağla','', 1000);
+          this.getBasket();
+        }) 
+      }
+    });
   }
 
   logOut(){
     sessionStorage.removeItem('token')
-    this.router.navigate(['user-login']);
+    this.authService.identityCheck();
+    this.isAuthenticated= _isAuthenticated;
+    //this.router.navigate(['user-login']);
   }
 }

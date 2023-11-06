@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { GlobalService } from './global.service';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
+import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +20,7 @@ export class LoginService {
 
   constructor(private http: HttpClient,
     private globalService: GlobalService,
+    private authService: AuthService,
     private router: Router
     ) {}
 
@@ -40,6 +42,8 @@ export class LoginService {
         this.loginned = result.status
         // this.globalService.token = result.data.token!;
         sessionStorage.setItem('token', result.data.token);
+
+        this.authService.identityCheck();
 
         if (data.userType == '1') {
           this.router.navigate(['/admin']);
