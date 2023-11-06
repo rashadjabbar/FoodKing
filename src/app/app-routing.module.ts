@@ -12,6 +12,7 @@ import { ProductCategoryComponent } from './admin/product-category/product-categ
 import { LoginComponent } from './admin-auth/login/login.component';
 import { AdminLogin } from 'src/guards/admin-login.guard';
 import { UserLoginComponent } from './public-auth/user-login/user-login.component';
+import { PaymentComponent } from './admin/payment/payment.component';
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'products', component: AddProductComponent },
-      { path: 'product-category', component: ProductCategoryComponent }
+      { path: 'product-category', component: ProductCategoryComponent },
+      { path: 'payment', component: PaymentComponent }
     ]
   },
   {path: 'login-adminpanel' , component: LoginComponent},

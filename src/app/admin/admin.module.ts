@@ -27,6 +27,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AddProductComponent } from './product/product.component';
 import { NewProductComponent } from './product/new-product/new-product.component';
 import {GlobalService} from '../../services/global.service'
+import { PaymentComponent } from './payment/payment.component';
 
 
 
@@ -38,7 +39,8 @@ import {GlobalService} from '../../services/global.service'
     ProductCategoryComponent,
     NewCategoryComponent,
     NewSubcategoryComponent,
-    NewProductComponent
+    NewProductComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,

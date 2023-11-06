@@ -18,9 +18,9 @@ export class AdminComponent implements OnInit{
 
   ngOnInit(){
     this.userData = jwt_decode(sessionStorage.getItem('token')!)
-    if ( this.userData.userType == 1) {
-      this.router.navigate(['/admin']);
-    }else this.router.navigate(['']);
+    // if ( this.userData.userType == 1) {
+    //   this.router.navigate(['/admin']);
+    // }else this.router.navigate(['']);
    
   }
 

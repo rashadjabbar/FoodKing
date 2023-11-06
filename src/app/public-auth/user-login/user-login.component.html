@@ -1,3 +1,7 @@
+<ngx-spinner type="none" bdColor="rgba(256, 256, 256, 0.8)" size="medium" color="#fff" [fullScreen]="true" type="none">
+  <img src="../../../assets/images/output-onlinegiftools.gif" alt="">
+</ngx-spinner>
+
 <div id="back">
   <canvas id="canvas" class="canvas-back"></canvas>
   <div class="backRight">
@@ -142,14 +146,14 @@
             <label for="password-login" class="form-label">Şifrəniz</label>
             <input id="password-login" type="password" name="password" formControlName="loginPassword">
             <div
-            *ngIf="loginF['loginPassword'].invalid && (loginF['loginPassword'].dirty || loginF['loginPassword'].touched)"
-            class="info-div">
-            <label for="password-login" class="invalid-text" *ngIf="loginF['loginPassword'].errors?.['required']">
-              <span>Şifrəniz tələb olunur</span>
-              <i class="fas fa-exclamation-circle">
-              </i>
-            </label>
-          </div>
+              *ngIf="loginF['loginPassword'].invalid && (loginF['loginPassword'].dirty || loginF['loginPassword'].touched)"
+              class="info-div">
+              <label for="password-login" class="invalid-text" *ngIf="loginF['loginPassword'].errors?.['required']">
+                <span>Şifrəniz tələb olunur</span>
+                <i class="fas fa-exclamation-circle">
+                </i>
+              </label>
+            </div>
           </div>
           <div class="form-element form-submit">
             <button id="logIn" class="login" type="submit" name="login" (click)="loginFunc()"
