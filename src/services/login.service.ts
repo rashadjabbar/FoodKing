@@ -43,7 +43,7 @@ export class LoginService {
         if (data.userType == 1) {
           this.router.navigate(['/admin']);
         }
-        // this.router.navigate(['']);
+        this.router.navigate(['']);
       },
       error: (res: any) => {
         sessionStorage.removeItem('token')
