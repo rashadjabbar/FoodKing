@@ -17,6 +17,7 @@ import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
 import { FormsModule } from '@angular/forms';
 import { defineElement } from '@lordicon/element';
 import lottie from 'lottie-web';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import lottie from 'lottie-web';
     MatMenuModule,
     MatBadgeModule,
     FormsModule,
+    NgxSpinnerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }

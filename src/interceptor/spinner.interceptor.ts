@@ -12,12 +12,15 @@ import { SpinnerService } from 'src/services/spinner.service';
 @Injectable()
 export class SpinnerInterceptor implements HttpInterceptor {
 
-  constructor(public spinner: SpinnerService) {}
+  constructor(public spinner: SpinnerService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinner.showSpinner();
     return next.handle(request).pipe(
-      finalize( () => this.spinner.hideSpinner() )
+      finalize(() => {
+        this.spinner.hideSpinner()
+      }
+      )
     )
   }
 }

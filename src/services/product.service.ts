@@ -32,7 +32,7 @@ export class ProductService {
   }
 
   changeProductStatus(status: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}ChangeSubCategoryStatus` ,  status);
+    return this.http.put<any>(`${this.baseUrl}ChangeStatus` ,  status);
   }
 
   postandputProduct(category: any): Observable<any> {

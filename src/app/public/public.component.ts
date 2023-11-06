@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AllCategory } from 'src/models/category';
 import { CategoryService } from 'src/services/category.service';
-import { appJs } from '../../assets/js/app.js'
 import { Router } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { GlobalService, User } from 'src/services/global.service';
@@ -20,7 +19,7 @@ export class PublicComponent {
     private router: Router,
     private basketService: BasketService,
     private categoryServices: CategoryService,
-    private globalService: GlobalService) { appJs }
+    private globalService: GlobalService) {  }
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   message: any;
@@ -40,12 +39,19 @@ export class PublicComponent {
     this.getCategories()
     this.getBasket()
     this.getUserData()
-
+    this.loadJsFile('../../../assets/js/app.js')
     this.globalService.basketObservable$.subscribe(res => {
       this.getBasket()
     })
     
   }
+
+  public loadJsFile(url) {  
+    let node = document.createElement('script');  
+    node.src = url;  
+    node.type = 'text/javascript';  
+    document.getElementsByTagName('head')[0].appendChild(node);  
+  }  
 
   getUserData(){
     this.userData = jwt_decode(sessionStorage.getItem('token')!)
@@ -71,7 +77,6 @@ export class PublicComponent {
   getBasket(){
     this.basketService.getBasket().subscribe(res => {
     this.basketItems = res.data.basketItems
-    console.log(res.data)
     this.basketAmount = res.data.amountInfo?.amount;
     this.serviceFee = res.data.amountInfo?.serviceFee;
 

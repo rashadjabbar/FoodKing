@@ -30,6 +30,7 @@ export class LoginService {
     this.http.post<LoginResult>(this.baseUrl + `Auth/login`, data).subscribe({
       next: (result: any) => {
         if (result.status == false) {
+          debugger
           showInfoAlert('Məlumat', result.message, false, true, 'Bağla')
           sessionStorage.removeItem('token')
           return
@@ -40,10 +41,9 @@ export class LoginService {
         // this.globalService.token = result.data.token!;
         sessionStorage.setItem('token', result.data.token);
 
-        if (data.userType == 1) {
+        if (data.userType == '1') {
           this.router.navigate(['/admin']);
-        }
-        this.router.navigate(['']);
+        }else this.router.navigate(['']);
       },
       error: (res: any) => {
         sessionStorage.removeItem('token')

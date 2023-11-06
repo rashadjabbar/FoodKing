@@ -17,12 +17,16 @@ export class AdminComponent implements OnInit{
     userData?: User;
 
   ngOnInit(){
-    this.userData = jwt_decode(sessionStorage.getItem('token')!)
-    // if ( this.userData.userType == 1) {
-    //   this.router.navigate(['/admin']);
-    // }else this.router.navigate(['']);
-   
+
+    this.loadJsFile('../../../assets/admin/js/app.js')
   }
+
+  public loadJsFile(url) {  
+    let node = document.createElement('script');  
+    node.src = url;  
+    node.type = 'text/javascript';  
+    document.getElementsByTagName('head')[0].appendChild(node);  
+  }  
 
   logOut(){
     sessionStorage.removeItem('token')

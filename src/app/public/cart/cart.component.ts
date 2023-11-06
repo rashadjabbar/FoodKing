@@ -29,7 +29,6 @@ export class CartComponent {
   getBasket(){
     this.basketService.getBasket().subscribe(res => {
       this.basketItems = res.data.basketItems
-      console.log(res.data)
       this.basketAmount = res.data.amountInfo?.amount;
       this.serviceFee = res.data.amountInfo?.serviceFee;
 
@@ -91,7 +90,6 @@ export class CartComponent {
           })
         });
         
-        console.log(this.orderData!)
     
         this.basketService.SaveOrder(this.orderData!).subscribe(res => {
           showInfoAlert('', "Sifariş qəbul edildi", false, false, 'Bağla','', 1000);

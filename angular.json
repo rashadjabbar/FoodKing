@@ -35,12 +35,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/js/libs.min.js",
-              "src/assets/vendor/gsap/gsap.min.js",
-              "src/assets/vendor/gsap/ScrollTrigger.min.js",
-              "src/assets/js/app.js" ,
-              "src/assets/js/gsap.js",
-              "src/assets/admin/js/app.js"
+              "src/assets/js/libs.min.js"
             ]
           },
           "configurations": {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { loginJs } from '../../../assets/js/login.js';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from 'src/services/login.service';
 import { Login } from 'src/models/login';
@@ -13,7 +12,7 @@ export class UserLoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private login: LoginService,
-    ) { loginJs }
+    ) {  }
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   logindata: Login = new Login();
@@ -44,8 +43,15 @@ export class UserLoginComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.loadJsFile("../../../assets/js/login.js");  
   }
+
+  public loadJsFile(url) {  
+    let node = document.createElement('script');  
+    node.src = url;  
+    node.type = 'text/javascript';  
+    document.getElementsByTagName('head')[0].appendChild(node);  
+  }  
 
   createUser(){
     if (this.signUpForm.invalid) {

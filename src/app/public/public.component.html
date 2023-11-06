@@ -1,19 +1,9 @@
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2L4H86T" height="0" width="0"
-    style="display: none; visibility: hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-<span class="screen-darken"></span>
-<!-- loader Start -->
-<!-- <div id="loading">
-    <div class="loader simple-loader">
-        <div class="loader-body"></div>
-    </div>
-</div> -->
-<!-- loader END -->
+
 <ngx-spinner type="none" bdColor="rgba(256, 256, 256, 0.8)" size="medium" color="#fff" [fullScreen]="true" type="none">
   <img src="../../../assets/images/output-onlinegiftools.gif" alt="">
 </ngx-spinner>
 <main class="main-content">
+
   <!--Nav Start-->
   <header class="header1 has-sticky" id="main-header">
     <div class="container main-header">
@@ -118,7 +108,7 @@
               <div *ngSwitchCase="null">
                 <div class="form-element">
                   <button id="logIn" class="login" name="login">
-                    <a href="user-login">Daxil ol</a>
+                    <a [routerLink]="['user-login']">Daxil ol</a>
                   </button>
                 </div>
               </div>
