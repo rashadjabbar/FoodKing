@@ -40,7 +40,7 @@
                       </li>
                     </ul>
                   </li>
-                  <li>
+                  <li *ngIf="isAuthenticated">
                     <a [routerLink]="['wishlist']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Sevİmlİlər</a>
                   </li>

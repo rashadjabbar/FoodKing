@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AllCategory, AllCategoryBrowse } from 'src/models/category';
 import { ProductBrowseData } from 'src/models/product';
+import { AuthService, _isAuthenticated } from 'src/services/auth.service';
 import { CategoryService } from 'src/services/category.service';
 import { GlobalService } from 'src/services/global.service';
 import { ProductService } from 'src/services/product.service';
@@ -21,7 +22,8 @@ export class HomeComponent {
     private productService: ProductService,
     private basketService: BasketService,
     private router: Router,
-    private globalService: GlobalService
+    private globalService: GlobalService,
+    private authService: AuthService
     ) {
       this.catId = sessionStorage.getItem('catId') as any
   }
@@ -94,7 +96,7 @@ export class HomeComponent {
 
   
   addProductToBasket(productId: number){
-    if (sessionStorage.getItem('token') == null) {
+    if (!_isAuthenticated) {
       this.router.navigate(['user-login'])
       
     }else {
@@ -106,6 +108,15 @@ export class HomeComponent {
       })
     }
     
+  }
+
+  addToWishList(index:number, productId: number){
+    if (!_isAuthenticated) 
+      this.router.navigate(['user-login'])
+
+    this.productData[index].isFavorite = !this.productData[index].isFavorite;
+
+   
   }
 
 }

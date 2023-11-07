@@ -13,4 +13,5 @@ export class ProductBrowseData {
     imagePath?: string
     price?: number
     subCategoryName?:  string
+    isFavorite?: boolean = false
 }

@@ -93,6 +93,7 @@ export class CartComponent {
     
         this.basketService.SaveOrder(this.orderData!).subscribe(res => {
           showInfoAlert('', "Sifariş qəbul edildi", false, false, 'Bağla','', 1000);
+          this.globalService.refreshBasket({itemAddedToBasket: true})
           this.router.navigate(['/']);
         }) 
       }
