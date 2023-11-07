@@ -13,6 +13,7 @@ import { LoginComponent } from './admin-auth/login/login.component';
 import { AdminLogin } from 'src/guards/admin-login.guard';
 import { UserLoginComponent } from './public-auth/user-login/user-login.component';
 import { PaymentComponent } from './admin/payment/payment.component';
+import { OrderComponent } from './admin/order/order.component';
 
 const routes: Routes = [
   {
@@ -32,7 +33,8 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'products', component: AddProductComponent },
       { path: 'product-category', component: ProductCategoryComponent },
-      { path: 'payment', component: PaymentComponent }
+      { path: 'payment', component: PaymentComponent },
+      { path: 'order', component: OrderComponent }
     ]
   },
   {path: 'login-adminpanel' , component: LoginComponent},

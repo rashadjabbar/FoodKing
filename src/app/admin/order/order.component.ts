@@ -1,26 +1,24 @@
-import { SelectionModel } from '@angular/cdk/collections';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Payment } from 'src/models/payment';
-import { StatusRequest } from 'src/models/status';
-import { PaymentService } from 'src/services/payment.service';
+import { BrowseOrder } from 'src/models/save-order';
+import { OrderService } from 'src/services/order.service';
 import Swal from 'sweetalert2';
-import { NewPaymentComponent } from './new-payment/new-payment.component';
+import { SaveOrderComponent } from './save-order/save-order.component';
 
 @Component({
-  selector: 'app-payment',
-  templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss']
+  selector: 'app-order',
+  templateUrl: './order.component.html',
+  styleUrls: ['./order.component.scss']
 })
-export class PaymentComponent implements OnInit {
+export class OrderComponent implements OnInit {
   beginDate: any = new Date();
   endDate: any = new Date()
   constructor(
-    private paymentService: PaymentService,
+    private orderService: OrderService,
     private dialog: MatDialog,
     private router: Router,
     private datePipe: DatePipe
@@ -30,15 +28,13 @@ export class PaymentComponent implements OnInit {
     this.beginDate = this.datePipe.transform(this.beginDate, 'yyyy-MM-dd')
   }
 
-
-  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   activeRow: any = -1;
   selectedId: any = 0;
   length!: number;
-  paymentData: Payment[] = []
+  orderData: BrowseOrder[] = []
 
-  dataSource = new MatTableDataSource<Payment>(this.paymentData);
+  dataSource = new MatTableDataSource<BrowseOrder>(this.orderData);
   pageSize!: number;
   pageSizeOptions: number[] = [5, 10, 25];
   pageEvent!: PageEvent;
@@ -50,25 +46,28 @@ export class PaymentComponent implements OnInit {
 
   displayedColumns: string[] = [
     'id',
-    'name',
-    'no',
+    'categoryName',
+    'subCategoryName',
+    'productName',
+    'count',
     'amount',
-    'createdDate'
+    'createdDate',
   ];
 
   
   isActive = (index: number) => { return this.activeRow === index };
 
   ngOnInit() {
-    this.getPayment()
+    this.getOrder()
   }
 
-  getPayment() {
-    this.paymentService.getpayment(this.requestData, this.beginDate!, this.endDate!).subscribe({
+  getOrder() {
+    this.orderService.getOrder(this.requestData, this.beginDate!, this.endDate!).subscribe({
       next: res => {
-        this.dataSource = new MatTableDataSource<Payment>(res.data.result);
+        this.dataSource = new MatTableDataSource<BrowseOrder>(res.data.result);
 
         this.length = res.data.count
+        console.log(res)
 
       },
       error: res => {
@@ -84,12 +83,10 @@ export class PaymentComponent implements OnInit {
     })
   }
 
-
-
   onChangePage(pe: PageEvent) {
     this.requestData.nextPageNumber = pe.pageIndex + 1
     this.requestData.visibleItemCount = pe.pageSize
-    this.getPayment()
+    this.getOrder()
   }
 
   highlight(index: number, id: number): void {
@@ -110,7 +107,7 @@ export class PaymentComponent implements OnInit {
       id = this.selectedId;
     } else id = 0
 
-      const dialogRef = this.dialog.open(NewPaymentComponent, {
+      const dialogRef = this.dialog.open(SaveOrderComponent, {
         data: { id: id, typeView: type },
         height: 'max-content',
         width: '30%',
@@ -120,7 +117,7 @@ export class PaymentComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         this.activeRow = -1;
         this.selectedId = 0;
-        this.getPayment();
+        this.getOrder();
       });
   }
 
