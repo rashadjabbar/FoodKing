@@ -4,7 +4,7 @@ export class Category {
     status?: true
 }
 
-export class AllCategory {
+export class ComboBox {
     key?: number
     value?: string
 }
@@ -20,6 +20,6 @@ export class SubCategory {
 export class AllCategoryBrowse {
     id?: number
     name?: string
-    subCategoryData?: AllCategory[]
+    subCategoryData?: ComboBox[]
 }
 

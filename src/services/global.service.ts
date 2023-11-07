@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environments';
 
-export class User{
+export class User {
   name?: string;
   userId?: number;
   userType?: number;
@@ -18,12 +20,16 @@ export class User{
 })
 export class GlobalService {
 
-constructor() { }
-private basketEmitter = new BehaviorSubject({ itemAddedToBasket: false });
-basketObservable$ = this.basketEmitter.asObservable();
+  constructor(private http: HttpClient) { }
+
+  baseUrl = environment.apiCommonUrl;
+
+
+  private basketEmitter = new BehaviorSubject({ itemAddedToBasket: false });
+  basketObservable$ = this.basketEmitter.asObservable();
 
   tokenValue = new BehaviorSubject(this.token);
-  
+
   private categoryId = new BehaviorSubject({ catId: 0 });
   data$ = this.categoryId.asObservable();
 
@@ -34,24 +40,26 @@ basketObservable$ = this.basketEmitter.asObservable();
     this.tokenValue.next(tk);
     sessionStorage.setItem('token', tk);
   }
-  
-   get token() {
+
+  get token() {
     return sessionStorage.getItem('token') ?? "";
-   }
-
-   
- refreshBasket(model: {itemAddedToBasket: boolean}) {
-  this.basketEmitter.next(model) 
-}
-
- getCategoryId(model: {catId: number}) {
-    this.categoryId.next(model) 
   }
-  
-  getUserData(model: User){
+
+
+  refreshBasket(model: { itemAddedToBasket: boolean }) {
+    this.basketEmitter.next(model)
+  }
+
+  getCategoryId(model: { catId: number }) {
+    this.categoryId.next(model)
+  }
+
+  getUserData(model: User) {
     this.userData.next(model)
   }
 
-
+  getAllUser(){
+      return this.http.get<any>(`${this.baseUrl}ComboBox/GetAllUsers`);
+  }
 
 }

@@ -3,9 +3,18 @@
   <i class="far fa-window-close" (click)="dialogRef.close()"></i>
 </div>
 <div class="form-container">
-  <form [formGroup]="paymentForm" (ngSubmit)="productFunc()">
+  <form [formGroup]="paymentForm" (ngSubmit)="paymentFunc()">
       <div class="row input-container">
-          <div class="col-lg-12">
+        <div class="col-lg-6">
+            <mat-form-field>
+                <mat-label>İstifadəçi</mat-label>
+                <mat-select formControlName="userId" >
+                    <mat-option *ngFor="let category of allUser"  
+                        [value]="category.key">{{category.value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+          <div class="col-lg-6">
               <mat-form-field class="example-full-width">
                   <mat-label>Məbləğ</mat-label>
                   <input type="text" matInput placeholder="Maksimum 15 simvol" #message maxlength="15"

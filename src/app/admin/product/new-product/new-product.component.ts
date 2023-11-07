@@ -5,8 +5,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
 import { ProductCategoryComponent } from '../../product-category/product-category.component';
-import { AllCategory } from 'src/models/category';
 import Swal from 'sweetalert2';
+import { ComboBox } from 'src/models/category';
 
 @Component({
   selector: 'app-new-product',
@@ -24,7 +24,7 @@ export class NewProductComponent implements OnInit {
 
   matcher = new ErrorStateMatcher();
   addData!: Product[];
-  allCategory: AllCategory[] = []
+  allCategory: ComboBox[] = []
 
   submitted = false;
 

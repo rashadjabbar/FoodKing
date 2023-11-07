@@ -8,6 +8,7 @@ import { BrowseOrder } from 'src/models/save-order';
 import { OrderService } from 'src/services/order.service';
 import Swal from 'sweetalert2';
 import { SaveOrderComponent } from './save-order/save-order.component';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-order',
@@ -22,7 +23,7 @@ export class OrderComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private datePipe: DatePipe
-  ) { 
+  ) {
     this.endDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
     this.beginDate.setMonth(this.beginDate.getMonth() - 1)
     this.beginDate = this.datePipe.transform(this.beginDate, 'yyyy-MM-dd')
@@ -35,9 +36,18 @@ export class OrderComponent implements OnInit {
   orderData: BrowseOrder[] = []
 
   dataSource = new MatTableDataSource<BrowseOrder>(this.orderData);
+  selection = new SelectionModel<BrowseOrder>(true, []);
+
   pageSize!: number;
   pageSizeOptions: number[] = [5, 10, 25];
   pageEvent!: PageEvent;
+
+  highlightedRows: any[] = [];
+  highlightedRowss: any = {};
+  selectedAllRow = false
+
+  orderIds: any[] = [];
+
 
   requestData: any = {
     nextPageNumber: 1,
@@ -45,6 +55,7 @@ export class OrderComponent implements OnInit {
   }
 
   displayedColumns: string[] = [
+    'select',
     'id',
     'categoryName',
     'subCategoryName',
@@ -54,7 +65,10 @@ export class OrderComponent implements OnInit {
     'createdDate',
   ];
 
-  
+  selRow: number = 0;
+
+
+
   isActive = (index: number) => { return this.activeRow === index };
 
   ngOnInit() {
@@ -100,25 +114,68 @@ export class OrderComponent implements OnInit {
     }
   }
 
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear()
+      this.highlightedRows = []
+      this.highlightedRowss = {}
+    } else {
+      this.dataSource.data.forEach(row => this.selection.select(row));
+      this.highlightedRows = []
+      this.highlightedRowss = {}
+      this.dataSource.data.forEach(row => this.highlightedRows.push(row));
+      this.dataSource.data.forEach(row => this.highlightedRowss[row.id!] = !this.highlightedRowss[row.id!]);
+
+    }
+  }
+
+  selectedRow(event: any, row: any) {
+    this.highlightedRows.push(row);
+    this.highlightedRowss[row.id] = !this.highlightedRowss[row.id];
+    event ? this.selection.toggle(row) : null
+    this.selRow = this.selection['selected'].length
+
+  }
+
+  selectedAll(event: any) {
+    event ? this.masterToggle() : null;
+    this.selRow = this.selection['selected'].length
+  }
+
   openDialog(type: number) {
     let id = 0
+    this.selection.selected.forEach(row => this.orderIds.push({
+      id: row.id
+    }));
+
+    console.log(this.selection.selected)
 
     if (type !== 1) {
       id = this.selectedId;
     } else id = 0
 
-      const dialogRef = this.dialog.open(SaveOrderComponent, {
-        data: { id: id, typeView: type },
-        height: 'max-content',
-        width: '30%',
-        hasBackdrop: true,
-        disableClose: true
-      })
-      dialogRef.afterClosed().subscribe(result => {
-        this.activeRow = -1;
-        this.selectedId = 0;
-        this.getOrder();
-      });
+    const dialogRef = this.dialog.open(SaveOrderComponent, {
+      data: this.orderIds,
+      height: 'max-content',
+      width: '30%',
+      hasBackdrop: true,
+      disableClose: true
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      // this.activeRow = -1;
+      // this.selectedId = 0;
+      this.selection.clear()
+      this.highlightedRows = []
+      this.highlightedRowss = {}
+      this.getOrder();
+    });
   }
 
 }

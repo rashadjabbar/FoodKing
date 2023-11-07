@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { AllCategory, AllCategoryBrowse } from 'src/models/category';
+import { ComboBox, AllCategoryBrowse } from 'src/models/category';
 import { ProductBrowseData } from 'src/models/product';
 import { AuthService, _isAuthenticated } from 'src/services/auth.service';
 import { CategoryService } from 'src/services/category.service';

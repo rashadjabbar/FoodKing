@@ -20,7 +20,7 @@ export class PaymentService {
   }
 
   getPaymentByid(id: number){
-    return this.http.get<any>(`${this.baseUrl}Payment/GetPaymentById?id=${id}`);
+    return this.http.get<any>(`${this.baseUrl}Payment/GetPaymentById/${id}`);
   }
 
   savePayment(payment: any): Observable<any> {

@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AllCategory, SubCategory } from 'src/models/category';
+import { ComboBox, SubCategory } from 'src/models/category';
 import { CategoryService } from 'src/services/category.service';
 import Swal from 'sweetalert2';
 import { ProductCategoryComponent } from '../product-category.component';
@@ -19,7 +19,7 @@ export class NewSubcategoryComponent {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   matcher = new ErrorStateMatcher();
-  allCategory: AllCategory[] = []
+  allCategory: ComboBox[] = []
   addData!: SubCategory[];
   submitted = false;
 

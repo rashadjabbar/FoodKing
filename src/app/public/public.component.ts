@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AllCategory } from 'src/models/category';
+import { ComboBox } from 'src/models/category';
 import { CategoryService } from 'src/services/category.service';
 import { Router } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -33,7 +33,7 @@ export class PublicComponent {
   orderData: SaveOrder = {orderItems:[]}
 
 
-  categories: AllCategory[] = []
+  categories: ComboBox[] = []
   basketItems: any = []
 
   userData?: User
