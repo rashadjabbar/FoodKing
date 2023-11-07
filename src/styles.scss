@@ -63,6 +63,12 @@
     font-size: 14px;
     color: #5264AE;
   }
+
+  .selected-row {
+    background-color: #01a3a4 !important;
+    color: white !important;
+    cursor: pointer;
+  }
   
   .wave-group .bar {
     position: relative;

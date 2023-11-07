@@ -15,10 +15,12 @@ import Swal from 'sweetalert2';
 })
 export class NewProductComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ProductCategoryComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<ProductCategoryComponent>,
     private formBuilder: FormBuilder,
     private productService: ProductService,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any
+    ) { }
 
   matcher = new ErrorStateMatcher();
   addData!: Product[];
@@ -31,12 +33,6 @@ export class NewProductComponent implements OnInit {
 
   selectedFile!: File;
   formData = new FormData();
-
-  requestData: any = {
-    nextPageNumber: 1,
-    visibleItemCount: 10,
-  }
-
 
   productForm = this.formBuilder.group({
     id: [0, Validators.required],

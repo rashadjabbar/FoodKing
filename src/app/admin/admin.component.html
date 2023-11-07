@@ -25,13 +25,10 @@
                 <a class="nav-link" [routerLink]="['product-category']"><i class="fas fa-list-alt"></i>Kateqoriyalar</a>
             </li>
             <li class="nav-item"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                <a class="nav-link" [routerLink]="['payment']"><i class="far fa-calendar-alt"></i>Calendar</a>
+                <a class="nav-link" [routerLink]="['payment']"><i class="fas fa-money-check-alt"></i>Ödəniş</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+            <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a class="nav-link" [routerLink]="['order']"><i class="fas fa-shopping-basket"></i>Sifariş</a>
             </li>
         </ul>
     </div>

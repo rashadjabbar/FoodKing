@@ -39,7 +39,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["192.168.37.49:3008" , "192.168.37.49:3005" ],
+        allowedDomains: ["192.168.37.49:3008" , "192.168.37.49:3005" , "192.168.37.49:3010" ],
       },
     }),
   ],

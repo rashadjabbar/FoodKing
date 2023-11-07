@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -28,6 +28,9 @@ import { AddProductComponent } from './product/product.component';
 import { NewProductComponent } from './product/new-product/new-product.component';
 import {GlobalService} from '../../services/global.service'
 import { PaymentComponent } from './payment/payment.component';
+import { NewPaymentComponent } from './payment/new-payment/new-payment.component';
+import { OrderComponent } from './order/order.component';
+import { SaveOrderComponent } from './order/save-order/save-order.component';
 
 
 
@@ -40,7 +43,10 @@ import { PaymentComponent } from './payment/payment.component';
     NewCategoryComponent,
     NewSubcategoryComponent,
     NewProductComponent,
-    PaymentComponent
+    PaymentComponent,
+    NewPaymentComponent,
+    OrderComponent,
+    SaveOrderComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +74,8 @@ import { PaymentComponent } from './payment/payment.component';
     //   useClass: UnAuthorizedInterceptor,
     //   multi: true
     // },
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    DatePipe
   ],
 })
 export class AdminModule {
