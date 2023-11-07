@@ -43,9 +43,8 @@ export class PublicComponent {
 
   ngOnInit() {
     this.authService.identityCheck();
-
     this.isAuthenticated= _isAuthenticated;
-    console.log(_isAuthenticated)
+    
     this.getCategories()
 
     if(this.isAuthenticated){
