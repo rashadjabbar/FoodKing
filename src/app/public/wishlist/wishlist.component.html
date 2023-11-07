@@ -37,8 +37,8 @@
                                 <tr>
                                     <th scope="col">&nbsp;</th>
                                     <th scope="col">&nbsp;</th>
-                                    <th scope="col"><span>Product Name</span></th>
-                                    <th scope="col"><span>Unit Price</span></th>
+                                    <th scope="col"><span>Məhsul</span></th>
+                                    <th scope="col"><span>Qiymət</span></th>
                                     <!-- <th scope="col"><span>Stock Status</span></th> -->
                                     <th scope="col">&nbsp;</th>
                                 </tr>
@@ -54,8 +54,12 @@
                                     <td class="vertical-middle"><a href="javascript:void(0)">Chips</a></td>
                                     <td class="vertical-middle">$10.00</td>
                                     <!-- <td class="vertical-middle">In stock</td> -->
-                                    <td class="vertical-middle"><a href="javascript:void(0)">Səbətə əlavə et</a></td>
+                                    <td class="vertical-middle"><a href="javascript:void(0)" (click)="addProductToBasket(1)">Səbətə əlavə et</a></td>
                                 </tr>
+
+                                <tr *ngIf="'0'=='0'">
+                                    <td colspan="5" class="text-center">Məhsul yoxdur</td>
+                                 </tr>
                             </tbody>
                         </table>
                         </div>

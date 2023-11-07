@@ -114,9 +114,11 @@ export class HomeComponent {
     if (!_isAuthenticated) 
       this.router.navigate(['user-login'])
 
-    this.productData[index].isFavorite = !this.productData[index].isFavorite;
-
-   
+    this.productService.SaveWishList(productId).subscribe({
+      next: res => {
+        this.productData[index].isFavorite = !this.productData[index].isFavorite;
+      }
+    })
   }
 
 }
