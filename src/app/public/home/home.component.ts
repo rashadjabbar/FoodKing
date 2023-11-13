@@ -32,6 +32,12 @@ export class HomeComponent {
   requestData: any = {
     nextPageNumber: 1,
     visibleItemCount: 6,
+    // filters:[
+    //   {
+    //   columnName: "productName",
+    //   value: ""
+    //   }
+    // ]
   }
 
   catId = 0
@@ -92,6 +98,17 @@ export class HomeComponent {
         this.length = res.data.count
       }
     })
+  }
+
+  filterProducts(event: any){
+    this.requestData.filters = [
+        {
+        columnName: "productName",
+        value: event.target.value
+        }
+      ];
+
+    this.getProduct(this.catId)
   }
 
   
