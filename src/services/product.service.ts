@@ -48,4 +48,7 @@ export class ProductService {
     return this.http.post<any>(`${this.baseUrl}SaveWishList/${productId}`, null );
   }
 
+  getUserWishList(): Observable<any> {
+    return this.http.get<Product>(`${this.baseUrl}GetWishListByUserId`);
+  }
 }

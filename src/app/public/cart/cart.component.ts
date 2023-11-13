@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environments';
 import { SaveOrder } from 'src/models/save-order';
 import { GlobalService } from 'src/services/global.service';
 import { BasketService } from 'src/services/public/basket.service';
@@ -14,8 +15,12 @@ export class CartComponent {
   constructor(
     private router: Router,
     private basketService: BasketService,
-    private globalService: GlobalService) {  }
+    private globalService: GlobalService) { 
+      this.imageIpUrl = environment.imageIpUrl
 
+     }
+
+  imageIpUrl!: string
   basketItems: any = []  
   basketAmount?: number = 0;
   serviceFee?: number = 0;

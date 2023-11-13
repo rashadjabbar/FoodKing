@@ -44,20 +44,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr *ngFor="let wishListItem of wishList; let i=index">
                                     <td class="vertical-middle">
-                                        <button type="button" class="cross"><i class="fas fa-times"></i></button>
+                                        <button type="button" (click)="removeFromWishList(wishListItem.productId)" class="cross"><i class="fas fa-times"></i></button>
                                     </td>
                                     <td class="vertical-middle">
-                                        <a href="javascript:void(0)"><img src="assets/images/cart/snack-2.jpg" class="rounded img-width-100" alt="01"></a>
+                                        <a target="_blank" [href]="imageIpUrl + wishListItem.imageUrl"><img [src]="imageIpUrl + wishListItem.imageUrl"  class="rounded img-width-100" alt="no image"></a>
                                     </td>
-                                    <td class="vertical-middle"><a href="javascript:void(0)">Chips</a></td>
-                                    <td class="vertical-middle">$10.00</td>
+                                    <td class="vertical-middle"><a href="javascript:void(0)">{{ wishListItem.name }}</a></td>
+                                    <td class="vertical-middle">{{ wishListItem.price }} ₼</td>
                                     <!-- <td class="vertical-middle">In stock</td> -->
-                                    <td class="vertical-middle"><a href="javascript:void(0)" (click)="addProductToBasket(1)">Səbətə əlavə et</a></td>
+                                    <td class="vertical-middle">
+                                        <a *ngIf="wishListItem.status" href="javascript:void(0)" (click)="addProductToBasket(wishListItem.productId)">Səbətə əlavə et</a>
+                                    <p *ngIf="!wishListItem.status">Stokda yoxdur</p>
+                                    </td>
                                 </tr>
 
-                                <tr *ngIf="'0'=='0'">
+                                <tr *ngIf="wishList.length=='0'">
                                     <td colspan="5" class="text-center">Məhsul yoxdur</td>
                                  </tr>
                             </tbody>

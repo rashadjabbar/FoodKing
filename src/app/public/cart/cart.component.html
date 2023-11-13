@@ -41,8 +41,9 @@ style="background: url(assets/images/banner/pages-banner.png) no-repeat scroll r
                               <button type="button" *ngIf="basketItems.length > 1" (click)="removeBasketItem(basketItem.id)" class="cross"><i class="fas fa-times"></i></button>
                            </td>
                            <td class="vertical-middle">
-                              <a href="#"><img [src]="'http://192.168.37.49:3005/'+basketItem.imageUrl" class="img-width-100"
-                                    alt="01"></a>
+                              <a target="_blank" [href]="imageIpUrl + basketItem.imageUrl">
+                                 <img [src]="imageIpUrl + basketItem.imageUrl" class="img-width-100" alt="no image">
+                              </a>
                            </td>
                            <td class="vertical-middle">{{ basketItem.name }}</td>
                            <td class="vertical-middle"><span class="price">{{ basketItem.price }} ₼</span></td>
