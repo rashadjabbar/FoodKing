@@ -31,11 +31,10 @@
                     </a>
                   </li>
                   <li>
-                    <a [routerLink]="['category-list']" [routerLinkActive]="['active-menu']"
-                      [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Kateqorİyalar
+                    <a href="javascript:void(0)" class="menu-item">Kateqorİyalar
                       <i class="fas fa-chevron-down toggledrop"></i></a>
                     <ul class="sub-menu">
-                      <li class="" *ngFor="let category of categories" (click)="browseCategory(category.key)">
+                      <li class="cursor-pointer" *ngFor="let category of categories" (click)="browseCategory(category.key)">
                         <a>{{ category.value }}</a>
                       </li>
                     </ul>
