@@ -40,8 +40,8 @@ export class ProductService {
   }
 
   // CLIENT
-  getProductClientBrowseData(request: RequestData, catId: number , subCatId: number): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}GetProductClientBrowseData?subCategoryId=${subCatId}&categoryId=${catId}`, request );
+  getProductClientBrowseData(request: RequestData, catId: number , subCatId: number, orderByProducts: number): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}GetProductClientBrowseData?subCategoryId=${subCatId}&categoryId=${catId}&orderByProducts=${orderByProducts}`, request );
   }
 
   SaveWishList(productId: number): Observable<any> {

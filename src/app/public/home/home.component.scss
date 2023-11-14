@@ -21,6 +21,15 @@
     cursor: pointer;
 }
 
+.subLi-selected {
+    background-color: #3bb77e;
+    color: white;
+}
+
+.category-selected {
+    font-weight: bold;
+}
+
 .favorite a{
     background: #ffba43;
     color: #fff !important

@@ -42,7 +42,7 @@ export class HomeComponent {
 
   catId = 0
   subCatId = 0
-
+  orderByProducts = 1
   message = 'Hello!';
 
   productData: ProductBrowseData[] = []
@@ -79,20 +79,29 @@ export class HomeComponent {
   }
 
   categoryClick(categoryId: any) {
-    this.catId = categoryId
-    this.subCatId = 0
-    this.getProduct(categoryId)
+   // this.catId = categoryId
+    if(this.catId == categoryId)
+      this.catId = 0;
+    else
+      this.catId = categoryId
 
+    this.subCatId = 0
+    this.getProduct(this.catId)
   }
 
   subCategoryClick(catId: any, subCatId: any) {
     this.catId = catId
-    this.subCatId = subCatId
-    this.getProduct(catId)
+
+    if(this.subCatId == subCatId)
+      this.subCatId = 0;
+    else
+      this.subCatId = subCatId
+
+    this.getProduct(this.catId)
   }
 
   getProduct(categoryId: number) {
-    this.productService.getProductClientBrowseData(this.requestData, categoryId, this.subCatId).subscribe({
+    this.productService.getProductClientBrowseData(this.requestData, categoryId, this.subCatId, this.orderByProducts).subscribe({
       next: res => {
         this.productData = res.data.result
         this.length = res.data.count
@@ -111,6 +120,10 @@ export class HomeComponent {
     this.getProduct(this.catId)
   }
 
+  // getProductsByNewOrder(){
+  //   alert(this.orderByProducts)
+  //   this.getProduct(this.catId)
+  // }
   
   addProductToBasket(productId: number){
     if (!_isAuthenticated) {

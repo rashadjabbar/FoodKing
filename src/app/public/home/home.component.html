@@ -63,9 +63,9 @@
                   <div class="chat-list-main" id="#leftside-navigation" id="accordionExample">
 
                     <ul class="list-unstyled">
-                      <li class="chat-list" id="chat-list" *ngFor="let category of categories;  index as i">
+                      <li class="chat-list" id="chat-list" *ngFor="let category of categories;  index as i" >
                         <div style="display: flex;justify-content: space-between;">
-                          <a (click)="categoryClick(category.id)">
+                          <a (click)="categoryClick(category.id)" [ngClass]="{'category-selected':category.id == catId}">
                             {{category.name}}
                           </a>
                           <i *ngIf="category.subCategoryData?.length !== 0" class="fas fa-chevron-down" type="button"
@@ -73,7 +73,7 @@
                             aria-expanded="false" [attr.aria-controls]="'#collapse'  + '-' + i"></i>
                         </div>
                         <ul id="collapse-{{i}}" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
-                          <li class="subLi" *ngFor="let item of category.subCategoryData"
+                          <li class="subLi" *ngFor="let item of category.subCategoryData" [ngClass]="{'subLi-selected':item.key == subCatId}" 
                             (click)="subCategoryClick(category.id , item.key)">{{item.value}}</li>
 
                         </ul>
@@ -89,13 +89,13 @@
             data-iq-trigger="scroll" data-iq-ease="power.inOut">
             <div class="mb-3 d-flex justify-content-between align-items-center">
 
-              <select name="orderby" class="orderby" aria-label="Shop order">
-                <option value="menu_order" selected='selected'>Defolt çeşidləmə</option>
-                <option value="popularity">Populyarlığa görə sırala</option>
+              <select name="orderby" class="orderby" aria-label="Shop order" [(ngModel)]="orderByProducts" (change)="getProduct(catId)">
+                <!-- <option value="menu_order" selected='selected'>Defolt çeşidləmə</option> -->
+                <option value="1">Populyarlığa görə sırala</option>
                 <!-- <option value="rating">Ortalama reytinqə görə sırala</option> -->
-                <option value="date">Ən yeni məhsulları sırala</option>
-                <option value="price">Qiymətə görə: aşağıdan yuxarıya</option>
-                <option value="price-desc">Qiymətə görə: yuxarıdan aşağıya </option>
+                <option value="2">Ən yeni məhsulları sırala</option>
+                <option value="3">Qiymətə görə: aşağıdan yuxarıya</option>
+                <option value="4">Qiymətə görə: yuxarıdan aşağıya </option>
               </select>
               <input type="hidden" name="paged" value="1" />
             </div>
