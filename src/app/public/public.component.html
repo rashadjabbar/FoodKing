@@ -32,7 +32,7 @@
                   </li>
                   <li>
                     <a [routerLink]="['category-list']" [routerLinkActive]="['active-menu']"
-                      [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Katİqorİyalar
+                      [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Kateqorİyalar
                       <i class="fas fa-chevron-down toggledrop"></i></a>
                     <ul class="sub-menu">
                       <li class="" *ngFor="let category of categories" (click)="browseCategory(category.key)">
@@ -84,7 +84,7 @@
                   </div>
                   <div class="button-div">
                     <div class="iq-btn-container" id="banner-action">
-                      <a routerLink="cart" (click)="closeBasket()">
+                      <a routerLink="cart"  (click)="closeBasket()">
                         <div class="btn btn-secondary animation-btn">
                           Səbətə bax<i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
                         </div>
@@ -150,15 +150,14 @@
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="footer-logo">
-              <a href="javascript:void(0)">
+              <a [routerLink]="['']">
                 <img class="img-fluid" src="assets/images/logo.png" alt="foodsto1" />
               </a>
             </div>
             <div class="widget mb-4">
               <div class="textwidget text-body">
                 <p>
-                  Subscribe to our newsletter and get 10% off your<br />
-                  first purchase.
+                 Qeydiyyatdan keçin və ilk sifarişiniz komissiyasız çatdırılsın!
                 </p>
               </div>
             </div>
@@ -179,17 +178,17 @@
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 mt-4 mt-lg-0 mt-md-0">
             <div class="widget">
-              <h5 class="footer-title">Link</h5>
+              <h5 class="footer-title">Keçidlər</h5>
               <div class="menu-footer1-container">
                 <ul id="menu-footer1" class="menu list-inline p-0 m-0">
-                  <li class="menu-item">
-                    <a href="checkout.html"><i class="fas fa-chevron-right me-2"></i>Checkout</a>
+                  <li class="menu-item" >
+                    <a [routerLink]="['']" routerLinkActive="active-menu"><i class="fas fa-chevron-right me-2"></i>Ana səhifə</a>
                   </li>
-                  <li class="menu-item">
-                    <a href="wishlist.html"><i class="fas fa-chevron-right me-2"></i>Wishlist</a>
+                  <li class="menu-item" *ngIf="isAuthenticated">
+                    <a [routerLink]="['wishlist']" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-menu"><i class="fas fa-chevron-right me-2"></i>Sevimlilər</a>
                   </li>
-                  <li class="menu-item">
-                    <a href="cart.html"><i class="fas fa-chevron-right me-2"></i>Shopping Cart</a>
+                  <li class="menu-item" *ngIf="isAuthenticated">
+                    <a [routerLink]="['cart']" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-menu"><i class="fas fa-chevron-right me-2"></i>Səbət</a>
                   </li>
                 </ul>
               </div>
@@ -197,41 +196,44 @@
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
             <div class="widget">
-              <h5 class="footer-title">Information</h5>
+              <h5 class="footer-title">Məlumat</h5>
               <div class="menu-footer2-container">
                 <ul id="menu-footer2" class="menu list-inline p-0 m-0">
                   <li class="menu-item">
-                    <a href="about-us.html"><i class="fas fa-chevron-right me-2"></i>About Us</a>
+                    <a href="about-us.html"><i class="fas fa-chevron-right me-2"></i>Haqqımızda</a>
                   </li>
                   <li class="menu-item">
-                    <a href="our-team.html"><i class="fas fa-chevron-right me-2"></i>Our Team</a>
+                    <a href="our-team.html"><i class="fas fa-chevron-right me-2"></i>Komandamız</a>
                   </li>
-                  <li class="menu-item">
+                  <!-- <li class="menu-item">
                     <a href="contact-us.html"><i class="fas fa-chevron-right me-2"></i>Contact Us</a>
-                  </li>
-                  <li class="menu-item">
+                  </li> -->
+                  <!-- <li class="menu-item">
                     <a href="blog/left-sidebar-blog.html"><i class="fas fa-chevron-right me-2"></i>Blog</a>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
             <div class="widget">
-              <h5 class="footer-title">Quick Contact</h5>
+              <h5 class="footer-title">Əlaqə</h5>
               <div class="row">
                 <div class="col-sm-12">
                   <ul class="iq-contact list-inline p-0 m-0">
                     <li>
-                      <a href="javascript:void(0)"><i class="fa fa-home"></i><span>1234 North Avenue Luke Lane, South
-                          Bend, IN
-                          360001</span></a>
+                      <a href="javascript:void(0)">
+                        <i class="fa fa-home"></i>
+                        <span>Grand Park
+                        Hasan Bey Zardabi 313, 
+                        Baku city, Azerbaijan Republic</span>
+                      </a>
                     </li>
                     <li>
-                      <a href="mailto:jondoe@demo.com"><i class="fa fa-envelope"></i><span>jondoe@demo.com</span></a>
+                      <a href="mailto:foodkingaze@gmail.com"><i class="fa fa-envelope"></i><span>foodkingaze@gmail.com</span></a>
                     </li>
                     <li>
-                      <a href="tel:+0123456789"><i class="fa fa-phone"></i><span>+0123456789</span></a>
+                      <a href="tel:(+994) 51 250 07 02"><i class="fa fa-phone"></i><span>(+994) 51 250 07 02</span></a>
                     </li>
                   </ul>
                 </div>
@@ -247,7 +249,7 @@
     <div class="container">
       <div class="pt-3 pb-3">
         <div class="d-flex justify-content-between">
-          <span class="copyright">Copyright 2021 foodsto All Rights Reserved.</span>
+          <span class="copyright">Copyright © {{year}} | All Rights Reserved.</span>
         </div>
       </div>
     </div>

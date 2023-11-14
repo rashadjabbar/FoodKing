@@ -31,7 +31,7 @@ export class PublicComponent {
   basketAmount?: number = 0;
   serviceFee?: number = 0;
   orderData: SaveOrder = {orderItems:[]}
-
+year = new Date().getFullYear();
 
   categories: ComboBox[] = []
   basketItems: any = []
