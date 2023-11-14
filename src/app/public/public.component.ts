@@ -136,6 +136,6 @@ export class PublicComponent {
     sessionStorage.removeItem('token')
     this.authService.identityCheck();
     this.isAuthenticated= _isAuthenticated;
-    //this.router.navigate(['user-login']);
+    this.router.navigate(['']);
   }
 }
