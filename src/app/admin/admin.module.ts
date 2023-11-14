@@ -31,8 +31,6 @@ import { PaymentComponent } from './payment/payment.component';
 import { NewPaymentComponent } from './payment/new-payment/new-payment.component';
 import { OrderComponent } from './order/order.component';
 import { SaveOrderComponent } from './order/save-order/save-order.component';
-import { UserTypeInterceptor } from 'src/interceptor/userType.interceptor';
-
 
 
 @NgModule({
