@@ -62,4 +62,8 @@ export class GlobalService {
       return this.http.get<any>(`${this.baseUrl}ComboBox/GetAllUsers`);
   }
 
+  getAllStatus(){
+    return this.http.get<any>(`${this.baseUrl}ComboBox/GetAllStatuses`);
+}
+
 }

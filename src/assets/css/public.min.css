@@ -82,7 +82,7 @@ body {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 hr {
-    margin: 1.25rem 0;
+    margin: 1.rem 0;
     color: inherit;
     background-color: currentColor;
     border: 0;
@@ -13964,9 +13964,10 @@ body {
     display: inline-block;
     border: 1px solid #ffba43;
 }
-.iq-product-icon a:hover {
-    background: #ffba43;
-    color: #fff;
+.iq-product-icon a:active {
+    /* background: #ffba43; */
+    /* color: #fff; */
+    transform: scale(5);
 }
 .iq-product-image {
     height: 306px;

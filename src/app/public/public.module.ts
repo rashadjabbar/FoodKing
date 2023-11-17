@@ -14,10 +14,11 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatBadgeModule} from '@angular/material/badge';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { defineElement } from '@lordicon/element';
 import lottie from 'lottie-web';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ChangePasswordComponent } from './changePassword/changePassword.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CategoryListComponent,
     WishlistComponent,
     CartComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatMenuModule,
     MatBadgeModule,
     FormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ReactiveFormsModule
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }

@@ -43,7 +43,14 @@
   }
   
   .operation-div {
-    text-align: end;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-input{
+    width: 15%;
+    margin-left: 3%;
   }
   
   .operation-button {

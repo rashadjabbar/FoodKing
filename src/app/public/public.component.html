@@ -1,4 +1,3 @@
-
 <ngx-spinner type="none" bdColor="rgba(256, 256, 256, 0.8)" size="medium" color="#fff" [fullScreen]="true" type="none">
   <img src="../../../assets/images/output-onlinegiftools.gif" alt="">
 </ngx-spinner>
@@ -34,7 +33,8 @@
                     <a href="javascript:void(0)" class="menu-item">Kateqorİyalar
                       <i class="fas fa-chevron-down toggledrop"></i></a>
                     <ul class="sub-menu">
-                      <li class="cursor-pointer" *ngFor="let category of categories" (click)="browseCategory(category.key)">
+                      <li class="cursor-pointer" *ngFor="let category of categories"
+                        (click)="browseCategory(category.key)">
                         <a>{{ category.value }}</a>
                       </li>
                     </ul>
@@ -53,60 +53,61 @@
             </div>
 
             <div *ngIf="isAuthenticated">
-<!-- <i  class="fas fa-shopping-basket" ></i> -->
-            <lord-icon class="basket-icon" trigger="hover" [matMenuTriggerFor]="menu" [matBadge]="basketItems.length" src="../../assets/images/wired-outline-139-basket.json"></lord-icon>
-            
-            <mat-menu #menu="matMenu">
-              <div class="basket-div" (click)="$event.stopPropagation()">
-                <div *ngIf="basketItems.length > 0">
-                  <div class="product-list">
-                    <div class="product" *ngFor="let basketItem of basketItems">
-                      <div class="product-img">
-                        <img [src]="'http://192.168.37.49:3005/'+basketItem.imageUrl" alt="" />
+              <!-- <i  class="fas fa-shopping-basket" ></i> -->
+              <lord-icon class="basket-icon" trigger="hover" [matMenuTriggerFor]="menu" [matBadge]="basketItems.length"
+                src="../../assets/images/wired-outline-139-basket.json"></lord-icon>
+
+              <mat-menu #menu="matMenu">
+                <div class="basket-div" (click)="$event.stopPropagation()">
+                  <div *ngIf="basketItems.length > 0">
+                    <div class="product-list">
+                      <div class="product" *ngFor="let basketItem of basketItems">
+                        <div class="product-img">
+                          <img [src]="'http://192.168.37.49:3005/'+basketItem.imageUrl" alt="" />
+                        </div>
+                        <div class="product-info">
+                          <span>{{ basketItem.name }}</span>
+                          <span>
+                            {{ basketItem.count + " × " + basketItem.price }}
+                            ₼</span>
+                        </div>
+                        <div class="delete-product">
+                          <i class="fas fa-times" (click)="removeBasketItem(basketItem.id)"></i>
+                        </div>
                       </div>
-                      <div class="product-info">
-                        <span>{{ basketItem.name }}</span>
-                        <span>
-                          {{ basketItem.count + " × " + basketItem.price }}
-                          ₼</span>
+                    </div>
+
+                    <hr />
+                    <div class="totalAmount-div">
+                      <span>Ümumi məbləğ:</span>
+                      <span>{{ totalBasketAmount }} ₼</span>
+                    </div>
+                    <div class="button-div">
+                      <div class="iq-btn-container" id="banner-action">
+                        <a routerLink="cart" (click)="closeBasket()">
+                          <div class="btn btn-secondary animation-btn">
+                            Səbətə bax<i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
+                          </div>
+                        </a>
                       </div>
-                      <div class="delete-product">
-                        <i class="fas fa-times" (click)="removeBasketItem(basketItem.id)"></i>
+                      <div class="iq-btn-container" id="banner-action">
+                        <a href="javascript:void(0)" (click)="submitOrder()">
+                          <div class="btn iq-button-checkout animation-btn">
+                            Sifariş et<i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
+                          </div>
+                        </a>
                       </div>
                     </div>
                   </div>
 
-                  <hr />
-                  <div class="totalAmount-div">
-                    <span>Ümumi məbləğ:</span>
-                    <span>{{ totalBasketAmount }} ₼</span>
-                  </div>
-                  <div class="button-div">
-                    <div class="iq-btn-container" id="banner-action">
-                      <a routerLink="cart"  (click)="closeBasket()">
-                        <div class="btn btn-secondary animation-btn">
-                          Səbətə bax<i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="iq-btn-container" id="banner-action">
-                      <a href="javascript:void(0)" (click)="submitOrder()">
-                        <div class="btn iq-button-checkout animation-btn">
-                          Sifariş et<i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                        </div>
-                      </a>
-                    </div>
+                  <div *ngIf="basketItems.length == 0">
+                    <!-- <i class="fa-thin fa-basket-shopping"></i> -->
+                    <p class="text-center font-weight-bold">Səbətdə məhsul yoxdur</p>
                   </div>
                 </div>
-
-                <div *ngIf="basketItems.length == 0">
-                  <!-- <i class="fa-thin fa-basket-shopping"></i> -->
-                  <p class="text-center font-weight-bold">Səbətdə məhsul yoxdur</p>
-                </div>
-              </div>
-            </mat-menu>
+              </mat-menu>
             </div>
-            
+
 
             <div [ngSwitch]="isAuthenticated">
               <div *ngSwitchCase="false">
@@ -117,21 +118,28 @@
                 </div>
               </div>
               <div *ngSwitchDefault class="user-icon-div">
-                
+
                 <!-- <i class="fas fa-user-circle" [matMenuTriggerFor]="user"></i> -->
-                <lord-icon class="user-icon" trigger="hover" [matMenuTriggerFor]="user" src="../../assets/images/wired-outline-21-avatar.json"></lord-icon>
+                <lord-icon class="user-icon" trigger="hover" [matMenuTriggerFor]="user"
+                  src="../../assets/images/wired-outline-21-avatar.json"></lord-icon>
               </div>
 
-                <mat-menu #user="matMenu">
-                  <div class="user-info">
-                    <span>{{userData?.fullName}}</span>
-                    <hr>
-                    <div class="logOut">
-                      <img src="../../assets/images/wired-outline-1725-exit-sign.gif" alt="">
-                      <span (click)="logOut()">Çıxış et</span>
-                    </div>
+              <mat-menu #user="matMenu">
+                <div class="user-info">
+                  <span>{{userData?.fullName}}</span>
+                  <hr>
+                  <div class="logOut">
+                    <span (click)="userInfo()">Kabinet</span>
                   </div>
-                </mat-menu>
+                  <div class="logOut">
+                    <span (click)="changePassword()">Şifrəni dəyiş</span>
+                  </div>
+                  <div class="logOut">
+                    <img src="../../assets/images/wired-outline-1725-exit-sign.gif" alt="">
+                    <span (click)="logOut()">Çıxış et</span>
+                  </div>
+                </div>
+              </mat-menu>
             </div>
 
           </nav>
@@ -156,7 +164,7 @@
             <div class="widget mb-4">
               <div class="textwidget text-body">
                 <p>
-                 Qeydiyyatdan keçin və ilk sifarişiniz komissiyasız çatdırılsın!
+                  Qeydiyyatdan keçin və ilk sifarişiniz komissiyasız çatdırılsın!
                 </p>
               </div>
             </div>
@@ -180,14 +188,17 @@
               <h5 class="footer-title">Keçidlər</h5>
               <div class="menu-footer1-container">
                 <ul id="menu-footer1" class="menu list-inline p-0 m-0">
-                  <li class="menu-item" >
-                    <a [routerLink]="['']" routerLinkActive="active-menu"><i class="fas fa-chevron-right me-2"></i>Ana səhifə</a>
+                  <li class="menu-item">
+                    <a [routerLink]="['']" routerLinkActive="active-menu"><i class="fas fa-chevron-right me-2"></i>Ana
+                      səhifə</a>
                   </li>
                   <li class="menu-item" *ngIf="isAuthenticated">
-                    <a [routerLink]="['wishlist']" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-menu"><i class="fas fa-chevron-right me-2"></i>Sevimlilər</a>
+                    <a [routerLink]="['wishlist']" [routerLinkActiveOptions]="{ exact: true }"
+                      routerLinkActive="active-menu"><i class="fas fa-chevron-right me-2"></i>Sevimlilər</a>
                   </li>
                   <li class="menu-item" *ngIf="isAuthenticated">
-                    <a [routerLink]="['cart']" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-menu"><i class="fas fa-chevron-right me-2"></i>Səbət</a>
+                    <a [routerLink]="['cart']" [routerLinkActiveOptions]="{ exact: true }"
+                      routerLinkActive="active-menu"><i class="fas fa-chevron-right me-2"></i>Səbət</a>
                   </li>
                 </ul>
               </div>
@@ -224,12 +235,13 @@
                       <a href="javascript:void(0)">
                         <i class="fa fa-home"></i>
                         <span>Grand Park
-                        Hasan Bey Zardabi 313, 
-                        Baku city, Azerbaijan Republic</span>
+                          Hasan Bey Zardabi 313,
+                          Baku city, Azerbaijan Republic</span>
                       </a>
                     </li>
                     <li>
-                      <a href="mailto:foodkingaze@gmail.com"><i class="fa fa-envelope"></i><span>foodkingaze@gmail.com</span></a>
+                      <a href="mailto:foodkingaze@gmail.com"><i
+                          class="fa fa-envelope"></i><span>foodkingaze@gmail.com</span></a>
                     </li>
                     <li>
                       <a href="tel:(+994) 51 250 07 02"><i class="fa fa-phone"></i><span>(+994) 51 250 07 02</span></a>
