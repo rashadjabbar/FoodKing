@@ -100,6 +100,9 @@ export class OrderComponent implements OnInit {
   onChangePage(pe: PageEvent) {
     this.requestData.nextPageNumber = pe.pageIndex + 1
     this.requestData.visibleItemCount = pe.pageSize
+    this.selection.clear()
+      this.highlightedRows = []
+      this.highlightedRowss = {}
     this.getOrder()
   }
 
@@ -164,7 +167,7 @@ export class OrderComponent implements OnInit {
     const dialogRef = this.dialog.open(SaveOrderComponent, {
       data: this.orderIds,
       height: 'max-content',
-      width: '30%',
+      width: '20%',
       hasBackdrop: true,
       disableClose: true
     })

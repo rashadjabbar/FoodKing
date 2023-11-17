@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ComboBox } from 'src/models/category';
 import { BasketService } from 'src/services/public/basket.service';
+import { GlobalService } from 'src/services/global.service';
 
 @Component({
   selector: 'app-save-order',
@@ -16,7 +17,8 @@ export class SaveOrderComponent implements OnInit {
     public dialogRef: MatDialogRef<OrderComponent>,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private globalService: GlobalService
   ) { }
 
   allStatus?: ComboBox[]
@@ -28,12 +30,22 @@ export class SaveOrderComponent implements OnInit {
   })
 
   ngOnInit() {
+    this.getStatus()
+  }
+
+  getStatus(){
+    this.globalService.getAllStatus().subscribe(res => {
+      console.log(res)
+    })
   }
 
   statusSubmit() {
+    console.log(this.statusForm.value)
+
     if (this.statusForm.invalid) {
       return;
     }
+
 
     // this.basketService.SaveOrder().subscribe(res => {
     //   this.dialogRef.close()
