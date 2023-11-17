@@ -12,12 +12,14 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
 import { IMaskModule } from 'angular-imask';
-
+import { OtpComponent } from './user-login/otp/otp.component';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 @NgModule({
   declarations: [
     UserLoginComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    OtpComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { IMaskModule } from 'angular-imask';
     MatDatepickerModule,
     BrowserAnimationsModule,
     MatNativeDateModule ,
-    IMaskModule
+    IMaskModule,
+    NgOtpInputModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },

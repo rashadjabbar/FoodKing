@@ -64,7 +64,7 @@ export class LoginService {
   userRegister(data: any) {
     this.http.post<LoginResult>(this.baseUrl + `Auth/register`, data).subscribe({
       next: (result: any) => {
-        if (result.status == false) {
+        if (result.status == false) { 
           showInfoAlert('Məlumat', result.message, false, true, 'Bağla')
           sessionStorage.removeItem('token')
           return

@@ -1,0 +1,34 @@
+<div class="container d-flex align-items-center">
+    <div class="col-sm-12">
+        <div class="col-md-12">
+            <div class="logo_block">
+                <a class="navbar-brand justify-content-center">
+                    <img width="50" height="50" class="img-fluid logo-sticky" src="./assets/images/logo.png"
+                        alt="foodsto" />
+                    <h4>Food King</h4>
+                </a>
+            </div>
+        </div>
+
+        <div class="card p-3 col-md-4 mx-auto">
+            <div class="my-2 d-flex justify-content-center">
+                <ng-otp-input #ngOtpInput [formCtrl]="otpCode" [config]="{length:6}">
+                </ng-otp-input>
+            </div>
+            <div class="card-body p-0 ">
+                <p class="card-text text-center">
+                    We sent a 6-digit number to your email.
+                    <br>
+                    Please enter it here.
+                </p>
+                <div class="row col-md-10 mx-auto mt-5">
+                    <button class="verify-btn col-md-12">Verify</button>
+                </div>
+                <div class="row mt-3 col-md-10 mx-auto justify-content-between">
+                    <button class="verify-btn back-btn col-md-5" (click)="onCloseDialog()">Back</button>
+                    <button class="verify-btn col-md-5" style="background: #fdbe51;">Resend code</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

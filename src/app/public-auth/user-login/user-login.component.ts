@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from 'src/services/login.service';
 import { Login } from 'src/models/login';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { OtpComponent } from './otp/otp.component';
 
 @Component({
   selector: 'app-user-login',
@@ -12,7 +14,10 @@ export class UserLoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private login: LoginService,
-    ) {  }
+    private dialog: MatDialog,
+  ) { }
+
+  otp_dialogRef?: MatDialogRef<OtpComponent>;
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   logindata: Login = new Login();
@@ -25,7 +30,7 @@ export class UserLoginComponent implements OnInit {
     username: ['', Validators.required],
     password: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
-    phone1: ['', [Validators.required ]],
+    phone1: ['', [Validators.required]],
   })
 
   loginForm = this.formBuilder.group({
@@ -43,21 +48,29 @@ export class UserLoginComponent implements OnInit {
 
 
   ngOnInit() {
-    this.loadJsFile("../../../assets/js/login.js");  
+    this.loadJsFile("../../../assets/js/login.js");
   }
 
-  public loadJsFile(url) {  
-    let node = document.createElement('script');  
-    node.src = url;  
-    node.type = 'text/javascript';  
-    document.getElementsByTagName('head')[0].appendChild(node);  
-  }  
+  public loadJsFile(url) {
+    let node = document.createElement('script');
+    node.src = url;
+    node.type = 'text/javascript';
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
 
-  createUser(){
-    if (this.signUpForm.invalid) {
-      return;
-    }
-    this.login.userRegister(this.signUpForm.value)
+  createUser() {
+    // if (this.signUpForm.invalid) {
+    //   return;
+    // }
+    // this.login.userRegister(this.signUpForm.value)
+    this.otp_dialogRef = this.dialog.open(OtpComponent, {
+      disableClose: true,
+      hasBackdrop: true,
+      width: '100%',
+      height: '100vh',
+      maxWidth: '100vw',
+      autoFocus: false,
+    })
   }
 
   loginFunc() {
