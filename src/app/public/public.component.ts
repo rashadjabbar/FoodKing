@@ -10,6 +10,8 @@ import jwt_decode from 'jwt-decode';
 import { showConfirmAlert, showInfoAlert } from 'src/utils/alert';
 import { SaveOrder } from 'src/models/save-order';
 import { AuthService, _isAuthenticated } from 'src/services/auth.service';
+import { ChangePasswordComponent } from './changePassword/changePassword.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-public',
@@ -23,7 +25,9 @@ export class PublicComponent {
     private basketService: BasketService,
     private categoryServices: CategoryService,
     private authService: AuthService,
-    private globalService: GlobalService) {  }
+    private globalService: GlobalService,
+    private dialog: MatDialog,
+) {  }
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   message: any;
@@ -129,6 +133,22 @@ year = new Date().getFullYear();
           this.getBasket();
         }) 
       }
+    });
+  }
+
+  userInfo(){
+
+  }
+
+  changePassword(){
+    const dialogRef = this.dialog.open(ChangePasswordComponent, {
+      height: 'max-content',
+      width: '20%',
+      hasBackdrop: true,
+      disableClose: true
+    })
+    dialogRef.afterClosed().subscribe(result => {
+
     });
   }
 

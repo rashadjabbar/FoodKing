@@ -63,7 +63,7 @@ export class GlobalService {
   }
 
   getAllStatus(){
-    return this.http.get<any>(`${this.baseUrl}ComboBox/GetStatus`);
+    return this.http.get<any>(`${this.baseUrl}ComboBox/GetAllStatuses`);
 }
 
 }

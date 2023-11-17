@@ -36,6 +36,7 @@ export class SaveOrderComponent implements OnInit {
   getStatus(){
     this.globalService.getAllStatus().subscribe(res => {
       console.log(res)
+      this.allStatus = res.data
     })
   }
 

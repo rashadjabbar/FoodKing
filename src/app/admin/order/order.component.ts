@@ -181,4 +181,11 @@ export class OrderComponent implements OnInit {
     });
   }
 
+  handleKeyUp(e: any) {
+    let filterValue = e.target.value
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
 }
