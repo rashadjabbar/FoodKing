@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService, User } from 'src/services/global.service';
 import jwt_decode from 'jwt-decode';
+import { LoginService } from 'src/services/login.service';
+import { AuthService, _isAuthenticated } from 'src/services/auth.service';
 
 
 @Component({
@@ -12,7 +14,10 @@ import jwt_decode from 'jwt-decode';
 export class AdminComponent implements OnInit{
 
   constructor(private router: Router,
-    private globalService: GlobalService){}
+    private globalService: GlobalService,
+    private loginService: LoginService,
+    private authService: AuthService
+    ){}
 
     userData?: User;
 
@@ -29,8 +34,16 @@ export class AdminComponent implements OnInit{
   }  
 
   logOut(){
-    sessionStorage.removeItem('token')
-    this.router.navigate(['/login-adminpanel']);
+    if(_isAuthenticated){
+      this.loginService.logout().subscribe(res =>{
+        sessionStorage.removeItem('token')
+        this.authService.identityCheck();
+        this.router.navigate(['/login-adminpanel']);
+      })
+    }else{
+      sessionStorage.removeItem('token')
+      this.authService.identityCheck();
+      this.router.navigate(['/login-adminpanel']);
+    }
   }
-
 }

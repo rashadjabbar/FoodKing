@@ -12,6 +12,7 @@ import { SaveOrder } from 'src/models/save-order';
 import { AuthService, _isAuthenticated } from 'src/services/auth.service';
 import { ChangePasswordComponent } from './changePassword/changePassword.component';
 import { MatDialog } from '@angular/material/dialog';
+import { LoginService } from 'src/services/login.service';
 
 @Component({
   selector: 'app-public',
@@ -27,6 +28,7 @@ export class PublicComponent {
     private authService: AuthService,
     private globalService: GlobalService,
     private dialog: MatDialog,
+    private loginService: LoginService
 ) {  }
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
@@ -153,9 +155,19 @@ year = new Date().getFullYear();
   }
 
   logOut(){
-    sessionStorage.removeItem('token')
-    this.authService.identityCheck();
-    this.isAuthenticated= _isAuthenticated;
-    this.router.navigate(['']);
+    if(_isAuthenticated){
+      this.loginService.logout().subscribe(res => {
+        sessionStorage.removeItem('token')
+        this.authService.identityCheck();
+        this.isAuthenticated= _isAuthenticated;
+        this.router.navigate(['']);
+      })
+    }else{
+      sessionStorage.removeItem('token')
+      this.authService.identityCheck();
+      this.isAuthenticated= _isAuthenticated;
+      this.router.navigate(['']);
+    }
+    
   }
 }

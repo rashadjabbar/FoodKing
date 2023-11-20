@@ -32,7 +32,6 @@ export class LoginService {
     this.http.post<LoginResult>(this.baseUrl + `Auth/login`, data).subscribe({
       next: (result: any) => {
         if (result.status == false) {
-          debugger
           showInfoAlert('Məlumat', result.message, false, true, 'Bağla')
           sessionStorage.removeItem('token')
           return
@@ -86,6 +85,10 @@ export class LoginService {
         })
       }
     })
+  }
+
+  logout(): Observable<any>{
+    return this.http.get<any>(this.baseUrl + `Auth/logout`);
   }
 
 }
