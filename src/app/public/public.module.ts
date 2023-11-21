@@ -19,6 +19,7 @@ import { defineElement } from '@lordicon/element';
 import lottie from 'lottie-web';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ChangePasswordComponent } from './changePassword/changePassword.component';
+import { UserCabinetComponent } from './user-cabinet/user-cabinet.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ChangePasswordComponent } from './changePassword/changePassword.compone
     WishlistComponent,
     CartComponent,
     ChangePasswordComponent,
+    UserCabinetComponent,
   ],
   imports: [
     CommonModule,

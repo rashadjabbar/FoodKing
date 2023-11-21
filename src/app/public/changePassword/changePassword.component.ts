@@ -60,7 +60,7 @@ export class ChangePasswordComponent implements OnInit {
   changePassword(){
     this.formSubmitted = true;
     
-    if(!this.passwordForm.valid){
+    if(!this.passwordForm.valid || this.cf['password'].value != this.cf['confirmPassword'].value){
       return;
     }
 

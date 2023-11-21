@@ -1,0 +1,64 @@
+<div class="dialogHeader" style="background-color: #3bb77e;">
+    <h3>Kabinet</h3>
+    <i class="far fa-window-close" (click)="dialogRef.close()"></i>
+</div>
+
+<div class="p-3">
+    <form [formGroup]="cabinetForm">
+        <div class="col-lg-12 w-100 row">
+            <div class="col-lg-6 p-0">
+                <label>*İstİfadəçi adı</label>
+                <div class="form" [ngClass]="{'border-red': !cf['username'].valid && formSubmitted}">
+                    <input id="username" readonly class="input" placeholder="*İstİfadəçi adı" required type="text" formControlName="username" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="col-lg-6 p-0">
+                <label>*Email</label>
+                <div class="form" [ngClass]="{'border-red': !cf['email'].valid && formSubmitted}">
+                    <input id="email" readonly class="input" placeholder="*Email" required type="email" formControlName="email" autocomplete="off">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 w-100 row">
+            <div class="col-lg-6 p-0">
+                <label>*Ad</label>
+                <div class="form" [ngClass]="{'border-red': !cf['firstName'].valid && formSubmitted}">
+                    <input id="firstName" class="input" placeholder="*Ad" required type="text"
+                        formControlName="firstName" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="col-lg-6 p-0">
+                <label>*Soyad</label>
+                <div class="form" [ngClass]="{'border-red': !cf['lastName'].valid && formSubmitted}">
+                    <input id="lastName" class="input" placeholder="*Soyad" required type="text"
+                        formControlName="lastName" autocomplete="off">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 w-100 row">
+            <div class="col-lg-6 p-0">
+                <label>*Doğum tarixi</label>
+                <div class="form" [ngClass]="{'border-red': !cf['birthday'].valid && formSubmitted}">
+                    <input id="birthday" class="input" placeholder="*Doğum tarixi" required type="date"
+                        formControlName="birthday" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="col-lg-6 p-0">
+                <label>Telefon nömrəsi</label>
+                <div class="form" [ngClass]="{'border-red': !cf['phone1'].valid && formSubmitted}">
+                    <input id="phone1" class="input" placeholder="Telefon nömrəsi" type="text"
+                        formControlName="phone1" autocomplete="off">
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button id="save" class="save" type="button" (click)="saveUserInfo()" [disabled]="cabinetForm.invalid">Yadda saxla</button>
+        </div>
+    </form>
+</div>

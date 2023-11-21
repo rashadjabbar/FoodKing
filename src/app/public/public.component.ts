@@ -13,6 +13,7 @@ import { AuthService, _isAuthenticated } from 'src/services/auth.service';
 import { ChangePasswordComponent } from './changePassword/changePassword.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/services/user.service';
+import { UserCabinetComponent } from './user-cabinet/user-cabinet.component';
 
 @Component({
   selector: 'app-public',
@@ -138,17 +139,27 @@ year = new Date().getFullYear();
     });
   }
 
-  userInfo(){
-
-  }
-
-  changePassword(){
+  showChangePasswordDialog(){
     const dialogRef = this.dialog.open(ChangePasswordComponent, {
       height: 'max-content',
       width: '20%',
       hasBackdrop: true,
       disableClose: true
     })
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
+
+  showCabinetDialog(){
+    const dialogRef = this.dialog.open(UserCabinetComponent, {
+      height: 'max-content',
+      width: '35%',
+      hasBackdrop: true,
+      disableClose: true
+    })
+
     dialogRef.afterClosed().subscribe(result => {
 
     });

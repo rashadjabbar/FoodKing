@@ -97,4 +97,11 @@ export class UserService {
     return this.http.post<any>(`${this.baseUrl}Global/ChangeUserPassword`, model );
   }
 
+  getUserInfo(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}Global/GetUserInfo`);
+  }
+
+  saveUserInfo(model: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}Global/UpdateUser`, model );
+  }
 }
