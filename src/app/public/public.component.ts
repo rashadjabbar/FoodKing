@@ -12,7 +12,7 @@ import { SaveOrder } from 'src/models/save-order';
 import { AuthService, _isAuthenticated } from 'src/services/auth.service';
 import { ChangePasswordComponent } from './changePassword/changePassword.component';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginService } from 'src/services/login.service';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-public',
@@ -28,7 +28,7 @@ export class PublicComponent {
     private authService: AuthService,
     private globalService: GlobalService,
     private dialog: MatDialog,
-    private loginService: LoginService
+    private loginService: UserService
 ) {  }
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;

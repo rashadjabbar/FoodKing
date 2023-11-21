@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Login, LoginResult } from 'src/models/login';
 import { GlobalService } from 'src/services/global.service';
-import { LoginService } from 'src/services/login.service';
+import { UserService } from 'src/services/user.service';
 import { showInfoAlert } from 'src/utils/alert';
 import Swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   constructor(private formBuilder: FormBuilder,
-    private login: LoginService,
+    private login: UserService,
     private globalService: GlobalService,
     private router: Router,
     private titleService: Title) { }

@@ -1,12 +1,17 @@
 import Swal from "sweetalert2";
 
-const showErrorAlert = (title: string, text?: string, confirmButtonText?: string) => {
+const showErrorAlert = (title: string, text:string, cBtn?: boolean, dBtn?: boolean, close?: string, confirm?: string, timer?: number) => {
   return Swal.fire({
     icon: 'error',
     title: title,
     text: text,
-    confirmButtonText: confirmButtonText,
-    customClass: 'w-25'
+    showConfirmButton: cBtn,
+    showDenyButton: dBtn,
+    denyButtonText: close,
+    confirmButtonText: confirm,
+    customClass: 'w-25',
+    timer: timer,
+    allowOutsideClick:  false
   });
 }
 

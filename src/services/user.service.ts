@@ -9,11 +9,13 @@ import { GlobalService } from './global.service';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import { AuthService } from './auth.service';
+import { ChangePasswordModel } from 'src/models/changePassword';
+
 @Injectable({
   providedIn: 'root'
 })
 
-export class LoginService {
+export class UserService {
 
   baseUrl = environment.apiAdminAuthUrl;
   loginned!: boolean;
@@ -89,6 +91,10 @@ export class LoginService {
 
   logout(): Observable<any>{
     return this.http.get<any>(this.baseUrl + `Auth/logout`);
+  }
+
+  changePassword(model: Partial<ChangePasswordModel>): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}Global/ChangeUserPassword`, model );
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { LoginService } from 'src/services/login.service';
+import { UserService } from 'src/services/user.service';
 import { Login } from 'src/models/login';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { OtpComponent } from './otp/otp.component';
@@ -13,7 +13,7 @@ import { OtpComponent } from './otp/otp.component';
 export class UserLoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
-    private login: LoginService,
+    private login: UserService,
     private dialog: MatDialog,
   ) { }
 

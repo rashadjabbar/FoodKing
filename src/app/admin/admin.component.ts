@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService, User } from 'src/services/global.service';
 import jwt_decode from 'jwt-decode';
-import { LoginService } from 'src/services/login.service';
+import { UserService } from 'src/services/user.service';
 import { AuthService, _isAuthenticated } from 'src/services/auth.service';
 
 
@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit{
 
   constructor(private router: Router,
     private globalService: GlobalService,
-    private loginService: LoginService,
+    private loginService: UserService,
     private authService: AuthService
     ){}
 

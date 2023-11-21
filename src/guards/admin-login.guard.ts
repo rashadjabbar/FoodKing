@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
-import { LoginService } from "src/services/login.service";
+import { UserService } from "src/services/user.service";
 import Swal from "sweetalert2";
 import jwt_decode from 'jwt-decode';
 import { _isAuthenticated } from "src/services/auth.service";
@@ -10,7 +10,7 @@ import { _isAuthenticated } from "src/services/auth.service";
   providedIn: 'root'
 })
 export class AdminLogin implements CanActivate{
-  constructor(private loginservices: LoginService, private router: Router) {}
+  constructor(private loginservices: UserService, private router: Router) {}
   canActivate(next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean  {
     //if (!this.loginservices.isLoginnedIn() && sessionStorage.getItem('token') == null) {
