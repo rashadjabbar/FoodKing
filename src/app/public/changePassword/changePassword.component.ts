@@ -67,7 +67,7 @@ export class ChangePasswordComponent implements OnInit {
     this.userService.changePassword(this.passwordForm.value as ChangePasswordModel).subscribe(res => {
       console.log(res)
 
-      if(res?.statusCode == 2023 || res?.statusCode == 2015){
+      if(!res?.status){
         showErrorAlert('', res?.message, false, false, '','', 1500);
       }
       else{

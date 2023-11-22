@@ -57,6 +57,7 @@ export class OrderComponent implements OnInit {
   displayedColumns: string[] = [
     'select',
     'id',
+    'status',
     'categoryName',
     'subCategoryName',
     'productName',
