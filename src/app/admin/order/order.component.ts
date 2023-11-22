@@ -58,12 +58,13 @@ export class OrderComponent implements OnInit {
   displayedColumns: string[] = [
     'select',
     'id',
+    'no',
     'status',
-    'categoryName',
-    'subCategoryName',
-    'productName',
-    'count',
-    'amount',
+    // 'categoryName',
+    // 'subCategoryName',
+     'serviceFee',
+     'amount',
+     'itemCount',
     'createdDate',
   ];
 
@@ -165,7 +166,8 @@ export class OrderComponent implements OnInit {
         height: 'max-content',
         width: '20%',
         hasBackdrop: true,
-        disableClose: true
+        disableClose: true,
+        autoFocus: false
       })
 
       dialogRef.afterClosed().subscribe(result => {
@@ -180,7 +182,8 @@ export class OrderComponent implements OnInit {
         height: 'max-content',
         width: '50%',
         hasBackdrop: true,
-        disableClose: true
+        disableClose: true,
+        autoFocus: false
       })
 
       dialogRef.afterClosed().subscribe(result => {
