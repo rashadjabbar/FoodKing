@@ -9,6 +9,7 @@ import { OrderService } from 'src/services/order.service';
 import Swal from 'sweetalert2';
 import { SaveOrderComponent } from './save-order/save-order.component';
 import { SelectionModel } from '@angular/cdk/collections';
+import { EditOrderPopupComponent } from './edit-order-popup/edit-order-popup.component';
 
 @Component({
   selector: 'app-order',
@@ -82,8 +83,6 @@ export class OrderComponent implements OnInit {
         this.dataSource = new MatTableDataSource<BrowseOrder>(res.data.result);
 
         this.length = res.data.count
-        console.log(res)
-
       },
       error: res => {
         if (res.status == 401) {
@@ -102,19 +101,19 @@ export class OrderComponent implements OnInit {
     this.requestData.nextPageNumber = pe.pageIndex + 1
     this.requestData.visibleItemCount = pe.pageSize
     this.selection.clear()
-      this.highlightedRows = []
-      this.highlightedRowss = {}
+    this.highlightedRows = []
+    this.highlightedRowss = {}
     this.getOrder()
   }
 
   highlight(index: number, id: number): void {
     if (!this.isActive(index)) {
       this.activeRow = index;
-      this.selectedId = id;
+     // this.selectedId = id;
     }
     else {
       this.activeRow = -1;
-      this.selectedId = 0;
+      //this.selectedId = 0;
     }
   }
 
@@ -153,33 +152,49 @@ export class OrderComponent implements OnInit {
     this.selRow = this.selection['selected'].length
   }
 
+
   openDialog(type: number) {
-    let id = 0
-    this.selection.selected.forEach(row => this.orderIds.push({
-      id: row.id
-    }));
+    if (type == 1) {
+      this.orderIds = []
+      this.selection.selected.forEach(row =>
+        this.orderIds.push(row.id)
+      );
 
-    console.log(this.selection.selected)
+      const dialogRef = this.dialog.open(SaveOrderComponent, {
+        data: this.orderIds,
+        height: 'max-content',
+        width: '20%',
+        hasBackdrop: true,
+        disableClose: true
+      })
 
-    if (type !== 1) {
-      id = this.selectedId;
-    } else id = 0
+      dialogRef.afterClosed().subscribe(result => {
+        this.refreshBrowse();
+      });
 
-    const dialogRef = this.dialog.open(SaveOrderComponent, {
-      data: this.orderIds,
-      height: 'max-content',
-      width: '20%',
-      hasBackdrop: true,
-      disableClose: true
-    })
-    dialogRef.afterClosed().subscribe(result => {
-      // this.activeRow = -1;
-      // this.selectedId = 0;
-      this.selection.clear()
-      this.highlightedRows = []
-      this.highlightedRowss = {}
-      this.getOrder();
-    });
+    } else {
+      this.selectedId = this.selection.selected[0].id
+
+      const dialogRef = this.dialog.open(EditOrderPopupComponent, {
+        data: this.selectedId,
+        height: 'max-content',
+        width: '50%',
+        hasBackdrop: true,
+        disableClose: true
+      })
+
+      dialogRef.afterClosed().subscribe(result => {
+       this.refreshBrowse();
+      });
+    }
+  }
+
+
+  refreshBrowse(){
+    this.selection.clear()
+    this.highlightedRows = []
+    this.highlightedRowss = {}
+    this.getOrder();
   }
 
   handleKeyUp(e: any) {

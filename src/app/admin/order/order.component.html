@@ -13,7 +13,11 @@
     <button mat-menu-item (click)="openDialog(1)" [disabled]="selection.selected.length == 0"><i
         class="fas fa-plus"></i> Status dəyiş
     </button>
+    <button mat-menu-item (click)="openDialog(2)" [disabled]="selection.selected.length != 1"><i class="fas fa-pen"></i>
+      Dəyişdir
+    </button>
   </mat-menu>
+
 </div>
 
 

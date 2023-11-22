@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environments';
+import { ChangeOrdersStatusModel } from 'src/models/ChangeOrdersStatusModel';
 import { SaveOrder } from 'src/models/save-order';
 
 @Injectable({
@@ -29,7 +30,15 @@ export class BasketService {
     return this.http.post<any>(`${this.baseUrl}GetServiceFeeByAmount`, request );
   }
 
+  getOrderById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}GetOrderById?orderId=${id}`, );
+  }
+
   SaveOrder(request: SaveOrder): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}SaveOrder`, request );
+  }
+
+  ChangeOrdersStatus(request: Partial<ChangeOrdersStatusModel>): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}ChangeStatus`, request );
   }
 }

@@ -31,6 +31,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { NewPaymentComponent } from './payment/new-payment/new-payment.component';
 import { OrderComponent } from './order/order.component';
 import { SaveOrderComponent } from './order/save-order/save-order.component';
+import { EditOrderPopupComponent } from './order/edit-order-popup/edit-order-popup.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { SaveOrderComponent } from './order/save-order/save-order.component';
     PaymentComponent,
     NewPaymentComponent,
     OrderComponent,
-    SaveOrderComponent
+    SaveOrderComponent,
+    EditOrderPopupComponent
   ],
   imports: [
     CommonModule,

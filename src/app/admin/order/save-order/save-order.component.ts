@@ -1,10 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { OrderComponent } from '../order.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ComboBox } from 'src/models/category';
 import { BasketService } from 'src/services/public/basket.service';
 import { GlobalService } from 'src/services/global.service';
+import { ChangeOrdersStatusModel } from 'src/models/ChangeOrdersStatusModel';
+import { showErrorAlert, showInfoAlert } from 'src/utils/alert';
 
 @Component({
   selector: 'app-save-order',
@@ -14,7 +15,7 @@ import { GlobalService } from 'src/services/global.service';
 export class SaveOrderComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<OrderComponent>,
+    public dialogRef: MatDialogRef<SaveOrderComponent>,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private basketService: BasketService,
@@ -24,9 +25,9 @@ export class SaveOrderComponent implements OnInit {
   allStatus?: ComboBox[]
 
   statusForm = this.formBuilder.group({
-    id: [0, Validators.required],
+    //id: [0, Validators.required],
     statusId: ['' , Validators.required],
-    orderIds: [this.data],
+    ids: [this.data],
   })
 
   ngOnInit() {
@@ -35,22 +36,26 @@ export class SaveOrderComponent implements OnInit {
 
   getStatus(){
     this.globalService.getAllStatus().subscribe(res => {
-      console.log(res)
       this.allStatus = res.data
     })
   }
 
   statusSubmit() {
-    console.log(this.statusForm.value)
-
     if (this.statusForm.invalid) {
       return;
     }
 
-
-    // this.basketService.SaveOrder().subscribe(res => {
-    //   this.dialogRef.close()
-    // })
+    this.basketService.ChangeOrdersStatus(this.statusForm.value as ChangeOrdersStatusModel).subscribe(res => {
+      if(!res?.status){
+        showErrorAlert('', res?.message, false, false, '','', 1500);
+      }
+      else{
+        showInfoAlert('', res?.message, false, false, '','', 2000);
+        this.dialogRef.close()
+      }
+      
+      this.statusForm.reset()
+    })
   }
 
 }
