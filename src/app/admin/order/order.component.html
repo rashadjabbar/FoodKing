@@ -1,6 +1,11 @@
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-pulse" [fullScreen]="true">
   <p style="color: white"> Yüklənir... </p>
 </ngx-spinner>
+
+<!-- <input type="file" id="fileInput" (change)="getFile($event)">   <br> <br>
+<a *ngIf="fileUrl" target="_blank" [href]="fileUrl"><i class="fa-regular fa-eye"></i></a> <br><br> -->
+
+
 <div class="operation-div">
   <div class="search-input">
     <mat-form-field class="example-full-width">
@@ -67,7 +72,7 @@
 
     <ng-container matColumnDef="serviceFee">
       <th mat-header-cell *matHeaderCellDef  style="width: 12%;">Xidmət haqqı</th>
-      <td mat-cell *matCellDef="let element"> {{element.serviceFee}}</td>
+      <td mat-cell *matCellDef="let element"> {{element.serviceFee}}  ₼</td>
     </ng-container> 
 
    

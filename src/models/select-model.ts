@@ -3,3 +3,9 @@ export class SelectModel {
     name?: string
 
 }
+
+export class ComboboxModel {
+    key!: number
+    value?: string
+
+}

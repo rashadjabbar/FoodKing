@@ -32,6 +32,7 @@ import { NewPaymentComponent } from './payment/new-payment/new-payment.component
 import { OrderComponent } from './order/order.component';
 import { SaveOrderComponent } from './order/save-order/save-order.component';
 import { EditOrderPopupComponent } from './order/edit-order-popup/edit-order-popup.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -58,7 +59,7 @@ import { EditOrderPopupComponent } from './order/edit-order-popup/edit-order-pop
     MatMenuModule,
     MatButtonModule,
     HttpClientModule,
-
+    MatAutocompleteModule,
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,

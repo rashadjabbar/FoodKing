@@ -48,8 +48,7 @@ export class OrderComponent implements OnInit {
   selectedAllRow = false
 
   orderIds: any[] = [];
-
-
+  
   requestData: any = {
     nextPageNumber: 1,
     visibleItemCount: 5,
@@ -62,15 +61,19 @@ export class OrderComponent implements OnInit {
     'status',
     // 'categoryName',
     // 'subCategoryName',
-     'serviceFee',
-     'amount',
-     'itemCount',
+    'serviceFee',
+    'amount',
+    'itemCount',
     'createdDate',
   ];
 
   selRow: number = 0;
+  // file?: File
+  // fileUrl?: string
 
-
+  // getFile(event: any){
+  //   this.fileUrl = URL.createObjectURL(event.target.files[0])
+  // }
 
   isActive = (index: number) => { return this.activeRow === index };
 

@@ -27,7 +27,7 @@ export class ProductService {
     return this.http.get<any>(`${this.allCategoryUrl}ComboBox/GetSubCategories` );
   }
   
-  getProductById(id: number): Observable<Product> {
+  getProductById(id: number): Observable<any> {
     return this.http.get<Product>(`${this.baseUrl}GetProductById?productId=${id}`);
   }
 

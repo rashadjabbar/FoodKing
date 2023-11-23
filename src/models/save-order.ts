@@ -8,9 +8,10 @@ export class SaveOrder {
 
 export class OrderItem {
     productId?: number
-    productName?: number
+    productName?: string
     count?: number
     price?: number
+    amount?: number
 }
 
 export class BrowseOrder {

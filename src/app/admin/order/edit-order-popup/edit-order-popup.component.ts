@@ -2,8 +2,10 @@ import { Component, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { SaveOrder } from 'src/models/save-order';
+import { OrderItem, SaveOrder } from 'src/models/save-order';
+import { ComboboxModel } from 'src/models/select-model';
 import { GlobalService } from 'src/services/global.service';
+import { ProductService } from 'src/services/product.service';
 import { BasketService } from 'src/services/public/basket.service';
 import { showErrorAlert, showInfoAlert } from 'src/utils/alert';
 
@@ -18,6 +20,7 @@ export class EditOrderPopupComponent {
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private basketService: BasketService,
+    private productService: ProductService,
     private globalService: GlobalService
   ) { }
   
@@ -27,16 +30,19 @@ export class EditOrderPopupComponent {
     serviceFee: [0, Validators.required],
     amount: [0, Validators.required],
     orderItems: ['' , Validators.required],
+    deletedItems: [''],
   })
 
   productItemForm = this.formBuilder.group({
     id: [this.data],
     productId: [0],
-    name: ['' , Validators.required],
-    count: [0, Validators.required],
-    price: [0, Validators.required],
-    amount: [0, Validators.required],
+    productName: ['' , Validators.required],
+    count: [null, Validators.required],
+    price: [null, Validators.required],
+    amount: [null, Validators.required],
   })
+
+  products!: any[]  //[{key:1, value:'abc'}]
 
   displayedColumns: string[] = [
     'Position',
@@ -50,7 +56,7 @@ export class EditOrderPopupComponent {
   lineSubmitted = false;
   formSubmitted: boolean = false
 
-  productItems: MatTableDataSource<any> = new MatTableDataSource<any>([]);
+  productItems: MatTableDataSource<OrderItem> = new MatTableDataSource<OrderItem>([]);
   activeRow: any = -1;
   selectedId: any = 0;
   deletedIds : number[] = [];
@@ -60,7 +66,7 @@ export class EditOrderPopupComponent {
   }
 
   get IF(): { [key: string]: AbstractControl } {
-    return this.orderForm.controls;
+    return this.productItemForm.controls;
   }
   
   ngOnInit() {
@@ -88,12 +94,29 @@ export class EditOrderPopupComponent {
 
   getOrderById(id: number){
     this.basketService.getOrderById(id).subscribe(res => {
-      console.log(res.data)
+     // console.log(res.data)
     this.orderForm.patchValue(res.data)
-    this.productItems.data = res.data.orderItems;
+    this.productItems.data = res.data.orderItems as OrderItem[];
     })
   }
 
+  getProducts(event: any){
+   // if(event.target.value){
+      this.globalService.getProductsAutoComplate(event.target.value).subscribe((res: any) => {
+        this.products = res.data
+      })
+   // }
+  }
+
+  getSelectedProduct(product: ComboboxModel){
+    console.log(product)
+    this.IF['productId'].patchValue(product.key)
+    this.IF['productName'].patchValue(product.value)
+
+    this.productService.getProductById(product.key).subscribe(res => {
+      this.IF['price'].setValue(res?.data[0]?.price);
+     })
+  }
 
   save() {
     this.formSubmitted = true;
@@ -101,6 +124,8 @@ export class EditOrderPopupComponent {
     if (!this.orderForm.valid) {
       return;
     }
+
+    this.OF['deletedItems'].patchValue(this.deletedIds);
 
     this.basketService.SaveOrder(this.orderForm.value as SaveOrder).subscribe(res => {
       console.log(res)
@@ -119,7 +144,6 @@ export class EditOrderPopupComponent {
     this.lineSubmitted = true;
 
    // this.IF['name'].setValue(this.IF['name'].value.trim())
-
     if (this.productItemForm.invalid) {
       return;
     }
@@ -129,14 +153,17 @@ export class EditOrderPopupComponent {
 
 
   saveLine() {
-    debugger
     if (this.activeRow < 0) { // add line
-      this.productItems.data.push(this.productItemForm.value);
+      this.productItems.data.push(this.productItemForm.value as OrderItem);
     }
     else { //edit line
-      this.productItems.data[this.activeRow] = this.productItemForm.value;
+      this.productItems.data[this.activeRow] = this.productItemForm.value as OrderItem;
+      this.productItems.data[this.activeRow].amount = this.IF['price'].value * this.IF['count'].value;
+      //this.productItems.data[this.activeRow].name =
     }
     
+    //console.log(this.productItemForm.value)
+    //console.log(this.productItems.data)
     this.productItems.data = [...this.productItems.data]
     this.activeRow = -1;
     this.productItemForm.reset()
@@ -146,7 +173,8 @@ export class EditOrderPopupComponent {
   }
 
   getLine(index: number) {
-    this.productItemForm.patchValue(this.productItems.data[index]);
+    this.productItemForm.patchValue(this.productItems.data[index] as any);
+    this.products = []
 }
 
   deleteLine(index: number, id: number) {

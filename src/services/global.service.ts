@@ -58,12 +58,15 @@ export class GlobalService {
     this.userData.next(model)
   }
 
-  getAllUser(){
-      return this.http.get<any>(`${this.baseUrl}ComboBox/GetAllUsers`);
+  getAllUser() {
+    return this.http.get<any>(`${this.baseUrl}ComboBox/GetAllUsers`);
   }
 
-  getAllStatus(){
+  getAllStatus() {
     return this.http.get<any>(`${this.baseUrl}ComboBox/GetAllStatuses`);
-}
+  }
 
+  getProductsAutoComplate(filter: string) {
+    return this.http.get<any>(`${this.baseUrl}AutoComplete/GetProducts?filter=${filter}`);
+  }
 }

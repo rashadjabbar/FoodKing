@@ -7,13 +7,6 @@
     <form [formGroup]="orderForm">
         <div class="row input-container">
             <div class="col-lg-4">
-                <!-- <mat-form-field>
-                  <mat-label>İstifadəçi</mat-label>
-                  <mat-select formControlName="userId" >
-                      <mat-option *ngFor="let category of allUser"  
-                          [value]="category.key">{{category.value}}</mat-option>
-                  </mat-select>
-              </mat-form-field> -->
                 <mat-form-field class="example-full-width">
                     <mat-label>Sifariş №</mat-label>
                     <input type="text" readonly matInput formControlName="no" required>
@@ -37,32 +30,26 @@
     <h6 class="mt-1">Məhsullar</h6>
     <hr>
     <form [formGroup]="productItemForm">
-        <input type="hidden" formControlName="productId">
-
         <div class="row input-container align-items-center">
-            <div class="col-lg-5">
-                <!-- <mat-form-field>
-                  <mat-label>İstifadəçi</mat-label>
-                  <mat-select formControlName="userId" >
-                      <mat-option *ngFor="let category of allUser"  
-                          [value]="category.key">{{category.value}}</mat-option>
-                  </mat-select>
-              </mat-form-field> -->
+            <div class="col-lg-5">        
                 <mat-form-field class="example-full-width">
                     <mat-label>Məhsul</mat-label>
-                    <input type="text"  matInput formControlName="productId" required>
-                </mat-form-field>
-            </div>
-            <div class="col-lg-3">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Say</mat-label>
-                    <input type="text"  matInput formControlName="count" required>
+                    <input type="text"  matInput formControlName="productName" required  [matAutocomplete]="auto" (keyup)="getProducts($event)">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
+                          <mat-option *ngFor="let product of products" [value]="product.value" (click)='getSelectedProduct(product)'>{{product.value}}</mat-option>
+                      </mat-autocomplete>
                 </mat-form-field>
             </div>
             <div class="col-lg-3">
                 <mat-form-field class="example-full-width">
                     <mat-label>Qiymət</mat-label>
-                    <input type="text"  matInput formControlName="price" required>
+                    <input type="number"  matInput formControlName="price" required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Say</mat-label>
+                    <input type="number"  matInput formControlName="count" (keydown)="$event.preventDefault" required>
                 </mat-form-field>
             </div>
             <div class="col-lg-1">
@@ -87,7 +74,7 @@
                 <!-- Name Column -->
                 <ng-container matColumnDef="Name">
                     <th mat-header-cell *matHeaderCellDef> Məhsul </th>
-                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
                 </ng-container>
 
                 <!-- Price Column -->
@@ -105,7 +92,7 @@
                 <!-- Amount Column -->
                 <ng-container matColumnDef="Amount">
                     <th mat-header-cell *matHeaderCellDef> Məbləğ</th>
-                    <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.amount | number : '1.2-2'}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="operation">
