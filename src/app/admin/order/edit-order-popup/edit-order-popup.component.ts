@@ -34,7 +34,7 @@ export class EditOrderPopupComponent {
   })
 
   productItemForm = this.formBuilder.group({
-    id: [this.data],
+    id: [0],
     productId: [0],
     productName: ['' , Validators.required],
     count: [null, Validators.required],
@@ -126,6 +126,7 @@ export class EditOrderPopupComponent {
     }
 
     this.OF['deletedItems'].patchValue(this.deletedIds);
+    this.OF['orderItems'].patchValue(this.productItems.data)
 
     this.basketService.SaveOrder(this.orderForm.value as SaveOrder).subscribe(res => {
       console.log(res)
@@ -142,9 +143,11 @@ export class EditOrderPopupComponent {
 
   submitLine() {
     this.lineSubmitted = true;
+    this.IF['amount'].patchValue(this.IF['price'].value * this.IF['count'].value);
+    console.log(this.productItemForm.value)
 
-   // this.IF['name'].setValue(this.IF['name'].value.trim())
     if (this.productItemForm.invalid) {
+      alert()
       return;
     }
 
@@ -181,6 +184,7 @@ export class EditOrderPopupComponent {
       this.deletedIds?.push(id);
       this.productItems.data.splice(index, 1);
       this.productItems.data = [...this.productItems.data]
+      console.log(this.productItems)
   }
 
 }
