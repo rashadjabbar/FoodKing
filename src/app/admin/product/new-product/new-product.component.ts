@@ -20,7 +20,7 @@ export class NewProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     private productService: ProductService,
     @Inject(MAT_DIALOG_DATA) public data: any
-    ) { }
+  ) { }
 
   matcher = new ErrorStateMatcher();
   addData!: Product[];
@@ -64,6 +64,10 @@ export class NewProductComponent implements OnInit {
         this.productForm.patchValue(res.data[0])
         this.fileName = res.data[0].imageUrl
         this.fileUrl = res.data[0].imageUrl
+
+        this.productForm.controls.fileName.clearValidators();
+        this.productForm.controls.fileName.updateValueAndValidity();
+
       })
     }
   }
