@@ -7,6 +7,12 @@
             <div class="category">
                 <div class="table-header">
                     <div class="operation-div">
+                        <div class="search-input">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Axtar...</mat-label>
+                              <input type="text" matInput (keyup)="handleKeyUp($event)">
+                            </mat-form-field>
+                          </div>
                         <button color="primary" mat-raised-button [matMenuTriggerFor]="menu"
                             class="operation-button">Əməliyyatlar</button>
                         <mat-menu #menu="matMenu">
@@ -70,6 +76,12 @@
             <div class="category">
                 <div class="table-header">
                     <div class="operation-div">
+                        <div class="search-input">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Axtar...</mat-label>
+                              <input type="text" matInput (keyup)="handleSubCatKeyUp($event)">
+                            </mat-form-field>
+                          </div>
                         <button color="primary" mat-raised-button [matMenuTriggerFor]="menu"
                             class="operation-button">Əməliyyatlar</button>
                         <mat-menu #menu="matMenu">
