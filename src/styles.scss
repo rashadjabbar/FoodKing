@@ -125,3 +125,18 @@
 .float-right {
   float: right !important;
 }
+
+.operation-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-input{
+  width: 15%;
+  margin-left: 3%;
+}
+
+.operation-button {
+  margin-right: 5%;
+}

@@ -33,6 +33,8 @@ export class AddProductComponent implements OnInit {
     'id',
     'productName',
     'categoryName',
+    'subCategoryName',
+    'price',
     'status'
   ];
 
@@ -139,5 +141,12 @@ export class AddProductComponent implements OnInit {
       this.activeRow = -1;
       this.selectedId = 0;
     }
+  }
+
+  handleKeyUp(e: any) {
+    let filterValue = e.target.value
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 }

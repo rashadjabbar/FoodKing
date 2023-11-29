@@ -242,4 +242,18 @@ export class ProductCategoryComponent {
     }
   }
 
+  
+  handleKeyUp(e: any) {
+    let filterValue = e.target.value
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
+  handleSubCatKeyUp(e: any) {
+    let filterValue = e.target.value
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.subDataSource.filter = filterValue;
+  }
 }
