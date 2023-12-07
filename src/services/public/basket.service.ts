@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environments';
 import { ChangeOrdersStatusModel } from 'src/models/ChangeOrdersStatusModel';
+import { RequestData } from 'src/models/request';
 import { SaveOrder } from 'src/models/save-order';
 
 @Injectable({
@@ -40,5 +41,9 @@ export class BasketService {
 
   ChangeOrdersStatus(request: Partial<ChangeOrdersStatusModel>): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}ChangeStatus`, request );
+  }
+
+  getOrdersClient(request: RequestData, beginDate?: any, endDate?: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}GetOrdersClient?beginDate=${beginDate}&endDate=${endDate}`, request );
   }
 }

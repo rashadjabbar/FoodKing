@@ -166,3 +166,16 @@
 ::ng-deep.mat-badge-content{
     margin-left: 20px;
 }
+
+@media (max-width:641px) {
+    ::ng-deep.cdk-overlay-pane {
+        overflow: auto !important;
+        width: 100% !important;
+        max-width: 90vw !important;
+        position: inherit;
+    }
+
+    .user-icon-div{
+        display: none;
+    }
+}

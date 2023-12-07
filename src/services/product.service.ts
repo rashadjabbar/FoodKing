@@ -44,6 +44,10 @@ export class ProductService {
     return this.http.post<any>(`${this.baseUrl}GetProductClientBrowseData?subCategoryId=${subCatId}&categoryId=${catId}&orderByProducts=${orderByProducts}`, request );
   }
 
+  getProductByIdClient(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}GetProductByIdClient/productId?productId=${id}`);
+  }
+
   SaveWishList(productId: number): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}SaveWishList/${productId}`, null );
   }

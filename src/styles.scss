@@ -1,3 +1,8 @@
+html{
+  top: 0 !important;
+}
+
+
 .dialogHeader {
   background-color: #5161ce;
   padding: 5px 20px;
@@ -139,4 +144,9 @@
 
 .operation-button {
   margin-right: 5%;
+}
+
+.disabled-button{
+  opacity: 0.3;
+  cursor: none !important;
 }

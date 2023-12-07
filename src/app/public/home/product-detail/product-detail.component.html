@@ -1,0 +1,29 @@
+<div class="dialogHeader" style="background-color: #3bb77e;">
+  <h3>Məhsul məlumatları</h3>
+  <i class="far fa-window-close" (click)="dialogRef.close()"></i>
+</div>
+<div class="details-content row" >
+  <div class="col-lg-6">
+   <div class="img-div">
+    <img src="http://192.168.37.49:3005/{{product?.productInfo?.imageUrl}}" class="detail_image" alt="img">
+   </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="tittle">
+      <h4>{{product?.productInfo?.name}}</h4>
+    </div>
+    <div class="stars">
+      <i class="fa-solid fa-star-sharp"></i><i class="fa-solid fa-star-sharp"></i><i class="fa-solid fa-star-sharp"></i><i class="fa-regular fa-star-sharp-half-stroke"></i><i class="fa-light fa-star-sharp"></i> 3.5(21)
+    </div>
+    <div class="price-div">
+      <span>Qiymət:</span> <span> {{product?.productInfo?.price | number : '1.2-2'}}₼</span>
+    </div>
+
+    <div class="description-div">
+      <p>Məhsul haqqında</p>
+      <p>{{product?.productInfo?.information}}</p>
+    </div>
+  </div>
+</div>
+
+

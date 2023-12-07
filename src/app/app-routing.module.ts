@@ -14,6 +14,7 @@ import { AdminLogin } from 'src/guards/admin-login.guard';
 import { UserLoginComponent } from './public-auth/user-login/user-login.component';
 import { PaymentComponent } from './admin/payment/payment.component';
 import { OrderComponent } from './admin/order/order.component';
+import { ClientOrderComponent } from './public/client-order/client-order.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'category-list', component: CategoryListComponent },
       { path: 'wishlist', component: WishlistComponent },
       { path: 'cart', component: CartComponent },
+      { path: 'client-order', component: ClientOrderComponent },
     ]
   },
   {

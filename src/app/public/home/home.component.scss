@@ -1,4 +1,4 @@
-.chat-list{
+.chat-list {
     display: flex;
     flex-direction: column;
     border-radius: 5px;
@@ -8,8 +8,8 @@
     cursor: pointer;
 }
 
-.subLi{
-    padding: 5px!important;
+.subLi {
+    padding: 5px !important;
     list-style: none;
     border-radius: 5px;
 }
@@ -27,10 +27,11 @@
 }
 
 .category-selected {
+    color: #2f9265;
     font-weight: bold;
 }
 
-.favorite a{
+.favorite a {
     background: #ffba43;
     color: #fff !important
 }

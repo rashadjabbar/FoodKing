@@ -1,0 +1,85 @@
+<div class="dialogHeader" style="background-color: #3bb77e;">
+  <h3>Sifarişlər</h3>
+  <i class="far fa-window-close" (click)="dialogRef.close()"></i>
+</div>
+<div class="p-3">
+  <form [formGroup]="productItemForm" class="user-cabinet-form">
+    <div class="row" style="align-items: center;">
+      <div class="col-lg-6">
+        <label>*Məhsul adı</label>
+        <div class="form">
+          <input id="productName" class="input"  required type="text"
+            formControlName="productName" autocomplete="off" [matAutocomplete]="auto" (keyup)="getProducts($event)">
+            <mat-autocomplete  #auto="matAutocomplete" >
+              <mat-option *ngFor="let product of products" [value]="product.value" (click)='getSelectedProduct(product)'>{{product.value}}</mat-option>
+          </mat-autocomplete>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <label>*Sayı</label>
+        <div class="form">
+          <input id="count" class="input"   required type="number" formControlName="count"
+            autocomplete="off">
+        </div>
+      </div>
+      <div class="col-lg-3">
+       <p><b>Qiymət: {{price | number : '1.2-2'}}₼</b></p>
+      </div>
+      <div class="col-lg-1" >
+        <div  class="add-icon-mobile" [ngClass]="{'disabled-button': productItemForm.invalid}">
+          <p class="btn iq-button-checkout animation-btn mt-2"  (click)="submitLine()">Əlavə et</p>
+        </div>
+        <lord-icon class="add-icon" trigger="hover" (click)="submitLine()" [ngClass]="{'disabled-button': productItemForm.invalid}"
+        src="../../../../assets/images/wired-outline-49-plus-circle.json">
+      </lord-icon>
+      </div>
+    </div>
+    <div class="order-edit-items-web">
+      <div class="row order-edit-items" style="border-bottom: 1px solid gray; opacity: 0.6;">
+        <div class="col-lg-6">Ad</div>
+        <div class="col-lg-1">Say</div>
+        <div class="col-lg-2">Qiymət</div>
+        <div class="col-lg-1">Məbləğ</div>
+        <div class="col-lg-2" style="text-align: center;">
+         #
+        </div>
+  
+      </div>
+      <div class="row order-edit-items" *ngFor="let item of orders; let i=index">
+        <div class="col-lg-6">{{item.productName}}</div>
+        <div class="col-lg-1">{{item.count}}</div>
+        <div class="col-lg-2">{{item.price | number : '1.2-2'}} ₼</div>
+        <div class="col-lg-1">{{item.amount | number : '1.2-2'}} ₼</div>
+        <div class="col-lg-2" style="text-align: end;">
+          <lord-icon class="user-icon" trigger="hover" (click)="getItemRow(item, i)"
+            src="../../../../assets/images/wired-outline-245-edit-document.json">
+          </lord-icon>
+          <lord-icon class="user-icon" trigger="hover" (click)="deleteLine(i, item.id)"
+            src="../../../../assets/images/wired-outline-185-trash-bin.json">
+          </lord-icon>
+        </div>
+  
+      </div>
+    </div>
+    <div class="order-edit-items-mobile">
+    <div *ngFor="let item of orders; let i = index" style="border-bottom: 1px solid #3bb77e; margin-bottom: 15px;">
+        <div><b>Ad: {{item.productName}}</b></div>
+        <div>Say: {{item.count}}</div>
+        <div>Qiymət: {{item.price | number : '1.2-2'}} ₼</div>
+        <div>Məbləğ {{item.amount | number : '1.2-2'}} ₼</div>
+        <div style="text-align: end;">
+          <lord-icon class="user-icon" trigger="hover" (click)="getItemRow(item, i)"
+            src="../../../../assets/images/wired-outline-245-edit-document.json">
+          </lord-icon>
+          <lord-icon class="user-icon" trigger="hover" (click)="deleteLine(i, item.id)"
+            src="../../../../assets/images/wired-outline-185-trash-bin.json">
+          </lord-icon>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button id="save" class="save" type="button" (click)="saveClientOrder()"
+        [disabled]="orders.length == 0">Yadda saxla</button>
+    </div>
+  </form>
+</div>

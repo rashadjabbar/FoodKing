@@ -1,0 +1,43 @@
+.row{
+    margin: 0;
+    padding: 2%;
+}
+
+.img-div{
+    height: 336px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.detail_image{
+    width: 100%;
+}
+
+.tittle h4{
+    font-family: "Dosis", sans-serif !important;
+}
+
+.stars i{
+    color: #ffba43;
+}
+
+.price-div span:nth-child(1){
+    font-weight: 500;
+    color: black;
+}
+
+.description-div{
+    margin-top: 15px;
+}
+
+.price-div span:nth-child(2){
+    color: #0984e3;
+}
+
+.description-div p:nth-child(1){
+    margin-bottom: 0;
+    font-family: "Dosis", sans-serif !important;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 22px;
+}

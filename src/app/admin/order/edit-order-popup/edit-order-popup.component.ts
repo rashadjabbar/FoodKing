@@ -94,7 +94,6 @@ export class EditOrderPopupComponent {
 
   getOrderById(id: number){
     this.basketService.getOrderById(id).subscribe(res => {
-     // console.log(res.data)
     this.orderForm.patchValue(res.data)
     this.productItems.data = res.data.orderItems as OrderItem[];
     })
@@ -109,7 +108,6 @@ export class EditOrderPopupComponent {
   }
 
   getSelectedProduct(product: ComboboxModel){
-    console.log(product)
     this.IF['productId'].patchValue(product.key)
     this.IF['productName'].patchValue(product.value)
 
@@ -129,8 +127,6 @@ export class EditOrderPopupComponent {
     this.OF['orderItems'].patchValue(this.productItems.data)
 
     this.basketService.SaveOrder(this.orderForm.value as SaveOrder).subscribe(res => {
-      console.log(res)
-
       if(!res?.status){
         showErrorAlert('', res?.message, false, false, '','', 1500);
       }
@@ -144,8 +140,6 @@ export class EditOrderPopupComponent {
   submitLine() {
     this.lineSubmitted = true;
     this.IF['amount'].patchValue(this.IF['price'].value * this.IF['count'].value);
-    console.log(this.productItemForm.value)
-
     if (this.productItemForm.invalid) {
       alert()
       return;
@@ -165,8 +159,6 @@ export class EditOrderPopupComponent {
       //this.productItems.data[this.activeRow].name =
     }
     
-    //console.log(this.productItemForm.value)
-    //console.log(this.productItems.data)
     this.productItems.data = [...this.productItems.data]
     this.activeRow = -1;
     this.productItemForm.reset()
@@ -184,7 +176,6 @@ export class EditOrderPopupComponent {
       this.deletedIds?.push(id);
       this.productItems.data.splice(index, 1);
       this.productItems.data = [...this.productItems.data]
-      console.log(this.productItems)
   }
 
 }

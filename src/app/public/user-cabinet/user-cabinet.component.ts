@@ -58,8 +58,6 @@ export class UserCabinetComponent {
     }
 
     this.userService.saveUserInfo(this.cabinetForm.value).subscribe(res => {
-      console.log(res)
-
       if(!res?.status){
         showErrorAlert('', res?.message, false, false, '','', 1500);
       }

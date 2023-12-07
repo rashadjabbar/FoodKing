@@ -20,6 +20,11 @@ import lottie from 'lottie-web';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ChangePasswordComponent } from './changePassword/changePassword.component';
 import { UserCabinetComponent } from './user-cabinet/user-cabinet.component';
+import { ClientOrderComponent } from './client-order/client-order.component';
+import { EditClientOrderComponent } from './client-order/edit-client-order/edit-client-order.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ProductDetailComponent } from './home/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +35,9 @@ import { UserCabinetComponent } from './user-cabinet/user-cabinet.component';
     CartComponent,
     ChangePasswordComponent,
     UserCabinetComponent,
+    ClientOrderComponent,
+    EditClientOrderComponent,
+    ProductDetailComponent
   ],
   imports: [
     CommonModule,
@@ -38,9 +46,12 @@ import { UserCabinetComponent } from './user-cabinet/user-cabinet.component';
     MatPaginatorModule,
     MatMenuModule,
     MatBadgeModule,
+    MatDialogModule,
     FormsModule,
     NgxSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+
 
   ],
   providers: [

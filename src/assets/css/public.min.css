@@ -238,7 +238,7 @@ sup {
     top: -0.5em;
 }
 a {
-    color: #3bb77e;
+    /* color: #3bb77e; */
     text-decoration: none;
 }
 a:hover {

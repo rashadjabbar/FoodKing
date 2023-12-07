@@ -1,0 +1,101 @@
+<!-- <div class="text-left iq-breadcrumb-one iq-bg-over black" style="background: url(assets/images/banner/pages-banner.png) no-repeat scroll right center; background-size: contain;">
+	<div class="container">
+        <div class="row align-items-center">
+            <div class="col-sm-12">
+                <nav aria-label="breadcrumb" class="text-center iq-breadcrumb-two">
+                    <h1 class="title">Sifarişlər</h1>
+                    <ol class="breadcrumb main-bg">
+                        <li class="breadcrumb-item">
+                            <a routerLink="" [routerLinkActive]="['active-menu']"><i class="fas fa-home me-2"></i>Ana səhifə</a>
+                        </li>
+                        <li class="breadcrumb-item active">Sifarişlər</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="section-padding-120">
+  <div class="container" style="overflow: auto;">
+   <div class="web-view">
+    <div class="row order-header">
+      <div class="col-lg-2">Sifariş №</div>
+      <div class="col-lg-2">Məbləğ</div>
+      <div class="col-lg-2">Xidmət haqqı</div>
+      <div class="col-lg-2">Sayı</div>
+      <div class="col-lg-2">Yardılma tarixi</div>
+      <div class="col-lg-2">Status</div>
+    </div>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let item of orderData; let i = index">
+        <mat-expansion-panel-header>
+          <div class="row w-100">
+            <div class="col-lg-2" style="font-weight: 500;">{{item.no}}</div>
+            <div class="col-lg-2">{{item.amount}} ₼</div>
+            <div class="col-lg-2">{{item.serviceFee}} ₼</div>
+            <div class="col-lg-2">{{item.itemCount}}</div>
+            <div class="col-lg-2">{{item.createdDate | date: 'dd-MM-yyyy'}}</div>
+            <div class="col-lg-2">{{item.status}}</div>
+          </div>
+        </mat-expansion-panel-header>
+        <div class="order-item-div">
+          <div class="row order-item-header">
+            <div class="col-lg-4">Məhsulun adı</div>
+            <div class="col-lg-4">Sayı</div>
+            <div class="col-lg-4">Qiyməti</div>
+          </div>
+          <div class="row order-item-body" *ngFor="let orderInItems of item.items">
+            <div class="col-lg-4">{{orderInItems.name}}</div>
+            <div class="col-lg-4">{{orderInItems.count}}</div>
+            <div class="col-lg-4">{{orderInItems.price | number : '1.2-2'}} ₼</div>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: end;">
+          <p class="btn iq-button-checkout animation-btn mt-2" (click)="openDialog(item.id!)">Düzəliş et</p>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+   </div>
+
+   <div class="mobile-view">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let item of orderData; let i = index" >
+        <mat-expansion-panel-header >
+          <mat-panel-title style="font-weight: 500;">
+            {{item.no}}
+          </mat-panel-title>
+          <mat-panel-description>
+            <p>{{item.amount}} ₼</p>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="main-order-info">
+          <p>Xidmət haqqı: {{item.serviceFee | number : '1.2-2'}} ₼</p>
+          <p>Sayı:  {{item.itemCount}} </p>
+          <p>Yardılma tarixi: {{item.createdDate | date: 'dd-MM-yyyy'}}</p>
+          <p>Status: {{item.status}}</p>
+        </div>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let orderItem of item.items">
+            <mat-expansion-panel-header >
+
+              <mat-panel-description >
+                <p style="margin-left: 0 !important; color: #636e72;"> {{orderItem.name}}.</p>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="main-order-info">
+              <p>Məhsulun adı: {{orderItem.name}}</p>
+              <p>Sayı: {{orderItem.count}} </p>
+              <p>Qiyməti {{orderItem.price}}  ₼</p>
+              
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <div style="display: flex; justify-content: end;">
+          <p class="btn iq-button-checkout animation-btn mt-2" (click)="openDialog(item.id!)">Düzəliş et</p>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    
+   </div>
+  </div>
+</div>

@@ -43,6 +43,10 @@
                     <a [routerLink]="['wishlist']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Sevİmlİlər</a>
                   </li>
+                  <li *ngIf="isAuthenticated">
+                    <a [routerLink]="['client-order']" [routerLinkActive]="['active-menu']"
+                      [routerLinkActiveOptions]="{ exact: true }" class="menu-item">sİfarİşlər</a>
+                  </li>
                   <!-- <li class="">
                     <a [routerLink]="['cart']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Səbət
@@ -118,7 +122,6 @@
                 </div>
               </div>
               <div *ngSwitchDefault class="user-icon-div">
-
                 <!-- <i class="fas fa-user-circle" [matMenuTriggerFor]="user"></i> -->
                 <lord-icon class="user-icon" trigger="hover" [matMenuTriggerFor]="user"
                   src="../../assets/images/wired-outline-21-avatar.json"></lord-icon>

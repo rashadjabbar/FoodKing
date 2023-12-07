@@ -4,16 +4,16 @@
 </div>
 
 <div class="p-3">
-    <form [formGroup]="cabinetForm">
-        <div class="col-lg-12 w-100 row">
-            <div class="col-lg-6 p-0">
+    <form [formGroup]="cabinetForm" class="user-cabinet-form">
+        <div class="row">
+            <div class="col-lg-6">
                 <label>*İstİfadəçi adı</label>
                 <div class="form" [ngClass]="{'border-red': !cf['username'].valid && formSubmitted}">
                     <input id="username" readonly class="input" placeholder="*İstİfadəçi adı" required type="text" formControlName="username" autocomplete="off">
                 </div>
             </div>
 
-            <div class="col-lg-6 p-0">
+            <div class="col-lg-6">
                 <label>*Email</label>
                 <div class="form" [ngClass]="{'border-red': !cf['email'].valid && formSubmitted}">
                     <input id="email" readonly class="input" placeholder="*Email" required type="email" formControlName="email" autocomplete="off">
@@ -21,8 +21,8 @@
             </div>
         </div>
 
-        <div class="col-lg-12 w-100 row">
-            <div class="col-lg-6 p-0">
+        <div class="row">
+            <div class="col-lg-6">
                 <label>*Ad</label>
                 <div class="form" [ngClass]="{'border-red': !cf['firstName'].valid && formSubmitted}">
                     <input id="firstName" class="input" placeholder="*Ad" required type="text"
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 p-0">
+            <div class="col-lg-6">
                 <label>*Soyad</label>
                 <div class="form" [ngClass]="{'border-red': !cf['lastName'].valid && formSubmitted}">
                     <input id="lastName" class="input" placeholder="*Soyad" required type="text"
@@ -39,8 +39,8 @@
             </div>
         </div>
 
-        <div class="col-lg-12 w-100 row">
-            <div class="col-lg-6 p-0">
+        <div class="row">
+            <div class="col-lg-6">
                 <label>*Doğum tarixi</label>
                 <div class="form" [ngClass]="{'border-red': !cf['birthday'].valid && formSubmitted}">
                     <input id="birthday" class="input" placeholder="*Doğum tarixi" required type="date"
@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 p-0">
+            <div class="col-lg-6">
                 <label>Telefon nömrəsi</label>
                 <div class="form" [ngClass]="{'border-red': !cf['phone1'].valid && formSubmitted}">
                     <input id="phone1" class="input" placeholder="Telefon nömrəsi" type="text"

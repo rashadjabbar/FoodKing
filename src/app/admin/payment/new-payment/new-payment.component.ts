@@ -42,7 +42,6 @@ export class NewPaymentComponent implements OnInit {
     if (this.data.id !== 0) {
       this.paymentService.getPaymentByid(this.data.id).subscribe({
         next: res => {
-          console.log(res.data)
           this.paymentForm.patchValue(res.data)
         }
       })
@@ -57,7 +56,6 @@ export class NewPaymentComponent implements OnInit {
 
   selectUser(userId: string){
     this.paymentForm.controls['userId'].patchValue(userId)
-    console.log(this.paymentForm.controls['userId'].value)
   }
 
   paymentFunc() {

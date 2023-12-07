@@ -10,6 +10,8 @@ import { GlobalService } from 'src/services/global.service';
 import { ProductService } from 'src/services/product.service';
 import { BasketService } from 'src/services/public/basket.service';
 import { showInfoAlert } from 'src/utils/alert';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +25,9 @@ export class HomeComponent {
     private basketService: BasketService,
     private router: Router,
     private globalService: GlobalService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog,
+
     ) {
       this.catId = sessionStorage.getItem('catId') as any
   }
@@ -138,6 +142,17 @@ export class HomeComponent {
       })
     }
     
+  }
+
+  openDetail(id: number){
+    const dialogRef = this.dialog.open(ProductDetailComponent, {
+      data: id,
+      height: 'max-content',
+      width: '55%',
+      hasBackdrop: true,
+      disableClose: false,
+    })
+
   }
 
   addToWishList(index:number, productId: number){

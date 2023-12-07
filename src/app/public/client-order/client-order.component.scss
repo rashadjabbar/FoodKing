@@ -1,0 +1,83 @@
+.order-header {
+    padding: 1% 3%;
+    border: 1px solid #3bb77e;
+    border-radius: 10px;
+}
+
+.order-header>div {
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #3bb77e;
+    font-size: 17px;
+    margin: 0;
+    padding: 0;
+}
+
+.order-item-div {
+    border: 1px solid #b2bec3;
+    border-radius: 10px;
+    background-color: white !important;
+
+}
+
+.order-item-header {
+    font-weight: 500;
+    padding: 5px 10px;
+    border-bottom: 1px solid #b2bec3;
+    margin: 0;
+}
+
+.order-item-body {
+    padding: 5px 10px;
+}
+
+.mat-expanded {
+    background-color: #dff9fb33;
+}
+
+.mat-expansion-panel-header {
+    height: fit-content;
+    padding: 7px 20px;
+}
+
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+    margin-right: 0;
+}
+
+.mat-expansion-panel-header-description p {
+    margin-left: 40px;
+    margin-bottom: 0;
+}
+
+.mobile-view {
+    display: none;
+}
+
+.web-view {
+    padding: 20px 0;
+}
+
+
+@media (max-width:641px) {
+    ::ng-deep.cdk-overlay-pane {
+        overflow: auto !important;
+        width: 100% !important;
+        max-width: 90vw !important;
+        position: inherit;
+    }
+
+    .web-view {
+        display: none;
+    }
+
+    .mobile-view {
+        display: block;
+        padding: 20px 0;
+    }
+
+    .main-order-info p{
+        margin-bottom: 5px;
+    }
+
+}

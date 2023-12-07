@@ -65,8 +65,6 @@ export class ChangePasswordComponent implements OnInit {
     }
 
     this.userService.changePassword(this.passwordForm.value as ChangePasswordModel).subscribe(res => {
-      console.log(res)
-
       if(!res?.status){
         showErrorAlert('', res?.message, false, false, '','', 1500);
       }
