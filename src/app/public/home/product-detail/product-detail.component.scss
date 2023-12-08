@@ -4,13 +4,15 @@
 }
 
 .img-div{
-    height: 336px;
-    border-radius: 5px;
+    max-height: 300px;
     overflow: hidden;
+    border-radius: 10px;
+
 }
 
 .detail_image{
     width: 100%;
+    border-radius: 10px;
 }
 
 .tittle h4{
@@ -40,4 +42,36 @@
     font-weight: 600;
     color: rgba(0, 0, 0, 0.8);
     font-size: 22px;
+}
+
+.review{
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.review p{
+    margin: 0;
+}
+
+.review-content{
+    background-color: #D5F4E7;
+    margin-left: 10px;
+    padding: 10px 15px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.review-content>p:nth-child(1){
+    font-weight: 600;
+    font-family: "Dosis", sans-serif !important;
+    color: #576574;
+    font-size: 17px;
+}
+
+.review img{
+    width: 35px;
+    height: 35px;
+    border: 2px solid #3bb77e;
+    border-radius: 50%;
 }

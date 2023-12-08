@@ -147,8 +147,8 @@ export class HomeComponent {
   openDetail(id: number){
     const dialogRef = this.dialog.open(ProductDetailComponent, {
       data: id,
-      height: 'max-content',
-      width: '55%',
+      maxHeight: '90vh',
+      width: '45%',
       hasBackdrop: true,
       disableClose: false,
     })
