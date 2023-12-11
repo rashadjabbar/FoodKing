@@ -36,7 +36,11 @@ export class ProductDetailComponent implements OnInit {
 
   ) { }
 
+
   product?: ProductDetail
+
+  stars: number[] = [1, 2, 3, 4, 5];
+  selectedValue?: number;
 
   ngOnInit() {
     this.getProductById()
@@ -48,5 +52,12 @@ export class ProductDetailComponent implements OnInit {
       console.log(res.data)
     })
   }
+
+  countStar(star) {
+    this.selectedValue = star;
+    console.log('Value of star', star);
+  }
+
+  
 
 }

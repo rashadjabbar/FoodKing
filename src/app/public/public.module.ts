@@ -25,6 +25,7 @@ import { EditClientOrderComponent } from './client-order/edit-client-order/edit-
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ProductDetailComponent } from './home/product-detail/product-detail.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ProductDetailComponent } from './home/product-detail/product-detail.com
     NgxSpinnerModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
+    MatIconModule,
 
 
   ],

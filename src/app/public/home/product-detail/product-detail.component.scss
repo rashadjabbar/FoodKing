@@ -20,7 +20,8 @@
 }
 
 .stars i{
-    color: #ffba43;
+    color:  #21345442;
+    margin-right: 2px;
 }
 
 .price-div span:nth-child(1){
@@ -75,3 +76,21 @@
     border: 2px solid #3bb77e;
     border-radius: 50%;
 }
+
+.rating-list li {
+    float: right;
+    color: #ddd;
+    padding: 10px 5px;
+  
+  }
+  
+  .rating-list li:hover,
+  .rating-list li:hover ~ li, .rating-list li.selected {
+    color: #ffd700;
+    cursor: pointer;
+  }
+  
+  .rating-list {
+    display: inline-block;
+    list-style: none;
+  }
