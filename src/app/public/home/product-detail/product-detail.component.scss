@@ -1,43 +1,43 @@
-.row{
+.row {
     margin: 0;
     padding: 2%;
 }
 
-.img-div{
+.img-div {
     max-height: 300px;
     overflow: hidden;
     border-radius: 10px;
 
 }
 
-.detail_image{
+.detail_image {
     width: 100%;
     border-radius: 10px;
 }
 
-.tittle h4{
+.tittle h4 {
     font-family: "Dosis", sans-serif !important;
 }
 
-.stars i{
-    color:  #21345442;
+.stars i {
+    color: #21345442;
     margin-right: 2px;
 }
 
-.price-div span:nth-child(1){
+.price-div span:nth-child(1) {
     font-weight: 500;
     color: black;
 }
 
-.description-div{
+.description-div {
     margin-top: 15px;
 }
 
-.price-div span:nth-child(2){
+.price-div span:nth-child(2) {
     color: #0984e3;
 }
 
-.description-div p:nth-child(1){
+.description-div p:nth-child(1) {
     margin-bottom: 0;
     font-family: "Dosis", sans-serif !important;
     font-weight: 600;
@@ -45,16 +45,16 @@
     font-size: 22px;
 }
 
-.review{
+.review {
     display: flex;
     margin-bottom: 15px;
 }
 
-.review p{
+.review p {
     margin: 0;
 }
 
-.review-content{
+.review-content {
     background-color: #D5F4E7;
     margin-left: 10px;
     padding: 10px 15px;
@@ -63,14 +63,14 @@
     border-bottom-left-radius: 10px;
 }
 
-.review-content>p:nth-child(1){
+.review-content>p:nth-child(1) {
     font-weight: 600;
     font-family: "Dosis", sans-serif !important;
     color: #576574;
     font-size: 17px;
 }
 
-.review img{
+.review img {
     width: 35px;
     height: 35px;
     border: 2px solid #3bb77e;
@@ -80,17 +80,145 @@
 .rating-list li {
     float: right;
     color: #ddd;
-    padding: 10px 5px;
-  
-  }
-  
-  .rating-list li:hover,
-  .rating-list li:hover ~ li, .rating-list li.selected {
+    padding: 0px 5px;
+    transition: 0.3s;
+
+
+}
+
+.rating-list li:hover,
+.rating-list li:hover~li{
     color: #ffd700;
+    transform: scale(1.2);
     cursor: pointer;
+
+}
+.rating-list li.selected {
+    color: #ffd700;
+    transform: scale(1.2);
+    transition: 0.3s;
+    &:before {
+        content: '';
+        background-color:#ffd700;
+        border-radius: 50%;
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: scale(0.001, 0.001);
+        animation: effect_dylan 0.8s ease-out;
+      }
+
+}
+
+
+    //start click effect
+
+
+// .rating-list li.selected {
+// }
+
+@keyframes effect_dylan {
+    50% {
+      transform: scale(1.5, 1.5);
+      opacity: 0;
+    }
+    99% {
+      transform: scale(0.001, 0.001);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(0.001, 0.001);
+      opacity: 1;
+    }
   }
-  
-  .rating-list {
+
+.rating-list-info {
     display: inline-block;
     list-style: none;
-  }
+}
+
+.rating-list-info li {
+    float: right;
+    color: #ddd;
+    padding: 3px;
+
+}
+
+.rating-list-info li:focus {
+    transform: scale(5);
+}
+
+
+.rating-list-info li.selected-rating {
+    color: #ffd700;
+}
+
+.rating-list-info {
+    display: inline-block;
+    list-style: none;
+}
+
+.form {
+    --timing: 0.3s;
+    --width-of-input: 100%;
+    --height-of-input: 40px;
+    --border-height: 2px;
+    --input-bg: #fff;
+    --border-color: #3bb77e;
+    --border-radius: 30px;
+    --after-border-radius: 4px;
+    position: relative;
+    width: var(--width-of-input);
+    height: var(--height-of-input);
+    display: flex;
+    align-items: center;
+    padding-inline: 0.8em;
+    border-radius: var(--border-radius);
+    transition: border-radius 0.5s ease;
+    background: var(--input-bg, #fff);
+    border: 1px solid #3bb77e;
+    margin-bottom: 10px;
+}
+
+/* styling of Input */
+.input {
+    font-size: 0.9rem;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    padding-inline: 0.5em;
+    padding-block: 0.7em;
+    border: none;
+}
+
+/* styling of animated border */
+.form:before {
+    content: "";
+    position: absolute;
+    background: var(--border-color);
+    transform: scaleX(0);
+    transform-origin: center;
+    width: 100%;
+    height: var(--border-height);
+    left: 0;
+    bottom: 0;
+    border-radius: 5px;
+    transition: transform var(--timing) ease;
+}
+
+/* Hover on Input */
+.form:focus-within {
+    border-radius: var(--after-border-radius);
+}
+
+input:focus {
+    outline: none;
+}
+
+/* here is code of animated border */
+.form:focus-within:before {
+    transform: scale(1);
+}

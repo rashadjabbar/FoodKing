@@ -2,49 +2,65 @@
   <h3>Məhsul məlumatları</h3>
   <i class="far fa-window-close" (click)="dialogRef.close()"></i>
 </div>
-<div class="details-content " >
+<div class="details-content ">
   <div class="row">
     <div class="col-lg-6">
       <div class="img-div">
-       <img src="http://192.168.37.49:3005/{{product?.productInfo?.imageUrl}}" class="detail_image" alt="img">
+        <img src="http://192.168.37.49:3005/{{product?.productInfo?.imageUrl}}" class="detail_image" alt="img">
       </div>
-     </div>
-     <div class="col-lg-6">
-       <div class="tittle">
-         <h4>{{product?.productInfo?.name}}</h4>
-       </div>
-       <div class="stars">
-        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 3.5(21)
-       </div>
-       <div class="price-div">
-         <span>Qiymət:</span> <span> {{product?.productInfo?.price | number : '1.2-2'}}₼</span>
-       </div>
-   
-       <div class="description-div">
-         <p>Məhsul haqqında</p>
-         <p *ngIf="product?.productInfo?.information == ''">Məhsul haqqında məlumat yoxdur</p>
-         <p>{{product?.productInfo?.information}}</p>
-       </div>
-       <div _ngcontent-ng-c700312977="" class="iq-btn-container"><a _ngcontent-ng-c700312977="" href="javascript:void(0)"><div _ngcontent-ng-c700312977="" class="btn btn-secondary animation-btn"> Səbətə at <i _ngcontent-ng-c700312977="" aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i></div></a></div>   
-     </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="tittle">
+        <h4>{{product?.productInfo?.name}}</h4>
+      </div>
+      <div class="d-flex" style="align-items: center;">
+        <ul class="list-inline rating-list-info" *ngFor="let star of ratingStars" style="display: inline-block">
+          <li [ngClass]="{'selected-rating': (star <= selectedRatingValue!)}">
+            <i class="fa fa-star"></i>
+          </li>
+        </ul>
+        <p style="margin-left: 10px;">3.5(21)</p>
+      </div>
+      <div class="price-div">
+        <span>Qiymət:</span> <span> {{product?.productInfo?.price | number : '1.2-2'}}₼</span>
+      </div>
+
+      <div class="description-div">
+        <p>Məhsul haqqında</p>
+        <p *ngIf="product?.productInfo?.information == ''">Məhsul haqqında məlumat yoxdur</p>
+        <p>{{product?.productInfo?.information}}</p>
+      </div>
+      <div _ngcontent-ng-c700312977="" class="iq-btn-container"><a _ngcontent-ng-c700312977=""
+          href="javascript:void(0)">
+          <div _ngcontent-ng-c700312977="" class="btn btn-secondary animation-btn"> Səbətə at <i
+              _ngcontent-ng-c700312977="" aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i></div>
+        </a></div>
+    </div>
   </div>
   <div class="row">
     <h5>Qiymətləndir</h5>
     <div class="col-sm-12">
-      <ul class="list-inline rating-list" 
-          *ngFor="let star of stars" style="display: inline-block" >
-            <li (click)="countStar(star)"
-                [ngClass]="{'selected': (star <= selectedValue!)}">
-              <i class="fa fa-star"></i>
-            </li> 
+      <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block">
+        <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue!)}">
+          <i class="fa fa-star"></i>
+        </li>
       </ul>
-  </div>
+    </div>
+    <div class="col-lg-11">
+      <div class="form">
+        <input id="username"  class="input" placeholder="Ürək sözünü yaz" required type="text"
+          formControlName="username" autocomplete="off">
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <i class="fa-sharp fa-solid fa-paper-plane-top" style="font-size: 25px; color: #3bb77e; cursor: pointer;"></i>
+    </div>
   </div>
   <div class="row">
     <h5>Rəylər</h5>
     <div class="review-div">
       <div class="review" *ngFor="let item of product?.reviews">
-        <img src="../../../../assets/images/man.png" >
+        <img src="../../../../assets/images/man.png">
         <div class="review-content">
           <p>{{item.userName}}</p>
           <p>{{item.comment}}</p>
@@ -58,5 +74,3 @@
     </div>
   </div>
 </div>
-
-

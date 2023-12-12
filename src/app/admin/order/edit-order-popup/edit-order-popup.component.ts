@@ -23,22 +23,22 @@ export class EditOrderPopupComponent {
     private productService: ProductService,
     private globalService: GlobalService
   ) { }
-  
+
   orderForm = this.formBuilder.group({
     id: [this.data, Validators.required],
-    no: ['' , Validators.required],
+    no: ['', Validators.required],
     serviceFee: [0, Validators.required],
     amount: [0, Validators.required],
-    orderItems: ['' , Validators.required],
+    orderItems: ['', Validators.required],
     deletedItems: [''],
   })
 
   productItemForm = this.formBuilder.group({
     id: [0],
     productId: [0],
-    productName: ['' , Validators.required],
+    productName: ['', Validators.required],
     count: [null, Validators.required],
-    price: [null, Validators.required],
+    price: [null],
     amount: [null, Validators.required],
   })
 
@@ -59,7 +59,7 @@ export class EditOrderPopupComponent {
   productItems: MatTableDataSource<OrderItem> = new MatTableDataSource<OrderItem>([]);
   activeRow: any = -1;
   selectedId: any = 0;
-  deletedIds : number[] = [];
+  deletedIds: number[] = [];
 
   get OF(): { [key: string]: AbstractControl } {
     return this.orderForm.controls;
@@ -68,7 +68,7 @@ export class EditOrderPopupComponent {
   get IF(): { [key: string]: AbstractControl } {
     return this.productItemForm.controls;
   }
-  
+
   ngOnInit() {
     this.getOrderById(this.OF['id'].value)
   }
@@ -92,28 +92,28 @@ export class EditOrderPopupComponent {
     }
   }
 
-  getOrderById(id: number){
+  getOrderById(id: number) {
     this.basketService.getOrderById(id).subscribe(res => {
-    this.orderForm.patchValue(res.data)
-    this.productItems.data = res.data.orderItems as OrderItem[];
+      this.orderForm.patchValue(res.data)
+      this.productItems.data = res.data.orderItems as OrderItem[];
     })
   }
 
-  getProducts(event: any){
-   // if(event.target.value){
-      this.globalService.getProductsAutoComplate(event.target.value).subscribe((res: any) => {
-        this.products = res.data
-      })
-   // }
+  getProducts(event: any) {
+    // if(event.target.value){
+    this.globalService.getProductsAutoComplate(event.target.value).subscribe((res: any) => {
+      this.products = res.data
+    })
+    // }
   }
 
-  getSelectedProduct(product: ComboboxModel){
+  getSelectedProduct(product: ComboboxModel) {
     this.IF['productId'].patchValue(product.key)
     this.IF['productName'].patchValue(product.value)
 
     this.productService.getProductById(product.key).subscribe(res => {
       this.IF['price'].setValue(res?.data[0]?.price);
-     })
+    })
   }
 
   save() {
@@ -127,11 +127,11 @@ export class EditOrderPopupComponent {
     this.OF['orderItems'].patchValue(this.productItems.data)
 
     this.basketService.SaveOrder(this.orderForm.value as SaveOrder).subscribe(res => {
-      if(!res?.status){
-        showErrorAlert('', res?.message, false, false, '','', 1500);
+      if (!res?.status) {
+        showErrorAlert('', res?.message, false, false, '', '', 1500);
       }
-      else{
-        showInfoAlert('', res?.message, false, false, '','', 2000);
+      else {
+        showInfoAlert('', res?.message, false, false, '', '', 2000);
         this.dialogRef.close()
       }
     })
@@ -140,12 +140,15 @@ export class EditOrderPopupComponent {
   submitLine() {
     this.lineSubmitted = true;
     this.IF['amount'].patchValue(this.IF['price'].value * this.IF['count'].value);
+
     if (this.productItemForm.invalid) {
-      alert()
       return;
     }
 
     this.saveLine();
+    // let sum = this.productItems.data.map(a => a.amount).reduce(function (a, b) {
+    //   return a + b;
+    // });
   }
 
 
@@ -158,7 +161,7 @@ export class EditOrderPopupComponent {
       this.productItems.data[this.activeRow].amount = this.IF['price'].value * this.IF['count'].value;
       //this.productItems.data[this.activeRow].name =
     }
-    
+
     this.productItems.data = [...this.productItems.data]
     this.activeRow = -1;
     this.productItemForm.reset()
@@ -170,12 +173,12 @@ export class EditOrderPopupComponent {
   getLine(index: number) {
     this.productItemForm.patchValue(this.productItems.data[index] as any);
     this.products = []
-}
+  }
 
   deleteLine(index: number, id: number) {
-      this.deletedIds?.push(id);
-      this.productItems.data.splice(index, 1);
-      this.productItems.data = [...this.productItems.data]
+    this.deletedIds?.push(id);
+    this.productItems.data.splice(index, 1);
+    this.productItems.data = [...this.productItems.data]
   }
 
 }

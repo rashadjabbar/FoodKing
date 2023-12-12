@@ -40,16 +40,17 @@
                       </mat-autocomplete>
                 </mat-form-field>
             </div>
-            <div class="col-lg-3">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Qiymət</mat-label>
-                    <input type="number"  matInput formControlName="price" required>
-                </mat-form-field>
-            </div>
+
             <div class="col-lg-3">
                 <mat-form-field class="example-full-width">
                     <mat-label>Say</mat-label>
                     <input type="number"  matInput formControlName="count" (keydown)="$event.preventDefault" required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Qiymət</mat-label>
+                    <input type="number" readonly  matInput formControlName="price" >
                 </mat-form-field>
             </div>
             <div class="col-lg-1">

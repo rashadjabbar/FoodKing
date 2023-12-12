@@ -40,7 +40,9 @@ export class ProductDetailComponent implements OnInit {
   product?: ProductDetail
 
   stars: number[] = [1, 2, 3, 4, 5];
+  ratingStars: number[] = [1, 2, 3, 4, 5];
   selectedValue?: number;
+  selectedRatingValue?: number = 4;
 
   ngOnInit() {
     this.getProductById()
