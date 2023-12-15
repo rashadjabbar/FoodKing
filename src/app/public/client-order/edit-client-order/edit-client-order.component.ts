@@ -42,6 +42,7 @@ export class EditClientOrderComponent implements OnInit {
     serviceFee: [0, Validators.required],
     amount: [0, Validators.required],
     orderItems: ['', Validators.required],
+    note: [''],
     deletedItems: [''],
   })
 

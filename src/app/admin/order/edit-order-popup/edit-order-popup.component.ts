@@ -61,6 +61,7 @@ export class EditOrderPopupComponent {
   selectedId: any = 0;
   deletedIds: number[] = [];
 
+
   get OF(): { [key: string]: AbstractControl } {
     return this.orderForm.controls;
   }
@@ -137,6 +138,9 @@ export class EditOrderPopupComponent {
     })
   }
 
+  totalAmount: number = 0
+
+
   submitLine() {
     this.lineSubmitted = true;
     this.IF['amount'].patchValue(this.IF['price'].value * this.IF['count'].value);
@@ -145,10 +149,19 @@ export class EditOrderPopupComponent {
       return;
     }
 
+    this.totalAmount = 0
     this.saveLine();
-    // let sum = this.productItems.data.map(a => a.amount).reduce(function (a, b) {
-    //   return a + b;
-    // });
+    for(let i = 0; i < this.productItems.data.length; i++){
+
+      console.log(this.productItems.data?.[i].amount)
+
+       this.totalAmount += Number(this.productItems.data?.[i].amount!)
+       // this.OF['amount'].value += this.sell[i]['quant']*this.sell[i]['price'];
+       
+      }
+      this.OF['amount'].patchValue(this.totalAmount)
+    console.log(this.totalAmount)
+
   }
 
 

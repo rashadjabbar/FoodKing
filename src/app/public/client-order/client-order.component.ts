@@ -31,6 +31,8 @@ export class ClientOrderComponent implements OnInit {
   orderData: ClientOrder[] = []
   orderItem: OrderItem[] = []
 
+  totalAmount!: number;
+
   requestData: any = {
     nextPageNumber: 1,
     visibleItemCount: 5,
@@ -48,8 +50,7 @@ export class ClientOrderComponent implements OnInit {
       next: res => {
         this.orderData = res.data
         this.orderItem = res.data.items
-
-
+        console.log(res.data)
       },
       error: res => {
         if (res.status == 401) {

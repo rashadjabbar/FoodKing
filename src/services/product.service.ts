@@ -45,11 +45,19 @@ export class ProductService {
   }
 
   getProductByIdClient(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}GetProductByIdClient/productId?productId=${id}`);
+    return this.http.get<any>(`${this.baseUrl}GetProductByIdClient?productId=${id}`);
   }
 
   SaveWishList(productId: number): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}SaveWishList/${productId}`, null );
+  }
+
+  addProductReview(data: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}AddProductReview`, data );
+  }
+
+  saveProductRating(data: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}SaveProductRating`, data );
   }
 
   getUserWishList(): Observable<any> {

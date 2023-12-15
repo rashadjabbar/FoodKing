@@ -58,6 +58,23 @@
           </div>
 
           <div class="form-element form-stack">
+            <label for="gender-signup" class="form-label">Cins  </label>
+            <select name="" id="" formControlName="gender">
+              <option value="null" selected disabled>Seçilməyib</option>
+              <option value="true">Kişi</option>
+              <option value="false">Qadın</option>
+            </select>
+            <div *ngIf="signUp['gender'].invalid && (signUp['gender'].dirty || signUp['gender'].touched)"
+              class="info-div">
+              <label for="gender-signup" class="invalid-text" *ngIf="signUp['gender'].errors?.['required']">
+                <span>Cins tələb olunur</span>
+                <div class="fas fa-exclamation-circle">
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-element form-stack">
             <label for="username-signup" class="form-label">İstİfadəçi adı</label>
             <input id="username-signup" type="text" name="username" formControlName="username">
             <div *ngIf="signUp['username'].invalid && (signUp['username'].dirty || signUp['username'].touched)"

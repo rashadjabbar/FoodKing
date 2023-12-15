@@ -2,6 +2,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { HomeComponent } from '../home.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProductService } from 'src/services/product.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { _isAuthenticated } from 'src/services/auth.service';
+import { showInfoAlert } from 'src/utils/alert';
+import { Router } from '@angular/router';
+import { BasketService } from 'src/services/public/basket.service';
+import { GlobalService } from 'src/services/global.service';
 export class ProductDetail {
   productInfo!: ProductInfo
   reviews?: Reviews[]
@@ -33,6 +39,10 @@ export class ProductDetailComponent implements OnInit {
     public dialogRef: MatDialogRef<HomeComponent>,
     private productService: ProductService,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private basketService: BasketService,
+    private globalService: GlobalService
 
   ) { }
 
@@ -42,7 +52,11 @@ export class ProductDetailComponent implements OnInit {
   stars: number[] = [1, 2, 3, 4, 5];
   ratingStars: number[] = [1, 2, 3, 4, 5];
   selectedValue?: number;
-  selectedRatingValue?: number = 4;
+  selectedRatingValue?: number;
+
+  reviewForm = this.formBuilder.group({
+    comment: ['' , Validators.required],
+  })
 
   ngOnInit() {
     this.getProductById()
@@ -51,15 +65,56 @@ export class ProductDetailComponent implements OnInit {
   getProductById() {
     this.productService.getProductByIdClient(this.data).subscribe(res => {
       this.product = res.data
-      console.log(res.data)
+      this.selectedValue = res.data.rateValue
+      this.selectedRatingValue = res.data.productInfo.averageRating
     })
   }
 
   countStar(star) {
     this.selectedValue = star;
     console.log('Value of star', star);
+
+    let ratingData = {
+      productId: this.data,
+      rateValue: star
+    }
+
+    this.productService.saveProductRating(ratingData).subscribe(res => {
+      this.getProductById()
+    })
   }
 
+  addComment(){
+   if (this.reviewForm.valid) {
+    let reViewData = {
+      id: 0,
+      productId: this.data,
+      comment: this.reviewForm.controls.comment.value
+    }
+
+    this.productService.addProductReview(reViewData).subscribe(res => {
+      this.reviewForm.controls.comment.patchValue('')
+      this.getProductById()
+    })
+   }
+  }
+
+  addProductToBasket(){
+
+    if (!_isAuthenticated) {
+      this.router.navigate(['user-login'])
+      
+    }else {
+      let productId = this.data
+      this.basketService.addProductToBasket({productId}).subscribe({
+        next: res => {
+          showInfoAlert('', "Səbətə əlavə edildi", false, false, 'Bağla','', 1000);
+          this.globalService.refreshBasket({itemAddedToBasket: true})
+        }
+      })
+    }
+    
+  }
   
 
 }

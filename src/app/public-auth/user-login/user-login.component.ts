@@ -4,6 +4,7 @@ import { UserService } from 'src/services/user.service';
 import { Login } from 'src/models/login';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { OtpComponent } from './otp/otp.component';
+import { ComboboxModel } from 'src/models/select-model';
 
 @Component({
   selector: 'app-user-login',
@@ -22,12 +23,15 @@ export class UserLoginComponent implements OnInit {
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   logindata: Login = new Login();
 
+  gender?: ComboboxModel[];
+
   signUpForm = this.formBuilder.group({
     id: [0, Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     birthday: ['', Validators.required],
     username: ['', Validators.required],
+    gender: [null, Validators.required],
     password: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
     phone1: ['', [Validators.required]],
@@ -49,6 +53,8 @@ export class UserLoginComponent implements OnInit {
 
   ngOnInit() {
     this.loadJsFile("../../../assets/js/login.js");
+
+
   }
 
   public loadJsFile(url) {

@@ -19,7 +19,7 @@
             <i class="fa fa-star"></i>
           </li>
         </ul>
-        <p style="margin-left: 10px;">3.5(21)</p>
+        <p style="margin-left: 10px;">{{selectedRatingValue}}(21)</p>
       </div>
       <div class="price-div">
         <span>Qiymət:</span> <span> {{product?.productInfo?.price | number : '1.2-2'}}₼</span>
@@ -32,7 +32,7 @@
       </div>
       <div _ngcontent-ng-c700312977="" class="iq-btn-container"><a _ngcontent-ng-c700312977=""
           href="javascript:void(0)">
-          <div _ngcontent-ng-c700312977="" class="btn btn-secondary animation-btn"> Səbətə at <i
+          <div _ngcontent-ng-c700312977="" class="btn btn-secondary animation-btn" (click)="addProductToBasket()"> Səbətə at <i
               _ngcontent-ng-c700312977="" aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i></div>
         </a></div>
     </div>
@@ -47,13 +47,15 @@
       </ul>
     </div>
     <div class="col-lg-11">
-      <div class="form">
-        <input id="username"  class="input" placeholder="Ürək sözünü yaz" required type="text"
-          formControlName="username" autocomplete="off">
-      </div>
+      <form [formGroup]="reviewForm">
+        <div class="form">
+          <input id="username" required class="input" placeholder="Ürək sözünü yaz" required type="text"
+            formControlName="comment" autocomplete="off">
+        </div>
+      </form>
     </div>
     <div class="col-lg-1">
-      <i class="fa-sharp fa-solid fa-paper-plane-top" style="font-size: 25px; color: #3bb77e; cursor: pointer;"></i>
+      <i class="fa-sharp fa-solid fa-paper-plane-top" style="font-size: 25px; color: #3bb77e; cursor: pointer;" (click)="addComment()"></i>
     </div>
   </div>
   <div class="row">

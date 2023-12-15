@@ -74,13 +74,23 @@ style="background: url(assets/images/banner/pages-banner.png) no-repeat scroll r
                         <th><span class="h6">Ödəniləcək məbləğ: {{(basketAmount! + serviceFee!) | number: '1.2-2' }} ₼</span></th>
                      </thead>
                   </table>
-                  <div class="iq-btn-container">
-                     <a class="" href="javascript:void(0)">
-                        <div class="btn btn-secondary animation-btn" (click)="submitOrder()">
-                           Sifariş et
-                           <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
-                        </div>
-                     </a>
+                  <div class="iq-btn-container row" style="display: flex; justify-content: space-between; align-items: center;">
+                     <div class="col-lg-6 mt-2">
+                        <form [formGroup]="reviewForm">
+                          <div class="form">
+                            <input id="username" required class="input" placeholder="Ürək sözünü yaz" required type="text"
+                              formControlName="comment" autocomplete="off">
+                          </div>
+                        </form>
+                      </div>
+                     <div class="col-lg-6" style="text-align: end;">
+                        <a  href="javascript:void(0)">
+                           <div class="btn btn-secondary animation-btn" (click)="submitOrder()">
+                              Sifariş et
+                              <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
+                           </div>
+                        </a>
+                     </div>
                   </div>
                </div>
             </div>

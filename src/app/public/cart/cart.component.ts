@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environments';
 import { SaveOrder } from 'src/models/save-order';
@@ -15,7 +16,9 @@ export class CartComponent {
   constructor(
     private router: Router,
     private basketService: BasketService,
-    private globalService: GlobalService) { 
+    private globalService: GlobalService,
+    private formBuilder: FormBuilder
+    ) { 
       this.imageIpUrl = environment.imageIpUrl
 
      }
@@ -26,6 +29,10 @@ export class CartComponent {
   serviceFee?: number = 0;
   totalBasketAmount?: number = 0;
   orderData: SaveOrder = {orderItems:[]}
+  
+  reviewForm = this.formBuilder.group({
+    comment: ['' ],
+  })
 
   ngOnInit() {
     this.getBasket()
@@ -85,6 +92,7 @@ export class CartComponent {
         this.orderData!.id=0
         this.orderData!.serviceFee=this.serviceFee
         this.orderData!.amount=this.basketAmount
+        this.orderData.note = this.reviewForm.controls.comment.value!
         
         this.basketItems.map((item: any) => {
           this.orderData.orderItems!.push({

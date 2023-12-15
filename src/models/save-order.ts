@@ -2,6 +2,7 @@ export class SaveOrder {
     id?: number = 0
     serviceFee?: number
     amount?: number
+    note?: string
     orderItems?: OrderItem[]
     deletedItems?: number[]
 }
