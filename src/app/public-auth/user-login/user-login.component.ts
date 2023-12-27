@@ -53,8 +53,6 @@ export class UserLoginComponent implements OnInit {
 
   ngOnInit() {
     this.loadJsFile("../../../assets/js/login.js");
-
-
   }
 
   public loadJsFile(url) {
@@ -65,19 +63,13 @@ export class UserLoginComponent implements OnInit {
   }
 
   createUser() {
-    // if (this.signUpForm.invalid) {
-    //   return;
-    // }
-    // this.login.userRegister(this.signUpForm.value)
-    this.otp_dialogRef = this.dialog.open(OtpComponent, {
-      disableClose: true,
-      hasBackdrop: true,
-      width: '100%',
-      height: '100vh',
-      maxWidth: '100vw',
-      autoFocus: false,
-    })
-  }
+    if (this.signUpForm.invalid) {
+      return;
+    }
+    this.signUp['gender'].setValue(Boolean(this.signUp['gender'].value));
+    this.login.userRegister(this.signUpForm.value)
+
+  } 
 
   loginFunc() {
     if (this.loginForm.invalid) {

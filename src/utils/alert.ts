@@ -15,6 +15,16 @@ const showErrorAlert = (title: string, text:string, cBtn?: boolean, dBtn?: boole
   });
 }
 
+const errorAlert = (title: string) => {
+  return Swal.fire({
+    icon: 'error',
+    title: title,
+    customClass: 'w-25',
+    timer: 1200,
+    showConfirmButton: false,
+  });
+}
+
 const showSuccessAlert = (title: string, text?: string) => {
   return Swal.fire({
     icon: 'success',
@@ -60,5 +70,6 @@ export {
   showErrorAlert,
   showSuccessAlert,
   showConfirmAlert,
-  showInfoAlert
+  showInfoAlert,
+  errorAlert
 }

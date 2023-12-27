@@ -11,6 +11,7 @@ $(document).ready(function () {
         marginLeft: "100%"
       });
     });
+    
     $("#goLeft").on("click", function () {
       if (window.innerWidth > 769) {
         $("#slideBox").animate({

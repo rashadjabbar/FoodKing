@@ -168,15 +168,14 @@
               class="info-div">
               <label for="password-login" class="invalid-text" *ngIf="loginF['loginPassword'].errors?.['required']">
                 <span>Şifrəniz tələb olunur</span>
-                <i class="fas fa-exclamation-circle">
-                </i>
+                <i class="fas fa-exclamation-circle"></i>
               </label>
             </div>
           </div>
           <div class="form-element form-submit">
             <button id="logIn" class="login" type="submit" name="login" (click)="loginFunc()"
-              [disabled]="loginForm.invalid">Daxİl ol</button>
-            <button id="goRight" class="login off" name="signup">Qeydİyyatdan keç</button>
+              [disabled]="loginForm.invalid">Daxil ol</button>
+            <button id="goRight" class="login off" name="signup">Qeydiyyatdan keç</button>
           </div>
         </form>
       </div>

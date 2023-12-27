@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import { AuthService } from './auth.service';
 import { ChangePasswordModel } from 'src/models/changePassword';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { OtpComponent } from 'src/app/public-auth/user-login/otp/otp.component';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +25,11 @@ export class UserService {
   constructor(private http: HttpClient,
     private globalService: GlobalService,
     private authService: AuthService,
-    private router: Router
-    ) {}
+    private router: Router,
+    private dialog: MatDialog,
+  ) { }
 
+  otp_dialogRef?: MatDialogRef<OtpComponent>;
   isLoginnedIn(): boolean {
     return this.loginned
   }
@@ -48,7 +52,7 @@ export class UserService {
 
         if (data.userType == '1') {
           this.router.navigate(['/admin']);
-        }else this.router.navigate(['']);
+        } else this.router.navigate(['']);
       },
       error: (res: any) => {
         sessionStorage.removeItem('token')
@@ -65,7 +69,7 @@ export class UserService {
   userRegister(data: any) {
     this.http.post<LoginResult>(this.baseUrl + `Auth/register`, data).subscribe({
       next: (result: any) => {
-        if (result.status == false) { 
+        if (result.status == false) {
           showInfoAlert('Məlumat', result.message, false, true, 'Bağla')
           sessionStorage.removeItem('token')
           return
@@ -74,27 +78,38 @@ export class UserService {
         this.loginned = result.status
         this.globalService.token = result.data.token!;
         // sessionStorage.setItem('token', result.data.token);
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
+        this.otp_dialogRef = this.dialog.open(OtpComponent, {
+          disableClose: true,
+          hasBackdrop: true,
+          width: '100%',
+          height: '100vh',
+          maxWidth: '100vw',
+          autoFocus: false,
+          data: {
+            userId: result.data
+          }
+        })
       },
       error: (res: any) => {
         sessionStorage.removeItem('token')
         Swal.fire({
           icon: 'error',
           title: 'Xəta',
-          text: res.error.message ,
+          text: res.error.message,
           showConfirmButton: true,
           confirmButtonText: 'Bağla'
         })
-      }
+      },
     })
   }
 
-  logout(): Observable<any>{
+  logout(): Observable<any> {
     return this.http.get<any>(this.baseUrl + `Auth/logout`);
   }
 
   changePassword(model: Partial<ChangePasswordModel>): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}Global/ChangeUserPassword`, model );
+    return this.http.post<any>(`${this.baseUrl}Global/ChangeUserPassword`, model);
   }
 
   getUserInfo(): Observable<any> {
@@ -102,6 +117,10 @@ export class UserService {
   }
 
   saveUserInfo(model: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}Global/UpdateUser`, model );
+    return this.http.post<any>(`${this.baseUrl}Global/UpdateUser`, model);
+  }
+
+  registrationConfirmation(model: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}Auth/RegistrationConfirmation`, model);
   }
 }
