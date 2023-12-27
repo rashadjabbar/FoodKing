@@ -35,7 +35,7 @@ export class HomeComponent {
 
   requestData: any = {
     nextPageNumber: 1,
-    visibleItemCount: 6,
+    visibleItemCount: 21,
     // filters:[
     //   {
     //   columnName: "productName",
@@ -52,8 +52,8 @@ export class HomeComponent {
   productData: ProductBrowseData[] = []
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   length!: number;
-  pageSize = 6;
-  pageSizeOptions: number[] = [3, 6, 9];
+  pageSize = 21;
+  pageSizeOptions: number[] = [21,30,60];
   pageEvent!: PageEvent;
   dataSource = new MatTableDataSource<ProductBrowseData>(this.productData);
 
@@ -65,7 +65,11 @@ export class HomeComponent {
       this.router.navigate(['/'],{fragment: 'products'});
     }
     this.getCategories()
-   
+
+    if(sessionStorage.getItem("productIdForDetail")){
+      this.openDetail(Number(sessionStorage.getItem("productIdForDetail")))
+    }
+
   }
 
   onChangePage(pe: PageEvent) {
@@ -145,6 +149,8 @@ export class HomeComponent {
   }
 
   openDetail(id: number){
+    sessionStorage.removeItem("productIdForDetail")
+
     const dialogRef = this.dialog.open(ProductDetailComponent, {
       data: id,
       maxHeight: '90vh',
@@ -153,6 +159,9 @@ export class HomeComponent {
       disableClose: false,
     })
 
+    dialogRef.afterClosed().subscribe(result => {
+      this.getProduct(this.catId)
+    });
   }
 
   addToWishList(index:number, productId: number){

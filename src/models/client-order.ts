@@ -5,6 +5,7 @@ export class ClientOrder {
     serviceFee?: number
     amount?: number
     createdDate?: string
+    orderStatus?: number
     status?: string
     items!: OrderItem[]
 }

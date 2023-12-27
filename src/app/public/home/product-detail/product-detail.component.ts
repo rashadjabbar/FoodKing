@@ -19,9 +19,10 @@ export class ProductInfo {
   information?: string
   price?: number
   imageUrl?: string
+  countRating?: number
 }
 
-export class Reviews{
+export class Reviews {
   id!: number
   userName?: string
   comment?: string
@@ -53,12 +54,18 @@ export class ProductDetailComponent implements OnInit {
   ratingStars: number[] = [1, 2, 3, 4, 5];
   selectedValue?: number;
   selectedRatingValue?: number;
-
   reviewForm = this.formBuilder.group({
-    comment: ['' , Validators.required],
+    comment: ['', Validators.required],
   })
 
+  isAuthenticated: boolean = _isAuthenticated;
+
   ngOnInit() {
+    if (sessionStorage.getItem('productComment')) {
+      this.reviewForm.controls.comment.setValue(sessionStorage.getItem('productComment'))
+      sessionStorage.removeItem('productComment')
+    }
+
     this.getProductById()
   }
 
@@ -71,50 +78,62 @@ export class ProductDetailComponent implements OnInit {
   }
 
   countStar(star) {
-    this.selectedValue = star;
-    console.log('Value of star', star);
+    if (!_isAuthenticated) {
+      sessionStorage.setItem("productIdForDetail", this.data)
+      this.router.navigate(['user-login'])
+    } else {
+      this.selectedValue = star;
+      console.log('Value of star', star);
 
-    let ratingData = {
-      productId: this.data,
-      rateValue: star
+      let ratingData = {
+        productId: this.data,
+        rateValue: star
+      }
+
+      this.productService.saveProductRating(ratingData).subscribe(res => {
+        this.getProductById()
+      })
     }
-
-    this.productService.saveProductRating(ratingData).subscribe(res => {
-      this.getProductById()
-    })
   }
 
-  addComment(){
-   if (this.reviewForm.valid) {
-    let reViewData = {
-      id: 0,
-      productId: this.data,
-      comment: this.reviewForm.controls.comment.value
-    }
+  addComment() {
+    if (!_isAuthenticated) {
+      sessionStorage.setItem("productIdForDetail", this.data)
+      sessionStorage.setItem("productComment", this.reviewForm.controls.comment.value as string)
+      this.router.navigate(['user-login'])
+    } else {
+      if (this.reviewForm.valid) {
+        let reViewData = {
+          id: 0,
+          productId: this.data,
+          comment: this.reviewForm.controls.comment.value
+        }
 
-    this.productService.addProductReview(reViewData).subscribe(res => {
-      this.reviewForm.controls.comment.patchValue('')
-      this.getProductById()
-    })
-   }
+        this.productService.addProductReview(reViewData).subscribe(res => {
+          this.reviewForm.controls.comment.patchValue('')
+          this.getProductById()
+        })
+      }
+    }
   }
 
-  addProductToBasket(){
+  addProductToBasket() {
 
     if (!_isAuthenticated) {
+      sessionStorage.setItem("productIdForDetail", this.data)
       this.router.navigate(['user-login'])
-      
-    }else {
+
+    } else {
       let productId = this.data
-      this.basketService.addProductToBasket({productId}).subscribe({
+      this.basketService.addProductToBasket({ productId }).subscribe({
         next: res => {
-          showInfoAlert('', "Səbətə əlavə edildi", false, false, 'Bağla','', 1000);
-          this.globalService.refreshBasket({itemAddedToBasket: true})
+          showInfoAlert('', "Səbətə əlavə edildi", false, false, 'Bağla', '', 1000);
+          this.globalService.refreshBasket({ itemAddedToBasket: true })
         }
       })
     }
-    
+
   }
-  
+
 
 }

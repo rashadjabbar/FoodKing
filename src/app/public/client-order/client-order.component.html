@@ -54,7 +54,7 @@
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <p style="color: #3bb77e;"><b>Ümumi məbləğ: {{item.amount! + item.serviceFee!}} ₼</b></p>
-          <p class="btn iq-button-checkout animation-btn mt-2" (click)="openDialog(item.id!)">Düzəliş et</p>
+          <p *ngIf="item?.orderStatus! == 1 || item?.orderStatus! == 2" class="btn iq-button-checkout animation-btn mt-2" (click)="openDialog(item.id!)">Düzəliş et</p>
         </div>
       </mat-expansion-panel>
     </mat-accordion>

@@ -19,7 +19,7 @@
             <i class="fa fa-star"></i>
           </li>
         </ul>
-        <p style="margin-left: 10px;">{{selectedRatingValue}}(21)</p>
+        <p style="margin-left: 10px;">{{selectedRatingValue}}({{product?.productInfo?.countRating}})</p>
       </div>
       <div class="price-div">
         <span>Qiymət:</span> <span> {{product?.productInfo?.price | number : '1.2-2'}}₼</span>
