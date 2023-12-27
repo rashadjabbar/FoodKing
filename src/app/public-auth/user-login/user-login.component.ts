@@ -50,7 +50,6 @@ export class UserLoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-
   ngOnInit() {
     this.loadJsFile("../../../assets/js/login.js");
   }
