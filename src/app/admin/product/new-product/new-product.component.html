@@ -49,7 +49,7 @@
                   <div *ngIf="fileUrl !== ''" class="image-div">
                     <span>
                         <i class="far fa-eye"></i>
-                        <img src="http://192.168.37.49:3005/{{fileUrl}}" alt="" class="image">
+                        <img [src]="imageIpUrl + fileUrl" alt="" class="image">
                     </span>
                     
                   </div>

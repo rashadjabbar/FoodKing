@@ -12,6 +12,7 @@ import { BasketService } from 'src/services/public/basket.service';
 import { showInfoAlert } from 'src/utils/alert';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from 'src/environments/environments';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,11 @@ export class HomeComponent {
 
     ) {
       this.catId = sessionStorage.getItem('catId') as any
+      this.imageIpUrl = environment.imageIpUrl
+
   }
+  
+  imageIpUrl!: string
   categories: AllCategoryBrowse[] = []
 
   requestData: any = {

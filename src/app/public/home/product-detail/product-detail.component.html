@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-lg-6">
       <div class="img-div">
-        <img src="http://192.168.37.49:3005/{{product?.productInfo?.imageUrl}}" class="detail_image" alt="img">
+        <img [src]="imageIpUrl + product?.productInfo?.imageUrl" class="detail_image" alt="img">
       </div>
     </div>
     <div class="col-lg-6">

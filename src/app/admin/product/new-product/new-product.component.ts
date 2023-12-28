@@ -7,6 +7,7 @@ import { ProductService } from 'src/services/product.service';
 import { ProductCategoryComponent } from '../../product-category/product-category.component';
 import Swal from 'sweetalert2';
 import { ComboBox } from 'src/models/category';
+import { environment } from 'src/environments/environments';
 
 @Component({
   selector: 'app-new-product',
@@ -20,8 +21,11 @@ export class NewProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     private productService: ProductService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) { 
+    this.imageIpUrl = environment.imageIpUrl
+  }
 
+  imageIpUrl!: string
   matcher = new ErrorStateMatcher();
   addData!: Product[];
   allCategory: ComboBox[] = []

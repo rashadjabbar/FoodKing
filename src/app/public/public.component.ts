@@ -14,6 +14,7 @@ import { ChangePasswordComponent } from './changePassword/changePassword.compone
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/services/user.service';
 import { UserCabinetComponent } from './user-cabinet/user-cabinet.component';
+import { environment } from 'src/environments/environments';
 
 @Component({
   selector: 'app-public',
@@ -30,7 +31,9 @@ export class PublicComponent {
     private globalService: GlobalService,
     private dialog: MatDialog,
     private loginService: UserService
-) {  }
+) { 
+    this.imageIpUrl = environment.imageIpUrl
+ }
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   message: any;
@@ -40,6 +43,7 @@ export class PublicComponent {
   orderData: SaveOrder = {orderItems:[]}
 year = new Date().getFullYear();
 
+  imageIpUrl!: string;
   categories: ComboBox[] = []
   basketItems: any = []
 
