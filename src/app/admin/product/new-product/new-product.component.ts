@@ -45,6 +45,7 @@ export class NewProductComponent implements OnInit {
     price: ['', Validators.required],
     fileName: ['', Validators.required],
     downloadKey: [''],
+    information: [''],
     status: [true],
   })
 
