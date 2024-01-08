@@ -104,7 +104,7 @@
                 <div class="card card-product">
                   <div class="card-body">
                     <div class="iq-product-image" (click)="openDetail(product.id)">
-                      <img src="http://192.168.37.49:3005/{{product.imagePath}}" class="hover_image" alt="img">
+                      <img [src]="imageIpUrl + product.imagePath" class="hover_image" alt="img">
                       <div class="see-detail"><i class="fa-light fa-magnifying-glass" style="color: white; font-size: 25px;"></i></div>
                     </div>
                     <div class="iq-product-content mt-3">

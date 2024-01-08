@@ -67,7 +67,7 @@
                     <div class="product-list">
                       <div class="product" *ngFor="let basketItem of basketItems">
                         <div class="product-img">
-                          <img [src]="'http://192.168.37.49:3005/'+basketItem.imageUrl" alt="" />
+                          <img [src]="imageIpUrl + basketItem.imageUrl" alt="" />
                         </div>
                         <div class="product-info">
                           <span>{{ basketItem.name }}</span>

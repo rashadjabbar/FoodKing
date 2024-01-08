@@ -8,6 +8,7 @@ import { showInfoAlert } from 'src/utils/alert';
 import { Router } from '@angular/router';
 import { BasketService } from 'src/services/public/basket.service';
 import { GlobalService } from 'src/services/global.service';
+import { environment } from 'src/environments/environments';
 export class ProductDetail {
   productInfo!: ProductInfo
   reviews?: Reviews[]
@@ -45,9 +46,11 @@ export class ProductDetailComponent implements OnInit {
     private basketService: BasketService,
     private globalService: GlobalService
 
-  ) { }
+  ) {
+    this.imageIpUrl = environment.imageIpUrl
+   }
 
-
+  imageIpUrl!: string
   product?: ProductDetail
 
   stars: number[] = [1, 2, 3, 4, 5];

@@ -1,10 +1,12 @@
-const categoryIp = 'http://192.168.37.49:3005/api/cardoperations/'
-const productIp = 'http://192.168.37.49:3005/api/cardoperations/Product'
-const imageIp = 'http://192.168.37.49:3005/'
-const authIp = 'http://192.168.37.49:3007/api/system/'
-const commonIp = 'http://192.168.37.49:3006/api/common/'
-const basketIp = 'http://192.168.37.49:3008/api/Baskets/'
-const paymentIp = 'http://192.168.37.49:3010/api/orders/'
+const categoryIp = 'http://192.168.37.49:3009/cardoperations/api/'
+const productIp = 'http://192.168.37.49:3009/cardoperations/api/Product'
+const imageIp = 'http://192.168.37.49:3009/cardoperations/'
+const authIp = 'http://192.168.37.49:3009/FoodKing/system/api/'
+const commonIp = 'http://192.168.37.49:3009/common/api/'
+const basketIp = 'http://192.168.37.49:3009/basket/api/Baskets/'
+const paymentIp = 'http://192.168.37.49:3009/payment/api/'
+
+
 
 export const environment = {
   production: false,
