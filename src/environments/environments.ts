@@ -12,7 +12,7 @@ export const environment = {
   production: false,
   apiCategoryUrl:`${categoryIp}Category/`,
   apiProductUrl:`${productIp}/`,
-  imageIpUrl:`${imageIp}/`,
+  imageIpUrl:`${imageIp}`,
   apiAdminAuthUrl:`${authIp}`,
   apiCommonUrl:`${commonIp}`,
   apibasketUrl:`${basketIp}`,

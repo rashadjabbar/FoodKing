@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-lg-6">
       <div class="img-div">
-        <img [src]="imageIpUrl + product?.productInfo?.imageUrl" class="detail_image" alt="img">
+        <img [src]="imageIpUrl + product?.productInfo?.imageUrl" class="detail_image" alt="img" *ngIf="product?.productInfo?.imageUrl">
       </div>
     </div>
     <div class="col-lg-6">
@@ -62,12 +62,13 @@
     <h5>Rəylər</h5>
     <div class="review-div">
       <div class="review" *ngFor="let item of product?.reviews">
-        <img src="../../../../assets/images/man.png">
+        <img src="../../../../assets/images/man.png" *ngIf="item.gender">
+        <img src="../../../../assets/images/woman.png" *ngIf="!item.gender">
         <div class="review-content">
           <p>{{item.userName}}</p>
           <p>{{item.comment}}</p>
           <hr>
-          <div style="text-align: end;">
+          <div style="text-align: end; font-size: 12px;">
             <p>{{item.createdDate | date: 'dd-MM-yyyy'}}</p>
           </div>
         </div>

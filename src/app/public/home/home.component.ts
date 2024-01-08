@@ -53,6 +53,7 @@ export class HomeComponent {
   subCatId = 0
   orderByProducts = 1
   message = 'Hello!';
+  currentPage?: number
 
   productData: ProductBrowseData[] = []
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -78,6 +79,7 @@ export class HomeComponent {
   }
 
   onChangePage(pe: PageEvent) {
+    this.currentPage = pe.pageIndex + 1
     this.requestData.nextPageNumber = pe.pageIndex + 1
     this.requestData.visibleItemCount = pe.pageSize
     this.getProduct(this.catId)
@@ -129,6 +131,10 @@ export class HomeComponent {
         value: event.target.value
         }
       ];
+      let filteredValues = this.requestData.filters.filter(x => x.value)
+    if (filteredValues.length > 0) {
+      this.requestData.nextPageNumber = 1
+    }else this.requestData.nextPageNumber = this.currentPage
 
     this.getProduct(this.catId)
   }

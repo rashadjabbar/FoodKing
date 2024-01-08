@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ComboboxModel } from 'src/models/select-model';
 import { AuthService } from 'src/services/auth.service';
 import { UserService } from 'src/services/user.service';
 import { showErrorAlert, showInfoAlert } from 'src/utils/alert';
@@ -33,6 +34,7 @@ export class UserCabinetComponent {
     username: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
     phone1: [''],
+
   })
 
   get cf(): { [key: string]: AbstractControl } {

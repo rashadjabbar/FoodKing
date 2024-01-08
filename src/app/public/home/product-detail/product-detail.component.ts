@@ -28,6 +28,7 @@ export class Reviews {
   userName?: string
   comment?: string
   createdDate?: string
+  gender?: boolean
 }
 
 @Component({

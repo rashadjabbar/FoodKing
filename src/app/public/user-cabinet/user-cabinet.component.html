@@ -44,7 +44,7 @@
                 <label>*Doğum tarixi</label>
                 <div class="form" [ngClass]="{'border-red': !cf['birthday'].valid && formSubmitted}">
                     <input id="birthday" class="input" placeholder="*Doğum tarixi" required type="date"
-                        formControlName="birthday" autocomplete="off">
+                        formControlName="birthday" readonly autocomplete="off" >
                 </div>
             </div>
 

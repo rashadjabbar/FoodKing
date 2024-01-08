@@ -5,6 +5,7 @@ import { UserService } from 'src/services/user.service';
 import { errorAlert, showErrorAlert, showSuccessAlert } from 'src/utils/alert';
 // import $ = require("jquery");
 import * as $ from 'jquery'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-otp',
@@ -18,6 +19,7 @@ export class OtpComponent {
     private login: UserService,
     private dialogRef: MatDialogRef<OtpComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -36,11 +38,17 @@ export class OtpComponent {
           }
           else {
             showSuccessAlert(res.message);
+            setTimeout(() => {
+              window.location.reload();
+            }, 1200);
+
           }
         },
         error: err => console.log(err),
         complete: () => {
           this.onCloseDialog();
+          
+
         }
       })
     }
