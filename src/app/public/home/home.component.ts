@@ -40,7 +40,7 @@ export class HomeComponent {
 
   requestData: any = {
     nextPageNumber: 1,
-    visibleItemCount: 21,
+    visibleItemCount: 9,
     // filters:[
     //   {
     //   columnName: "productName",
@@ -53,13 +53,13 @@ export class HomeComponent {
   subCatId = 0
   orderByProducts = 1
   message = 'Hello!';
-  currentPage?: number
+  currentPage?: number = 1
 
   productData: ProductBrowseData[] = []
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   length!: number;
-  pageSize = 21;
-  pageSizeOptions: number[] = [21,30,60];
+  pageSize = 9;
+  pageSizeOptions: number[] = [9,18,27];
   pageEvent!: PageEvent;
   dataSource = new MatTableDataSource<ProductBrowseData>(this.productData);
 
@@ -134,16 +134,13 @@ export class HomeComponent {
       let filteredValues = this.requestData.filters.filter(x => x.value)
     if (filteredValues.length > 0) {
       this.requestData.nextPageNumber = 1
+      this.catId = 0
+      this.subCatId = 0 
     }else this.requestData.nextPageNumber = this.currentPage
 
     this.getProduct(this.catId)
   }
 
-  // getProductsByNewOrder(){
-  //   alert(this.orderByProducts)
-  //   this.getProduct(this.catId)
-  // }
-  
   addProductToBasket(productId: number){
     if (!_isAuthenticated) {
       this.router.navigate(['user-login'])

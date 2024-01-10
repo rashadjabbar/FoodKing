@@ -1,5 +1,4 @@
-
-<!-- <div class="banner section-padding-120 pb-0" id="home-1">
+<div class="banner section-padding-120 pb-0" id="home-1">
   <div class="slider-image" id="banner-slider-image">
     <div class="slider-2"></div>
     <div class="slider-3"></div>
@@ -36,7 +35,7 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
 <div class="section-padding-120" #products id="products">
   <div class="container">
     <div class="row">
@@ -48,8 +47,8 @@
               <div class="card">
                 <div class="card-body">
                   <div class="input-group1">
-                    <input class="text-search text-search-sm" type="text" placeholder="Məhsul axtar" (input)="filterProducts($event)"
-                      aria-label=".form-control-sm example">
+                    <input class="text-search text-search-sm" type="text" placeholder="Məhsul axtar"
+                      (input)="filterProducts($event)" aria-label=".form-control-sm example">
                     <span class="search-icon"><i class="fas fa-search"></i></span>
                   </div>
                 </div>
@@ -63,9 +62,10 @@
                   <div class="chat-list-main" id="#leftside-navigation" id="accordionExample">
 
                     <ul class="list-unstyled">
-                      <li class="chat-list" id="chat-list" *ngFor="let category of categories;  index as i" >
+                      <li class="chat-list" id="chat-list" *ngFor="let category of categories;  index as i">
                         <div style="display: flex;justify-content: space-between;">
-                          <a (click)="categoryClick(category.id)" [ngClass]="{'category-selected':category.id == catId}">
+                          <a (click)="categoryClick(category.id)"
+                            [ngClass]="{'category-selected':category.id == catId}">
                             {{category.name}}
                           </a>
                           <i *ngIf="category.subCategoryData?.length !== 0" class="fas fa-chevron-down" type="button"
@@ -73,7 +73,8 @@
                             aria-expanded="false" [attr.aria-controls]="'#collapse'  + '-' + i"></i>
                         </div>
                         <ul id="collapse-{{i}}" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
-                          <li class="subLi" *ngFor="let item of category.subCategoryData" [ngClass]="{'subLi-selected':item.key == subCatId}" 
+                          <li class="subLi" *ngFor="let item of category.subCategoryData"
+                            [ngClass]="{'subLi-selected':item.key == subCatId}"
                             (click)="subCategoryClick(category.id , item.key)">{{item.value}}</li>
 
                         </ul>
@@ -89,7 +90,8 @@
             data-iq-trigger="scroll" data-iq-ease="power.inOut">
             <div class="mb-3 d-flex justify-content-between align-items-center">
 
-              <select name="orderby" class="orderby" aria-label="Shop order" [(ngModel)]="orderByProducts" (change)="getProduct(catId)">
+              <select name="orderby" class="orderby" aria-label="Shop order" [(ngModel)]="orderByProducts"
+                (change)="getProduct(catId)">
                 <!-- <option value="menu_order" selected='selected'>Defolt çeşidləmə</option> -->
                 <option value="1">Populyarlığa görə sırala</option>
                 <!-- <option value="rating">Ortalama reytinqə görə sırala</option> -->
@@ -105,37 +107,37 @@
                   <div class="card-body">
                     <div class="iq-product-image" (click)="openDetail(product.id)">
                       <img [src]="imageIpUrl + product.imagePath" class="hover_image" alt="img">
-                      <div class="see-detail"><i class="fa-light fa-magnifying-glass" style="color: white; font-size: 25px;"></i></div>
+                      <div class="see-detail"><i class="fa-light fa-magnifying-glass"
+                          style="color: white; font-size: 25px;"></i></div>
                     </div>
                     <div class="iq-product-content mt-3">
                       <p class="mb-0"><small>{{product.categoryName}}</small> →
-                        <small>{{product.subCategoryName}}</small></p>
-                      <a href="../product/new-product.html" class="iq-product-title-link h5">{{product.productName}}</a>
+                        <small>{{product.subCategoryName}}</small>
+                      </p>
+                      <span  class="iq-product-title-link h5">{{product.productName}}</span>
                       <div class="d-flex align-items-center justify-content-between my-2">
                         <h6 class="m-0">
                           <span class="text-decoration-line-through"></span>
-                          <span class="text-primary"><b> ₼{{product.price}}</b></span>
+                          <span class="text-primary"><b> {{product.price}} ₼</b></span>
                         </h6>
                       </div>
                       <div class="d-flex justify-content-between mb-3">
                         <div class="iq-btn-container">
-                          <a class="" href="javascript:void(0)"  (click)="addProductToBasket(product.id)">
+                          <a class="" href="javascript:void(0)" (click)="addProductToBasket(product.id)">
                             <div class="btn btn-secondary animation-btn">
                               Səbətə at
                               <i aria-hidden="true" class="fas fa-long-arrow-alt-right ms-2"></i>
                             </div>
                           </a>
                         </div>
-                        <div class="d-flex align-items-center">
-                          <!-- <div class="iq-product-icon" >
-                            <a href="javascript:void(0)" (click)="openDetail(product.id)">
-                              <i class="fa-light fa-eye"></i>
-                            </a>
-                          </div> -->
+                        <div class="d-flex align-items-center" style="color: #ffba43; margin-left: 10%;" *ngIf="product.averageRating !== 0">
+                          {{product.averageRating}}
+                          <i class="fa-sharp fa-solid fa-star-sharp" style="margin-left: 5px;"></i>
 
                         </div>
                         <div class="d-flex align-items-center">
-                          <div class="iq-product-icon" [ngClass]="{'favorite':product.isFavorite}" (click)="addToWishList(i, product.id)">
+                          <div class="iq-product-icon" [ngClass]="{'favorite':product.isFavorite}"
+                            (click)="addToWishList(i, product.id)">
                             <a href="javascript:void(0)">
                               <i class="far fa-heart"></i>
                             </a>
@@ -150,8 +152,8 @@
             </div>
             <div class="d-flex justify-content-center">
 
-              <mat-paginator *ngIf="productData.length !== 0" [length]="length" #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                (page)="onChangePage($event)" showFirstLastButtons>
+              <mat-paginator *ngIf="productData.length !== 0" [length]="length" #paginator [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions" (page)="onChangePage($event)" showFirstLastButtons>
               </mat-paginator>
               <!-- <nav aria-label="Page navigation" *ngIf="productData.length !== 0">
                 <ul class="pagination pagination-lg custom-pagination">

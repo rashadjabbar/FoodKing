@@ -146,6 +146,22 @@
     stroke-dashoffset: 25;
   }
   
+
+  .operation-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .range-date{
+    display: flex;
+    margin-left: 2%;
+  }
+  
+  .search-input{
+    width: 35%;
+    margin-left: 3%;
+  }
   
   
   

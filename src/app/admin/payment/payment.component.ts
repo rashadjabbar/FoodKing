@@ -10,11 +10,34 @@ import { StatusRequest } from 'src/models/status';
 import { PaymentService } from 'src/services/payment.service';
 import Swal from 'sweetalert2';
 import { NewPaymentComponent } from './new-payment/new-payment.component';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import * as _moment from 'moment';
+import {default as _rollupMoment} from 'moment';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
+const moment = _rollupMoment || _moment;
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'DD-MM-YYYY',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss']
+  styleUrls: ['./payment.component.scss'],
+  providers: [
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ],
 })
 export class PaymentComponent implements OnInit {
   beginDate: any = new Date();
@@ -56,6 +79,11 @@ export class PaymentComponent implements OnInit {
     'createdDate'
   ];
 
+  range = new FormGroup({
+    start: new FormControl<string>(this.datePipe.transform(this.beginDate.setMonth(this.beginDate.getMonth() - 1), 'yyyy-MM-dd')!),
+    end: new FormControl<string>(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!),
+  });
+
   
   isActive = (index: number) => { return this.activeRow === index };
 
@@ -84,7 +112,21 @@ export class PaymentComponent implements OnInit {
     })
   }
 
+  selectToday() {
+    this.range.controls.end.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+    this.range.controls.start.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+    this.getPayment()
 
+  }
+
+  search(){
+    this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
+    this.range.controls.start.patchValue(this.datePipe.transform(this.range.controls.start.value, 'yyyy-MM-dd')!)
+    if (this.range.controls.end.value == null) {
+      this.range.controls.end.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+    }
+    this.getPayment()
+  }
 
   onChangePage(pe: PageEvent) {
     this.requestData.nextPageNumber = pe.pageIndex + 1

@@ -50,7 +50,6 @@ export class ClientOrderComponent implements OnInit {
       next: res => {
         this.orderData = res.data
         this.orderItem = res.data.items
-        console.log(res.data)
       },
       error: res => {
         if (res.status == 401) {

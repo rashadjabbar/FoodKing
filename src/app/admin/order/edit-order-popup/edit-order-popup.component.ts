@@ -153,14 +153,11 @@ export class EditOrderPopupComponent {
     this.saveLine();
     for(let i = 0; i < this.productItems.data.length; i++){
 
-      console.log(this.productItems.data?.[i].amount)
-
        this.totalAmount += Number(this.productItems.data?.[i].amount!)
        // this.OF['amount'].value += this.sell[i]['quant']*this.sell[i]['price'];
        
       }
       this.OF['amount'].patchValue(this.totalAmount)
-    console.log(this.totalAmount)
 
   }
 

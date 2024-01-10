@@ -147,6 +147,7 @@ year = new Date().getFullYear();
     const dialogRef = this.dialog.open(ChangePasswordComponent, {
       height: 'max-content',
       width: '20%',
+      panelClass: "dialog-change-password",
       hasBackdrop: true,
       disableClose: true
     })
@@ -160,6 +161,7 @@ year = new Date().getFullYear();
     const dialogRef = this.dialog.open(UserCabinetComponent, {
       height: 'max-content',
       width: '35%',
+      panelClass: "dialog-user-cabinet",
       hasBackdrop: true,
       disableClose: true
     })

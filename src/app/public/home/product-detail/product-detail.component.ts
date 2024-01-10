@@ -87,7 +87,6 @@ export class ProductDetailComponent implements OnInit {
       this.router.navigate(['user-login'])
     } else {
       this.selectedValue = star;
-      console.log('Value of star', star);
 
       let ratingData = {
         productId: this.data,

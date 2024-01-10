@@ -130,6 +130,10 @@
               <mat-menu #user="matMenu">
                 <div class="user-info">
                   <span>{{userData?.fullName}}</span>
+                  <div class="wallet">
+                    <i class="fa-thin fa-coins" style="color:white;"></i>
+                    <span>{{userData?.balance | number : '1.2-2'}} ₼</span>
+                  </div>
                   <hr>
                   <div class="logOut">
                     <span (click)="showCabinetDialog()">Kabinet</span>
@@ -162,6 +166,7 @@
             <div class="footer-logo">
               <a [routerLink]="['']">
                 <img class="img-fluid" src="assets/images/logo.png" alt="foodsto1" />
+                <h4>Food King</h4>
               </a>
             </div>
             <div class="widget mb-4">
@@ -207,7 +212,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
+          <!-- <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
             <div class="widget">
               <h5 class="footer-title">Məlumat</h5>
               <div class="menu-footer2-container">
@@ -218,16 +223,10 @@
                   <li class="menu-item">
                     <a href="our-team.html"><i class="fas fa-chevron-right me-2"></i>Komandamız</a>
                   </li>
-                  <!-- <li class="menu-item">
-                    <a href="contact-us.html"><i class="fas fa-chevron-right me-2"></i>Contact Us</a>
-                  </li> -->
-                  <!-- <li class="menu-item">
-                    <a href="blog/left-sidebar-blog.html"><i class="fas fa-chevron-right me-2"></i>Blog</a>
-                  </li> -->
                 </ul>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
             <div class="widget">
               <h5 class="footer-title">Əlaqə</h5>

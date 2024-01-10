@@ -7,12 +7,32 @@
 
 
 <div class="operation-div">
-  <div class="search-input">
-    <mat-form-field class="example-full-width">
-      <mat-label>Axtar...</mat-label>
-      <input type="text" matInput (keyup)="handleKeyUp($event)">
-    </mat-form-field>
-  </div>
+    <div class="range-date">
+      <mat-form-field>
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+          <input matStartDate formControlName="start" readonly placeholder="Start date"  (click)="picker.open()">
+          <input matEndDate formControlName="end" readonly placeholder="End date"  (click)="picker.open()">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker>
+          <mat-datepicker-actions>
+            <button mat-raised-button matDatepickerApply (click)="selectToday()">Today</button>
+            <button mat-raised-button color="primary" matDatepickerApply (click)="search()">
+              Apply
+            </button>
+          </mat-datepicker-actions>
+        </mat-date-range-picker>
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+      </mat-form-field>
+      <div class="search-input">
+        <mat-form-field class="example-full-width">
+          <mat-label>Axtar...</mat-label>
+          <input type="text" matInput (keyup)="handleKeyUp($event)">
+        </mat-form-field>
+      </div>
+    </div>
   <button color="primary" mat-raised-button [matMenuTriggerFor]="menu" class="operation-button">Əməliyyatlar</button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="openDialog(1)" [disabled]="selection.selected.length == 0"><i

@@ -167,15 +167,37 @@
     margin-left: 20px;
 }
 
+.wallet{
+    background-color: #3bb77e;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 4px 12px;
+}
+
+.wallet span{
+    color: white;
+    margin-left: 7px;
+}
+
 @media (max-width:641px) {
-    ::ng-deep.cdk-overlay-pane {
+    ::ng-deep.dialog-user-cabinet,::ng-deep.dialog-change-password {
         overflow: auto !important;
         width: 100% !important;
         max-width: 90vw !important;
         position: inherit;
     }
 
-    .user-icon-div{
-        display: none;
+    // .user-icon-div{
+    //     display: none;
+    // }
+
+    .navbar{
+        justify-content: normal !important;
+    }
+
+    .basket-icon{
+        margin-top: 10px;
+        margin-left: 60px;
     }
 }

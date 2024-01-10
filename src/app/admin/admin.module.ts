@@ -33,6 +33,8 @@ import { OrderComponent } from './order/order.component';
 import { SaveOrderComponent } from './order/save-order/save-order.component';
 import { EditOrderPopupComponent } from './order/edit-order-popup/edit-order-popup.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -67,9 +69,13 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatTabsModule,
     MatSelectModule,
     MatSelectSearchModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+
+    MatDatepickerModule,
+    MatNativeDateModule ,
   ],
   providers: [
+    MatDatepickerModule,
     AdminLogin,
     // {
     //   provide: HTTP_INTERCEPTORS,

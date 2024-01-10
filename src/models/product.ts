@@ -13,5 +13,6 @@ export class ProductBrowseData {
     imagePath?: string
     price?: number
     subCategoryName?:  string
+    averageRating?: number
     isFavorite?: boolean = false
 }

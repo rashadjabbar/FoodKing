@@ -7111,6 +7111,12 @@ fieldset:disabled .btn {
 .w-25 {
     width: 25% !important;
 }
+
+@media (max-width:641px) {
+    .w-25{
+       width: 90% !important;
+   }
+}
 .w-50 {
     width: 50% !important;
 }
@@ -13144,6 +13150,16 @@ body.home-3 header {
 footer .footer-body {
     padding-top: 90px;
 }
+
+.footer-logo a{
+    display: flex;
+}
+
+.footer-logo a h4{
+    margin-left: 5px;
+    margin-top: 5px;
+    font-family: 'Dosis', sans-serif;
+}
 footer .footer-logo img {
     margin-bottom: 30px;
     height: 41px;
@@ -16478,3 +16494,43 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-right {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Poppins', sans-serif; }
+
+
+@media (max-width:641px) {
+    .orderby{
+        width: 50%;
+    }
+
+    .buttons_added{
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .minus, .plus {
+        width: 30px;
+        height: 30px;
+    }
+
+    .qty {
+        width: 2.9em;
+        height: 38px;
+        margin: 5px 0;
+    }
+
+    .table > :not(caption) > * > * {
+        padding: 0.5rem 1.5rem;
+    }
+
+    .table-borderless thead{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-element .login{
+        width: 100% !important;
+        margin-left: 60% !important;
+    }
+
+}

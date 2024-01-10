@@ -18,6 +18,9 @@
 <div class="section-padding-120">
   <div class="container" style="overflow: auto;">
    <div class="web-view">
+    <div *ngIf="orderData.length == 0" style="width: 100%; display: flex; justify-content: center;">
+      <h4 >Sifariş yoxdur</h4>
+    </div>
     <div class="row order-header">
       <div class="col-lg-2">Sifariş №</div>
       <div class="col-lg-2">Məbləğ</div>
@@ -61,6 +64,9 @@
    </div>
 
    <div class="mobile-view">
+    <div *ngIf="orderData.length == 0" style="width: 100%; display: flex; justify-content: center;">
+      <h4 >Sifariş yoxdur</h4>
+    </div>
     <mat-accordion>
       <mat-expansion-panel *ngFor="let item of orderData; let i = index" >
         <mat-expansion-panel-header >

@@ -13,6 +13,7 @@ export class User {
   exp?: number;
   iss?: string;
   aud?: string;
+  balance?: number
 }
 
 @Injectable({

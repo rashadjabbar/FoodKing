@@ -7,14 +7,38 @@ import { Router } from '@angular/router';
 import { BrowseOrder } from 'src/models/save-order';
 import { OrderService } from 'src/services/order.service';
 import Swal from 'sweetalert2';
+
 import { SaveOrderComponent } from './save-order/save-order.component';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EditOrderPopupComponent } from './edit-order-popup/edit-order-popup.component';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import * as _moment from 'moment';
+import {default as _rollupMoment} from 'moment';
 
+const moment = _rollupMoment || _moment;
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'DD-MM-YYYY',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  styleUrls: ['./order.component.scss'],
+  providers: [
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ],
 })
 export class OrderComponent implements OnInit {
   beginDate: any = new Date();
@@ -25,9 +49,7 @@ export class OrderComponent implements OnInit {
     private router: Router,
     private datePipe: DatePipe
   ) {
-    this.endDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
-    this.beginDate.setMonth(this.beginDate.getMonth() - 1)
-    this.beginDate = this.datePipe.transform(this.beginDate, 'yyyy-MM-dd')
+   
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -54,6 +76,11 @@ export class OrderComponent implements OnInit {
     visibleItemCount: 5,
   }
 
+  range = new FormGroup({
+    start: new FormControl<string>(this.datePipe.transform(this.beginDate.setMonth(this.beginDate.getMonth() - 1), 'yyyy-MM-dd')!),
+    end: new FormControl<string>(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!),
+  });
+  
   displayedColumns: string[] = [
     'select',
     'id',
@@ -68,12 +95,6 @@ export class OrderComponent implements OnInit {
   ];
 
   selRow: number = 0;
-  // file?: File
-  // fileUrl?: string
-
-  // getFile(event: any){
-  //   this.fileUrl = URL.createObjectURL(event.target.files[0])
-  // }
 
   isActive = (index: number) => { return this.activeRow === index };
 
@@ -82,7 +103,8 @@ export class OrderComponent implements OnInit {
   }
 
   getOrder() {
-    this.orderService.getOrder(this.requestData, this.beginDate!, this.endDate!).subscribe({
+
+    this.orderService.getOrder(this.requestData, this.range.controls.start.value, this.range.controls.end.value).subscribe({
       next: res => {
         this.dataSource = new MatTableDataSource<BrowseOrder>(res.data.result);
 
@@ -99,6 +121,15 @@ export class OrderComponent implements OnInit {
         }
       }
     })
+  }
+
+  search(){
+    this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
+    this.range.controls.start.patchValue(this.datePipe.transform(this.range.controls.start.value, 'yyyy-MM-dd')!)
+    if (this.range.controls.end.value == null) {
+      this.range.controls.end.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+    }
+    this.getOrder()
   }
 
   onChangePage(pe: PageEvent) {
@@ -120,6 +151,16 @@ export class OrderComponent implements OnInit {
       //this.selectedId = 0;
     }
   }
+
+  selectToday() {
+    this.range.controls.end.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+    this.range.controls.start.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+    this.getOrder()
+
+  }
+
+  
+
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
