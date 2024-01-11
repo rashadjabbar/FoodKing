@@ -16,6 +16,7 @@
                 <h4>Food King</h4>
               </a>
             </div>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
               aria-label="Toggle navigation">
@@ -24,6 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <div id="iq-menu-container" class="menu-main-menu-container">
                 <ul id="top-menu" class="navbar-nav">
+
                   <li>
                     <a routerLink="" aria-current="page" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Ana səhİfə
@@ -39,6 +41,10 @@
                       </li>
                     </ul>
                   </li>
+                  <li >
+                    <a [routerLink]="['daily-meal']" [routerLinkActive]="['active-menu']"
+                      [routerLinkActiveOptions]="{ exact: true }" class="menu-item">bu günün yeməyİ</a>
+                  </li>
                   <li *ngIf="isAuthenticated">
                     <a [routerLink]="['wishlist']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Sevİmlİlər</a>
@@ -47,12 +53,48 @@
                     <a [routerLink]="['client-order']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">sİfarİşlər</a>
                   </li>
-                  <!-- <li class="">
-                    <a [routerLink]="['cart']" [routerLinkActive]="['active-menu']"
-                      [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Səbət
-                    </a>
-                  </li> -->
+                  <li>
+                    <div [ngSwitch]="isAuthenticated" class="navbar-controls-button">
+                      <div *ngSwitchCase="false" >
+                        <div class="form-element">
+                          <button id="logIn" class="login login-public" name="login">
+                            <a [routerLink]="['user-login']">Daxil ol</a>
+                          </button>
+                        </div>
+                      </div>
+                      <div *ngSwitchDefault style="display: flex; align-items: center;" >
+                        <div  class="user-icon-div">
+                          <!-- <i class="fas fa-user-circle" [matMenuTriggerFor]="user"></i> -->
+                          <lord-icon class="user-icon" trigger="hover" [matMenuTriggerFor]="user"
+                            src="../../assets/images/wired-outline-21-avatar.json"></lord-icon>
+                        </div>
+                        <span [matMenuTriggerFor]="user" class="user-icon-text">Hesabım</span>
+                      </div>
+        
+                      <mat-menu #user="matMenu">
+                        <div class="user-info">
+                          <span>{{userData?.fullName}}</span>
+                          <div class="wallet">
+                            <i class="fa-thin fa-coins" style="color:white;"></i>
+                            <span>{{userData?.balance | number : '1.2-2'}} ₼</span>
+                          </div>
+                          <hr>
+                          <div class="logOut">
+                            <span (click)="showCabinetDialog()">Kabinet</span>
+                          </div>
+                          <div class="logOut">
+                            <span (click)="showChangePasswordDialog()">Şifrəni dəyiş</span>
+                          </div>
+                          <div class="logOut">
+                            <img src="../../assets/images/wired-outline-1725-exit-sign.gif" alt="">
+                            <span (click)="logOut()">Çıxış et</span>
+                          </div>
+                        </div>
+                      </mat-menu>
+                    </div>
+                  </li>
                 </ul>
+                
               </div>
             </div>
 
@@ -113,41 +155,7 @@
             </div>
 
 
-            <div [ngSwitch]="isAuthenticated">
-              <div *ngSwitchCase="false">
-                <div class="form-element">
-                  <button id="logIn" class="login" name="login">
-                    <a [routerLink]="['user-login']">Daxil ol</a>
-                  </button>
-                </div>
-              </div>
-              <div *ngSwitchDefault class="user-icon-div">
-                <!-- <i class="fas fa-user-circle" [matMenuTriggerFor]="user"></i> -->
-                <lord-icon class="user-icon" trigger="hover" [matMenuTriggerFor]="user"
-                  src="../../assets/images/wired-outline-21-avatar.json"></lord-icon>
-              </div>
 
-              <mat-menu #user="matMenu">
-                <div class="user-info">
-                  <span>{{userData?.fullName}}</span>
-                  <div class="wallet">
-                    <i class="fa-thin fa-coins" style="color:white;"></i>
-                    <span>{{userData?.balance | number : '1.2-2'}} ₼</span>
-                  </div>
-                  <hr>
-                  <div class="logOut">
-                    <span (click)="showCabinetDialog()">Kabinet</span>
-                  </div>
-                  <div class="logOut">
-                    <span (click)="showChangePasswordDialog()">Şifrəni dəyiş</span>
-                  </div>
-                  <div class="logOut">
-                    <img src="../../assets/images/wired-outline-1725-exit-sign.gif" alt="">
-                    <span (click)="logOut()">Çıxış et</span>
-                  </div>
-                </div>
-              </mat-menu>
-            </div>
 
           </nav>
         </div>
@@ -212,8 +220,8 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
-            <div class="widget">
+          <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
+            <!-- <div class="widget">
               <h5 class="footer-title">Məlumat</h5>
               <div class="menu-footer2-container">
                 <ul id="menu-footer2" class="menu list-inline p-0 m-0">
@@ -225,8 +233,8 @@
                   </li>
                 </ul>
               </div>
-            </div>
-          </div> -->
+            </div> -->
+          </div>
           <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
             <div class="widget">
               <h5 class="footer-title">Əlaqə</h5>

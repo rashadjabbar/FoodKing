@@ -84,6 +84,7 @@ export class ProductDetailComponent implements OnInit {
   countStar(star) {
     if (!_isAuthenticated) {
       sessionStorage.setItem("productIdForDetail", this.data)
+      this.dialogRef.close()
       this.router.navigate(['user-login'])
     } else {
       this.selectedValue = star;
@@ -103,6 +104,7 @@ export class ProductDetailComponent implements OnInit {
     if (!_isAuthenticated) {
       sessionStorage.setItem("productIdForDetail", this.data)
       sessionStorage.setItem("productComment", this.reviewForm.controls.comment.value as string)
+      this.dialogRef.close()
       this.router.navigate(['user-login'])
     } else {
       if (this.reviewForm.valid) {

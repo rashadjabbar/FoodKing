@@ -17,10 +17,11 @@
 </div> -->
 <div class="section-padding-120">
   <div class="container" style="overflow: auto;">
-   <div class="web-view">
     <div *ngIf="orderData.length == 0" style="width: 100%; display: flex; justify-content: center;">
       <h4 >Sifariş yoxdur</h4>
     </div>
+   <div class="web-view" *ngIf="orderData.length !== 0">
+
     <div class="row order-header">
       <div class="col-lg-2">Sifariş №</div>
       <div class="col-lg-2">Məbləğ</div>
@@ -57,7 +58,13 @@
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <p style="color: #3bb77e; margin-top: 10px;"><b>Ümumi məbləğ: {{item.amount! + item.serviceFee!}} ₼</b></p>
+          <div>
+          <p *ngIf="item?.orderStatus! == 1 " class="btn iq-button-checkout  mt-2" (click)="cancelOrder(item.id!)" style="background: #e84118;color: #fff;
+          padding: 12px 30px; margin-right: 10px;">Ləğv et</p>
+
           <p *ngIf="item?.orderStatus! == 1 " class="btn iq-button-checkout animation-btn mt-2" (click)="openDialog(item.id!)">Düzəliş et</p>
+
+          </div>
         </div>
       </mat-expansion-panel>
     </mat-accordion>

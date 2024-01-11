@@ -15,6 +15,8 @@ import { UserLoginComponent } from './public-auth/user-login/user-login.componen
 import { PaymentComponent } from './admin/payment/payment.component';
 import { OrderComponent } from './admin/order/order.component';
 import { ClientOrderComponent } from './public/client-order/client-order.component';
+import { DailyReportComponent } from './admin/daily-report/daily-report.component';
+import { DailyMealComponent } from './public/daily-meal/daily-meal.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,7 @@ const routes: Routes = [
       { path: 'wishlist', component: WishlistComponent },
       { path: 'cart', component: CartComponent },
       { path: 'client-order', component: ClientOrderComponent },
+      { path: 'daily-meal', component: DailyMealComponent },
     ]
   },
   {
@@ -36,7 +39,8 @@ const routes: Routes = [
       { path: 'products', component: AddProductComponent },
       { path: 'product-category', component: ProductCategoryComponent },
       { path: 'payment', component: PaymentComponent },
-      { path: 'order', component: OrderComponent }
+      { path: 'order', component: OrderComponent },
+      { path: 'daily-report', component: DailyReportComponent },
     ]
   },
   {path: 'login-adminpanel' , component: LoginComponent},

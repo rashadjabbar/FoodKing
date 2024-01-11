@@ -1,0 +1,10 @@
+<div class="row" style="padding: 0 2%; ">
+  <div class="col-lg-2" *ngFor="let item of productData" style="margin-bottom: 20px;">
+    <div class="product-card">
+        <span #tooltip="matTooltip"
+        matTooltip="{{item.name}}">{{item.name}}</span>
+      <span>{{item.count}}</span>
+    </div>
+  </div>
+  
+</div>

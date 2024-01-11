@@ -6,6 +6,8 @@ import { ClientOrder, OrderItem } from 'src/models/client-order';
 import { BasketService } from 'src/services/public/basket.service';
 import Swal from 'sweetalert2';
 import { EditClientOrderComponent } from './edit-client-order/edit-client-order.component';
+import { ChangeOrdersStatusModel } from 'src/models/ChangeOrdersStatusModel';
+import { showConfirmAlert, showErrorAlert, showInfoAlert } from 'src/utils/alert';
 
 @Component({
   selector: 'app-client-order',
@@ -15,6 +17,7 @@ import { EditClientOrderComponent } from './edit-client-order/edit-client-order.
 export class ClientOrderComponent implements OnInit {
   beginDate: any = new Date();
   endDate: any = new Date()
+  statusModel?: { statusId: string; ids: number[]; };
   constructor(
     private datePipe: DatePipe,
     private basketService: BasketService,
@@ -77,6 +80,24 @@ export class ClientOrderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.getOrdersClient();
     });
+  }
+
+  cancelOrder(id: number){
+    this.statusModel = {statusId: '6' , ids: [id]}
+    console.log(this.statusModel)
+
+    showConfirmAlert('', "Sifarişi ləğv etmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res =>{
+      this.basketService.ChangeOrdersStatus(this.statusModel as  Partial<ChangeOrdersStatusModel>).subscribe(res =>{
+        if(!res?.status){
+          showErrorAlert('', res?.message, false, false, '','', 1500);
+        }
+        else{
+          showInfoAlert('', res?.message, false, false, '','', 2000);
+        }
+        this.getOrdersClient()
+      })
+    })
+
   }
 
 }

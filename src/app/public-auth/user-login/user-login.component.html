@@ -137,7 +137,7 @@
           <div class="form-element form-submit">
             <p style="font-size: 14px;">Qeydiyyatdan keçməklə siz <a href="../../../assets/file/usage_conditions.pdf" target="_blank">istifadə şərtləri</a>ni qəbul etmiş olursunuz.</p>
             <button id="signUp" class="signup" type="submit" name="signup" 
-              (click)="createUser()">Qeydiyyatdan keç</button>
+              (click)="createUser()"  [disabled]="signUpForm.invalid">Qeydiyyatdan keç</button>
             <button id="goLeft" class="signup off">Daxil ol</button>
           </div>
         </form>

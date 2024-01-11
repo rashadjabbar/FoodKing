@@ -1,0 +1,31 @@
+.product-card{
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 120px;
+    max-height: 120px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 10%;
+    text-align: center;
+    border-radius: 7px;
+}
+
+.product-card span:nth-child(1) {
+    font-weight: 600;
+    color: black;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-card span:nth-child(2){
+    color: #27ae60;
+    font-family: "Dosis", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+
+}
+

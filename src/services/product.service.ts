@@ -63,4 +63,8 @@ export class ProductService {
   getUserWishList(): Observable<any> {
     return this.http.get<Product>(`${this.baseUrl}GetWishListByUserId`);
   }
+
+  getDailyProducts(): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}GetDailyProducts`, null );
+  }
 }

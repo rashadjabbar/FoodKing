@@ -26,6 +26,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ProductDetailComponent } from './home/product-detail/product-detail.component';
 import {MatIconModule} from '@angular/material/icon';
+import { DailyMealComponent } from './daily-meal/daily-meal.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatIconModule} from '@angular/material/icon';
     UserCabinetComponent,
     ClientOrderComponent,
     EditClientOrderComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    DailyMealComponent
   ],
   imports: [
     CommonModule,

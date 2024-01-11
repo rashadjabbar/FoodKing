@@ -1,10 +1,14 @@
-const categoryIp = 'http://192.168.37.49:3009/cardoperations/api/'
-const productIp = 'http://192.168.37.49:3009/cardoperations/api/Product'
-const imageIp = 'http://192.168.37.49:3009/cardoperations/'
-const authIp = 'http://192.168.37.49:3009/FoodKing/system/api/'
-const commonIp = 'http://192.168.37.49:3009/common/api/'
-const basketIp = 'http://192.168.37.49:3009/basket/api/Baskets/'
-const paymentIp = 'http://192.168.37.49:3009/payment/api/'
+
+// const localIp = 'http://192.168.37.49:3004'
+const localIp = 'http://89.147.203.83:3004'
+
+const categoryIp = `${localIp}/cardoperations/api/`
+const productIp = `${localIp}/cardoperations/api/Product`
+const imageIp = `${localIp}/cardoperations/`
+const authIp = `${localIp}/FoodKing/system/api/`
+const commonIp = `${localIp}/common/api/`
+const basketIp = `${localIp}/basket/api/Baskets/`
+const paymentIp = `${localIp}/payment/api/`
 
 
 

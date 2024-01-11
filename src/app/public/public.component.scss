@@ -104,17 +104,17 @@
     justify-content: space-between;
 }
 
-.mat-badge-content{
+.mat-badge-content {
     background: #3bb77e !important;
     font-weight: 400;
 }
 
-.user-info{
+.user-info {
     padding: 12px 13px;
-    
+
 }
 
-.user-info>span{
+.user-info>span {
     font-family: 'Dosis', sans-serif;
     color: #3bb77e;
     font-size: 18px;
@@ -122,7 +122,7 @@
     cursor: pointer;
 }
 
-.logOut{
+.logOut {
     width: 100%;
     margin-bottom: 7px;
 }
@@ -140,12 +140,12 @@
     cursor: pointer;
 }
 
-.basket-icon{
+.basket-icon {
     margin-left: 20px;
     cursor: pointer;
 }
 
-.user-icon-div{
+.user-icon-div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -157,17 +157,17 @@
 
 }
 
-.user-icon{
+.user-icon {
     cursor: pointer;
     width: 23px;
     height: 23px;
 }
 
-::ng-deep.mat-badge-content{
+::ng-deep.mat-badge-content {
     margin-left: 20px;
 }
 
-.wallet{
+.wallet {
     background-color: #3bb77e;
     border-radius: 10px;
     display: flex;
@@ -175,29 +175,38 @@
     padding: 4px 12px;
 }
 
-.wallet span{
+.wallet span {
     color: white;
     margin-left: 7px;
 }
 
+.user-icon-text {
+    display: none
+}
+
 @media (max-width:641px) {
-    ::ng-deep.dialog-user-cabinet,::ng-deep.dialog-change-password {
+
+    ::ng-deep.dialog-user-cabinet,
+    ::ng-deep.dialog-change-password {
         overflow: auto !important;
         width: 100% !important;
         max-width: 90vw !important;
         position: inherit;
     }
 
+    .user-icon-text {
+        display: block;
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
     // .user-icon-div{
     //     display: none;
     // }
 
-    .navbar{
-        justify-content: normal !important;
-    }
 
-    .basket-icon{
+    .basket-icon {
         margin-top: 10px;
-        margin-left: 60px;
+        margin-left: -90px;
     }
 }

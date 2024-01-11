@@ -46,4 +46,9 @@ export class BasketService {
   getOrdersClient(request: RequestData, beginDate?: any, endDate?: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}GetOrdersClient?beginDate=${beginDate}&endDate=${endDate}`, request );
   }
+  
+  getDailyOrderProductList(): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}GetDailyOrderProductList`, null);
+  }
+
 }

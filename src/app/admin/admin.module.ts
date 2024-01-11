@@ -35,7 +35,8 @@ import { EditOrderPopupComponent } from './order/edit-order-popup/edit-order-pop
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { DailyReportComponent } from './daily-report/daily-report.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     NewPaymentComponent,
     OrderComponent,
     SaveOrderComponent,
-    EditOrderPopupComponent
+    EditOrderPopupComponent,
+    DailyReportComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +72,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSelectModule,
     MatSelectSearchModule,
     NgxSpinnerModule,
-
+    MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule ,
   ],

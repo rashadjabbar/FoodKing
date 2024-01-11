@@ -11632,7 +11632,7 @@ th span {
     background: url(/assets/images/banner/banner-shap-3.png) no-repeat top center;
     position: absolute;
     top: 60px;
-    right: 13%;
+    right: 12%;
     z-index: 9;
     -webkit-transform: rotate(310deg);
     -ms-transform: rotate(310deg);
@@ -11669,7 +11669,7 @@ th span {
     background-size: contain;
     position: absolute;
     top: 400px;
-    left: 40px;
+    left: 5%;
     z-index: 99;
     width: 150px;
     height: 150px;
@@ -16528,9 +16528,16 @@ body { margin: 0; font-family: 'Poppins', sans-serif; }
         flex-direction: column;
     }
 
-    .form-element .login{
-        width: 100% !important;
-        margin-left: 60% !important;
+    .form-element .login-public a{
+        padding: 5px 10px !important;
+    }
+
+    .form-element .signup{
+        margin-bottom: 10px;
+    }
+
+    .navbar-controls-button{
+        margin-bottom: 14px;
     }
 
 }
