@@ -49,9 +49,9 @@ style="background: url(assets/images/banner/pages-banner.png) no-repeat scroll r
                            <td class="vertical-middle"><span class="price">{{ basketItem.price }} ₼</span></td>
                            <td class="vertical-middle">
                               <div class="buttons_added" data-qty="btn">
-                                 <button type="button" [disabled]="basketItem.count==1" class="minus" (click)="changeQuantity(i, false)"><i class="fas fa-minus"></i></button>
-                                 <input type="number" id="quantity"  class=" qty text" 
-                                    min="0" name="cart" [(ngModel)]="basketItem.count"  title="Qty" placeholder="">
+                                 <button type="button" [disabled]="basketItem.count==1 " class="minus" (click)="changeQuantity(i, false)"><i class="fas fa-minus"></i></button>
+                                 <input type="number" id="quantity"  class=" qty text" pattern="[0-9]*" 
+                                    min="0" name="cart" [(ngModel)]="basketItem.count"  title="Qty" placeholder="" (keyup)="changeInputNumber(i, $event)">
                                  <button type="button" class="plus" (click)="changeQuantity(i, true)"><i class="fas fa-plus"></i></button>
                               </div>
                            </td>

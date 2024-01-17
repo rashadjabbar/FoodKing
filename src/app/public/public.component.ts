@@ -109,9 +109,14 @@ year = new Date().getFullYear();
   }
 
   removeBasketItem(id: number){
-    this.basketService.removeBasketItem(id).subscribe(res => {
-      this.getBasket();
-     }) 
+    showConfirmAlert('', "Seçilmiş sətri silmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res => {
+      if (res.isConfirmed) {
+        this.basketService.removeBasketItem(id).subscribe(res => {
+          this.getBasket();
+         }) 
+      } 
+    })
+    
   }
 
   closeBasket(){

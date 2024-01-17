@@ -1,3 +1,4 @@
+
 <ngx-spinner type="none" bdColor="rgba(256, 256, 256, 0.8)" size="medium" color="#fff" [fullScreen]="true" type="none">
   <img src="../../../assets/images/output-onlinegiftools.gif" alt="">
 </ngx-spinner>
@@ -26,51 +27,51 @@
               <div id="iq-menu-container" class="menu-main-menu-container">
                 <ul id="top-menu" class="navbar-nav">
 
-                  <li>
+                  <li class="nav-item-mobile">
                     <a routerLink="" aria-current="page" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Ana səhİfə
                     </a>
                   </li>
-                  <li>
+                  <li >
                     <a href="javascript:void(0)" class="menu-item">Kateqorİyalar
                       <i class="fas fa-chevron-down toggledrop"></i></a>
                     <ul class="sub-menu">
-                      <li class="cursor-pointer" *ngFor="let category of categories"
+                      <li class="cursor-pointer nav-item-mobile" *ngFor="let category of categories"
                         (click)="browseCategory(category.key)">
                         <a>{{ category.value }}</a>
                       </li>
                     </ul>
                   </li>
-                  <li >
+                  <li class="nav-item-mobile">
                     <a [routerLink]="['daily-meal']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">bu günün yeməyİ</a>
                   </li>
-                  <li *ngIf="isAuthenticated">
+                  <li *ngIf="isAuthenticated" class="nav-item-mobile">
                     <a [routerLink]="['wishlist']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Sevİmlİlər</a>
                   </li>
-                  <li *ngIf="isAuthenticated">
+                  <li *ngIf="isAuthenticated" class="nav-item-mobile">
                     <a [routerLink]="['client-order']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">sİfarİşlər</a>
                   </li>
                   <li>
                     <div [ngSwitch]="isAuthenticated" class="navbar-controls-button">
-                      <div *ngSwitchCase="false" >
+                      <div *ngSwitchCase="false">
                         <div class="form-element">
                           <button id="logIn" class="login login-public" name="login">
                             <a [routerLink]="['user-login']">Daxil ol</a>
                           </button>
                         </div>
                       </div>
-                      <div *ngSwitchDefault style="display: flex; align-items: center;" >
-                        <div  class="user-icon-div">
+                      <div *ngSwitchDefault style="display: flex; align-items: center;">
+                        <div class="user-icon-div">
                           <!-- <i class="fas fa-user-circle" [matMenuTriggerFor]="user"></i> -->
                           <lord-icon class="user-icon" trigger="hover" [matMenuTriggerFor]="user"
                             src="../../assets/images/wired-outline-21-avatar.json"></lord-icon>
                         </div>
                         <span [matMenuTriggerFor]="user" class="user-icon-text">Hesabım</span>
                       </div>
-        
+
                       <mat-menu #user="matMenu">
                         <div class="user-info">
                           <span>{{userData?.fullName}}</span>
@@ -94,7 +95,7 @@
                     </div>
                   </li>
                 </ul>
-                
+
               </div>
             </div>
 
@@ -205,8 +206,14 @@
               <div class="menu-footer1-container">
                 <ul id="menu-footer1" class="menu list-inline p-0 m-0">
                   <li class="menu-item">
-                    <a [routerLink]="['']" routerLinkActive="active-menu"><i class="fas fa-chevron-right me-2"></i>Ana
+                    <a [routerLink]="['']" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-menu"><i
+                        class="fas fa-chevron-right me-2"></i>Ana
                       səhifə</a>
+                  </li>
+                  <li class="menu-item">
+                    <a [routerLink]="['daily-meal']" [routerLinkActive]="['active-menu']"
+                      [routerLinkActiveOptions]="{ exact: true }"><i class="fas fa-chevron-right me-2"></i>Bu günün
+                      yeməyi</a>
                   </li>
                   <li class="menu-item" *ngIf="isAuthenticated">
                     <a [routerLink]="['wishlist']" [routerLinkActiveOptions]="{ exact: true }"

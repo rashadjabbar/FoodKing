@@ -82,20 +82,22 @@ export class ClientOrderComponent implements OnInit {
     });
   }
 
-  cancelOrder(id: number){
-    this.statusModel = {statusId: '6' , ids: [id]}
-    console.log(this.statusModel)
+  cancelOrder(id: number) {
+    this.statusModel = { statusId: '6', ids: [id] }
 
-    showConfirmAlert('', "Sifarişi ləğv etmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res =>{
-      this.basketService.ChangeOrdersStatus(this.statusModel as  Partial<ChangeOrdersStatusModel>).subscribe(res =>{
-        if(!res?.status){
-          showErrorAlert('', res?.message, false, false, '','', 1500);
-        }
-        else{
-          showInfoAlert('', res?.message, false, false, '','', 2000);
-        }
-        this.getOrdersClient()
-      })
+    showConfirmAlert('', "Sifarişi ləğv etmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res => {
+      if (res.isConfirmed) {
+        this.basketService.ChangeOrdersStatus(this.statusModel as Partial<ChangeOrdersStatusModel>).subscribe(res => {
+          if (!res?.status) {
+            showErrorAlert('', res?.message, false, false, '', '', 1500);
+          }
+          else {
+            showInfoAlert('', res?.message, false, false, '', '', 2000);
+          }
+          this.getOrdersClient()
+        })
+      } else if (res.isDenied) {
+      }
     })
 
   }

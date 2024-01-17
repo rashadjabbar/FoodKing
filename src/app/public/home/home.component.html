@@ -93,12 +93,11 @@
 
               <select name="orderby" class="orderby" aria-label="Shop order" [(ngModel)]="orderByProducts"
                 (change)="getProduct(catId)">
-                <!-- <option value="menu_order" selected='selected'>Defolt çeşidləmə</option> -->
                 <option value="1">Populyarlığa görə sırala</option>
-                <!-- <option value="rating">Ortalama reytinqə görə sırala</option> -->
                 <option value="2">Ən yeni məhsulları sırala</option>
-                <option value="3">Qiymətə görə: aşağıdan yuxarıya</option>
-                <option value="4">Qiymətə görə: yuxarıdan aşağıya </option>
+                <option value="3">Reytinqə görə sırala</option>
+                <option value="4">Qiymətə görə: aşağıdan yuxarıya</option>
+                <option value="5">Qiymətə görə: yuxarıdan aşağıya </option>
               </select>
               <input type="hidden" name="paged" value="1" />
             </div>

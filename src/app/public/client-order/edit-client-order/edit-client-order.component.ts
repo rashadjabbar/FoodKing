@@ -6,7 +6,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { BasketService } from 'src/services/public/basket.service';
 import { ComboboxModel } from 'src/models/select-model';
 import { ProductService } from 'src/services/product.service';
-import { showErrorAlert, showInfoAlert } from 'src/utils/alert';
+import { showConfirmAlert, showErrorAlert, showInfoAlert } from 'src/utils/alert';
 import { SaveOrder } from 'src/models/save-order';
 
 @Component({
@@ -124,26 +124,6 @@ export class EditClientOrderComponent implements OnInit {
       this.orders[this.activeRow].amount = this.price! * this.cf['count'].value;
     }
 
-    this.orders = [...this.orders]
-    this.activeRow = -1;
-    this.products = []
-    this.price = null!
-    this.productItemForm.reset()
-    this.cf['id'].setValue(0);
-  }
-
-  deleteLine(index: number, id: number) {
-    if (id !== 0) {
-      this.deletedIds?.push(id);
-    }
-    this.orders.splice(index, 1);
-    this.orders = [...this.orders]
-  }
-
-  saveClientOrder() {
-    this.OF['deletedItems'].patchValue(this.deletedIds);
-    this.OF['orderItems'].patchValue(this.orders)
-
     let sum: number = this.orders.map(a => a.amount).reduce(function (a, b) {
       return a + b;
     });
@@ -157,6 +137,45 @@ export class EditClientOrderComponent implements OnInit {
     this.basketService.getServiceFeeByAmount(amount).subscribe(res => {
       this.OF['serviceFee'].patchValue(res.data)
     })
+
+    this.orders = [...this.orders]
+    this.activeRow = -1;
+    this.products = []
+    this.price = null!
+    this.productItemForm.reset()
+    this.cf['id'].setValue(0);
+  }
+
+  deleteLine(index: number, id: number) {
+    if (id !== 0) {
+      this.deletedIds?.push(id);
+    }
+    showConfirmAlert('', "Seçilmiş sətri silmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res => {
+      if (res.isConfirmed) {
+        this.orders.splice(index, 1);
+        this.orders = [...this.orders]
+      } 
+    })
+
+  }
+
+  saveClientOrder() {
+    this.OF['deletedItems'].patchValue(this.deletedIds);
+    this.OF['orderItems'].patchValue(this.orders)
+
+    // let sum: number = this.orders.map(a => a.amount).reduce(function (a, b) {
+    //   return a + b;
+    // });
+
+    // this.OF['amount'].patchValue(sum)
+
+    // let amount = {
+    //   amount: sum
+    // }
+
+    // this.basketService.getServiceFeeByAmount(amount).subscribe(res => {
+    //   this.OF['serviceFee'].patchValue(res.data)
+    // })
 
     this.basketService.SaveOrder(this.orderForm.value as SaveOrder).subscribe(res => {
       if (!res?.status) {

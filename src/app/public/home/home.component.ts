@@ -164,6 +164,7 @@ export class HomeComponent {
       maxHeight: '90vh',
       width: '45%',
       hasBackdrop: true,
+      panelClass: "dialog-user-cabinet",
       disableClose: false,
     })
 

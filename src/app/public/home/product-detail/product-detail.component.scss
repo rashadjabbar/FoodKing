@@ -222,3 +222,10 @@ input:focus {
 .form:focus-within:before {
     transform: scale(1);
 }
+
+@media (max-width:641px) {
+    .comment-button{
+        text-align: center;
+    transform: rotate(90deg);
+    }
+}

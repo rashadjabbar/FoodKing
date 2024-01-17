@@ -29,7 +29,7 @@ export class CartComponent {
   serviceFee?: number = 0;
   totalBasketAmount?: number = 0;
   orderData: SaveOrder = {orderItems:[]}
-  
+  numberValidate: boolean = true
   reviewForm = this.formBuilder.group({
     comment: ['' ],
   })
@@ -64,7 +64,6 @@ export class CartComponent {
     this.basketItems[index].count = Number(this.basketItems[index].count + 1);
     else
       this.basketItems[index].count = Number(this.basketItems[index].count - 1);
-
     this.calculateTotals();
   }
 
@@ -85,6 +84,15 @@ export class CartComponent {
      }) 
   }
 
+  changeInputNumber(index:number, event: any){
+    if (this.basketItems[index].count && this.basketItems[index].count < 1) {
+      this.basketItems[index].count = 1
+    }
+
+    if(event.target.value.includes('.')){
+      this.basketItems[index].count = Number(Math.floor(this.basketItems[index].count ))
+    }
+  } 
 
   submitOrder(){
     showConfirmAlert('', "Sifariş etmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res =>{
