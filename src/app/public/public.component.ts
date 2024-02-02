@@ -143,6 +143,7 @@ year = new Date().getFullYear();
         this.basketService.SaveOrder(this.orderData!).subscribe(res => {
           showInfoAlert('', "Sifariş qəbul edildi", false, false, 'Bağla','', 1000);
           this.getBasket();
+          this.orderData.orderItems = []
         }) 
       }
     });
