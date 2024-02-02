@@ -45,13 +45,13 @@ export class AddProductComponent implements OnInit {
   dataSource = new MatTableDataSource<Product>(this.productData);
   statusRequest!: StatusRequest;
   pageSize!: number;
-  pageSizeOptions: number[] = [5, 10, 25];
+  pageSizeOptions: number[] = [10, 25, 200];
   pageEvent!: PageEvent;
 
   selection = new SelectionModel<Product>(true, []);
   requestData: any = {
     nextPageNumber: 1,
-    visibleItemCount: 5,
+    visibleItemCount: 200,
   }
   isActive = (index: number) => { return this.activeRow === index };
 

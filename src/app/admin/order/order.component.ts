@@ -61,9 +61,7 @@ export class OrderComponent implements OnInit {
   dataSource = new MatTableDataSource<BrowseOrder>(this.orderData);
   selection = new SelectionModel<BrowseOrder>(true, []);
 
-  pageSize!: number;
-  pageSizeOptions: number[] = [5, 10, 25];
-  pageEvent!: PageEvent;
+
 
   highlightedRows: any[] = [];
   highlightedRowss: any = {};
@@ -73,8 +71,12 @@ export class OrderComponent implements OnInit {
   
   requestData: any = {
     nextPageNumber: 1,
-    visibleItemCount: 5,
+    visibleItemCount: 25,
   }
+
+  pageSize: number = this.requestData.visibleItemCount;
+  pageSizeOptions: number[] = [10, 25, 50];
+  pageEvent!: PageEvent;
 
   range = new FormGroup({
     start: new FormControl<string>(this.datePipe.transform(this.beginDate.setMonth(this.beginDate.getMonth() - 1), 'yyyy-MM-dd')!),
@@ -86,6 +88,7 @@ export class OrderComponent implements OnInit {
     'id',
     'no',
     'status',
+    'username',
     // 'categoryName',
     // 'subCategoryName',
     'serviceFee',

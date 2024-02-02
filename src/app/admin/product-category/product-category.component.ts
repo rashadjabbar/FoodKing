@@ -47,7 +47,7 @@ export class ProductCategoryComponent {
   length!: number
   sublength!: number
   pageSize!: number;
-  pageSizeOptions: number[] = [5, 10, 25];
+  pageSizeOptions: number[] = [10, 25, 50];
   pageEvent!: PageEvent;
   tabID: number = 0;
 
@@ -60,7 +60,7 @@ export class ProductCategoryComponent {
 
   requestData: any = {
     nextPageNumber: 1,
-    visibleItemCount: 5,
+    visibleItemCount: 25,
   }
 
   isActive = (index: number) => { return this.activeRow === index };

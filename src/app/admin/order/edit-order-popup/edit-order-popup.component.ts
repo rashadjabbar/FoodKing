@@ -159,6 +159,10 @@ export class EditOrderPopupComponent {
       }
       this.OF['amount'].patchValue(this.totalAmount)
 
+      this.basketService.getServiceFeeByAmount({amount: this.totalAmount}).subscribe(res => {
+        this.OF['serviceFee'].patchValue(res.data)
+       }) 
+
   }
 
 

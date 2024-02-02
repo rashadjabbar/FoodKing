@@ -63,12 +63,12 @@ export class PaymentComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Payment>(this.paymentData);
   pageSize!: number;
-  pageSizeOptions: number[] = [5, 10, 25];
+  pageSizeOptions: number[] = [10, 25, 50];
   pageEvent!: PageEvent;
 
   requestData: any = {
     nextPageNumber: 1,
-    visibleItemCount: 5,
+    visibleItemCount: 25,
   }
 
   displayedColumns: string[] = [
