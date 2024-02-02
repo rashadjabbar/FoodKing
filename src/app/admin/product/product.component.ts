@@ -44,15 +44,17 @@ export class AddProductComponent implements OnInit {
   productData: Product[] = []
   dataSource = new MatTableDataSource<Product>(this.productData);
   statusRequest!: StatusRequest;
-  pageSize!: number;
-  pageSizeOptions: number[] = [10, 25, 200];
-  pageEvent!: PageEvent;
 
   selection = new SelectionModel<Product>(true, []);
   requestData: any = {
     nextPageNumber: 1,
     visibleItemCount: 200,
   }
+
+  pageSize: number = this.requestData.visibleItemCount;
+  pageSizeOptions: number[] = [10, 25, 200];
+  pageEvent!: PageEvent;
+
   isActive = (index: number) => { return this.activeRow === index };
 
   ngOnInit(): void {

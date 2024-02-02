@@ -79,7 +79,7 @@ export class OrderComponent implements OnInit {
   pageEvent!: PageEvent;
 
   range = new FormGroup({
-    start: new FormControl<string>(this.datePipe.transform(this.beginDate.setMonth(this.beginDate.getMonth() - 1), 'yyyy-MM-dd')!),
+    start: new FormControl<string>(this.datePipe.transform(this.beginDate, 'yyyy-MM-dd')!), //this.beginDate.setMonth(this.beginDate.getMonth() - 1
     end: new FormControl<string>(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!),
   });
   
