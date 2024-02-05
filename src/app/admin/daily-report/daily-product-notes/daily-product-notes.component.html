@@ -7,6 +7,8 @@
   <div class="note" *ngFor="let item of notes">
     <span class="note-username"><b>İstifadəçi:</b> {{item.user}}</span>
     <span class="note-products"><b>Məhsullar:</b> {{item.products}}</span>
-    <span class="note-content"><b>Not:</b> {{item.notes}}</span>
+    <b>Not:</b>
+    <span *ngFor="let note of item.notes.split('|'), let i = index" class="note-content"><b> {{i+1}} </b> - {{note}}</span>
+
   </div>
 </div>
