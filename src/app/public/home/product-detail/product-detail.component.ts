@@ -65,9 +65,9 @@ export class ProductDetailComponent implements OnInit {
   isAuthenticated: boolean = _isAuthenticated;
 
   ngOnInit() {
-    if (sessionStorage.getItem('productComment')) {
-      this.reviewForm.controls.comment.setValue(sessionStorage.getItem('productComment'))
-      sessionStorage.removeItem('productComment')
+    if (localStorage.getItem('productComment')) {
+      this.reviewForm.controls.comment.setValue(localStorage.getItem('productComment'))
+      localStorage.removeItem('productComment')
     }
 
     this.getProductById()
@@ -83,7 +83,7 @@ export class ProductDetailComponent implements OnInit {
 
   countStar(star) {
     if (!_isAuthenticated) {
-      sessionStorage.setItem("productIdForDetail", this.data)
+      localStorage.setItem("productIdForDetail", this.data)
       this.dialogRef.close()
       this.router.navigate(['user-login'])
     } else {
@@ -102,8 +102,8 @@ export class ProductDetailComponent implements OnInit {
 
   addComment() {
     if (!_isAuthenticated) {
-      sessionStorage.setItem("productIdForDetail", this.data)
-      sessionStorage.setItem("productComment", this.reviewForm.controls.comment.value as string)
+      localStorage.setItem("productIdForDetail", this.data)
+      localStorage.setItem("productComment", this.reviewForm.controls.comment.value as string)
       this.dialogRef.close()
       this.router.navigate(['user-login'])
     } else {
@@ -125,7 +125,7 @@ export class ProductDetailComponent implements OnInit {
   addProductToBasket() {
 
     if (!_isAuthenticated) {
-      sessionStorage.setItem("productIdForDetail", this.data)
+      localStorage.setItem("productIdForDetail", this.data)
       this.router.navigate(['user-login'])
 
     } else {

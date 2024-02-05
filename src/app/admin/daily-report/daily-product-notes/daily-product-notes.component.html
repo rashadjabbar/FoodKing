@@ -1,0 +1,12 @@
+<div class="dialogHeader">
+  <h3>Notlar</h3>
+  <i class="far fa-window-close" (click)="dialogRef.close()"></i>
+</div>
+
+<div class="notes">
+  <div class="note" *ngFor="let item of notes">
+    <span class="note-username"><b>İstifadəçi:</b> {{item.user}}</span>
+    <span class="note-products"><b>Məhsullar:</b> {{item.products}}</span>
+    <span class="note-content"><b>Not:</b> {{item.notes}}</span>
+  </div>
+</div>

@@ -36,12 +36,12 @@ export class AdminComponent implements OnInit{
   logOut(){
     if(_isAuthenticated){
       this.loginService.logout().subscribe(res =>{
-        sessionStorage.removeItem('token')
+        localStorage.removeItem('token')
         this.authService.identityCheck();
         this.router.navigate(['/login-adminpanel']);
       })
     }else{
-      sessionStorage.removeItem('token')
+      localStorage.removeItem('token')
       this.authService.identityCheck();
       this.router.navigate(['/login-adminpanel']);
     }

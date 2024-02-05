@@ -29,3 +29,22 @@
 
 }
 
+
+.operation-div {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+
+  @media (max-width:641px) {
+    ::ng-deep.cdk-overlay-pane {
+        overflow: auto !important;
+        width: 100% !important;
+        max-width: 90vw !important;
+        position: inherit;
+    }
+
+}

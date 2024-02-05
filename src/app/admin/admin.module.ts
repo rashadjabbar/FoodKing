@@ -37,6 +37,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DailyReportComponent } from './daily-report/daily-report.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { DailyProductNotesComponent } from './daily-report/daily-product-notes/daily-product-notes.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     OrderComponent,
     SaveOrderComponent,
     EditOrderPopupComponent,
-    DailyReportComponent
+    DailyReportComponent,
+    DailyProductNotesComponent,
+    ReportComponent
   ],
   imports: [
     CommonModule,

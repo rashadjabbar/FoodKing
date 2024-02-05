@@ -50,7 +50,7 @@ year = new Date().getFullYear();
   userData?: User
   isAuthenticated: boolean=false;
 
-  loginnedUser = sessionStorage.getItem('token')
+  loginnedUser = localStorage.getItem('token')
 
   ngOnInit() {
     this.authService.identityCheck();
@@ -78,7 +78,7 @@ year = new Date().getFullYear();
   }  
 
   getUserData(){
-    this.userData = jwt_decode(sessionStorage.getItem('token')!)
+    this.userData = jwt_decode(localStorage.getItem('token')!)
   }
 
   getCategories() {
@@ -180,13 +180,13 @@ year = new Date().getFullYear();
   logOut(){
     if(_isAuthenticated){
       this.loginService.logout().subscribe(res => {
-        sessionStorage.removeItem('token')
+        localStorage.removeItem('token')
         this.authService.identityCheck();
         this.isAuthenticated= _isAuthenticated;
         this.router.navigate(['']);
       })
     }else{
-      sessionStorage.removeItem('token')
+      localStorage.removeItem('token')
       this.authService.identityCheck();
       this.isAuthenticated= _isAuthenticated;
       this.router.navigate(['']);

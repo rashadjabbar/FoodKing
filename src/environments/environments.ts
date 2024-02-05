@@ -9,6 +9,7 @@ const authIp = `${localIp}/FoodKing/system/api/`
 const commonIp = `${localIp}/common/api/`
 const basketIp = `${localIp}/basket/api/Baskets/`
 const paymentIp = `${localIp}/payment/api/`
+const reportIp = `${localIp}/report/api/`
 
 
 
@@ -21,4 +22,5 @@ export const environment = {
   apiCommonUrl:`${commonIp}`,
   apibasketUrl:`${basketIp}`,
   apiPaymentUrl:`${paymentIp}`,
+  apiReportUrl:`${reportIp}`,
 };

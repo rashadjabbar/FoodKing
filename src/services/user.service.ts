@@ -39,14 +39,14 @@ export class UserService {
       next: (result: any) => {
         if (result.status == false) {
           showInfoAlert('Məlumat', result.message, false, true, 'Bağla')
-          sessionStorage.removeItem('token')
+          localStorage.removeItem('token')
           return
         }
         data = jwt_decode(result.data.token)
         this.globalService.getUserData(data);
         this.loginned = result.status
         // this.globalService.token = result.data.token!;
-        sessionStorage.setItem('token', result.data.token);
+        localStorage.setItem('token', result.data.token);
 
         this.authService.identityCheck();
 
@@ -55,7 +55,7 @@ export class UserService {
         } else this.router.navigate(['']);
       },
       error: (res: any) => {
-        sessionStorage.removeItem('token')
+        localStorage.removeItem('token')
         Swal.fire({
           icon: 'error',
           title: res.error.message,
@@ -71,13 +71,13 @@ export class UserService {
       next: (result: any) => {
         if (result.status == false) {
           showInfoAlert('Məlumat', result.message, false, true, 'Bağla')
-          sessionStorage.removeItem('token')
+          localStorage.removeItem('token')
           return
         }
 
         this.loginned = result.status
         this.globalService.token = result.data.token!;
-        // sessionStorage.setItem('token', result.data.token);
+        // localStorage.setItem('token', result.data.token);
         // this.router.navigate(['/']);
         this.otp_dialogRef = this.dialog.open(OtpComponent, {
           disableClose: true,
@@ -92,7 +92,7 @@ export class UserService {
         })
       },
       error: (res: any) => {
-        sessionStorage.removeItem('token')
+        localStorage.removeItem('token')
         Swal.fire({
           icon: 'error',
           title: 'Xəta',

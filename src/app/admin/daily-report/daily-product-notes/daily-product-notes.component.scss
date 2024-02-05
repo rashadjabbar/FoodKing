@@ -1,0 +1,11 @@
+.notes{
+    padding: 2%;
+    color: black;
+    height: 80vh;
+}
+.note{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #1f1f1f;
+    margin-bottom: 15px;
+}

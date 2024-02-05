@@ -30,7 +30,7 @@ export class HomeComponent {
     private dialog: MatDialog,
 
     ) {
-      this.catId = sessionStorage.getItem('catId') as any
+      this.catId = localStorage.getItem('catId') as any
       this.imageIpUrl = environment.imageIpUrl
 
   }
@@ -72,8 +72,8 @@ export class HomeComponent {
     }
     this.getCategories()
 
-    if(sessionStorage.getItem("productIdForDetail")){
-      this.openDetail(Number(sessionStorage.getItem("productIdForDetail")))
+    if(localStorage.getItem("productIdForDetail")){
+      this.openDetail(Number(localStorage.getItem("productIdForDetail")))
     }
 
   }
@@ -157,7 +157,7 @@ export class HomeComponent {
   }
 
   openDetail(id: number){
-    sessionStorage.removeItem("productIdForDetail")
+    localStorage.removeItem("productIdForDetail")
 
     const dialogRef = this.dialog.open(ProductDetailComponent, {
       data: id,

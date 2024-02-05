@@ -1,10 +1,16 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-pulse" [fullScreen]="true">
+  <p style="color: white"> Yüklənir... </p>
+</ngx-spinner>
+<div class="operation-div">
+  <button color="primary" mat-raised-button class="operation-button" (click)="openDialog()">Notlar</button>
+</div>
+
 <div class="row" style="padding: 0 2%; ">
   <div class="col-lg-2" *ngFor="let item of productData" style="margin-bottom: 20px;">
     <div class="product-card">
-        <span #tooltip="matTooltip"
-        matTooltip="{{item.name}}">{{item.name}}</span>
+      <span #tooltip="matTooltip" matTooltip="{{item.name}}">{{item.name}}</span>
       <span>{{item.count}}</span>
     </div>
   </div>
-  
+
 </div>

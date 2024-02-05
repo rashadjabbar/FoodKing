@@ -120,7 +120,7 @@ export class OrderComponent implements OnInit {
             title: 'İcazəsiz giriş...',
             text: 'Login sehifesinden daxil olun!',
           })
-          this.router.navigate(['/login-adminpanel']);
+          this.router.navigate(['/user-login']);
         }
       }
     })

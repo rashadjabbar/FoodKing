@@ -17,6 +17,7 @@ import { OrderComponent } from './admin/order/order.component';
 import { ClientOrderComponent } from './public/client-order/client-order.component';
 import { DailyReportComponent } from './admin/daily-report/daily-report.component';
 import { DailyMealComponent } from './public/daily-meal/daily-meal.component';
+import { ReportComponent } from './admin/report/report.component';
 
 const routes: Routes = [
   {
@@ -33,7 +34,7 @@ const routes: Routes = [
   {
     path: 'admin', component: AdminComponent, canActivate: [AdminLogin],
     children: [
-      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+      {path: '', redirectTo: 'products', pathMatch: 'full'},
       { path: 'dashboard', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'products', component: AddProductComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
       { path: 'payment', component: PaymentComponent },
       { path: 'order', component: OrderComponent },
       { path: 'daily-report', component: DailyReportComponent },
+      { path: 'report', component: ReportComponent },
     ]
   },
   {path: 'login-adminpanel' , component: LoginComponent},

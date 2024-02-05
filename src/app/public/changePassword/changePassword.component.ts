@@ -70,7 +70,7 @@ export class ChangePasswordComponent implements OnInit {
       }
       else{
         showInfoAlert('', res?.message, false, false, '','', 2000);
-        sessionStorage.removeItem('token')
+        localStorage.removeItem('token')
         this.authService.identityCheck();
         this.dialogRef.close()
         this.router.navigateByUrl('user-login')

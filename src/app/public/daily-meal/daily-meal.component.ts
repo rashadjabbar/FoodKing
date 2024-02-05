@@ -46,7 +46,7 @@ export class DailyMealComponent implements OnInit {
   }
 
   openDetail(id: number){
-    sessionStorage.removeItem("productIdForDetail")
+    localStorage.removeItem("productIdForDetail")
 
     const dialogRef = this.dialog.open(ProductDetailComponent, {
       data: id,

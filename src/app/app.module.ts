@@ -17,7 +17,7 @@ import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
 import { PublicAuthModule } from './public-auth/public-auth.module';
 
 export function tokenGetter() {
-  return sessionStorage.getItem("token");
+  return localStorage.getItem("token");
 }
 
 @NgModule({

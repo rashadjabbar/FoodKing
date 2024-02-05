@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environments';
+import { RequestData } from 'src/models/request';
 
 export class User {
   name?: string;
@@ -24,6 +25,7 @@ export class GlobalService {
   constructor(private http: HttpClient) { }
 
   baseUrl = environment.apiCommonUrl;
+  reportUrl = environment.apiReportUrl;
 
 
   private basketEmitter = new BehaviorSubject({ itemAddedToBasket: false });
@@ -39,11 +41,11 @@ export class GlobalService {
 
   set token(tk: string) {
     this.tokenValue.next(tk);
-    sessionStorage.setItem('token', tk);
+    localStorage.setItem('token', tk);
   }
 
   get token() {
-    return sessionStorage.getItem('token') ?? "";
+    return localStorage.getItem('token') ?? "";
   }
 
 
@@ -69,5 +71,10 @@ export class GlobalService {
 
   getProductsAutoComplate(filter: string) {
     return this.http.get<any>(`${this.baseUrl}AutoComplete/GetProducts?filter=${filter}`);
+  }
+
+  // ADMINPANEL REPORT BALANCE
+  getClientBalance(request: RequestData): Observable<any> {
+    return this.http.post<any>(`${this.reportUrl}ClientBalance/GetClientBalance`, request );
   }
 }

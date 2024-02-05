@@ -51,4 +51,8 @@ export class BasketService {
     return this.http.post<any>(`${this.baseUrl}GetDailyOrderProductList`, null);
   }
 
+  getDailyOrderNotes(): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}GetDailyOrderNotes`, null);
+  }
+
 }
