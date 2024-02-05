@@ -61,6 +61,8 @@ export class EditOrderPopupComponent {
   selectedId: any = 0;
   deletedIds: number[] = [];
 
+  userId?: number
+
 
   get OF(): { [key: string]: AbstractControl } {
     return this.orderForm.controls;
@@ -97,6 +99,7 @@ export class EditOrderPopupComponent {
     this.basketService.getOrderById(id).subscribe(res => {
       this.orderForm.patchValue(res.data)
       this.productItems.data = res.data.orderItems as OrderItem[];
+      this.userId = res.data.userId
     })
   }
 
@@ -149,6 +152,7 @@ export class EditOrderPopupComponent {
       return;
     }
 
+
     this.totalAmount = 0
     this.saveLine();
     for(let i = 0; i < this.productItems.data.length; i++){
@@ -159,7 +163,7 @@ export class EditOrderPopupComponent {
       }
       this.OF['amount'].patchValue(this.totalAmount)
 
-      this.basketService.getServiceFeeByAmount({amount: this.totalAmount}).subscribe(res => {
+      this.basketService.GetServiceFeeByUserAndAmount({userId:  this.userId ,amount: this.totalAmount}).subscribe(res => {
         this.OF['serviceFee'].patchValue(res.data)
        }) 
 

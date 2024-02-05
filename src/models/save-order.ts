@@ -25,3 +25,9 @@ export class BrowseOrder {
     createdDate?: string
     status?: true
 }
+
+export class ServiceFeeByUserAndAmount
+{
+    userId?: number
+    amount?: number
+}
