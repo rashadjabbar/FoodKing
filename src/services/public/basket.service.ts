@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environments';
 import { ChangeOrdersStatusModel } from 'src/models/ChangeOrdersStatusModel';
 import { RequestData } from 'src/models/request';
-import { SaveOrder } from 'src/models/save-order';
+import { SaveOrder, ServiceFeeByUserAndAmount } from 'src/models/save-order';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +53,10 @@ export class BasketService {
 
   getDailyOrderNotes(): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}GetDailyOrderNotes`, null);
+  }
+
+  GetServiceFeeByUserAndAmount(request: ServiceFeeByUserAndAmount): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}GetServiceFeeByUserAndAmount`, request );
   }
 
 }
