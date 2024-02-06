@@ -49,6 +49,7 @@ year = new Date().getFullYear();
 
   userData?: User
   isAuthenticated: boolean=false;
+  balance: number=0;
 
   loginnedUser = localStorage.getItem('token')
 
@@ -65,6 +66,8 @@ year = new Date().getFullYear();
       this.globalService.basketObservable$.subscribe(res => {
         this.getBasket()
       })
+
+      this.getUserBalance();
     }
 
     this.loadJsFile('../../../assets/js/app.js')
@@ -79,6 +82,12 @@ year = new Date().getFullYear();
 
   getUserData(){
     this.userData = jwt_decode(localStorage.getItem('token')!)
+  }
+
+  getUserBalance(){
+    this.globalService.getUserBalance().subscribe((res: any) => {
+      this.balance = res.data
+    })
   }
 
   getCategories() {

@@ -77,4 +77,12 @@ export class GlobalService {
   getClientBalance(request: RequestData): Observable<any> {
     return this.http.post<any>(`${this.reportUrl}ClientBalance/GetClientBalance`, request );
   }
+  
+  getUserDebt(userId: number) {
+    return this.http.get<any>(`${environment.apiAdminAuthUrl}Global/GetUserDebt?userId=${userId}`);
+  }
+
+  getUserBalance() {
+    return this.http.get<any>(`${environment.apiAdminAuthUrl}Global/GetUserBalance`);
+  }
 }

@@ -48,6 +48,12 @@ export class NewPaymentComponent implements OnInit {
     }
   }
 
+  getUserDebt(){
+    this.globalService.getUserDebt(Number(this.paymentForm.controls['userId'].value)).subscribe((res: any) => {
+      this.paymentForm.controls['amount'].patchValue(res.data)
+    })
+  }
+
   getAllUser(){
     this.globalService.getAllUser().subscribe( res => {
       this.allUser = res.data

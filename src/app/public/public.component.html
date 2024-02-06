@@ -66,18 +66,18 @@
                       <div *ngSwitchDefault style="display: flex; align-items: center;">
                         <div class="user-icon-div">
                           <!-- <i class="fas fa-user-circle" [matMenuTriggerFor]="user"></i> -->
-                          <lord-icon class="user-icon" trigger="hover" [matMenuTriggerFor]="user"
+                          <lord-icon class="user-icon" trigger="hover" [matMenuTriggerFor]="user" (menuOpened)="getUserBalance()"
                             src="../../assets/images/wired-outline-21-avatar.json"></lord-icon>
                         </div>
-                        <span [matMenuTriggerFor]="user" class="user-icon-text">Hesabım</span>
+                        <span [matMenuTriggerFor]="user"  class="user-icon-text">Hesabım</span>
                       </div>
 
                       <mat-menu #user="matMenu">
                         <div class="user-info">
                           <span>{{userData?.fullName}}</span>
-                          <div class="wallet">
+                          <div class="wallet"  [ngStyle]="balance>=0? {'background-color':'#3bb77e' } : {'background-color':'red' }">
                             <i class="fa-thin fa-coins" style="color:white;"></i>
-                            <span>{{userData?.balance | number : '1.2-2'}} ₼</span>
+                            <span>{{balance | number : '1.2-2'}} ₼</span>
                           </div>
                           <hr>
                           <div class="logOut">

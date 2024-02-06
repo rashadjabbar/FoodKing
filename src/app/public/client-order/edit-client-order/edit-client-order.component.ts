@@ -50,7 +50,7 @@ export class EditClientOrderComponent implements OnInit {
     id: [0],
     productId: [null, Validators.required],
     productName: ['', Validators.required],
-    count: [null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(1), Validators.max(20)]],
+    count: [1, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(1), Validators.max(20)]],
     price: [null],
     amount: [null],
   })
@@ -75,7 +75,7 @@ export class EditClientOrderComponent implements OnInit {
         return a + b;
       });
 
-      this.basketService.getServiceFeeByAmount({amount: sum}).subscribe(res => {
+      this.basketService.getServiceFeeByAmount({ amount: sum }).subscribe(res => {
         this.OF['serviceFee'].patchValue(res.data)
       })
     })
@@ -85,7 +85,7 @@ export class EditClientOrderComponent implements OnInit {
     this.cf['productId'].patchValue(null)
     this.globalService.getProductsAutoComplate(event.target.value).subscribe((res: any) => {
 
-      
+
       this.products = res.data
 
     })
@@ -124,6 +124,18 @@ export class EditClientOrderComponent implements OnInit {
       this.orders[this.activeRow].amount = this.price! * this.cf['count'].value;
     }
 
+    this.calculateAmountAndServiceFee();
+
+    this.orders = [...this.orders]
+    this.activeRow = -1;
+    this.products = []
+    this.price = null!
+    this.productItemForm.reset()
+    this.cf['id'].setValue(0);
+  }
+
+
+  calculateAmountAndServiceFee() {
     let sum: number = this.orders.map(a => a.amount).reduce(function (a, b) {
       return a + b;
     });
@@ -137,13 +149,6 @@ export class EditClientOrderComponent implements OnInit {
     this.basketService.getServiceFeeByAmount(amount).subscribe(res => {
       this.OF['serviceFee'].patchValue(res.data)
     })
-
-    this.orders = [...this.orders]
-    this.activeRow = -1;
-    this.products = []
-    this.price = null!
-    this.productItemForm.reset()
-    this.cf['id'].setValue(0);
   }
 
   deleteLine(index: number, id: number) {
@@ -152,9 +157,11 @@ export class EditClientOrderComponent implements OnInit {
     }
     showConfirmAlert('', "Seçilmiş sətri silmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res => {
       if (res.isConfirmed) {
+        this.calculateAmountAndServiceFee();
+
         this.orders.splice(index, 1);
         this.orders = [...this.orders]
-      } 
+      }
     })
 
   }
