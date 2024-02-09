@@ -33,6 +33,7 @@ export class NewSubcategoryComponent {
     id: [0, Validators.required],
     categoryId: [0, Validators.required],
     name: ['', Validators.required],
+    hexColor: [''],
   })
 
 

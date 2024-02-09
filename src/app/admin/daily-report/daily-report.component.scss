@@ -4,8 +4,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 120px;
-    max-height: 120px;
+    align-items: center;
+    height: 180px;
+    max-height: 180px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -21,7 +22,7 @@
     text-overflow: ellipsis;
 }
 
-.product-card span:nth-child(2){
+.product-card spa:nth-child(2){
     color: #27ae60;
     font-family: "Dosis", sans-serif;
     font-weight: 600;
