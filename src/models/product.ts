@@ -15,4 +15,5 @@ export class ProductBrowseData {
     subCategoryName?:  string
     averageRating?: number
     isFavorite?: boolean = false
+    oldPrice?: number
 }

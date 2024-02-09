@@ -37,6 +37,21 @@
     
 }
 
+.oldPrice{
+    position: relative;
+    display: inline-block;
+}
 
+.oldPrice::before {
+    content: "";
+    position: absolute;
+    bottom: 9px; /* xəttin yüksəkliyi */
+    left: 0;
+    width: 100%;
+    height: 2px; /* xəttin eni */
+    background-color: #ffba43; /* xəttin rəngi */
+  }
 
-
+  h6 i{
+    color: #ffba43;
+  }
