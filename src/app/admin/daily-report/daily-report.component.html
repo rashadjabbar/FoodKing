@@ -7,7 +7,7 @@
 
 <div class="row" style="padding: 0 2%; ">
   <div class="col-lg-2" *ngFor="let item of productData" style="margin-bottom: 20px;">
-    <div class="product-card" >
+    <div class="product-card" [ngStyle]="{'box-shadow': item.hexColor? '' + item.hexColor +' 0px 1px 3px, '+item.hexColor +'  0px 1px 2px' : ''}">
       <img [src]="imageIpUrl + item.imagePath" class="img-width-100" alt="no image">
       <span #tooltip="matTooltip" matTooltip="{{item.name}}">{{item.name}}</span>
       <span>{{item.count}}</span>

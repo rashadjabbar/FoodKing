@@ -1,6 +1,7 @@
 <div class="dialogHeader">
     <div [ngSwitch]="data.id">
-        <div *ngSwitchCase="0"><h3>Yeni alt kateqoriya</h3>
+        <div *ngSwitchCase="0">
+            <h3>Yeni alt kateqoriya</h3>
         </div>
         <div *ngSwitchDefault>Düzəliş et</div>
     </div>
@@ -13,9 +14,10 @@
                 <mat-form-field>
                     <mat-label>Kateqoriya seç</mat-label>
                     <mat-select formControlName="categoryId">
-                      <mat-option *ngFor="let category of allCategory" [value]="category.key">{{category.value}}</mat-option>
+                        <mat-option *ngFor="let category of allCategory"
+                            [value]="category.key">{{category.value}}</mat-option>
                     </mat-select>
-                  </mat-form-field>
+                </mat-form-field>
             </div>
             <div class="col-lg-6">
                 <mat-form-field class="example-full-width">
@@ -28,11 +30,14 @@
             <div class="col-lg-6">
                 <mat-form-field class="example-full-width">
                     <mat-label>Rəng (hex code)</mat-label>
-                    <input type="text" matInput placeholder="Maksimum 7 simvol" maxlength="7" formControlName="hexColor">
+                    <input type="text" matInput placeholder="Maksimum 20 simvol" maxlength="20"
+                        formControlName="hexColor">
                 </mat-form-field>
+
+                <!-- <div style="width: 20px;height: 20px;" [style.background]="Tf['hexColor'].value"></div> -->
             </div>
             <div class="col-lg-6">
-                <!-- <div style="color: {{}}"></div> -->
+                <div style="width: 20px;height: 20px;" [style.background]="Tf['hexColor'].value"></div>
             </div>
         </div>
         <div>

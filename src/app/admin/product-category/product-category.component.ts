@@ -41,6 +41,7 @@ export class ProductCategoryComponent {
     'id',
     'category',
     'subcategory',
+    'hexColor',
     'status'
   ];
 
