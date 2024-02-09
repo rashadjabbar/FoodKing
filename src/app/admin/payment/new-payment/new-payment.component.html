@@ -9,7 +9,7 @@
             <mat-form-field>
                 <mat-label>İstifadəçi</mat-label>
                 <mat-select formControlName="userId" >
-                    <mat-option *ngFor="let category of allUser"  
+                    <mat-option *ngFor="let category of allUser"  (click)="getUserDebt()"
                         [value]="category.key">{{category.value}}</mat-option>
                 </mat-select>
             </mat-form-field>

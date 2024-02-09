@@ -152,21 +152,24 @@ export class EditOrderPopupComponent {
       return;
     }
 
-
-    this.totalAmount = 0
     this.saveLine();
-    for(let i = 0; i < this.productItems.data.length; i++){
 
-       this.totalAmount += Number(this.productItems.data?.[i].amount!)
-       // this.OF['amount'].value += this.sell[i]['quant']*this.sell[i]['price'];
-       
-      }
-      this.OF['amount'].patchValue(this.totalAmount)
+    this.calculateAmountAndServiceFee()
+  }
 
-      this.basketService.GetServiceFeeByUserAndAmount({userId:  this.userId ,amount: this.totalAmount}).subscribe(res => {
-        this.OF['serviceFee'].patchValue(res.data)
-       }) 
+  calculateAmountAndServiceFee(){
+    this.totalAmount = 0
+    
+    for (let i = 0; i < this.productItems.data.length; i++) {
+      this.totalAmount += Number(Number(this.productItems.data?.[i].amount!).toFixed(2))
+      // this.OF['amount'].value += this.sell[i]['quant']*this.sell[i]['price'];
+    }
 
+    this.OF['amount'].patchValue(this.totalAmount.toFixed(2))
+
+    this.basketService.GetServiceFeeByUserAndAmount({ userId: this.userId, amount: this.totalAmount }).subscribe(res => {
+      this.OF['serviceFee'].patchValue(res.data)
+    })
   }
 
 
@@ -197,6 +200,8 @@ export class EditOrderPopupComponent {
     this.deletedIds?.push(id);
     this.productItems.data.splice(index, 1);
     this.productItems.data = [...this.productItems.data]
+
+    this.calculateAmountAndServiceFee()
   }
 
 }
