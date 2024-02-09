@@ -13,6 +13,7 @@ export class SubCategory {
     id!: number
     subCategoryName?: string
     categoryName?: string
+    hexColor?: string
     status?: true
 }
 

@@ -93,7 +93,7 @@ export class AddProductComponent implements OnInit {
       const dialogRef = this.dialog.open(NewProductComponent, {
         data: { id: id, typeView: type },
         height: 'max-content',
-        width: '30%',
+        width: '50%',
         hasBackdrop: true,
         disableClose: true
       })
