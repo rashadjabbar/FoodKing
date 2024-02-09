@@ -62,6 +62,10 @@
                 </mat-form-field>
             </div>
         </div>
+
+        <div class="row input-container">
+            <mat-checkbox class="example-margin" matinput formControlName="currentAvailability">Günün yeməyi</mat-checkbox>
+        </div>
         <div class="add-button">
             <div [ngSwitch]="data.id">
                 <div *ngSwitchCase="0"><button type="submit" mat-raised-button color="primary" class="dialog-button"

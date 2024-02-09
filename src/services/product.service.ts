@@ -31,6 +31,10 @@ export class ProductService {
     return this.http.get<Product>(`${this.baseUrl}GetProductById?productId=${id}`);
   }
 
+  changeProductCurrentAvailability(status: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}ChangeCurrentAvailability` ,  status);
+  }
+
   changeProductStatus(status: any): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}ChangeStatus` ,  status);
   }

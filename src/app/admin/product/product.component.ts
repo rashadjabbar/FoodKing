@@ -35,6 +35,7 @@ export class AddProductComponent implements OnInit {
     'categoryName',
     'subCategoryName',
     'price',
+    'currentAvailability',
     'status'
   ];
 
@@ -125,7 +126,29 @@ export class AddProductComponent implements OnInit {
           }
         }
       })
+  }
 
+  currentAvailability(id: number, event: any) {
+    this.statusRequest = {
+      id: id,
+      status: event.target.checked
+    }
+
+      this.productService.changeProductCurrentAvailability(this.statusRequest).subscribe({
+        next: res => {
+          this.getProduct()
+        },
+        error: res => {
+          if (res.status == 401) {
+            Swal.fire({
+              icon: 'error',
+              title: 'İcazəsiz giriş...',
+              text: 'Login sehifesinden daxil olun!',
+            })
+            this.router.navigate(['/user-login']);
+          }
+        }
+      })
   }
 
   onChangePage(pe: PageEvent) {
