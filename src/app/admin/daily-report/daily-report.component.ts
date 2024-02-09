@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BasketService } from 'src/services/public/basket.service';
 import { DailyProductNotesComponent } from './daily-product-notes/daily-product-notes.component';
+import { environment } from 'src/environments/environments';
 
 @Component({
   selector: 'app-daily-report',
@@ -14,6 +15,7 @@ export class DailyReportComponent implements OnInit {
     private dialog: MatDialog,) { }
 
   productData: any[] =[]
+  imageIpUrl: string = environment.imageIpUrl
 
   ngOnInit() {
     this.basketService.getDailyOrderProductList().subscribe(res =>{
