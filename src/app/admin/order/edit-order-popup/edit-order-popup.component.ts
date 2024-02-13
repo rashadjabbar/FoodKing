@@ -29,6 +29,7 @@ export class EditOrderPopupComponent {
     no: ['', Validators.required],
     serviceFee: [0, Validators.required],
     amount: [0, Validators.required],
+    note: [],
     orderItems: ['', Validators.required],
     deletedItems: [''],
   })
@@ -118,6 +119,8 @@ export class EditOrderPopupComponent {
     this.productService.getProductById(product.key).subscribe(res => {
       this.IF['price'].setValue(res?.data[0]?.price);
     })
+
+    this.IF['count'].patchValue(1)
   }
 
   save() {

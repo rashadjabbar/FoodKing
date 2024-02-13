@@ -52,7 +52,11 @@
                                         <a target="_blank" [href]="imageIpUrl + wishListItem.imageUrl"><img [src]="imageIpUrl + wishListItem.imageUrl"  class="rounded img-width-100" alt="no image"></a>
                                     </td>
                                     <td class="vertical-middle"><a href="javascript:void(0)">{{ wishListItem.name }}</a></td>
-                                    <td class="vertical-middle">{{ wishListItem.price }} ₼</td>
+
+                                    <td class="vertical-middle">
+                                        <span class="text-primary oldPrice" style="color: red;" *ngIf="wishListItem.oldPrice > wishListItem.price"> {{wishListItem.oldPrice}}</span>
+                                        <i class="fa-sharp fa-solid fa-right ms-1" *ngIf="wishListItem.oldPrice > wishListItem.price"></i>
+                                        {{ wishListItem.price }} ₼</td>
                                     <!-- <td class="vertical-middle">In stock</td> -->
                                     <td class="vertical-middle">
                                         <a *ngIf="wishListItem.status" href="javascript:void(0)" (click)="addProductToBasket(wishListItem.productId)">Səbətə əlavə et</a>

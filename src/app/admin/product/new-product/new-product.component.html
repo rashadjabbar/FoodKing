@@ -11,7 +11,7 @@
     <form [formGroup]="productForm" (ngSubmit)="productFunc()">
         <div class="row input-container">
             <div class="col-lg-6">
-                <mat-form-field>
+                <mat-form-field class="example-full-width">
                     <mat-label>Alt kateqoriya</mat-label>
                     <mat-select formControlName="subCategoryId">
                         <mat-option *ngFor="let category of allCategory"
