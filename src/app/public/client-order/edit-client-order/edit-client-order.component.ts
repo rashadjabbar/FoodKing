@@ -88,6 +88,7 @@ export class EditClientOrderComponent implements OnInit {
 
       this.products = res.data
 
+      this.cf['count'].patchValue(1)
     })
   }
 
