@@ -14,18 +14,24 @@ import {
   ApexPlotOptions,
   ApexResponsive,
   ApexStates,
-  ApexStroke,
   ApexTheme,
   ApexTooltip,
-  ApexYAxis
+  ApexStroke,
+  ApexYAxis,
+  ApexMarkers
 } from "ng-apexcharts";
+import { ElementRef } from '@angular/core';
+import { ApexOptions } from 'ng-apexcharts';
 
 export type ChartOptions = {
-  series: ApexAxisChartSeries;
+  series: ApexNonAxisChartSeries;
   chart: ApexChart;
-  xaxis: ApexXAxis;
-  title: ApexTitleSubtitle;
+  responsive: ApexResponsive[];
+  labels: any;
 };
+
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -33,28 +39,35 @@ export type ChartOptions = {
 })
 export class DashboardComponent {
 
-  @ViewChild("chart") chart?: ChartComponent;
+  @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
 
   constructor() {
     this.chartOptions = {
-      series: [
-        {
-          name: "My-series",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-        }
-      ],
+      series: [44, 55, 13, 43, 22],
       chart: {
-        height: 350,
-        type: "bar"
+        width: 380,
+        type: "donut"
       },
-      title: {
-        text: "My First Angular Chart"
-      },
-      xaxis: {
-        categories: ["Jan", "Feb",  "Mar",  "Apr",  "May",  "Jun",  "Jul",  "Aug", "Sep"]
-      }
+      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
     };
+
+
+
+    
   }
 
 }
