@@ -73,11 +73,12 @@
                       </div>
 
                       <mat-menu #user="matMenu">
-                        <div class="user-info">
+                        <div class="user-info" (click)="$event.stopPropagation()">
                           <span>{{userData?.fullName}}</span>
                           <div class="wallet"  [ngStyle]="balance>=0? {'background-color':'#3bb77e' } : {'background-color':'red' }">
                             <i class="fa-thin fa-coins" style="color:white;"></i>
-                            <span>{{balance | number : '1.2-2'}} ₼</span>
+                            <span (click)="copyCard()">{{balance | number : '1.2-2'}} ₼</span>
+                            <!-- <button cdkCopyToClipboard="Caaart">Copy</button> -->
                           </div>
                           <hr>
                           <div class="logOut">

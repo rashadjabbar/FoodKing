@@ -15,11 +15,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/services/user.service';
 import { UserCabinetComponent } from './user-cabinet/user-cabinet.component';
 import { environment } from 'src/environments/environments';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-public',
   templateUrl: './public.component.html',
   styleUrls: ['./public.component.scss'],
+
+
 })
 
 export class PublicComponent {
@@ -30,7 +34,8 @@ export class PublicComponent {
     private authService: AuthService,
     private globalService: GlobalService,
     private dialog: MatDialog,
-    private loginService: UserService
+    private loginService: UserService,
+    private toastr: ToastrService
 ) { 
     this.imageIpUrl = environment.imageIpUrl
  }
@@ -202,4 +207,10 @@ year = new Date().getFullYear();
     }
     
   }
+
+
+  copyCard(){
+    this.toastr.success('Hello, this is a success message!', 'Success');
+  }
+
 }

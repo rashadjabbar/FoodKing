@@ -15,6 +15,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
 import { PublicAuthModule } from './public-auth/public-auth.module';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ToastrModule } from 'ngx-toastr';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -36,6 +38,9 @@ export function tokenGetter() {
     PublicAuthModule,
     HttpClientModule,
     NgxSpinnerModule,
+    ClipboardModule,
+    ToastrModule.forRoot(), // ToastrModule added
+
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

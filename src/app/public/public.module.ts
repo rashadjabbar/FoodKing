@@ -27,6 +27,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ProductDetailComponent } from './home/product-detail/product-detail.component';
 import {MatIconModule} from '@angular/material/icon';
 import { DailyMealComponent } from './daily-meal/daily-meal.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +43,7 @@ import { DailyMealComponent } from './daily-meal/daily-meal.component';
     ClientOrderComponent,
     EditClientOrderComponent,
     ProductDetailComponent,
-    DailyMealComponent
+    DailyMealComponent,
   ],
   imports: [
     CommonModule,
@@ -55,8 +58,8 @@ import { DailyMealComponent } from './daily-meal/daily-meal.component';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatIconModule,
-
-
+    ClipboardModule,
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }

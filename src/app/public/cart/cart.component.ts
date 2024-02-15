@@ -92,6 +92,7 @@ export class CartComponent {
     if(event.target.value.includes('.')){
       this.basketItems[index].count = Number(Math.floor(this.basketItems[index].count ))
     }
+    this.calculateTotals();
   } 
 
   submitOrder(){
