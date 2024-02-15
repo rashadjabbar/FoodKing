@@ -251,3 +251,4 @@ function widthChangeCallback(myMediaQuery) {
 myMediaQuery.addEventListener('change', widthChangeCallback);
 
 widthChangeCallback(myMediaQuery);
+
