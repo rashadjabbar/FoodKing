@@ -32,7 +32,8 @@
             "styles": [
               "node_modules/ngx-spinner/animations/ball-circus.css",
               "src/assets/css/theme.scss",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "src/assets/js/libs.min.js"

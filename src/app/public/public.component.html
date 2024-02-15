@@ -77,7 +77,7 @@
                           <span>{{userData?.fullName}}</span>
                           <div class="wallet"  [ngStyle]="balance>=0? {'background-color':'#3bb77e' } : {'background-color':'red' }">
                             <i class="fa-thin fa-coins" style="color:white;"></i>
-                            <span (click)="copyCard()">{{balance | number : '1.2-2'}} ₼</span>
+                            <span (click)="copyCard()" cdkCopyToClipboard="CaaartCart">{{balance | number : '1.2-2'}} ₼</span>
                             <!-- <button cdkCopyToClipboard="Caaart">Copy</button> -->
                           </div>
                           <hr>

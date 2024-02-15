@@ -210,7 +210,9 @@ year = new Date().getFullYear();
 
 
   copyCard(){
-    this.toastr.success('Hello, this is a success message!', 'Success');
+    this.toastr.success('Ödəniş üçün kart kopyalandı!', '', {
+      positionClass: 'toast-bottom-right' 
+   });
   }
 
 }
