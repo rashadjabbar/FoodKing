@@ -39,6 +39,7 @@ import { DailyReportComponent } from './daily-report/daily-report.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { DailyProductNotesComponent } from './daily-report/daily-product-notes/daily-product-notes.component';
 import { ReportComponent } from './report/report.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,9 @@ import { ReportComponent } from './report/report.component';
     EditOrderPopupComponent,
     DailyReportComponent,
     DailyProductNotesComponent,
-    ReportComponent
+    ReportComponent,
+    
+
   ],
   imports: [
     CommonModule,
@@ -79,6 +82,7 @@ import { ReportComponent } from './report/report.component';
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule ,
+    NgApexchartsModule
   ],
   providers: [
     MatDatepickerModule,
