@@ -1,12 +1,26 @@
-<p>dashboard works!</p>
 
-<div id="chart">
-    <apx-chart
-      [series]="chartOptions.series!"
-      [chart]="chartOptions.chart!"
-      [labels]="chartOptions.labels!"
-      [responsive]="chartOptions.responsive!"
-    ></apx-chart>
-  </div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 chart">
+        <apx-chart
+        [series]="chartOptions.series!"
+        [chart]="chartOptions.chart!"
+        [labels]="chartOptions.labels!"
+        [responsive]="chartOptions.responsive!"
+      ></apx-chart>
+    </div>
+    <div class="col-lg-6 col-md-6 chart">
+        <apx-chart
+        [series]="chartOptions2.series2!"
+        [chart]="chartOptions2.chart2!"
+        [dataLabels]="chartOptions2.dataLabels2!"
+        [markers]="chartOptions2.markers2!"
+        [xaxis]="chartOptions2.xaxis2!"
+        [yaxis]="chartOptions2.yaxis2!"
+        [stroke]="chartOptions2.stroke2!"
+        [title]="chartOptions2.title2!"
+      ></apx-chart>
+    </div>
+</div>
+
   
   
