@@ -17,6 +17,7 @@ import { SpinnerInterceptor } from 'src/interceptor/spinner.interceptor';
 import { PublicAuthModule } from './public-auth/public-auth.module';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ToastrModule } from 'ngx-toastr';
+import { MatSortModule } from '@angular/material/sort';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -40,6 +41,7 @@ export function tokenGetter() {
     NgxSpinnerModule,
     ClipboardModule,
     ToastrModule.forRoot(), // ToastrModule added
+    MatSortModule,
 
     JwtModule.forRoot({
       config: {

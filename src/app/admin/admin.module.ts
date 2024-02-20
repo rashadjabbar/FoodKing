@@ -40,6 +40,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { DailyProductNotesComponent } from './daily-report/daily-product-notes/daily-product-notes.component';
 import { ReportComponent } from './report/report.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule ,
-    NgApexchartsModule
+    NgApexchartsModule,
+    MatSortModule
   ],
   providers: [
     MatDatepickerModule,

@@ -31,15 +31,25 @@ export type ChartOptions = {
   labels: any;
 };
 
-export type ChartOptions2 = {
-  series2: ApexAxisChartSeries;
-  chart2: ApexChart;
-  dataLabels2: ApexDataLabels;
-  stroke2: ApexStroke;
-  xaxis2: ApexXAxis;
-  yaxis2: ApexYAxis;
-  title2: ApexTitleSubtitle;
-  markers2: ApexMarkers;
+export type ChartOptionsProduct = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  xaxis: ApexXAxis;
+};
+
+export type ChartOptionsMounthly = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  dataLabels: ApexDataLabels;
+  grid: ApexGrid;
+  fill: ApexFill;
+  markers: ApexMarkers;
+  yaxis: ApexYAxis;
+  stroke: ApexStroke;
+  title: ApexTitleSubtitle;
 };
 
 @Component({
@@ -51,7 +61,8 @@ export class DashboardComponent {
 
    @ViewChild("chart") chart!: ChartComponent;
    public chartOptions!: Partial<ChartOptions>
-   public chartOptions2!: Partial<ChartOptions2>
+   public chartOptionsProduct!: Partial<ChartOptionsProduct>;
+   public chartOptionsMonthly!: Partial<ChartOptionsMounthly>
 
    constructor() {
      this.chartOptions = {
@@ -76,91 +87,117 @@ export class DashboardComponent {
        ]
      };
 
-
-
-     this.chartOptions2 = {
-      series2: [
+    //Product Statistic
+    this.chartOptionsProduct = {
+      series: [
         {
-          name: "New York Temperature",
-          data: [
-            {
-              x: "Jan",
-              y: [-2, 4]
-            },
-            {
-              x: "Feb",
-              y: [-1, 6]
-            },
-            {
-              x: "Mar",
-              y: [3, 10]
-            },
-            {
-              x: "Apr",
-              y: [8, 16]
-            },
-            {
-              x: "May",
-              y: [13, 22]
-            },
-            {
-              x: "Jun",
-              y: [18, 26]
-            },
-            {
-              x: "Jul",
-              y: [21, 29]
-            },
-            {
-              x: "Aug",
-              y: [21, 28]
-            },
-            {
-              x: "Sep",
-              y: [17, 24]
-            },
-            {
-              x: "Oct",
-              y: [11, 18]
-            },
-            {
-              x: "Nov",
-              y: [6, 12]
-            },
-            {
-              x: "Dec",
-              y: [1, 7]
-            }
-          ]
+          name: "basic",
+          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
         }
       ],
-      chart2: {
-        height: 350,
-        type: "rangeArea"
+      chart: {
+        type: "bar",
+        height: 350
       },
-      stroke2: {
-        curve: "straight"
-      },
-      title2: {
-        text: "New York Temperature (all year round)"
-      },
-      markers2: {
-        hover: {
-          sizeOffset: 5
+      plotOptions: {
+        bar: {
+          horizontal: true
         }
       },
-      dataLabels2: {
+      dataLabels: {
         enabled: false
       },
-      yaxis2: {
-        labels: {
-          formatter: (val) => {
-            return val + "°C";
-          }
+      xaxis: {
+        categories: [
+          "South Korea",
+          "Canada",
+          "United Kingdom",
+          "Netherlands",
+          "Italy",
+          "France",
+          "Japan",
+          "United States",
+          "China",
+          "Germany"
+        ]
+      }
+    };
+
+    this.chartOptionsMonthly = {
+      series: [
+        {
+          name: "Likes",
+          data: [4, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5, 13, 9, 17, 2, 7, 5]
+        }
+      ],
+      chart: {
+        height: 350,
+        type: "line"
+      },
+      stroke: {
+        width: 7,
+        curve: "smooth"
+      },
+      xaxis: {
+        type: "datetime",
+        categories: [
+          "1/11/2000",
+          "2/11/2000",
+          "3/11/2000",
+          "4/11/2000",
+          "5/11/2000",
+          "6/11/2000",
+          "7/11/2000",
+          "8/11/2000",
+          "9/11/2000",
+          "10/11/2000",
+          "11/11/2000",
+          "12/11/2000",
+          "1/11/2001",
+          "2/11/2001",
+          "3/11/2001",
+          "4/11/2001",
+          "5/11/2001",
+          "6/11/2001"
+        ]
+      },
+      title: {
+        text: "Social Media",
+        align: "left",
+        style: {
+          fontSize: "16px",
+          color: "#666"
+        }
+      },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shade: "dark",
+          gradientToColors: ["#FDD835"],
+          shadeIntensity: 1,
+          type: "horizontal",
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 100, 100, 100]
+        }
+      },
+      markers: {
+        size: 4,
+        colors: ["#FFA41B"],
+        strokeColors: "#fff",
+        strokeWidth: 2,
+        hover: {
+          size: 7
+        }
+      },
+      yaxis: {
+        min: -10,
+        max: 40,
+        title: {
+          text: "Engagement"
         }
       }
-    }; 
-
+    };
     
    }
 

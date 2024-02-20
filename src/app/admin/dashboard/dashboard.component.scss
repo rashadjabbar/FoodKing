@@ -1,5 +1,27 @@
 .chart {
     max-width: 650px;
     margin: 35px auto;
-    height: 100px;
+  }
+
+  .container-fluid{
+    background-color: #e1e4e4;
+  }
+
+  .headerDiv {
+    position: relative; /* Set position to relative */
+    background-color: white;
+  }
+  
+  .headerDiv::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0; /* Position the line to the right */
+    height: 100%; /* Make the line the full height of the box */
+    width: 1px; /* Width of the line */
+    background-color: black; /* Color of the line */
+  }
+  
+  .productDiv, .monthlyDiv{
+    background-color: white;
   }

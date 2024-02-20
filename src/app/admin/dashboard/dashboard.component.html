@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="row">
     <div class="col-lg-6 col-md-6 chart">
         <apx-chart
@@ -10,17 +10,70 @@
     </div>
     <div class="col-lg-6 col-md-6 chart">
         <apx-chart
-        [series]="chartOptions2.series2!"
-        [chart]="chartOptions2.chart2!"
-        [dataLabels]="chartOptions2.dataLabels2!"
-        [markers]="chartOptions2.markers2!"
-        [xaxis]="chartOptions2.xaxis2!"
-        [yaxis]="chartOptions2.yaxis2!"
-        [stroke]="chartOptions2.stroke2!"
-        [title]="chartOptions2.title2!"
+        [series]="chartOptionsmonthly.series!"
+        [chart]="chartOptionsmonthly.chart!"
+        [xaxis]="chartOptionsmonthly.xaxis!"
+        [dataLabels]="chartOptionsmonthly.dataLabels!"
+        [grid]="chartOptionsmonthly.grid!"
+        [stroke]="chartOptionsmonthly.stroke!"
+        [title]="chartOptionsmonthly.title!"
       ></apx-chart>
     </div>
 </div>
 
   
-  
+   -->
+
+
+<div class="container-fluid">
+  <div class="row p-2">
+    <div class="col-lg-8 col-md-8">
+      <div class="row headerDiv p-2">
+        <div class="col-lg-3">
+          <h5 class="d-flex justify-content-center">$ 302.1M</h5>
+          <span class="d-flex justify-content-center">Satish qiymeti</span>
+        </div>
+        <div class="col-lg-3">
+          <h5 class="d-flex justify-content-center">$ 302.1M</h5>
+          <span class="d-flex justify-content-center">Satish qiymeti</span>
+        </div>
+        <div class="col-lg-3">
+          <h5 class="d-flex justify-content-center">$ 302.1M</h5>
+          <span class="d-flex justify-content-center">Satish qiymeti</span>
+        </div>
+        <div class="col-lg-3">
+          <h5 class="d-flex justify-content-center">$ 302.1M</h5>
+          <span class="d-flex justify-content-center">Satish qiymeti</span>
+        </div>
+
+      </div>
+
+      <div class="row pt-3 mt-2 secondDiv">
+        <div class="col-lg-4 col-md-4 productDiv">
+          <div class="">
+            <div id="chart">
+              <apx-chart [series]="chartOptionsProduct.series!" [chart]="chartOptionsProduct.chart!"
+                [dataLabels]="chartOptionsProduct.dataLabels!" [plotOptions]="chartOptionsProduct.plotOptions!"
+                [xaxis]="chartOptionsProduct.xaxis!"></apx-chart>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-8 pe-0" style="float: right;">
+          <!--The content below is only a placeholder and can be replaced.-->
+          <div class="monthlyDiv">
+            <div id="chart">
+              <apx-chart [series]="chartOptionsMonthly.series!" [chart]="chartOptionsMonthly.chart!"
+                [xaxis]="chartOptionsMonthly.xaxis!" [dataLabels]="chartOptionsMonthly.dataLabels!"
+                [grid]="chartOptionsMonthly.grid!" [stroke]="chartOptionsMonthly.stroke!"
+                [title]="chartOptionsMonthly.title!" [markers]="chartOptionsMonthly.markers!"
+                [yaxis]="chartOptionsMonthly.yaxis!" [fill]="chartOptionsMonthly.fill!"></apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-md-8" style="background-color: blue;">
+
+    </div>
+  </div>
+</div>

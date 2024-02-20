@@ -16,6 +16,8 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import * as _moment from 'moment';
 import {default as _rollupMoment} from 'moment';
+import {MatSort, Sort} from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 const moment = _rollupMoment || _moment;
 
@@ -47,12 +49,14 @@ export class OrderComponent implements OnInit {
     private orderService: OrderService,
     private dialog: MatDialog,
     private router: Router,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private _liveAnnounce: LiveAnnouncer
   ) {
-   
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   activeRow: any = -1;
   selectedId: any = 0;
   length!: number;
@@ -71,11 +75,11 @@ export class OrderComponent implements OnInit {
   
   requestData: any = {
     nextPageNumber: 1,
-    visibleItemCount: 25,
+    visibleItemCount: 100,
   }
 
   pageSize: number = this.requestData.visibleItemCount;
-  pageSizeOptions: number[] = [10, 25, 50];
+  pageSizeOptions: number[] = [25, 100, 250];
   pageEvent!: PageEvent;
 
   range = new FormGroup({
@@ -87,13 +91,14 @@ export class OrderComponent implements OnInit {
     'select',
     'id',
     'no',
-    'status',
     'username',
     // 'categoryName',
     // 'subCategoryName',
+    'productList',
+    'itemCount',
     'serviceFee',
     'amount',
-    'itemCount',
+    'status',
     'createdDate',
   ];
 
@@ -103,6 +108,8 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
     this.getOrder()
+    
+
   }
 
   getOrder() {
@@ -110,8 +117,8 @@ export class OrderComponent implements OnInit {
     this.orderService.getOrder(this.requestData, this.range.controls.start.value, this.range.controls.end.value).subscribe({
       next: res => {
         this.dataSource = new MatTableDataSource<BrowseOrder>(res.data.result);
-
-        this.length = res.data.count
+        this.length = res.data.count;
+        this.dataSource.sort = this.sort;
       },
       error: res => {
         if (res.status == 401) {
@@ -124,6 +131,15 @@ export class OrderComponent implements OnInit {
         }
       }
     })
+  }
+
+  sortChange(sortState: Sort){
+    if(sortState.direction){
+      this._liveAnnounce.announce('sorted ${sortState.direction}ending');
+    }
+    else{
+      this._liveAnnounce.announce('sorted cleared');
+    }
   }
 
   search(){

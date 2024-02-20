@@ -47,9 +47,9 @@
 
 
 <div class="table-div">
-  <table mat-table [dataSource]="dataSource" class="text-center">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortChange($event)" class="text-center">
     <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef style="width: 7%;">
+      <th mat-header-cell *matHeaderCellDef>
         <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
           [indeterminate]="selection.hasValue() && !isAllSelected()">
         </mat-checkbox>
@@ -65,19 +65,19 @@
         paginator.pageSize) + (i + 1)}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="no">
-      <th mat-header-cell *matHeaderCellDef>Sifariş №</th>
+    <ng-container matColumnDef="no" style="width: 8%;">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifariş №</th>
       <td mat-cell *matCellDef="let element"> {{element.no}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="username">
-      <th mat-header-cell *matHeaderCellDef>Istifadəçi</th>
+    <ng-container matColumnDef="username" style="width: 11%;">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Istifadəçi</th>
       <td mat-cell *matCellDef="let element"> {{element.username}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    <ng-container matColumnDef="productList">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Məhsul</th>
+      <td mat-cell *matCellDef="let element"> {{element.productList}} </td>
     </ng-container>
 
     <!-- <ng-container matColumnDef="categoryName">
@@ -91,24 +91,29 @@
     </ng-container>-->
 
     <ng-container matColumnDef="itemCount">
-      <th mat-header-cell *matHeaderCellDef>Məhsul sayı</th>
-      <td mat-cell *matCellDef="let element"> {{element.itemCount}}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Məhsul sayı</th>
+      <td mat-cell *matCellDef="let element" class="text-center"> {{element.itemCount}}</td>
     </ng-container>
 
     <ng-container matColumnDef="serviceFee">
-      <th mat-header-cell *matHeaderCellDef  style="width: 12%;">Xidmət haqqı</th>
-      <td mat-cell *matCellDef="let element"> {{element.serviceFee}}  ₼</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Xidmət haqqı</th>
+      <td mat-cell *matCellDef="let element" class="text-center"> {{element.serviceFee}}  ₼</td>
     </ng-container> 
 
    
     <ng-container matColumnDef="amount">
-      <th mat-header-cell *matHeaderCellDef>Məbləğ</th>
-      <td mat-cell *matCellDef="let element"> {{element.amount}} ₼</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Məbləğ</th>
+      <td mat-cell *matCellDef="let element" class="text-center"> {{element.amount}} ₼</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let element" class="text-center"> {{element.status}} </td>
     </ng-container>
 
     <ng-container matColumnDef="createdDate">
-      <th mat-header-cell *matHeaderCellDef>Yaranma tarixi</th>
-      <td mat-cell *matCellDef="let element"> {{element.createdDate | date: 'dd-MM-yyyy HH:mm'}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Yaranma tarixi</th>
+      <td mat-cell *matCellDef="let element" class="text-center"> {{element.createdDate | date: 'dd-MM-yyyy HH:mm'}} </td>
     </ng-container>
 
 
