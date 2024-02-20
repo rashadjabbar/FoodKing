@@ -4087,7 +4087,7 @@ fieldset:disabled .btn {
     text-decoration: none;
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.25rem;
-    box-shadow: 0 0 0 0.25rem;
+    box-shadow: none;
 }
 .navbar-toggler-icon {
     display: inline-block;
@@ -4914,7 +4914,7 @@ fieldset:disabled .btn {
     border-color: #9ddbbf;
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.25rem rgba(59, 183, 126, 0.25);
-    box-shadow: 0 0 0 0.25rem rgba(59, 183, 126, 0.25);
+    box-shadow: none;
 }
 .accordion-header {
     margin-bottom: 0;

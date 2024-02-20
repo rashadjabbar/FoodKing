@@ -64,17 +64,17 @@ table {
 
 
 
-::ng-deep .mat-mdc-menu-item-text{
-  font-family: "Dosis" , sans-serif!important;
-  font-weight: 700!important;
+::ng-deep .mat-mdc-menu-item-text {
+  font-family: "Dosis", sans-serif !important;
+  font-weight: 700 !important;
   opacity: 0.75;
 }
 
 ::ng-deep .mat-mdc-menu-item-text i {
-  padding-right: 10px!important;
+  padding-right: 10px !important;
 }
 
-.category{
+.category {
   padding: 20px;
 }
 
@@ -115,7 +115,7 @@ table {
   display: block;
   background: #fff;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(154,153,153,0.75);
+  box-shadow: 0 2px 6px rgba(154, 153, 153, 0.75);
   transition: all 0.2s ease;
 }
 
@@ -134,15 +134,15 @@ table {
   transition: all 0.5s linear;
 }
 
-.checkbox-wrapper-51 input[type="checkbox"]:checked + .toggle:before {
+.checkbox-wrapper-51 input[type="checkbox"]:checked+.toggle:before {
   background: #1175c7;
 }
 
-.checkbox-wrapper-51 input[type="checkbox"]:checked + .toggle span {
+.checkbox-wrapper-51 input[type="checkbox"]:checked+.toggle span {
   transform: translateX(18px);
 }
 
-.checkbox-wrapper-51 input[type="checkbox"]:checked + .toggle span path {
+.checkbox-wrapper-51 input[type="checkbox"]:checked+.toggle span path {
   stroke: #000000;
   stroke-dasharray: 25;
   stroke-dashoffset: 25;
@@ -187,7 +187,7 @@ table {
   display: block;
   background: #fff;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(154,153,153,0.75);
+  box-shadow: 0 2px 6px rgba(154, 153, 153, 0.75);
   transition: all 0.2s ease;
 }
 
@@ -206,18 +206,25 @@ table {
   transition: all 0.5s linear;
 }
 
-.checkbox-wrapper-52 input[type="checkbox"]:checked + .toggle:before {
+.checkbox-wrapper-52 input[type="checkbox"]:checked+.toggle:before {
   background: #FFBE98;
 }
 
-.checkbox-wrapper-52 input[type="checkbox"]:checked + .toggle span {
+.checkbox-wrapper-52 input[type="checkbox"]:checked+.toggle span {
   transform: translateX(18px);
 }
 
-.checkbox-wrapper-52 input[type="checkbox"]:checked + .toggle span path {
+.checkbox-wrapper-52 input[type="checkbox"]:checked+.toggle span path {
   stroke: #000000;
   stroke-dasharray: 25;
   stroke-dashoffset: 25;
 }
 
-
+@media (max-width:641px) {
+  ::ng-deep.dialog-admin-product {
+    overflow: auto !important;
+    width: 100% !important;
+    max-width: 90vw !important;
+    position: inherit;
+  }
+}

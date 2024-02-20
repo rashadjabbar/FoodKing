@@ -1,6 +1,4 @@
-
-
-html{
+html {
   top: 0 !important;
   font-family: 'Inconsolata', monospace !important;
 
@@ -142,7 +140,7 @@ html{
   align-items: center;
 }
 
-.search-input{
+.search-input {
   width: 15%;
   margin-left: 3%;
 }
@@ -151,7 +149,33 @@ html{
   margin-right: 5%;
 }
 
-.disabled-button{
+.disabled-button {
   opacity: 0.3;
   cursor: none !important;
+}
+
+@media (max-width:641px) {
+  .search-input {
+    width: 35%;
+    margin-left: 3%;
+  }
+  
+  .table-div{
+    overflow: auto !important;
+  }
+
+  .range-date{
+    flex-direction: column !important;
+  }
+
+  
+  .form-container{
+    max-height: 80vh;
+    overflow: auto;
+  }
+
+  .navbar-nav{
+    padding-right: 0 !important;
+  }
+
 }

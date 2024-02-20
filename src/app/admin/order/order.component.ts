@@ -15,8 +15,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import * as _moment from 'moment';
-import {default as _rollupMoment} from 'moment';
-import {MatSort, Sort} from '@angular/material/sort';
+import { default as _rollupMoment } from 'moment';
+import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 const moment = _rollupMoment || _moment;
@@ -37,9 +37,9 @@ export const MY_FORMATS = {
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
   providers: [
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
 
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
 export class OrderComponent implements OnInit {
@@ -72,7 +72,7 @@ export class OrderComponent implements OnInit {
   selectedAllRow = false
 
   orderIds: any[] = [];
-  
+
   requestData: any = {
     nextPageNumber: 1,
     visibleItemCount: 100,
@@ -86,7 +86,7 @@ export class OrderComponent implements OnInit {
     start: new FormControl<string>(this.datePipe.transform(this.beginDate, 'yyyy-MM-dd')!), //this.beginDate.setMonth(this.beginDate.getMonth() - 1
     end: new FormControl<string>(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!),
   });
-  
+
   displayedColumns: string[] = [
     'select',
     'id',
@@ -108,7 +108,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
     this.getOrder()
-    
+
 
   }
 
@@ -133,16 +133,16 @@ export class OrderComponent implements OnInit {
     })
   }
 
-  sortChange(sortState: Sort){
-    if(sortState.direction){
+  sortChange(sortState: Sort) {
+    if (sortState.direction) {
       this._liveAnnounce.announce('sorted ${sortState.direction}ending');
     }
-    else{
+    else {
       this._liveAnnounce.announce('sorted cleared');
     }
   }
 
-  search(){
+  search() {
     this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
     this.range.controls.start.patchValue(this.datePipe.transform(this.range.controls.start.value, 'yyyy-MM-dd')!)
     if (this.range.controls.end.value == null) {
@@ -163,7 +163,7 @@ export class OrderComponent implements OnInit {
   highlight(index: number, id: number): void {
     if (!this.isActive(index)) {
       this.activeRow = index;
-     // this.selectedId = id;
+      // this.selectedId = id;
     }
     else {
       this.activeRow = -1;
@@ -178,7 +178,7 @@ export class OrderComponent implements OnInit {
 
   }
 
-  
+
 
 
   isAllSelected() {
@@ -229,6 +229,7 @@ export class OrderComponent implements OnInit {
         height: 'max-content',
         width: '20%',
         hasBackdrop: true,
+        panelClass: "dialog-admin-order",
         disableClose: true,
         autoFocus: false
       })
@@ -245,18 +246,19 @@ export class OrderComponent implements OnInit {
         height: 'max-content',
         width: '50%',
         hasBackdrop: true,
+        panelClass: "dialog-admin-edit-order",
         disableClose: true,
         autoFocus: false
       })
 
       dialogRef.afterClosed().subscribe(result => {
-       this.refreshBrowse();
+        this.refreshBrowse();
       });
     }
   }
 
 
-  refreshBrowse(){
+  refreshBrowse() {
     this.selection.clear()
     this.highlightedRows = []
     this.highlightedRowss = {}

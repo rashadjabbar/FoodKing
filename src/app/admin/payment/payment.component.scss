@@ -162,6 +162,15 @@
     width: 35%;
     margin-left: 3%;
   }
+
+  @media (max-width:641px) {
+    ::ng-deep.dialog-admin-payment{
+      overflow: auto !important;
+      width: 100% !important;
+      max-width: 90vw !important;
+      position: inherit;
+    }
+  }
   
   
   

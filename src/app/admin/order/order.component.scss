@@ -158,3 +158,13 @@
     stroke-dashoffset: 25;
   }
   
+  @media (max-width:641px) {
+    ::ng-deep.dialog-admin-order,
+    ::ng-deep.dialog-admin-edit-order {
+        overflow: auto !important;
+        width: 100% !important;
+        max-width: 90vw !important;
+        position: inherit;
+    }
+
+  }

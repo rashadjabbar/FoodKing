@@ -95,6 +95,7 @@ export class AddProductComponent implements OnInit {
         height: 'max-content',
         width: '50%',
         hasBackdrop: true,
+        panelClass: "dialog-admin-product",
         disableClose: true
       })
       dialogRef.afterClosed().subscribe(result => {

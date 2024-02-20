@@ -158,6 +158,7 @@ export class PaymentComponent implements OnInit {
         height: 'max-content',
         width: '30%',
         hasBackdrop: true,
+        panelClass: "dialog-admin-payment",
         disableClose: true
       })
       dialogRef.afterClosed().subscribe(result => {
