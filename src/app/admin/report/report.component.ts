@@ -34,10 +34,10 @@ export class ReportComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'name',
-    'orderAmount',
-    'paymentAmount',
-    'avansAmount',
     'debtAmount',
+    'avansAmount',
+    'paymentAmount',
+    'orderAmount',
   ];
 
   ngOnInit() {

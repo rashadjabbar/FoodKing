@@ -46,7 +46,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["192.168.37.49:3004", "89.147.203.83:3004"],
+        allowedDomains: ["192.168.37.32:80", "192.168.37.32:443", "foodking.program.az"],
       },
     }),
   ],

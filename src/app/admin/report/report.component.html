@@ -15,14 +15,12 @@
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="orderAmount">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifariş məbləği</th>
-      <td mat-cell *matCellDef="let element"> {{element.orderAmount}} ₼</td>
-    </ng-container>
-
-    <ng-container matColumnDef="paymentAmount">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ödəniş məbləği</th>
-      <td mat-cell *matCellDef="let element"> {{element.paymentAmount}} ₼</td>
+    <ng-container matColumnDef="debtAmount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Borc məbləği</th>
+      <td mat-cell *matCellDef="let element"> 
+        <span *ngIf="element.debtAmount !== 0" style="color: red; font-weight: bold;">{{element.debtAmount }} ₼</span>
+        <span *ngIf="element.debtAmount == 0">{{element.debtAmount }} ₼</span>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="avansAmount">
@@ -30,14 +28,16 @@
       <td mat-cell *matCellDef="let element"> {{element.avansAmount }} ₼</td>
     </ng-container>
 
-    <ng-container matColumnDef="debtAmount">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Borc məbləği</th>
-      <td mat-cell *matCellDef="let element"> 
-        <span *ngIf="element.debtAmount !== 0" style="color: red; font-weight: bold;">{{element.debtAmount }} ₼</span>
-        <span *ngIf="element.debtAmount == 0">{{element.debtAmount }} ₼</span>
-
-      </td>
+    <ng-container matColumnDef="paymentAmount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ödəniş məbləği</th>
+      <td mat-cell *matCellDef="let element"> {{element.paymentAmount}} ₼</td>
     </ng-container>
+
+    <ng-container matColumnDef="orderAmount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifariş məbləği</th>
+      <td mat-cell *matCellDef="let element"> {{element.orderAmount}} ₼</td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" [attr.data-index]="i">
     </tr>

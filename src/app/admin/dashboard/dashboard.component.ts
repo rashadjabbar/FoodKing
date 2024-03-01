@@ -31,7 +31,7 @@ export type ChartOptions = {
   labels: any;
 };
 
-export type ChartOptionsProduct = {
+export type chartOptionsCategory = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   dataLabels: ApexDataLabels;
@@ -52,6 +52,13 @@ export type ChartOptionsMounthly = {
   title: ApexTitleSubtitle;
 };
 
+export type chartOptionsProduct = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: ApexResponsive[];
+  labels: any;
+};
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -61,34 +68,14 @@ export class DashboardComponent {
 
    @ViewChild("chart") chart!: ChartComponent;
    public chartOptions!: Partial<ChartOptions>
-   public chartOptionsProduct!: Partial<ChartOptionsProduct>;
+   public chartOptionsCategory!: Partial<chartOptionsCategory>;
    public chartOptionsMonthly!: Partial<ChartOptionsMounthly>
+   public chartOptionsProduct!: Partial<chartOptionsProduct>
 
    constructor() {
-     this.chartOptions = {
-       series: [44, 55, 13, 43, 22],
-       chart: {
-         width: 380,
-         type: "donut"
-       },
-       labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
-       responsive: [
-         {
-           breakpoint: 480,
-           options: {
-             chart: {
-               width: 200
-             },
-             legend: {
-               position: "bottom"
-             }
-           }
-         }
-       ]
-     };
 
     //Product Statistic
-    this.chartOptionsProduct = {
+    this.chartOptionsCategory = {
       series: [
         {
           name: "basic",
@@ -97,7 +84,7 @@ export class DashboardComponent {
       ],
       chart: {
         type: "bar",
-        height: 350
+        height: 430
       },
       plotOptions: {
         bar: {
@@ -105,7 +92,7 @@ export class DashboardComponent {
         }
       },
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       xaxis: {
         categories: [
@@ -120,7 +107,7 @@ export class DashboardComponent {
           "China",
           "Germany"
         ]
-      }
+      },
     };
 
     this.chartOptionsMonthly = {
@@ -131,7 +118,7 @@ export class DashboardComponent {
         }
       ],
       chart: {
-        height: 350,
+        height: 430,
         type: "line"
       },
       stroke: {
@@ -197,6 +184,28 @@ export class DashboardComponent {
           text: "Engagement"
         }
       }
+    };
+
+    this.chartOptionsProduct = {
+      series: [44, 55, 13, 43, 22],
+      chart: {
+        width: 380,
+        type: "pie"
+      },
+      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
     };
     
    }

@@ -158,10 +158,10 @@ export class EditClientOrderComponent implements OnInit {
     }
     showConfirmAlert('', "Seçilmiş sətri silmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res => {
       if (res.isConfirmed) {
-        this.calculateAmountAndServiceFee();
-
+        
         this.orders.splice(index, 1);
         this.orders = [...this.orders]
+        this.calculateAmountAndServiceFee();
       }
     })
 

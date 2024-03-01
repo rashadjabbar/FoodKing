@@ -1,60 +1,33 @@
-<!-- 
-<div class="row">
-    <div class="col-lg-6 col-md-6 chart">
-        <apx-chart
-        [series]="chartOptions.series!"
-        [chart]="chartOptions.chart!"
-        [labels]="chartOptions.labels!"
-        [responsive]="chartOptions.responsive!"
-      ></apx-chart>
-    </div>
-    <div class="col-lg-6 col-md-6 chart">
-        <apx-chart
-        [series]="chartOptionsmonthly.series!"
-        [chart]="chartOptionsmonthly.chart!"
-        [xaxis]="chartOptionsmonthly.xaxis!"
-        [dataLabels]="chartOptionsmonthly.dataLabels!"
-        [grid]="chartOptionsmonthly.grid!"
-        [stroke]="chartOptionsmonthly.stroke!"
-        [title]="chartOptionsmonthly.title!"
-      ></apx-chart>
-    </div>
-</div>
-
-  
-   -->
-
-
 <div class="container-fluid">
   <div class="row p-2">
     <div class="col-lg-8 col-md-8">
       <div class="row headerDiv p-2">
         <div class="col-lg-3">
-          <h5 class="d-flex justify-content-center">$ 302.1M</h5>
+          <h4 class="d-flex justify-content-center">$ 302.1M</h4>
           <span class="d-flex justify-content-center">Satish qiymeti</span>
         </div>
         <div class="col-lg-3">
-          <h5 class="d-flex justify-content-center">$ 302.1M</h5>
+          <h4 class="d-flex justify-content-center">$ 302.1M</h4>
           <span class="d-flex justify-content-center">Satish qiymeti</span>
         </div>
         <div class="col-lg-3">
-          <h5 class="d-flex justify-content-center">$ 302.1M</h5>
+          <h4 class="d-flex justify-content-center">$ 302.1M</h4>
           <span class="d-flex justify-content-center">Satish qiymeti</span>
         </div>
         <div class="col-lg-3">
-          <h5 class="d-flex justify-content-center">$ 302.1M</h5>
+          <h4 class="d-flex justify-content-center">$ 302.1M</h4>
           <span class="d-flex justify-content-center">Satish qiymeti</span>
         </div>
 
       </div>
 
-      <div class="row pt-3 mt-2 secondDiv">
-        <div class="col-lg-4 col-md-4 productDiv">
+      <div class="row pt-3 mt-1 secondDiv">
+        <div class="col-lg-4 col-md-4 categoryDiv">
           <div class="">
             <div id="chart">
-              <apx-chart [series]="chartOptionsProduct.series!" [chart]="chartOptionsProduct.chart!"
-                [dataLabels]="chartOptionsProduct.dataLabels!" [plotOptions]="chartOptionsProduct.plotOptions!"
-                [xaxis]="chartOptionsProduct.xaxis!"></apx-chart>
+              <apx-chart [series]="chartOptionsCategory.series!" [chart]="chartOptionsCategory.chart!"
+                [dataLabels]="chartOptionsCategory.dataLabels!" [plotOptions]="chartOptionsCategory.plotOptions!"
+                [xaxis]="chartOptionsCategory.xaxis!"></apx-chart>
             </div>
           </div>
         </div>
@@ -72,7 +45,35 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-8 col-md-8" style="background-color: blue;">
+    <div class="col-lg-4 col-md-4">
+      <div class="row saleHuman ms-1">
+        <h5 class="text-center">Sales by division</h5>
+
+        <div class="col-lg-4 col-md-4">
+          <img src="../../../assets/images/thomasshelby.jpg" width="125" alt="thomas-shelby">
+          <span class="d-flex justify-content-center sale">$ 193.45</span>
+          <span class="d-flex justify-content-center gender">Woman</span>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <img src="../../../assets/images/harley-quinn.jpg" width="125"  alt="harley-quinn">
+          <span class="d-flex justify-content-center sale">$ 193.45</span>
+          <span class="d-flex justify-content-center gender">Woman</span>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <img src="../../../assets/images/harley-quinn.jpg" width="125"  alt="harley-quinn">
+          <span class="d-flex justify-content-center sale">$ 193.45</span>
+          <span class="d-flex justify-content-center gender">Woman</span>
+        </div>
+      </div>
+
+      <div class="row mt-3 ms-1 productDiv">
+        <apx-chart
+        [series]="chartOptionsProduct.series!"
+        [chart]="chartOptionsProduct.chart!"
+        [labels]="chartOptionsProduct.labels!"
+        [responsive]="chartOptionsProduct.responsive!"
+       ></apx-chart>
+      </div>
 
     </div>
   </div>

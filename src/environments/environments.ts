@@ -1,6 +1,6 @@
 
 // const localIp = 'http://192.168.37.49:3004'
-const localIp = 'http://89.147.203.83:3004'
+const localIp = 'https://foodking.program.az'
 
 const categoryIp = `${localIp}/cardoperations/api/`
 const productIp = `${localIp}/cardoperations/api/Product`

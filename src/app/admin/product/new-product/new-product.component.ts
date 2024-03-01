@@ -43,6 +43,8 @@ export class NewProductComponent implements OnInit {
     subCategoryId: [0, Validators.required],
     name: ['', Validators.required],
     price: ['', Validators.required],
+    salePrice: [''],
+    salePercentage: [''],
     fileName: ['', Validators.required],
     downloadKey: [''],
     information: [''],
