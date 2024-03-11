@@ -11,7 +11,7 @@ import { showErrorAlert, showInfoAlert } from 'src/utils/alert';
 @Component({
   selector: 'app-user-cabinet',
   templateUrl: './user-cabinet.component.html',
-  styleUrls: ['./user-cabinet.component.scss']
+  styleUrls: ['./user-cabinet.component.scss'],
 })
 export class UserCabinetComponent {
   constructor(
@@ -34,7 +34,7 @@ export class UserCabinetComponent {
     username: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
     phone1: [''],
-
+    subscription: ['']
   })
 
   get cf(): { [key: string]: AbstractControl } {

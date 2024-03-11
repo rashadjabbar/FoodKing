@@ -18,6 +18,7 @@ import { PublicAuthModule } from './public-auth/public-auth.module';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ToastrModule } from 'ngx-toastr';
 import { MatSortModule } from '@angular/material/sort';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -42,6 +43,7 @@ export function tokenGetter() {
     ClipboardModule,
     ToastrModule.forRoot(), // ToastrModule added
     MatSortModule,
+    MatCheckboxModule,
 
     JwtModule.forRoot({
       config: {

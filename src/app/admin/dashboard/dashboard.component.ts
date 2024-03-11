@@ -23,12 +23,16 @@ import {
 import { ElementRef } from '@angular/core';
 import { ApexOptions } from 'ng-apexcharts';
 import { ChartType } from 'ngx-apexcharts';
+import { DashboardService } from 'src/services/dashboard.service';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
   responsive: ApexResponsive[];
   labels: any;
+  
+
+  headerTotals: any;
 };
 
 export type chartOptionsCategory = {
@@ -65,6 +69,7 @@ export type chartOptionsProduct = {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+  
 
    @ViewChild("chart") chart!: ChartComponent;
    public chartOptions!: Partial<ChartOptions>
@@ -72,7 +77,9 @@ export class DashboardComponent {
    public chartOptionsMonthly!: Partial<ChartOptionsMounthly>
    public chartOptionsProduct!: Partial<chartOptionsProduct>
 
-   constructor() {
+   constructor(
+    private dashboardService: DashboardService,
+   ) {
 
     //Product Statistic
     this.chartOptionsCategory = {
@@ -114,7 +121,7 @@ export class DashboardComponent {
       series: [
         {
           name: "Likes",
-          data: [4, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5, 13, 9, 17, 2, 7, 5]
+          data: [750.35, 238.69]
         }
       ],
       chart: {
@@ -126,26 +133,10 @@ export class DashboardComponent {
         curve: "smooth"
       },
       xaxis: {
-        type: "datetime",
+        type: "category",
         categories: [
-          "1/11/2000",
-          "2/11/2000",
-          "3/11/2000",
-          "4/11/2000",
-          "5/11/2000",
-          "6/11/2000",
-          "7/11/2000",
-          "8/11/2000",
-          "9/11/2000",
-          "10/11/2000",
-          "11/11/2000",
-          "12/11/2000",
-          "1/11/2001",
-          "2/11/2001",
-          "3/11/2001",
-          "4/11/2001",
-          "5/11/2001",
-          "6/11/2001"
+          "Feb-24",
+          "Mar-24"
         ]
       },
       title: {
@@ -179,7 +170,7 @@ export class DashboardComponent {
       },
       yaxis: {
         min: -10,
-        max: 40,
+        max: 1000,
         title: {
           text: "Engagement"
         }
@@ -207,9 +198,12 @@ export class DashboardComponent {
         }
       ]
     };
+
+
     
    }
 
 
  
 }
+

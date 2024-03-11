@@ -29,7 +29,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { DailyMealComponent } from './daily-meal/daily-meal.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ToastrModule } from 'ngx-toastr';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatAutocompleteModule,
     MatIconModule,
     ClipboardModule,
-    ToastrModule.forRoot() // ToastrModule added
+    ToastrModule.forRoot(), // ToastrModule added
+    MatCheckboxModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }

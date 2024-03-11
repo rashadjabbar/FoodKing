@@ -8,6 +8,7 @@ import { ProductCategoryComponent } from '../../product-category/product-categor
 import Swal from 'sweetalert2';
 import { ComboBox } from 'src/models/category';
 import { environment } from 'src/environments/environments';
+import { GlobalService } from 'src/services/global.service';
 
 @Component({
   selector: 'app-new-product',
@@ -42,8 +43,8 @@ export class NewProductComponent implements OnInit {
     id: [0, Validators.required],
     subCategoryId: [0, Validators.required],
     name: ['', Validators.required],
-    price: ['', Validators.required],
-    salePrice: [''],
+    purchasePrice: ['', Validators.required],
+    price: [''],
     salePercentage: [''],
     fileName: ['', Validators.required],
     downloadKey: [''],
@@ -103,6 +104,12 @@ export class NewProductComponent implements OnInit {
     })
   }
 
+  getSalePrice(){
+    this.productService.getSalePrice({subCategoryId: Number(this.productForm.controls['subCategoryId'].value), purchasePrice: Number(this.productForm.controls['purchasePrice'].value )}).subscribe((res: any) => {
+       this.productForm.controls['price'].patchValue(res.data.salePrice);
+       this.productForm.controls['salePercentage'].patchValue(res.data.percentage)
+    })
+  }
 
 
 }

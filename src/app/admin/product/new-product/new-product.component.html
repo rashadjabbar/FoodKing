@@ -32,13 +32,13 @@
             <div class="col-lg-6">
                 <mat-form-field class="example-full-width">
                     <mat-label>Qiymət</mat-label>
-                    <input type="number" matInput formControlName="price" required>
+                    <input type="number" matInput formControlName="purchasePrice" (change)="getSalePrice()" required>
                 </mat-form-field>
             </div>
             <div class="col-lg-6">
                 <mat-form-field class="example-full-width">
                     <mat-label>Satış qiyməti</mat-label>
-                    <input type="number" matInput formControlName="salePrice" readonly="true">
+                    <input type="number" matInput formControlName="price" readonly="true">
                 </mat-form-field>
             </div>
         </div>

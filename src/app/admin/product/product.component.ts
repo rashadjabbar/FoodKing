@@ -34,6 +34,8 @@ export class AddProductComponent implements OnInit {
     'productName',
     'categoryName',
     'subCategoryName',
+    'purchasePrice',
+    'percentage',
     'price',
     'currentAvailability',
     'status'

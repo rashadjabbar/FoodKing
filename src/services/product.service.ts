@@ -71,4 +71,8 @@ export class ProductService {
   getDailyProducts(): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}GetDailyProducts`, null );
   }
+
+  getSalePrice(model: { subCategoryId: number, purchasePrice: number }) {
+    return this.http.post<any>(`${this.baseUrl}GetSalePrice`, model );
+  }
 }
