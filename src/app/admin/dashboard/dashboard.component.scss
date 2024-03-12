@@ -43,3 +43,59 @@
    font-weight: normal; 
    font-family: 'Signika', sans-serif; 
 }
+
+.range-date{
+  display: flex;
+  margin-left: 2%;
+}
+
+.search-input{
+  width: 35%;
+  margin-left: 3%;
+}
+
+.clock-small {
+  font-size: 30px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  text-align: center;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Adjust the margin as needed */
+  height: 60px;
+}
+
+
+.clock-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Adjust the height as needed */
+}
+
+.clock {
+  font-family: 'Roboto', sans-serif;
+  font-size: 25px;
+  color: #fff;
+  text-align: center;
+  background-color: #5161ce;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  width: 500px; /* Adjust the width as needed */
+}
+
+.digit {
+  display: inline-block;
+  padding: 5px;
+  background-color: #64b5f6; /* Adjust color as needed */
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.colon {
+  display: inline-block;
+  padding: 0 20px;
+  color: #64b5f6; /* Adjust color as needed */
+}

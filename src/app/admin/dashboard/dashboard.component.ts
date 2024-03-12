@@ -24,14 +24,15 @@ import { ElementRef } from '@angular/core';
 import { ApexOptions } from 'ng-apexcharts';
 import { ChartType } from 'ngx-apexcharts';
 import { DashboardService } from 'src/services/dashboard.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { Subscription, timer } from "rxjs";
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
   responsive: ApexResponsive[];
   labels: any;
-  
-
   headerTotals: any;
 };
 
@@ -69,7 +70,6 @@ export type chartOptionsProduct = {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  
 
    @ViewChild("chart") chart!: ChartComponent;
    public chartOptions!: Partial<ChartOptions>
@@ -77,8 +77,23 @@ export class DashboardComponent {
    public chartOptionsMonthly!: Partial<ChartOptionsMounthly>
    public chartOptionsProduct!: Partial<chartOptionsProduct>
 
+   time = new Date();
+   intervalId;
+   subscription!: Subscription;
+
+   totalAmounts!: any [];
+
+   beginDate: any = new Date();
+   endDate: any = new Date()
+
+   range = new FormGroup({
+    start: new FormControl<string>(this.datePipe.transform(this.beginDate, 'yyyy-MM-dd')!), //this.beginDate.setMonth(this.beginDate.getMonth() - 1
+    end: new FormControl<string>(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!),
+  });
+
    constructor(
     private dashboardService: DashboardService,
+    private datePipe: DatePipe,
    ) {
 
     //Product Statistic
@@ -198,11 +213,41 @@ export class DashboardComponent {
         }
       ]
     };
-
-
     
    }
 
+   ngOnInit() {
+    // Using Basic Interval
+    this.intervalId = setInterval(() => {
+      this.time = new Date();
+    }, 1000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+   getDashboardInfo(){
+    this.dashboardService.getDashboardInfo({beginDate: '2024', endDate: '2024'}).subscribe((res: any) => {
+       this.totalAmounts = res.data
+    })
+  }
+
+  selectToday() {
+    this.range.controls.end.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+    this.range.controls.start.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+  }
+
+  search() {
+    this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
+    this.range.controls.start.patchValue(this.datePipe.transform(this.range.controls.start.value, 'yyyy-MM-dd')!)
+    if (this.range.controls.end.value == null) {
+      this.range.controls.end.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+    }
+  }
 
  
 }
