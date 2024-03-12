@@ -94,6 +94,10 @@
     width: 1px; /* Width of the line */
     background-color: black; /* Color of the line */
   }
+
+  .headerDiv span{
+    font-size: 12px;
+  }
   
   .categoryDiv, .monthlyDiv, .saleHuman, .productDiv{
     background-color: white;
@@ -122,19 +126,6 @@
   margin-left: 2%;
 }
 
-.clock-small {
-  font-size: 30px;
-  font-family: Arial, sans-serif;
-  color: #333;
-  text-align: center;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px; /* Adjust the margin as needed */
-  height: 60px;
-}
-
-
 .clock-container {
   display: flex;
   justify-content: center;
@@ -153,11 +144,11 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   min-width: 185px;
   max-width: 186px;
-  height: 60px;
+  height: 50px;
 }
 
 .date {
-  height: 60px;
+  height: 50px;
   background-color: #5161ce;
   color: #fff;
   display: flex;

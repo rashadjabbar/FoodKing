@@ -106,7 +106,7 @@ export class DashboardComponent {
       ],
       chart: {
         type: "bar",
-        height: 430
+        height: 400
       },
       plotOptions: {
         bar: {
@@ -140,7 +140,7 @@ export class DashboardComponent {
         }
       ],
       chart: {
-        height: 430,
+        height: 400,
         type: "line"
       },
       stroke: {
