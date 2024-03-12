@@ -1,40 +1,10 @@
 <div class="container-fluid">
   <div class="row p-2">
 
-    <div class="col-lg-8 col-md-8">
-      <div class="row">
-        <div class="col-lg-6 col-md-6">
-          <div class="range-date">
-            <mat-form-field>
-              <mat-label>Enter a date range</mat-label>
-              <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-                <input matStartDate formControlName="start" readonly placeholder="Start date" (click)="picker.open()">
-                <input matEndDate formControlName="end" readonly placeholder="End date" (click)="picker.open()">
-              </mat-date-range-input>
-              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-date-range-picker #picker>
-                <mat-datepicker-actions>
-                  <button mat-raised-button matDatepickerApply (click)="selectToday()">Today</button>
-                  <button mat-raised-button color="primary" matDatepickerApply (click)="search()">
-                    Apply
-                  </button>
-                </mat-datepicker-actions>
-              </mat-date-range-picker>
-              <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-              <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-            </mat-form-field>
-            <div class="search-input">
-              <button mat-raised-button color="primary">Primary</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="col-lg-6 col-md-6 clock-small bg-light p-2 rounded">
-          {{ time | date: 'HH:mm:ss' }}
-        </div> -->
-
-        <div class="clock-container col-lg-6 col-md-6 ">
-          <div class="clock">
+    <div class="col-md-8">
+      <div class="row my-2">
+        <div class="col-md-2 mt-1" style="min-width: 210px;">
+          <div class="clock d-flex justify-content-between align-items-center">
             <div class="digit hours">{{ time | date: 'HH' }}</div>
             <div class="colon">:</div>
             <div class="digit minutes">{{ time | date: 'mm' }}</div>
@@ -42,56 +12,78 @@
             <div class="digit seconds">{{ time | date: 'ss' }}</div>
           </div>
         </div>
-        
-        
-      </div>
 
-
-
-      <div class="row headerDiv p-2">
-        <div class="col-lg-3">
-          <h4 class="d-flex justify-content-center">$ 302.1M</h4>
-          <span class="d-flex justify-content-center">Müştərilər</span>
-        </div>
-        <div class="col-lg-3">
-          <h4 class="d-flex justify-content-center">$ 302.1M</h4>
-          <span class="d-flex justify-content-center">Satish Məbləği</span>
-        </div>
-        <div class="col-lg-3">
-          <h4 class="d-flex justify-content-center">$ 302.1M</h4>
-          <span class="d-flex justify-content-center">Ödəniş Məbləği</span>
-        </div>
-        <div class="col-lg-3">
-          <h4 class="d-flex justify-content-center">$ 302.1M</h4>
-          <span class="d-flex justify-content-center">Günlük Abarot</span>
-        </div>
-
-      </div>
-
-      <div class="row pt-3 mt-1 secondDiv">
-        <div class="col-lg-4 col-md-4 categoryDiv">
-          <div class="">
-            <div id="chart">
-              <apx-chart [series]="chartOptionsCategory.series!" [chart]="chartOptionsCategory.chart!"
-                [dataLabels]="chartOptionsCategory.dataLabels!" [plotOptions]="chartOptionsCategory.plotOptions!"
-                [xaxis]="chartOptionsCategory.xaxis!"></apx-chart>
+        <div class="mt-1 col-md-4 ms-1 p-0 row align-items-center">
+          <div class="date col-sm-9">
+            <div class="field col-lg-12">
+              <mat-form-field class="col-md-12" style="margin: 14px 0 0 0;">
+                <mat-date-range-input style="color: #fff !important;" class="mt-3" [formGroup]="range"
+                  [rangePicker]="picker">
+                  <input style="font-size: 17px;" matStartDate formControlName="start" readonly placeholder="Start date"
+                    (click)="picker.open()">
+                  <input style="font-size: 17px;" matEndDate formControlName="end" readonly placeholder="End date"
+                    (click)="picker.open()">
+                </mat-date-range-input>
+                <mat-datepicker-toggle style="color: #fff !important;" class="mt-3" matIconSuffix
+                  [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker style="color: #fff !important;" class="mt-3" #picker></mat-date-range-picker>
+              </mat-form-field>
             </div>
           </div>
+          <div class="col-sm-3">
+            <button class="filter-btn col-sm-12">
+              <i class="fa-regular fa-magnifying-glass"></i>
+            </button>
+          </div>
         </div>
-        <div class="col-lg-8 col-md-8 pe-0" style="float: right;">
-          <!--The content below is only a placeholder and can be replaced.-->
-          <div class="monthlyDiv">
-            <div id="chart">
-              <apx-chart [series]="chartOptionsMonthly.series!" [chart]="chartOptionsMonthly.chart!"
-                [xaxis]="chartOptionsMonthly.xaxis!" [dataLabels]="chartOptionsMonthly.dataLabels!"
-                [grid]="chartOptionsMonthly.grid!" [stroke]="chartOptionsMonthly.stroke!"
-                [title]="chartOptionsMonthly.title!" [markers]="chartOptionsMonthly.markers!"
-                [yaxis]="chartOptionsMonthly.yaxis!" [fill]="chartOptionsMonthly.fill!"></apx-chart>
+
+      </div>
+
+      <div class="px-2">
+        <div class="row headerDiv p-2 mt-3">
+          <div class="col-lg-3">
+            <h4 class="d-flex justify-content-center">$ 302.1M</h4>
+            <span class="d-flex justify-content-center">Müştərilər</span>
+          </div>
+          <div class="col-lg-3">
+            <h4 class="d-flex justify-content-center">$ 302.1M</h4>
+            <span class="d-flex justify-content-center">Satish Məbləği</span>
+          </div>
+          <div class="col-lg-3">
+            <h4 class="d-flex justify-content-center">$ 302.1M</h4>
+            <span class="d-flex justify-content-center">Ödəniş Məbləği</span>
+          </div>
+          <div class="col-lg-3">
+            <h4 class="d-flex justify-content-center">$ 302.1M</h4>
+            <span class="d-flex justify-content-center">Günlük Abarot</span>
+          </div>
+        </div>
+
+        <div class="row pt-3 mt-1 secondDiv">
+          <div class="col-lg-4 col-md-4 categoryDiv">
+            <div class="">
+              <div id="chart">
+                <apx-chart [series]="chartOptionsCategory.series!" [chart]="chartOptionsCategory.chart!"
+                  [dataLabels]="chartOptionsCategory.dataLabels!" [plotOptions]="chartOptionsCategory.plotOptions!"
+                  [xaxis]="chartOptionsCategory.xaxis!"></apx-chart>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 col-md-8 pe-0" style="float: right;">
+            <div class="monthlyDiv">
+              <div id="chart">
+                <apx-chart [series]="chartOptionsMonthly.series!" [chart]="chartOptionsMonthly.chart!"
+                  [xaxis]="chartOptionsMonthly.xaxis!" [dataLabels]="chartOptionsMonthly.dataLabels!"
+                  [grid]="chartOptionsMonthly.grid!" [stroke]="chartOptionsMonthly.stroke!"
+                  [title]="chartOptionsMonthly.title!" [markers]="chartOptionsMonthly.markers!"
+                  [yaxis]="chartOptionsMonthly.yaxis!" [fill]="chartOptionsMonthly.fill!"></apx-chart>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <div class="col-lg-4 col-md-4">
       <div class="row saleHuman ms-1">
         <h5 class="text-center">Sales by division</h5>

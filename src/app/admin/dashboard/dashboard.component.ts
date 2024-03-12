@@ -4,7 +4,7 @@ import {
   ApexAxisChartSeries,
   ApexChart,
   ApexXAxis,
-  ApexTitleSubtitle,
+  ApexTitleSubtitle, 
   ApexDataLabels,
   ApexLegend,
   ApexFill,
