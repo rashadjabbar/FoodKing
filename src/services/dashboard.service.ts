@@ -13,11 +13,12 @@ import { RequestData } from 'src/models/request';
 
     constructor(private http: HttpClient) { }
   
-    baseUrl = environment.apibasketUrl;
+    baseUrl = environment.apiReportUrl;
   
     getDashboardInfo(beginDate?: any, endDate?: any): Observable<any> {
-      return this.http.get<any>(`${this.baseUrl}GetOrders?beginDate=${beginDate}&endDate=${endDate}` );
+      return this.http.get<any>(`${this.baseUrl}Report/GetDashboardInfo?beginDate=${beginDate}&endDate=${endDate}` );
     }
+    
 
   }
   

@@ -27,7 +27,25 @@ import { DashboardService } from 'src/services/dashboard.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Subscription, timer } from "rxjs";
+import { DateRange, MatDatepicker } from '@angular/material/datepicker';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {default as _rollupMoment, Moment} from 'moment';
+const moment = _rollupMoment || _moment;
 
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'MM/YYYY',
+  },
+  display: {
+    dateInput: 'MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -67,10 +85,10 @@ export type chartOptionsProduct = {
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-
+  date = new FormControl(moment());
    @ViewChild("chart") chart!: ChartComponent;
    public chartOptions!: Partial<ChartOptions>
    public chartOptionsCategory!: Partial<chartOptionsCategory>;
@@ -81,7 +99,8 @@ export class DashboardComponent {
    intervalId;
    subscription!: Subscription;
 
-   totalAmounts!: any [];
+   dashboardData!: any;
+   totalAmounts!:  any [];
 
    beginDate: any = new Date();
    endDate: any = new Date()
@@ -221,6 +240,8 @@ export class DashboardComponent {
     this.intervalId = setInterval(() => {
       this.time = new Date();
     }, 1000);
+
+    this.getDashboardInfo();
   }
 
   ngOnDestroy() {
@@ -231,9 +252,12 @@ export class DashboardComponent {
   }
 
    getDashboardInfo(){
-    this.dashboardService.getDashboardInfo({beginDate: '2024', endDate: '2024'}).subscribe((res: any) => {
-       this.totalAmounts = res.data
-    })
+     this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
+     this.range.controls.start.patchValue(this.datePipe.transform(this.range.controls.start.value, 'yyyy-MM-dd')!)
+
+     this.dashboardService.getDashboardInfo(this.range.controls.start.value, this.range.controls.end.value).subscribe((res: any) => {
+        this.dashboardData = res.data
+     })
   }
 
   selectToday() {
@@ -248,6 +272,20 @@ export class DashboardComponent {
       this.range.controls.end.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
     }
   }
+
+  mclick = 0;
+  get controls() {
+    return this.range.controls;
+}
+
+
+setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<DateRange<moment.Moment>>) {
+  const ctrlValue = this.date.value ?? moment();
+  ctrlValue.month(normalizedMonthAndYear.month());
+  ctrlValue.year(normalizedMonthAndYear.year());
+  this.date.setValue(ctrlValue);
+  datepicker.close();
+}
 
  
 }
