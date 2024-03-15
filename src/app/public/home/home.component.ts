@@ -93,18 +93,18 @@ export class HomeComponent {
     })
   }
 
-  categoryClick(categoryId: any) {
-   // this.catId = categoryId
-    if(this.catId == categoryId)
-      this.catId = 0;
-    else
-      this.catId = categoryId
 
-    this.subCatId = 0
-    this.getProduct(this.catId)
-  }
 
   subCategoryClick(catId: any, subCatId: any) {
+    
+    this.requestData = {
+      nextPageNumber: 1,
+      visibleItemCount: 9,
+    }
+  
+    this.pageSize = 9;
+    this.pageSizeOptions = [9,18,27];
+
     this.catId = catId
 
     if(this.subCatId == subCatId)
@@ -113,7 +113,38 @@ export class HomeComponent {
       this.subCatId = subCatId
 
     this.getProduct(this.catId)
+
+    setTimeout(() => {
+      if (this.productData.length !== 0) {
+        this.paginator.firstPage()
+      }
+     }, 300);
   }
+
+  categoryClick(categoryId: any) {
+    // this.catId = categoryId
+    this.requestData = {
+     nextPageNumber: 1,
+     visibleItemCount: 9,
+   }
+ 
+   this.pageSize = 9;
+   this.pageSizeOptions = [9,18,27];
+
+     if(this.catId == categoryId)
+       this.catId = 0;
+     else this.catId = categoryId
+ 
+     this.subCatId = 0
+     this.getProduct(this.catId)
+
+     setTimeout(() => {
+      if (this.productData.length !== 0) {
+        this.paginator.firstPage()
+      }
+     }, 300);
+
+   }
 
   getProduct(categoryId: number) {
     this.productService.getProductClientBrowseData(this.requestData, categoryId, this.subCatId, this.orderByProducts).subscribe({
@@ -183,5 +214,7 @@ export class HomeComponent {
       }
     })
   }
+
+
 
 }
