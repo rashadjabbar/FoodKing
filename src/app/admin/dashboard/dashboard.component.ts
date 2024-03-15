@@ -252,12 +252,6 @@ export class DashboardComponent {
     };
   }
 
-  ngOnDestroy() {
-    clearInterval(this.intervalId);
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
 
   getDashboardInfo() {
     this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
@@ -288,19 +282,10 @@ export class DashboardComponent {
     this.range.controls.start.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
   }
 
-  search() {
-    this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
-    this.range.controls.start.patchValue(this.datePipe.transform(this.range.controls.start.value, 'yyyy-MM-dd')!)
-    if (this.range.controls.end.value == null) {
-      this.range.controls.end.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
-    }
-  }
-
   mclick = 0;
   get controls() {
     return this.range.controls;
   }
-
 
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<DateRange<moment.Moment>>) {
     const ctrlValue = this.date.value ?? moment();
