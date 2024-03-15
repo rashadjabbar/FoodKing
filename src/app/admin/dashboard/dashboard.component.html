@@ -26,10 +26,7 @@
                 </mat-date-range-input>
                 <mat-datepicker-toggle style="color: #fff !important;" class="mt-3" matIconSuffix
                   [for]="picker"></mat-datepicker-toggle>
-                  
-                <mat-date-range-picker  style="color: #fff !important;" class="mt-3" #picker startView="multi-year" (monthSelected)="setMonthAndYear($event, picker)" >
-                  
-                </mat-date-range-picker>
+                <mat-date-range-picker style="color: #fff !important;" class="mt-3" #picker (monthSelected)="setMonthAndYear($event, picker)"></mat-date-range-picker>
               </mat-form-field>
             </div>
           </div>
@@ -45,19 +42,19 @@
       <div class="px-2">
         <div class="row headerDiv p-2 mt-3">
           <div class="col-lg-3">
-            <h5 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.userCount}}</h5>
+            <h4 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.userCount}}</h4>
             <span class="d-flex justify-content-center">Müştərilər</span>
           </div>
           <div class="col-lg-3">
-            <h5 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.orderAmount}} ₼</h5>
+            <h4 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.orderAmount}} ₼</h4>
             <span class="d-flex justify-content-center">Satish Məbləği</span>
           </div>
           <div class="col-lg-3">
-            <h5 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.paymentAmount}} ₼</h5>
+            <h4 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.paymentAmount}} ₼</h4>
             <span class="d-flex justify-content-center">Ödəniş Məbləği</span>
           </div>
           <div class="col-lg-3">
-            <h5 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.dailyAverage}} ₼</h5>
+            <h4 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.dailyAverage}} ₼</h4>
             <span class="d-flex justify-content-center">Günlük Abarot</span>
           </div>
         </div>
@@ -89,7 +86,7 @@
 
     <div class="col-lg-4 col-md-4">
       <div class="row saleHuman ms-1">
-        <h5 class="text-center">Sales by division</h5>
+        <h4 class="text-center">Sales by division</h4>
 
         <div class="col-lg-4 col-md-4">
           <img src="../../../assets/images/thomasshelby.jpg" width="125" alt="thomas-shelby">
