@@ -155,7 +155,7 @@ export class DashboardComponent {
       series: [
         {
           name: "Likes",
-          data: [750.35, 238.69]
+          data: [this.dashboardData.monthlyAmounts[0]!.amount, 238.69]
         }
       ],
       chart: {
@@ -257,6 +257,8 @@ export class DashboardComponent {
 
      this.dashboardService.getDashboardInfo(this.range.controls.start.value, this.range.controls.end.value).subscribe((res: any) => {
         this.dashboardData = res.data
+        console.log(this.dashboardData);
+        console.log(this.dashboardData.monthlyAmounts[0].amount);
      })
   }
 
