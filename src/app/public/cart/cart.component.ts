@@ -41,6 +41,7 @@ export class CartComponent {
   getBasket(){
     this.basketService.getBasket().subscribe(res => {
       this.basketItems = res.data.basketItems
+
       this.basketAmount = res.data.amountInfo?.amount;
       this.serviceFee = res.data.amountInfo?.serviceFee;
 
@@ -51,8 +52,9 @@ export class CartComponent {
   removeBasketItem(id: number){
     showConfirmAlert('', "Silmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res =>{
       if (res.isConfirmed){
+
         this.basketService.removeBasketItem(id).subscribe(res => {
-          this.getBasket();
+          this.basketItems = this.basketItems.filter(item => item.id !== id);
           this.globalService.refreshBasket({itemAddedToBasket: true})
          }) 
       }

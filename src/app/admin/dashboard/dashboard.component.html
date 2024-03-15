@@ -71,8 +71,8 @@
           </div>
           <div class="col-lg-8 col-md-8 pe-0" style="float: right;">
             <div class="monthlyDiv">
-              <div id="chart">
-                <apx-chart [series]="chartOptionsMonthly.series!" [chart]="chartOptionsMonthly.chart!"
+              <div  #chartMonthly>
+                <apx-chart [series]="chartOptionsMonthly.series!" [chart]="chartOptionsMonthly.chartMonthly!"
                   [xaxis]="chartOptionsMonthly.xaxis!" [dataLabels]="chartOptionsMonthly.dataLabels!"
                   [grid]="chartOptionsMonthly.grid!" [stroke]="chartOptionsMonthly.stroke!"
                   [title]="chartOptionsMonthly.title!" [markers]="chartOptionsMonthly.markers!"

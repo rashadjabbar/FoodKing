@@ -40,7 +40,6 @@ export class DailyMealComponent implements OnInit {
     this.productService.getDailyProducts().subscribe({
       next: res => {
         this.productData = res.data
-        console.log(this.productData)
       }
     })
   }

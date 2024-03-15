@@ -4,7 +4,7 @@ import {
   ApexAxisChartSeries,
   ApexChart,
   ApexXAxis,
-  ApexTitleSubtitle, 
+  ApexTitleSubtitle,
   ApexDataLabels,
   ApexLegend,
   ApexFill,
@@ -30,7 +30,7 @@ import { Subscription, timer } from "rxjs";
 import { DateRange, MatDatepicker } from '@angular/material/datepicker';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
-import {default as _rollupMoment, Moment} from 'moment';
+import { default as _rollupMoment, Moment } from 'moment';
 const moment = _rollupMoment || _moment;
 
 // See the Moment.js docs for the meaning of these formats:
@@ -64,7 +64,7 @@ export type chartOptionsCategory = {
 
 export type ChartOptionsMounthly = {
   series: ApexAxisChartSeries;
-  chart: ApexChart;
+  chartMonthly: ApexChart;
   xaxis: ApexXAxis;
   dataLabels: ApexDataLabels;
   grid: ApexGrid;
@@ -74,6 +74,8 @@ export type ChartOptionsMounthly = {
   stroke: ApexStroke;
   title: ApexTitleSubtitle;
 };
+
+
 
 export type chartOptionsProduct = {
   series: ApexNonAxisChartSeries;
@@ -89,31 +91,34 @@ export type chartOptionsProduct = {
 })
 export class DashboardComponent {
   date = new FormControl(moment());
-   @ViewChild("chart") chart!: ChartComponent;
-   public chartOptions!: Partial<ChartOptions>
-   public chartOptionsCategory!: Partial<chartOptionsCategory>;
-   public chartOptionsMonthly!: Partial<ChartOptionsMounthly>
-   public chartOptionsProduct!: Partial<chartOptionsProduct>
+  @ViewChild("chart") chart!: ChartComponent;
+  @ViewChild("chartMonthly") chartMonthly!: ChartComponent;
+  public chartOptions!: Partial<ChartOptions>
+  public chartOptionsCategory!: Partial<chartOptionsCategory>;
+  public chartOptionsMonthly!: Partial<ChartOptionsMounthly>
+  public chartOptionsProduct!: Partial<chartOptionsProduct>
 
-   time = new Date();
-   intervalId;
-   subscription!: Subscription;
+  time = new Date();
+  intervalId;
+  subscription!: Subscription;
 
-   dashboardData!: any;
-   totalAmounts!:  any [];
+  dashboardData!: any;
+  totalAmounts!: any[];
+  monthlyAmounts: any[] = [];
+  monthlyAmountDate: any[] = [];
 
-   beginDate: any = new Date();
-   endDate: any = new Date()
+  beginDate: any = new Date();
+  endDate: any = new Date()
 
-   range = new FormGroup({
+  range = new FormGroup({
     start: new FormControl<string>(this.datePipe.transform(this.beginDate, 'yyyy-MM-dd')!), //this.beginDate.setMonth(this.beginDate.getMonth() - 1
     end: new FormControl<string>(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!),
   });
 
-   constructor(
+  constructor(
     private dashboardService: DashboardService,
     private datePipe: DatePipe,
-   ) {
+  ) {
 
     //Product Statistic
     this.chartOptionsCategory = {
@@ -151,14 +156,52 @@ export class DashboardComponent {
       },
     };
 
+
+
+    this.chartOptionsProduct = {
+      series: [44, 55, 13, 43, 22],
+      chart: {
+        width: 380,
+        type: "pie"
+      },
+      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
+
+  }
+
+  ngOnInit() {
+    // Using Basic Interval
+    this.intervalId = setInterval(() => {
+      this.time = new Date();
+    }, 1000);
+    this.getDashboardInfo();
+
+    this.updateMonthlyAmountChart(this.monthlyAmounts, this.monthlyAmountDate)
+
+  }
+
+  updateMonthlyAmountChart(monthlyAmounts: any[] , monthlyAmountDate: any[]) {
     this.chartOptionsMonthly = {
       series: [
         {
           name: "Likes",
-          data: [this.dashboardData.monthlyAmounts[0]!.amount, 238.69]
+          data: monthlyAmounts
         }
       ],
-      chart: {
+      chartMonthly: {
         height: 400,
         type: "line"
       },
@@ -168,10 +211,7 @@ export class DashboardComponent {
       },
       xaxis: {
         type: "category",
-        categories: [
-          "Feb-24",
-          "Mar-24"
-        ]
+        categories: monthlyAmountDate
       },
       title: {
         text: "Social Media",
@@ -210,38 +250,6 @@ export class DashboardComponent {
         }
       }
     };
-
-    this.chartOptionsProduct = {
-      series: [44, 55, 13, 43, 22],
-      chart: {
-        width: 380,
-        type: "pie"
-      },
-      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
-    };
-    
-   }
-
-   ngOnInit() {
-    // Using Basic Interval
-    this.intervalId = setInterval(() => {
-      this.time = new Date();
-    }, 1000);
-
-    this.getDashboardInfo();
   }
 
   ngOnDestroy() {
@@ -251,15 +259,28 @@ export class DashboardComponent {
     }
   }
 
-   getDashboardInfo(){
-     this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
-     this.range.controls.start.patchValue(this.datePipe.transform(this.range.controls.start.value, 'yyyy-MM-dd')!)
+  getDashboardInfo() {
+    this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
+    this.range.controls.start.patchValue(this.datePipe.transform(this.range.controls.start.value, 'yyyy-MM-dd')!)
 
-     this.dashboardService.getDashboardInfo(this.range.controls.start.value, this.range.controls.end.value).subscribe((res: any) => {
-        this.dashboardData = res.data
-        console.log(this.dashboardData);
-        console.log(this.dashboardData.monthlyAmounts[0].amount);
-     })
+    this.dashboardService.getDashboardInfo(this.range.controls.start.value, this.range.controls.end.value).subscribe((res: any) => {
+      this.dashboardData = res.data
+      this.monthlyAmounts = []
+      for (let index = 0; index < res.data.monthlyAmounts.length; index++) {
+        const amount = res.data.monthlyAmounts[index].amount
+        this.monthlyAmounts.push(amount)
+      }
+
+      for (let index = 0; index < res.data.monthlyAmounts.length; index++) {
+        const date = res.data.monthlyAmounts[index].date
+        this.monthlyAmountDate.push(date)
+      }
+
+      setTimeout(() => {
+        this.updateMonthlyAmountChart(this.monthlyAmounts , this.monthlyAmountDate)
+      }, 500);
+
+    })
   }
 
   selectToday() {
@@ -278,17 +299,17 @@ export class DashboardComponent {
   mclick = 0;
   get controls() {
     return this.range.controls;
-}
+  }
 
 
-setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<DateRange<moment.Moment>>) {
-  const ctrlValue = this.date.value ?? moment();
-  ctrlValue.month(normalizedMonthAndYear.month());
-  ctrlValue.year(normalizedMonthAndYear.year());
-  this.date.setValue(ctrlValue);
-  datepicker.close();
-}
+  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<DateRange<moment.Moment>>) {
+    const ctrlValue = this.date.value ?? moment();
+    ctrlValue.month(normalizedMonthAndYear.month());
+    ctrlValue.year(normalizedMonthAndYear.year());
+    this.date.setValue(ctrlValue);
+    datepicker.close();
+  }
 
- 
+
 }
 
