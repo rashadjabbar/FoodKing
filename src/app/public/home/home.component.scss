@@ -14,11 +14,26 @@
     border-radius: 5px;
 }
 
+.search-results {
+    height: 50em;
+    overflow: scroll;
+  }
+
 .subLi:hover {
     background-color: #3bb77e;
     color: white;
     transition: 0.4s;
     cursor: pointer;
+}
+
+.main-panel {
+    max-height: 100vh !important;
+    overflow-y: scroll !important;
+  }
+
+  .main-panel::-webkit-scrollbar-thumb {
+    background: #3bb77d43;
+    border-radius: 5px;
 }
 
 .subLi-selected {

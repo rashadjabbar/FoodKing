@@ -30,6 +30,7 @@ import { DailyMealComponent } from './daily-meal/daily-meal.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ToastrModule } from 'ngx-toastr';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatIconModule,
     ClipboardModule,
     ToastrModule.forRoot(), // ToastrModule added
-    MatCheckboxModule
+    MatCheckboxModule,
+    InfiniteScrollModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
