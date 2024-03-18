@@ -259,6 +259,9 @@ export class DashboardComponent {
 
     this.dashboardService.getDashboardInfo(this.range.controls.start.value, this.range.controls.end.value).subscribe((res: any) => {
       this.dashboardData = res.data
+
+      console.log(res.data)
+
       this.monthlyAmounts = []
       for (let index = 0; index < res.data.monthlyAmounts.length; index++) {
         const amount = res.data.monthlyAmounts[index].amount
