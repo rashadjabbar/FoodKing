@@ -41,21 +41,21 @@
       </div>
 
       <div class="px-2">
-        <div class="row headerDiv p-2 mt-3">
+        <div class="row headerDiv p-1 mt-2">
           <div class="col-lg-3">
-            <h4 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.userCount}}</h4>
+            <h5 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.userCount}}</h5>
             <span class="d-flex justify-content-center">Müştərilər</span>
           </div>
           <div class="col-lg-3">
-            <h4 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.orderAmount}} ₼</h4>
+            <h5 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.orderAmount}} ₼</h5>
             <span class="d-flex justify-content-center">Satish Məbləği</span>
           </div>
           <div class="col-lg-3">
-            <h4 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.paymentAmount}} ₼</h4>
+            <h5 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.paymentAmount}} ₼</h5>
             <span class="d-flex justify-content-center">Ödəniş Məbləği</span>
           </div>
           <div class="col-lg-3">
-            <h4 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.dailyAverage}} ₼</h4>
+            <h5 class="d-flex justify-content-center">{{dashboardData?.totalAmounts.dailyAverage}} ₼</h5>
             <span class="d-flex justify-content-center">Günlük Abarot</span>
           </div>
         </div>
@@ -85,9 +85,9 @@
       </div>
     </div>
 
-    <div class="col-lg-4 col-md-4">
-      <div class="row saleHuman ms-1">
-        <h4 class="text-center">Top Shoppers</h4>
+    <div class="col-lg-4 col-md-4 ps-0">
+      <div class="row saleHuman pt-1 ms-1">
+        <h5 class="text-center">Top Shoppers</h5>
 
         <div class="col-lg-4 col-md-4" *ngFor="let topShopper of dashboardData?.topShoppers">
           <img *ngIf="topShopper.gender== 1" src="../../../assets/images/thomasshelby.jpg" width="125"
@@ -95,7 +95,7 @@
           <img *ngIf="topShopper.gender == 0" src="../../../assets/images/harley-quinn.jpg" width="125"
             alt="harley-quinn">
           <span class="d-flex justify-content-center sale">₼ {{topShopper.amount}}</span>
-          <span class="d-flex justify-content-center gender">{{topShopper.name}}</span>
+          <span class="d-flex justify-content-center gender mb-1">{{topShopper.name}}</span>
         </div>
 
       </div>

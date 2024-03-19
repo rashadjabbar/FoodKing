@@ -107,6 +107,9 @@ export class DashboardComponent {
   monthlyAmounts: any[] = [];
   monthlyAmountDate: any[] = [];
 
+  topProductNames: any[] = [];
+  topProductCount: any[] = [];
+
   beginDate: any = new Date();
   endDate: any = new Date()
 
@@ -157,28 +160,8 @@ export class DashboardComponent {
     };
 
 
+    
 
-    this.chartOptionsProduct = {
-      series: [44, 55, 13, 43, 22],
-      chart: {
-        width: 380,
-        type: "pie"
-      },
-      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
-    };
 
   }
 
@@ -190,6 +173,7 @@ export class DashboardComponent {
     this.getDashboardInfo();
 
     this.updateMonthlyAmountChart(this.monthlyAmounts, this.monthlyAmountDate)
+    this.updateTopProductChart(this.monthlyAmounts, this.monthlyAmountDate)
 
   }
 
@@ -252,6 +236,30 @@ export class DashboardComponent {
     };
   }
 
+  updateTopProductChart(topProductNames: any[], topProductCount: any[]){
+    this.chartOptionsProduct = {
+      series: topProductCount,
+      chart: {
+        width: 500,
+        type: "pie"
+      },
+      labels: topProductNames,
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
+  }
+
 
   getDashboardInfo() {
     this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
@@ -260,7 +268,9 @@ export class DashboardComponent {
     this.dashboardService.getDashboardInfo(this.range.controls.start.value, this.range.controls.end.value).subscribe((res: any) => {
       this.dashboardData = res.data
 
-      console.log(res.data)
+      //console.log(res.data)
+
+      ///////////Monthly Amount
 
       this.monthlyAmounts = []
       for (let index = 0; index < res.data.monthlyAmounts.length; index++) {
@@ -268,14 +278,31 @@ export class DashboardComponent {
         this.monthlyAmounts.push(amount)
       }
 
+      this.monthlyAmountDate = [];
       for (let index = 0; index < res.data.monthlyAmounts.length; index++) {
         const date = res.data.monthlyAmounts[index].date
         this.monthlyAmountDate.push(date)
       }
 
+      ////////////Top Products
+
+      this.topProductNames = []
+      for (let index = 0; index < res.data.topProducts.length; index++) {
+        const name = res.data.topProducts[index].name
+        this.topProductNames.push(name)
+      }
+
+      this.topProductCount = []
+      for (let index = 0; index < res.data.topProducts.length; index++) {
+        const count = res.data.topProducts[index].count
+        this.topProductCount.push(count)
+      }
+
       setTimeout(() => {
         this.updateMonthlyAmountChart(this.monthlyAmounts , this.monthlyAmountDate)
-      }, 500);
+        this.updateTopProductChart(this.topProductNames, this.topProductCount)
+
+      }, 1000);
 
     })
   }

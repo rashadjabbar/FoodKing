@@ -98,14 +98,18 @@
   .headerDiv span{
     font-size: 13px;
   }
+
+  .headerDiv h5{
+    font-size: 26px;
+  }
   
   .categoryDiv, .monthlyDiv, .saleHuman, .productDiv{
     background-color: white;
   }
 
-  .productDiv{
-    height: 264px;
-  }
+  // .productDiv{
+  //   height: 264px;
+  // }
 
 .saleHuman .sale{
   color: #7c795d;
