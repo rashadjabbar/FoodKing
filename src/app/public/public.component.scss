@@ -184,6 +184,11 @@
     display: none
 }
 
+.main-panel {
+    height: 100vh;
+    overflow-y: scroll;
+  }
+
 @media (max-width:641px) {
 
     ::ng-deep.dialog-user-cabinet,
