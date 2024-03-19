@@ -25,8 +25,6 @@ export class GlobalService {
   constructor(private http: HttpClient) { }
 
   baseUrl = environment.apiCommonUrl;
-  reportUrl = environment.apiReportUrl;
-
 
   private basketEmitter = new BehaviorSubject({ itemAddedToBasket: false });
   basketObservable$ = this.basketEmitter.asObservable();
@@ -71,11 +69,6 @@ export class GlobalService {
 
   getProductsAutoComplate(filter: string) {
     return this.http.get<any>(`${this.baseUrl}AutoComplete/GetProducts?filter=${filter}`);
-  }
-
-  // ADMINPANEL REPORT BALANCE
-  getClientBalance(request: RequestData): Observable<any> {
-    return this.http.post<any>(`${this.reportUrl}Report/GetClientBalance`, request );
   }
   
   getUserDebt(userId: number) {

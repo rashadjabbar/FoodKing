@@ -1,0 +1,54 @@
+.table-container {
+    width: 100%;
+    display: flex;
+    padding: 0 5%;
+  }
+  
+  .table-container>div {
+    width: 100%;
+  }
+  
+  .line {
+    height: auto;
+    width: 1px !important;
+    margin: 0 2%;
+    background-color: black;
+    opacity: 0.1;
+  }
+  
+  .table-div {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .table-container {
+    display: flex;
+  }
+  
+  .table-header {
+    display: flex;
+    width: 100%;
+  }
+  
+  .table-header>div {
+    width: 100%;
+  }
+  
+  .table-header .header h5 {
+    font-family: "Dosis", sans-serif !important;
+  }
+
+  .range-date{
+    display: flex;
+    margin-right: 2%;
+    justify-content: end;
+  }
+  
+  .search-input{
+    width: 25%;
+    margin-left: 3%;
+  }

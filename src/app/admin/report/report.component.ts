@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Report } from 'src/models/report';
+import { ReportDebt, ReportbalanceMonitoring } from 'src/models/report';
 import { GlobalService } from 'src/services/global.service';
 import {MatSort, Sort} from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { ReportService } from 'src/services/report.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-report',
@@ -14,24 +17,37 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 export class ReportComponent implements OnInit {
 
   constructor(
-    public globalService: GlobalService,
+    public reportService: ReportService,
+    private datePipe: DatePipe,
     private _liveAnnounce: LiveAnnouncer
   ) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   length!: number;
-  reportData: Report[] = []
+  reportData: ReportDebt[] = []
+
+  lengthBalanceMonitoring!: number;
+  reportDataBalanceMonitoring: ReportbalanceMonitoring[] = []
+
   requestData: any = {
     nextPageNumber: 1,
     visibleItemCount: 25,
   }
-  dataSource = new MatTableDataSource<Report>(this.reportData);
+  dataSource = new MatTableDataSource<ReportDebt>(this.reportData);
+  dataSourceBalanceMonitoring = new MatTableDataSource<ReportbalanceMonitoring>(this.reportDataBalanceMonitoring);
   pageSize: number = this.requestData.visibleItemCount;
   pageSizeOptions: number[] = [10, 25, 50];
   pageEvent!: PageEvent;
 
   tabID: number = 0;
+  beginDate: any = new Date();
+  endDate: any = new Date()
+
+  range = new FormGroup({
+    start: new FormControl<string>(this.datePipe.transform(this.beginDate.setMonth(this.beginDate.getMonth() - 1), 'yyyy-MM-dd')!),
+    end: new FormControl<string>(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!),
+  });
 
   displayedColumns: string[] = [
     'id',
@@ -42,16 +58,35 @@ export class ReportComponent implements OnInit {
     'orderAmount',
   ];
 
+  displayedColmBalanceRep: string[] = [
+    'orderAmount',
+    'paymentAmount',
+    'expectedProfit',
+    'actualProfit'
+  ];
+
   ngOnInit() {
     this.getReportBalance()
+    this.getReportBalanceMonitoring()
   }
 
   getReportBalance(){
-    this.globalService.getClientBalance(this.requestData).subscribe(res =>{
-      this.dataSource = new MatTableDataSource<Report>(res.data);
+    this.reportService.getClientBalance(this.requestData).subscribe(res =>{
+      this.dataSource = new MatTableDataSource<ReportDebt>(res.data);
 
         this.length = res.data.count
         this.dataSource.sort = this.sort;
+    })
+  }
+
+  getReportBalanceMonitoring(){
+    this.reportService.getBalanceMonitoring(this.requestData).subscribe(res =>{
+      this.dataSourceBalanceMonitoring = new MatTableDataSource<ReportbalanceMonitoring>(res.data);
+      console.log(this.dataSourceBalanceMonitoring);
+
+        this.lengthBalanceMonitoring = res.data.count
+        this.dataSourceBalanceMonitoring.sort = this.sort;
+
     })
   }
 
@@ -73,18 +108,18 @@ export class ReportComponent implements OnInit {
       this.getReportBalance()
   }
 
-  handleKeyUp(e: any) {
+  handleDebtReportKeyUp(e: any) {
     let filterValue = e.target.value
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
 
-  handleSubCatKeyUp(e: any) {
+  handleBalanceReportKeyUp(e: any) {
     let filterValue = e.target.value
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    //this.subDataSource.filter = filterValue;
+    this.dataSource.filter = filterValue;
   }
 
   onChangePage(pe: PageEvent) {
@@ -94,7 +129,23 @@ export class ReportComponent implements OnInit {
     if (this.tabID == 0) {
       this.getReportBalance()
     } else
-      this.getReportBalance();
+      this.getReportBalanceMonitoring();
+  }
+
+  selectToday() {
+    this.range.controls.end.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+    this.range.controls.start.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+    this.getReportBalanceMonitoring()
+
+  }
+
+  search() {
+    this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
+    this.range.controls.start.patchValue(this.datePipe.transform(this.range.controls.start.value, 'yyyy-MM-dd')!)
+    if (this.range.controls.end.value == null) {
+      this.range.controls.end.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+    }
+    this.getReportBalanceMonitoring()
   }
 
 }
