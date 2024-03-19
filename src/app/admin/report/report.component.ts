@@ -31,6 +31,8 @@ export class ReportComponent implements OnInit {
   pageSizeOptions: number[] = [10, 25, 50];
   pageEvent!: PageEvent;
 
+  tabID: number = 0;
+
   displayedColumns: string[] = [
     'id',
     'name',
@@ -63,11 +65,36 @@ export class ReportComponent implements OnInit {
      }
   }
 
+  tabChange(id: number) {
+    this.tabID = id
+    if (id == 0) {
+      this.getReportBalance()
+    } else
+      this.getReportBalance()
+  }
+
+  handleKeyUp(e: any) {
+    let filterValue = e.target.value
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
+  handleSubCatKeyUp(e: any) {
+    let filterValue = e.target.value
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    //this.subDataSource.filter = filterValue;
+  }
 
   onChangePage(pe: PageEvent) {
     this.requestData.nextPageNumber = pe.pageIndex + 1
     this.requestData.visibleItemCount = pe.pageSize
-    this.getReportBalance()
+    
+    if (this.tabID == 0) {
+      this.getReportBalance()
+    } else
+      this.getReportBalance();
   }
 
 }
