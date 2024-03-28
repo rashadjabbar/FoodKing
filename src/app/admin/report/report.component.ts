@@ -59,6 +59,7 @@ export class ReportComponent implements OnInit {
   ];
 
   displayedColmBalanceRep: string[] = [
+    'id',
     'orderAmount',
     'paymentAmount',
     'expectedProfit',
@@ -67,7 +68,7 @@ export class ReportComponent implements OnInit {
 
   ngOnInit() {
     this.getReportBalance()
-    this.getReportBalanceMonitoring()
+    //this.getReportBalanceMonitoring()
   }
 
   getReportBalance(){
@@ -80,12 +81,10 @@ export class ReportComponent implements OnInit {
   }
 
   getReportBalanceMonitoring(){
-    this.reportService.getBalanceMonitoring(this.requestData).subscribe(res =>{
-      this.dataSourceBalanceMonitoring = new MatTableDataSource<ReportbalanceMonitoring>(res.data);
-      console.log(this.dataSourceBalanceMonitoring);
-
+    this.reportService.getBalanceMonitoring(this.requestData, this.range.controls.start.value, this.range.controls.end.value).subscribe(res =>{
+      this.dataSourceBalanceMonitoring.data = res.data.result;
+      console.log(res.data.result);
         this.lengthBalanceMonitoring = res.data.count
-        this.dataSourceBalanceMonitoring.sort = this.sort;
 
     })
   }
@@ -105,7 +104,7 @@ export class ReportComponent implements OnInit {
     if (id == 0) {
       this.getReportBalance()
     } else
-      this.getReportBalance()
+      this.getReportBalanceMonitoring()
   }
 
   handleDebtReportKeyUp(e: any) {
@@ -119,7 +118,7 @@ export class ReportComponent implements OnInit {
     let filterValue = e.target.value
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+    this.dataSourceBalanceMonitoring.filter = filterValue;
   }
 
   onChangePage(pe: PageEvent) {

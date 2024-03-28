@@ -18,6 +18,6 @@ export class ReportService {
     }
 
     getBalanceMonitoring(request: RequestData, beginDate?: any, endDate?: any): Observable<any> {
-        return this.http.post<any>(`${this.reportUrl}Report?beginDate=${beginDate}&endDate=${endDate}`, request);
+        return this.http.post<any>(`${this.reportUrl}Report/GetBalanceMonitoring?beginDate=${beginDate}&endDate=${endDate}`, request);
     }
 }
