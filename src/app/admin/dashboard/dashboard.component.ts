@@ -54,7 +54,7 @@ export type ChartOptions = {
   headerTotals: any;
 };
 
-export type chartOptionsCategory = {
+export type chartOptionsDelay = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   dataLabels: ApexDataLabels;
@@ -94,7 +94,7 @@ export class DashboardComponent {
   @ViewChild("chart") chart!: ChartComponent;
   @ViewChild("chartMonthly") chartMonthly!: ChartComponent;
   public chartOptions!: Partial<ChartOptions>
-  public chartOptionsCategory!: Partial<chartOptionsCategory>;
+  public chartOptionsDelay!: Partial<chartOptionsDelay>;
   public chartOptionsMonthly!: Partial<ChartOptionsMounthly>
   public chartOptionsProduct!: Partial<chartOptionsProduct>
 
@@ -110,6 +110,9 @@ export class DashboardComponent {
   topProductNames: any[] = [];
   topProductCount: any[] = [];
 
+  topDelayUser: any[] = [];
+  topDelayCount: any[] = [];
+
   beginDate: any = new Date();
   endDate: any = new Date()
 
@@ -124,7 +127,7 @@ export class DashboardComponent {
   ) {
 
     //Product Statistic
-    this.chartOptionsCategory = {
+    this.chartOptionsDelay = {
       series: [
         {
           name: "basic",
@@ -174,6 +177,7 @@ export class DashboardComponent {
 
     this.updateMonthlyAmountChart(this.monthlyAmounts, this.monthlyAmountDate)
     this.updateTopProductChart(this.monthlyAmounts, this.monthlyAmountDate)
+    this.updateTopDelayChart(this.monthlyAmounts, this.monthlyAmountDate)
 
   }
 
@@ -260,6 +264,32 @@ export class DashboardComponent {
     };
   }
 
+  updateTopDelayChart(topUserNames: any[], topDelayAmount: any[]){
+    this.chartOptionsDelay = {
+      series: [
+        {
+          name: "Fee",
+          data: topDelayAmount
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 400
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true
+        }
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      xaxis: {
+        categories: topUserNames
+      },
+    };
+  }
+
 
   getDashboardInfo() {
     this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
@@ -298,9 +328,23 @@ export class DashboardComponent {
         this.topProductCount.push(count)
       }
 
+
+      ////////// Top Delay
+      this.topDelayUser = []
+      for (let index = 0; index < res.data.topDelay.length; index++) {
+        const name = res.data.topDelay[index].name
+        this.topDelayUser.push(name)
+      }
+      this.topDelayCount = []
+      for (let index = 0; index < res.data.topDelay.length; index++) {
+        const count = res.data.topDelay[index].fee
+        this.topDelayCount.push(count)
+      }
+
       setTimeout(() => {
         this.updateMonthlyAmountChart(this.monthlyAmounts , this.monthlyAmountDate)
         this.updateTopProductChart(this.topProductNames, this.topProductCount)
+        this.updateTopDelayChart(this.topDelayUser, this.topDelayCount)
 
       }, 1000);
 
