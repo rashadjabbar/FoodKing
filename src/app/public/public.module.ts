@@ -31,6 +31,10 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ToastrModule } from 'ngx-toastr';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -62,9 +66,16 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ClipboardModule,
     ToastrModule.forRoot(), // ToastrModule added
     MatCheckboxModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    MatDatepickerModule,
+    MatNativeDateModule ,
+    MatFormFieldModule,
+    MatButtonModule,
+
   ],
   providers: [
+    MatDatepickerModule,
+
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
 
   ],

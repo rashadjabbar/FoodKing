@@ -20,6 +20,22 @@
     <div *ngIf="orderData.length == 0" style="width: 100%; display: flex; justify-content: center;">
       <h4 >Sifariş yoxdur</h4>
     </div>
+    <mat-form-field>
+      <mat-label>Tarix aralığı seçin</mat-label>
+      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+        <input matStartDate formControlName="start" readonly placeholder="Start date"  (click)="picker.open()">
+        <input matEndDate formControlName="end" readonly placeholder="End date"  (click)="picker.open()">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker>
+        <mat-datepicker-actions>
+          <button mat-raised-button matDatepickerApply (click)="selectToday()">Bu gün</button>
+          <button mat-raised-button color="primary" matDatepickerApply (click)="search()">
+            Axtar
+          </button>
+        </mat-datepicker-actions>
+      </mat-date-range-picker>
+    </mat-form-field>
    <div class="web-view" *ngIf="orderData.length !== 0">
 
     <div class="row order-header">
@@ -30,6 +46,7 @@
       <div class="col-lg-2">Yaradılma tarixi</div>
       <div class="col-lg-2">Status</div>
     </div>
+
     <mat-accordion>
       <mat-expansion-panel *ngFor="let item of orderData; let i = index">
         <mat-expansion-panel-header>
@@ -68,6 +85,8 @@
         </div>
       </mat-expansion-panel>
     </mat-accordion>
+    <p style="color: #3bb77e; margin-top: 10px;"><b>Ümumi məbləğ: {{allTotalAmount! | number : '1.2-2'}} ₼</b></p>
+
    </div>
 
    <div class="mobile-view">
@@ -113,7 +132,8 @@
         </div>
       </mat-expansion-panel>
     </mat-accordion>
-    
+    <p style="color: #3bb77e; margin-top: 10px;"><b>Ümumi məbləğ: {{allTotalAmount! | number : '1.2-2'}} ₼</b></p>
+
    </div>
   </div>
 </div>

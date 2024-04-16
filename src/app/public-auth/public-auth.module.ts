@@ -17,9 +17,9 @@ import { NgOtpInputModule } from 'ng-otp-input';
 
 @NgModule({
   declarations: [
-    UserLoginComponent,
+    // UserLoginComponent,
     UserRegisterComponent,
-    OtpComponent
+    // OtpComponent
   ],
   imports: [
     CommonModule,

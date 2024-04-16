@@ -40,7 +40,6 @@ export class HomeComponent {
   currentPage?: number = 1
   imageIpUrl!: string
   categories: AllCategoryBrowse[] = []
-  selector: string = ".main-panel";
   requestData: any = {
     nextPageNumber: 1,
     visibleItemCount: 9,
@@ -75,17 +74,6 @@ export class HomeComponent {
     }
 
   }
-
-  onScroll(): void {
-    console.log('scrolled')
-    this.requestData.nextPageNumber = ++this.requestData.nextPageNumber
-    this.productService.getProductClientBrowseData(this.requestData, this.catId, this.subCatId, this.orderByProducts)
-      .subscribe((res: any) => {
-        console.log(res)
-        this.productData.push(...res.data.result);
-      });
-  }
-
 
 
   onChangePage(pe: PageEvent) {

@@ -5,7 +5,9 @@ import { Login } from 'src/models/login';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { OtpComponent } from './otp/otp.component';
 import { ComboboxModel } from 'src/models/select-model';
-
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from "@abacritt/angularx-social-login";
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -16,15 +18,19 @@ export class UserLoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private login: UserService,
     private dialog: MatDialog,
-  ) { }
-
-
+    private socialAuthService: SocialAuthService,
+    private httpClient: HttpClient
+  ) {
+    this.socialAuthService.authState.subscribe((user: SocialUser) => {
+      console.log(user);
+    });
+   }
 
   otp_dialogRef?: MatDialogRef<OtpComponent>;
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   logindata: Login = new Login();
-
+  private accessToken = '';
   gender?: ComboboxModel[];
 
   signUpForm = this.formBuilder.group({
@@ -55,6 +61,8 @@ export class UserLoginComponent implements OnInit {
   ngOnInit() {
     this.loadJsFile("../../../assets/js/login.js");
   }
+
+
 
   public loadJsFile(url) {
     let node = document.createElement('script');

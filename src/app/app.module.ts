@@ -8,7 +8,7 @@ import { AdminModule } from './admin/admin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UnAuthorizedInterceptor } from 'src/environments/un-authorized.interceptor';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AdminAuthModule } from './admin-auth/admin-auth.module';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -19,6 +19,14 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ToastrModule } from 'ngx-toastr';
 import { MatSortModule } from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { UserLoginComponent } from './public-auth/user-login/user-login.component';
+import { OtpComponent } from './public-auth/user-login/otp/otp.component';
+import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { RouterModule } from '@angular/router';
+import { IMaskModule } from 'angular-imask';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -27,6 +35,9 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
+    UserLoginComponent,
+    OtpComponent
+
   ],
   imports: [
     CommonModule,
@@ -37,24 +48,45 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     ReactiveFormsModule,
     AdminAuthModule,
-    PublicAuthModule,
+    // PublicAuthModule,
     HttpClientModule,
     NgxSpinnerModule,
     ClipboardModule,
     ToastrModule.forRoot(), // ToastrModule added
     MatSortModule,
     MatCheckboxModule,
-
+    SocialLoginModule,
+    GoogleSigninButtonModule ,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
         allowedDomains: ["192.168.37.32:80", "192.168.37.32:443", "foodking.program.az"],
       },
     }),
+
+    RouterModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule ,
+    IMaskModule,
+    NgOtpInputModule
   ],
 
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    {
+      provide: "SocialAuthServiceConfig",
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider("1008280619441-jgr16sc2dkj02ih76v2q8v8rjf0a3r5d.apps.googleusercontent.com")
+          }
+        ],
+        onError: err => console.log(err)
+      } as SocialAuthServiceConfig
+    }
   ],
 
   bootstrap: [AppComponent],
