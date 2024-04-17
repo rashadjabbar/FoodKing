@@ -34,7 +34,8 @@ export class UserCabinetComponent {
     username: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
     phone1: [''],
-    subscription: ['']
+    subscription: [''],
+    gender: ['']
   })
 
   get cf(): { [key: string]: AbstractControl } {
