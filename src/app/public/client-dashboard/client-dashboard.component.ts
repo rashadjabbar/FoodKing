@@ -33,8 +33,7 @@ import * as _moment from 'moment';
 import { default as _rollupMoment, Moment } from 'moment';
 const moment = _rollupMoment || _moment;
 
-// See the Moment.js docs for the meaning of these formats:
-// https://momentjs.com/docs/#/displaying/format/
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'MM/YYYY',
@@ -52,14 +51,6 @@ export type ChartOptions = {
   responsive: ApexResponsive[];
   labels: any;
   headerTotals: any;
-};
-
-export type chartOptionsDelay = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  plotOptions: ApexPlotOptions;
-  xaxis: ApexXAxis;
 };
 
 export type ChartOptionsMounthly = {
@@ -81,20 +72,22 @@ export type chartOptionsProduct = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
   responsive: ApexResponsive[];
+  plotOptions: ApexPlotOptions;
   labels: any;
+  colors: string[];
 };
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  selector: 'app-client-dashboard',
+  templateUrl: './client-dashboard.component.html',
+  styleUrls: ['./client-dashboard.component.scss']
 })
-export class DashboardComponent {
+
+export class ClientDashboardComponent {
   date = new FormControl(moment());
   @ViewChild("chart") chart!: ChartComponent;
   @ViewChild("chartMonthly") chartMonthly!: ChartComponent;
   public chartOptions!: Partial<ChartOptions>
-  public chartOptionsDelay!: Partial<chartOptionsDelay>;
   public chartOptionsMonthly!: Partial<ChartOptionsMounthly>
   public chartOptionsProduct!: Partial<chartOptionsProduct>
 
@@ -110,9 +103,6 @@ export class DashboardComponent {
   topProductNames: any[] = [];
   topProductCount: any[] = [];
 
-  topDelayUser: any[] = [];
-  topDelayCount: any[] = [];
-
   beginDate: any = new Date();
   endDate: any = new Date()
 
@@ -121,49 +111,16 @@ export class DashboardComponent {
     end: new FormControl<string>(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!),
   });
 
+  textObject = {
+    "1":"Bu ay babat partdatmısan..",
+    "2":"Bu ay ölüvaydı..",
+
+  }
+
   constructor(
     private dashboardService: DashboardService,
     private datePipe: DatePipe,
   ) {
-
-    //Product Statistic
-    this.chartOptionsDelay = {
-      series: [
-        {
-          name: "basic",
-          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 400
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true
-        }
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      xaxis: {
-        categories: [
-          "South Korea",
-          "Canada",
-          "United Kingdom",
-          "Netherlands",
-          "Italy",
-          "France",
-          "Japan",
-          "United States",
-          "China",
-          "Germany"
-        ]
-      },
-    };
-
-
-    
 
 
   }
@@ -177,7 +134,6 @@ export class DashboardComponent {
 
     this.updateMonthlyAmountChart(this.monthlyAmounts, this.monthlyAmountDate)
     this.updateTopProductChart(this.monthlyAmounts, this.monthlyAmountDate)
-    this.updateTopDelayChart(this.monthlyAmounts, this.monthlyAmountDate)
 
   }
 
@@ -190,7 +146,7 @@ export class DashboardComponent {
         }
       ],
       chartMonthly: {
-        height: 400,
+        height: 453,
         type: "line"
       },
       stroke: {
@@ -202,11 +158,13 @@ export class DashboardComponent {
         categories: monthlyAmountDate
       },
       title: {
-        text: "Monthly Expenses",
+        text: "Aylıq Istifadə",
         align: "left",
         style: {
+          fontFamily: 'Verdana, Times, serif',
+          fontWeight: 900,
           fontSize: "16px",
-          color: "#666"
+          color: "#666",
         }
       },
       fill: {
@@ -231,11 +189,13 @@ export class DashboardComponent {
         }
       },
       yaxis: {
-        min: -10,
-        max: 1000,
+        min: 0,
+        max: 100,
         title: {
           text: "Məbləğ ₼",
           style: {
+            fontFamily: 'Trebuchet MS, sans-serif',
+            fontWeight: 400,
             fontSize: "16px",
             color: "#666"
           }
@@ -248,10 +208,36 @@ export class DashboardComponent {
     this.chartOptionsProduct = {
       series: topProductCount,
       chart: {
-        width: 450,
-        type: "pie"
+        type: "donut"
       },
       labels: topProductNames,
+
+      plotOptions: {
+        pie: {
+          customScale: 1.07,
+          donut: {
+
+            labels: {
+              show: true,
+              total: {
+                show: false,
+                label: '',
+                formatter: () => 'Text you want'
+              }
+            }
+          }
+        }
+      },
+      colors: [
+        '#FE995C',
+        '#37647D',
+        '#418B7C',
+        '#80f04d',
+        '#8956b0',
+        '#de333e',
+        '#6b8e23',
+        '#cddb32'
+      ],
       responsive: [
         {
           breakpoint: 480,
@@ -265,35 +251,15 @@ export class DashboardComponent {
           }
         }
       ]
+      
     };
-  }
 
-  updateTopDelayChart(topUserNames: any[], topDelayAmount: any[]){
-    this.chartOptionsDelay = {
-      series: [
-        {
-          name: "Fee",
-          data: topDelayAmount
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 400
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true
-        }
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      xaxis: {
-        categories: topUserNames
-      },
-    };
   }
+  
 
+
+  
+  
 
   getDashboardInfo() {
     this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
@@ -333,22 +299,9 @@ export class DashboardComponent {
       }
 
 
-      ////////// Top Delay
-      this.topDelayUser = []
-      for (let index = 0; index < res.data.topDelay.length; index++) {
-        const name = res.data.topDelay[index].name
-        this.topDelayUser.push(name)
-      }
-      this.topDelayCount = []
-      for (let index = 0; index < res.data.topDelay.length; index++) {
-        const count = res.data.topDelay[index].fee
-        this.topDelayCount.push(count)
-      }
-
       setTimeout(() => {
         this.updateMonthlyAmountChart(this.monthlyAmounts , this.monthlyAmountDate)
         this.updateTopProductChart(this.topProductNames, this.topProductCount)
-        this.updateTopDelayChart(this.topDelayUser, this.topDelayCount)
 
       }, 1000);
 
@@ -373,6 +326,14 @@ export class DashboardComponent {
     datepicker.close();
   }
 
+  search() {
+    this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
+    this.range.controls.start.patchValue(this.datePipe.transform(this.range.controls.start.value, 'yyyy-MM-dd')!)
+    if (this.range.controls.end.value == null) {
+      this.range.controls.end.patchValue(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!)
+    }
+    this.getDashboardInfo()
+  }
+
 
 }
-

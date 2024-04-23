@@ -18,6 +18,7 @@ import { ClientOrderComponent } from './public/client-order/client-order.compone
 import { DailyReportComponent } from './admin/daily-report/daily-report.component';
 import { DailyMealComponent } from './public/daily-meal/daily-meal.component';
 import { ReportComponent } from './admin/report/report.component';
+import { ClientDashboardComponent } from './public/client-dashboard/client-dashboard.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
       { path: 'cart', component: CartComponent },
       { path: 'client-order', component: ClientOrderComponent },
       { path: 'daily-meal', component: DailyMealComponent },
+      { path: 'client-dashboard', component: ClientDashboardComponent },
     ]
   },
   {

@@ -1,0 +1,31 @@
+.headerDiv, .monthlyDiv, .productDiv {
+  position: relative; /* Set position to relative */
+  background-color: rgb(238, 236, 236);
+}
+
+
+
+.headerDiv ::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0; /* Position the line to the right */
+  height: 100%; /* Make the line the full height of the box */
+  width: 1px; /* Width of the line */
+  background-color: black; /* Color of the line */
+}
+
+.headerDiv span{
+  font-size: 13px;
+}
+
+.headerDiv h5{
+  font-size: 26px;
+}
+
+.headerDiv{
+  height: 88px;
+}
+.productDiv{
+  height: 80%;
+}

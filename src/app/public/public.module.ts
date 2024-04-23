@@ -35,6 +35,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,7 @@ import { MatButtonModule } from '@angular/material/button';
     EditClientOrderComponent,
     ProductDetailComponent,
     DailyMealComponent,
+    ClientDashboardComponent,
   ],
   imports: [
     CommonModule,
@@ -71,7 +75,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatNativeDateModule ,
     MatFormFieldModule,
     MatButtonModule,
-
+    NgApexchartsModule,
   ],
   providers: [
     MatDatepickerModule,
