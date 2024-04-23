@@ -15,8 +15,11 @@ import { RequestData } from 'src/models/request';
   
     baseUrl = environment.apiReportUrl;
   
+    getDashboardInfoAdmin(beginDate?: any, endDate?: any): Observable<any> {
+      return this.http.get<any>(`${this.baseUrl}Report/GetDashboardInfo?beginDate=${beginDate}&endDate=${endDate}&dataType=1` );
+    }
     getDashboardInfo(beginDate?: any, endDate?: any): Observable<any> {
-      return this.http.get<any>(`${this.baseUrl}Report/GetDashboardInfo?beginDate=${beginDate}&endDate=${endDate}` );
+      return this.http.get<any>(`${this.baseUrl}Report/GetDashboardInfo?beginDate=${beginDate}&endDate=${endDate}&dataType=2` );
     }
     
 

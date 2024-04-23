@@ -248,7 +248,7 @@ export class DashboardComponent {
     this.chartOptionsProduct = {
       series: topProductCount,
       chart: {
-        width: 450,
+        width: 500,
         type: "pie"
       },
       labels: topProductNames,
@@ -299,7 +299,7 @@ export class DashboardComponent {
     this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
     this.range.controls.start.patchValue(this.datePipe.transform(this.range.controls.start.value, 'yyyy-MM-dd')!)
 
-    this.dashboardService.getDashboardInfo(this.range.controls.start.value, this.range.controls.end.value).subscribe((res: any) => {
+    this.dashboardService.getDashboardInfoAdmin(this.range.controls.start.value, this.range.controls.end.value).subscribe((res: any) => {
       this.dashboardData = res.data
 
       //console.log(res.data)
