@@ -36,35 +36,36 @@ export class PublicComponent {
     private dialog: MatDialog,
     private loginService: UserService,
     private toastr: ToastrService
-) { 
+  ) {
     this.imageIpUrl = environment.imageIpUrl
- }
+  }
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
+  @ViewChild('menuTrigger') menuTrigger!: MatMenuTrigger;
   message: any;
   totalBasketAmount?: number = 0;
   basketAmount?: number = 0;
   serviceFee?: number = 0;
-  orderData: SaveOrder = {orderItems:[]}
-year = new Date().getFullYear();
+  orderData: SaveOrder = { orderItems: [] }
+  year = new Date().getFullYear();
 
   imageIpUrl!: string;
   categories: ComboBox[] = []
   basketItems: any = []
 
   userData?: User
-  isAuthenticated: boolean=false;
-  balance: number=0;
+  isAuthenticated: boolean = false;
+  balance: number = 0;
 
   loginnedUser = localStorage.getItem('token')
 
   ngOnInit() {
     this.authService.identityCheck();
-    this.isAuthenticated= _isAuthenticated;
-    
+    this.isAuthenticated = _isAuthenticated;
+
     this.getCategories()
 
-    if(this.isAuthenticated){
+    if (this.isAuthenticated) {
       this.getBasket()
       this.getUserData()
 
@@ -78,18 +79,28 @@ year = new Date().getFullYear();
     this.loadJsFile('../../../assets/js/app.js')
   }
 
-  public loadJsFile(url) {  
-    let node = document.createElement('script');  
-    node.src = url;  
-    node.type = 'text/javascript';  
-    document.getElementsByTagName('head')[0].appendChild(node);  
-  }  
+  playNotification() {
+    //if (localStorage.getItem('sound') == 'true') {
+    let audio = new Audio();
+    audio.autoplay = true
+    audio.src = "../../../assets/audio/notification.mp3";
+    audio.load();
+    audio.play();
+    //}
+  }
 
-  getUserData(){
+  public loadJsFile(url) {
+    let node = document.createElement('script');
+    node.src = url;
+    node.type = 'text/javascript';
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
+
+  getUserData() {
     this.userData = jwt_decode(localStorage.getItem('token')!)
   }
 
-  getUserBalance(){
+  getUserBalance() {
     this.globalService.getUserBalance().subscribe((res: any) => {
       this.balance = res.data
     })
@@ -102,48 +113,57 @@ year = new Date().getFullYear();
   }
 
   browseCategory(category: any) {
-    this.globalService.getCategoryId({catId: category});
-    this.router.navigate(['/'],{fragment: 'products'});
+    this.globalService.getCategoryId({ catId: category });
+    this.router.navigate(['/'], { fragment: 'products' });
 
     setTimeout(() => {
       var elements = document.getElementById('products');
       elements?.scrollIntoView();
     }, 300);
-   
+
   }
 
-  getBasket(){
+  getBasket() {
     this.basketService.getBasket().subscribe(res => {
-    this.basketItems = res.data.basketItems
-    this.basketAmount = res.data.amountInfo?.amount;
-    this.serviceFee = res.data.amountInfo?.serviceFee;
+      this.basketItems = res.data.basketItems
+      this.basketAmount = res.data.amountInfo?.amount;
+      this.serviceFee = res.data.amountInfo?.serviceFee;
 
-   this.totalBasketAmount = isNaN(this.basketAmount! + this.serviceFee!)? 0 : this.basketAmount! + this.serviceFee!; 
+      this.totalBasketAmount = isNaN(this.basketAmount! + this.serviceFee!) ? 0 : this.basketAmount! + this.serviceFee!;
+
+      if (this.basketItems.length > 0 && localStorage.getItem('notificationPlayed') == 'false') {
+        setTimeout(() => {
+          this.playNotification()
+          localStorage.setItem('notificationPlayed', 'true')
+          showInfoAlert('','Sifarişi təsdiqləmək zamanı gəldi😋', true, false, '', 'Ok')
+          this.menuTrigger.openMenu()
+      }, 5*60*1000); //5 minutes
+      }
     })
   }
 
-  removeBasketItem(id: number){
+  removeBasketItem(id: number) {
     showConfirmAlert('', "Seçilmiş sətri silmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res => {
       if (res.isConfirmed) {
         this.basketService.removeBasketItem(id).subscribe(res => {
           this.getBasket();
-         }) 
-      } 
+        })
+      }
     })
-    
+
   }
 
-  closeBasket(){
-    this.trigger.closeMenu();
+  closeBasket() {
+    this.menuTrigger.closeMenu();
   }
 
-  submitOrder(){
-    showConfirmAlert('', "Sifariş etmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res =>{
-      if (res.isConfirmed){
-        this.orderData!.id=0
-        this.orderData!.serviceFee=this.serviceFee
-        this.orderData!.amount=this.basketAmount
-        
+  submitOrder() {
+    showConfirmAlert('', "Sifariş etmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res => {
+      if (res.isConfirmed) {
+        this.orderData!.id = 0
+        this.orderData!.serviceFee = this.serviceFee
+        this.orderData!.amount = this.basketAmount
+
         this.basketItems.map((item: any) => {
           this.orderData.orderItems!.push({
             productId: item.productId,
@@ -152,18 +172,18 @@ year = new Date().getFullYear();
             price: item.price,
           })
         });
-        
-    
+
+
         this.basketService.SaveOrder(this.orderData!).subscribe(res => {
-          showInfoAlert('', "Sifariş qəbul edildi", false, false, 'Bağla','', 1000);
+          showInfoAlert('', "Sifariş qəbul edildi", false, false, 'Bağla', '', 1000);
           this.getBasket();
           this.orderData.orderItems = []
-        }) 
+        })
       }
     });
   }
 
-  showChangePasswordDialog(){
+  showChangePasswordDialog() {
     const dialogRef = this.dialog.open(ChangePasswordComponent, {
       height: 'max-content',
       width: '20%',
@@ -177,7 +197,7 @@ year = new Date().getFullYear();
     });
   }
 
-  showCabinetDialog(){
+  showCabinetDialog() {
     const dialogRef = this.dialog.open(UserCabinetComponent, {
       height: 'max-content',
       width: '35%',
@@ -191,28 +211,28 @@ year = new Date().getFullYear();
     });
   }
 
-  logOut(){
-    if(_isAuthenticated){
+  logOut() {
+    if (_isAuthenticated) {
       this.loginService.logout().subscribe(res => {
         localStorage.removeItem('token')
         this.authService.identityCheck();
-        this.isAuthenticated= _isAuthenticated;
+        this.isAuthenticated = _isAuthenticated;
         this.router.navigate(['']);
       })
-    }else{
+    } else {
       localStorage.removeItem('token')
       this.authService.identityCheck();
-      this.isAuthenticated= _isAuthenticated;
+      this.isAuthenticated = _isAuthenticated;
       this.router.navigate(['']);
     }
-    
+
   }
 
 
-  copyCard(){
+  copyCard() {
     this.toastr.success('Ödəniş üçün kart kopyalandı!', '', {
-      positionClass: 'toast-bottom-right' 
-   });
+      positionClass: 'toast-bottom-right'
+    });
   }
 
 }

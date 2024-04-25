@@ -47,6 +47,7 @@ export class UserService {
         this.loginned = result.status
         // this.globalService.token = result.data.token!;
         localStorage.setItem('token', result.data.token);
+        localStorage.setItem('notificationPlayed', 'false')
 
         this.authService.identityCheck();
 

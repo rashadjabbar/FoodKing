@@ -102,7 +102,7 @@
 
             <div *ngIf="isAuthenticated">
               <!-- <i  class="fas fa-shopping-basket" ></i> -->
-              <lord-icon class="basket-icon" trigger="hover" [matMenuTriggerFor]="menu" [matBadge]="basketItems.length"
+              <lord-icon class="basket-icon" trigger="hover" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu" [matBadge]="basketItems.length"
                 src="../../assets/images/wired-outline-139-basket.json"></lord-icon>
 
               <mat-menu #menu="matMenu">
