@@ -56,10 +56,10 @@ export class CartComponent {
         this.basketService.removeBasketItem(id).subscribe(res => {
           this.basketItems = this.basketItems.filter(item => item.id !== id);
           
-          this.basketAmount = res.data.amountInfo?.amount;
-          this.serviceFee = res.data.amountInfo?.serviceFee;
-          this.totalBasketAmount = isNaN(this.basketAmount! + this.serviceFee!) ? 0 : this.basketAmount! + this.serviceFee!;
-
+          // this.basketAmount = this.basketItems.amountInfo?.amount;
+          // this.serviceFee = this.basketItems.amountInfo?.serviceFee;
+          // this.totalBasketAmount = isNaN(this.basketAmount! + this.serviceFee!) ? 0 : this.basketAmount! + this.serviceFee!;
+          this.calculateTotals()
           this.globalService.refreshBasket({ itemAddedToBasket: true })
         })
       }
