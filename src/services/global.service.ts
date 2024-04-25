@@ -78,4 +78,8 @@ export class GlobalService {
   getUserBalance() {
     return this.http.get<any>(`${environment.apiAdminAuthUrl}Global/GetUserBalance`);
   }
+
+  saveContactUs(data: any): Observable<any> {
+    return this.http.post<any>('https://localhost:7054/operations/api/Truck/TruckOperations/SaveContactUs', data);
+  }
 }
