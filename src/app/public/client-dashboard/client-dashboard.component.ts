@@ -104,17 +104,26 @@ export class ClientDashboardComponent {
   topProductCount: any[] = [];
 
   beginDate: any = new Date();
+  
   endDate: any = new Date()
 
   range = new FormGroup({
-    start: new FormControl<string>(this.datePipe.transform(this.beginDate, 'yyyy-MM-dd')!), //this.beginDate.setMonth(this.beginDate.getMonth() - 1
+    start: new FormControl<string>(this.datePipe.transform(this.beginDate.setDate(1), 'yyyy-MM-dd')!), //this.beginDate.setMonth(this.beginDate.getMonth() - 1
     end: new FormControl<string>(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!),
   });
 
-  textObject = {
-    "1":"Bu ay babat partdatmısan..",
-    "2":"Bu ay ölüvaydı..",
+  array1: any [] = ['Bu aralar heç o deyilsən..', 'Yerlərdə sürünüyore..']; 
+  array2: any [] = ['Normalni zəifçilik..']; 
+  array3: any [] = ['Qənaətbəxş', 'Normal']; 
+  array4: any [] = ['Vəhşii', 'Dəliii', 'Crazzy', 'Partdadırsan']; 
+  array5: any [] = ['Krokodil', 'Alliqator', 'Legenda', 'You Are The Best']; 
 
+  textObject = {
+    "1":this.getRandomArrayValue(this.array1),
+    "2":this.getRandomArrayValue(this.array2),
+    "3":this.getRandomArrayValue(this.array3),
+    "4":this.getRandomArrayValue(this.array4),
+    "5":this.getRandomArrayValue(this.array5)
   }
 
   constructor(
@@ -134,7 +143,7 @@ export class ClientDashboardComponent {
 
     this.updateMonthlyAmountChart(this.monthlyAmounts, this.monthlyAmountDate)
     this.updateTopProductChart(this.monthlyAmounts, this.monthlyAmountDate)
-
+    
   }
 
   updateMonthlyAmountChart(monthlyAmounts: any[] , monthlyAmountDate: any[]) {
@@ -214,7 +223,7 @@ export class ClientDashboardComponent {
 
       plotOptions: {
         pie: {
-          customScale: 1.07,
+          customScale: 1,
           donut: {
 
             labels: {
@@ -256,11 +265,6 @@ export class ClientDashboardComponent {
 
   }
   
-
-
-  
-  
-
   getDashboardInfo() {
     this.range.controls.end.patchValue(this.datePipe.transform(this.range.controls.end.value, 'yyyy-MM-dd')!)
     this.range.controls.start.patchValue(this.datePipe.transform(this.range.controls.start.value, 'yyyy-MM-dd')!)
@@ -298,7 +302,6 @@ export class ClientDashboardComponent {
         this.topProductCount.push(count)
       }
 
-
       setTimeout(() => {
         this.updateMonthlyAmountChart(this.monthlyAmounts , this.monthlyAmountDate)
         this.updateTopProductChart(this.topProductNames, this.topProductCount)
@@ -335,5 +338,9 @@ export class ClientDashboardComponent {
     this.getDashboardInfo()
   }
 
+  getRandomArrayValue(array: any[]): any {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    return array[randomIndex];
+  }
 
 }

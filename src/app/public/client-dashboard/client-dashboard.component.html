@@ -21,7 +21,7 @@
         </mat-form-field>
       </div>
       <div class="col-lg-9" style="background-color: rgb(238, 236, 236);">
-        <h5 style="display: flex; justify-content: center;" >{{textObject[dashboardData.totalAmounts.type]}}</h5>
+        <h5 class="statusText pt-3 typewriter-text">{{textObject[dashboardData.textType.textType]}}</h5>
       </div>
     </div>
 
@@ -62,7 +62,7 @@
         <div class="mt-2 row productDiv">
           <apx-chart [series]="chartOptionsProduct.series!" [chart]="chartOptionsProduct.chart!"
           [plotOptions]="chartOptionsProduct.plotOptions!" [colors]="chartOptionsProduct.colors!"
-            [labels]="chartOptionsProduct.labels!" [responsive]="chartOptionsProduct.responsive!" class="pt-4"></apx-chart>
+            [labels]="chartOptionsProduct.labels!" [responsive]="chartOptionsProduct.responsive!" class="pt-1"></apx-chart>
         </div>
       </div>
 

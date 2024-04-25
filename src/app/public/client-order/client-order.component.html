@@ -36,6 +36,14 @@
         </mat-datepicker-actions>
       </mat-date-range-picker>
     </mat-form-field>
+
+    <span>
+      <a [routerLink]="['../client-dashboard']" [routerLinkActive]="['active-menu']"
+      [routerLinkActiveOptions]="{ exact: true }" class="pt-3">
+      <i class="fa-solid fa-chart-column"></i>
+      Statistika</a>
+    </span>
+
    <div class="web-view" *ngIf="orderData.length !== 0">
 
     <div class="row order-header">

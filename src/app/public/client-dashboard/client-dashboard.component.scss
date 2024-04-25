@@ -27,5 +27,32 @@
   height: 88px;
 }
 .productDiv{
-  height: 80%;
+  height: 78%;
+}
+
+.statusText{
+  display: flex; 
+  justify-content: center;
+  font-size: 2rem;
+}
+
+
+.typewriter-text {
+  overflow: hidden;
+  border-right: .15em solid orange; /* Adjust color and size as needed */
+  white-space: nowrap;
+  margin: 0 auto; /* Center the text */
+  animation: typing 3s steps(30, end), blink-caret .5s step-end infinite;
+  color: #f7b219;
+  max-width: 80vw; /* Set maximum width to 80% of the viewport width */
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
 }
