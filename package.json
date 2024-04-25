@@ -34,6 +34,7 @@
     "ng-apexcharts": "^1.8.0",
     "ng-otp-input": "^1.8.5",
     "ngx-apexcharts": "^0.4.7",
+    "ngx-file-drop": "^16.0.0",
     "ngx-infinite-scroll": "^17.0.0",
     "ngx-spinner": "^16.0.2",
     "ngx-toastr": "^18.0.0",

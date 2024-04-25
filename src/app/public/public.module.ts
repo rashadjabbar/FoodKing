@@ -38,6 +38,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { MatSortModule } from '@angular/material/sort';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { MatSortModule } from '@angular/material/sort';
     ProductDetailComponent,
     DailyMealComponent,
     ClientDashboardComponent,
+    ContactUsComponent
   ],
   imports: [
     CommonModule,
@@ -76,6 +79,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatFormFieldModule,
     MatButtonModule,
     NgApexchartsModule,
+    NgxFileDropModule
   ],
   providers: [
     MatDatepickerModule,

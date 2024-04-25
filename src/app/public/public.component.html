@@ -54,6 +54,10 @@
                     <a [routerLink]="['client-order']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">sİfarİşlər</a>
                   </li>
+                  <!-- <li *ngIf="isAuthenticated" class="nav-item-mobile">
+                    <a [routerLink]="['contactUs']" [routerLinkActive]="['active-menu']"
+                      [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Bizə yaz</a>
+                  </li> -->
                   <li>
                     <div [ngSwitch]="isAuthenticated" class="navbar-controls-button">
                       <div *ngSwitchCase="false">

@@ -133,10 +133,12 @@ export class PublicComponent {
 
       if (this.basketItems.length > 0 && localStorage.getItem('notificationPlayed') == 'false') {
         setTimeout(() => {
-          this.playNotification()
-          localStorage.setItem('notificationPlayed', 'true')
-          showInfoAlert('','Sifarişi təsdiqləmək zamanı gəldi😋', true, false, '', 'Ok')
-          this.menuTrigger.openMenu()
+          if(this.basketItems.length > 0){
+            this.playNotification()
+            localStorage.setItem('notificationPlayed', 'true')
+            showInfoAlert('','Sifarişi təsdiqləmək zamanı gəldi😋', true, false, '', 'Ok')
+            this.menuTrigger.openMenu()
+          }
       }, 5*60*1000); //5 minutes
       }
     })
