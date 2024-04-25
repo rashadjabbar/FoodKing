@@ -19,6 +19,7 @@ import { DailyReportComponent } from './admin/daily-report/daily-report.componen
 import { DailyMealComponent } from './public/daily-meal/daily-meal.component';
 import { ReportComponent } from './admin/report/report.component';
 import { ClientDashboardComponent } from './public/client-dashboard/client-dashboard.component';
+import { ContactUsAdminComponent } from './admin/contact-us-admin/contact-us-admin.component';
 
 const routes: Routes = [
   {
@@ -38,12 +39,12 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: 'products', pathMatch: 'full'},
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'dashboard', component: DashboardComponent },
       { path: 'products', component: AddProductComponent },
       { path: 'product-category', component: ProductCategoryComponent },
       { path: 'payment', component: PaymentComponent },
       { path: 'order', component: OrderComponent },
       { path: 'daily-report', component: DailyReportComponent },
+      { path: 'contact-us-admin', component: ContactUsAdminComponent },
       { path: 'report', component: ReportComponent },
     ]
   },
