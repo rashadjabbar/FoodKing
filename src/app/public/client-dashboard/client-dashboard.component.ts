@@ -150,7 +150,7 @@ export class ClientDashboardComponent {
     this.chartOptionsMonthly = {
       series: [
         {
-          name: "Likes",
+          name: "Məbləğ",
           data: monthlyAmounts
         }
       ],
@@ -167,7 +167,7 @@ export class ClientDashboardComponent {
         categories: monthlyAmountDate
       },
       title: {
-        text: "Aylıq Istifadə",
+        text: "Aylıq istifadə",
         align: "left",
         style: {
           fontFamily: 'Verdana, Times, serif',

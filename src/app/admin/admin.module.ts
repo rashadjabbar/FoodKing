@@ -41,6 +41,7 @@ import { DailyProductNotesComponent } from './daily-report/daily-product-notes/d
 import { ReportComponent } from './report/report.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { MatSortModule } from '@angular/material/sort';
+import { ContactUsAdminComponent } from './contact-us-admin/contact-us-admin.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { MatSortModule } from '@angular/material/sort';
     DailyReportComponent,
     DailyProductNotesComponent,
     ReportComponent,
+    ContactUsAdminComponent,
     
 
   ],

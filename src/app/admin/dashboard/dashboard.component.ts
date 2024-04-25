@@ -185,7 +185,7 @@ export class DashboardComponent {
     this.chartOptionsMonthly = {
       series: [
         {
-          name: "Likes",
+          name: "Məbləğ",
           data: monthlyAmounts
         }
       ],

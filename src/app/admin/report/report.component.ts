@@ -83,7 +83,6 @@ export class ReportComponent implements OnInit {
   getReportBalanceMonitoring(){
     this.reportService.getBalanceMonitoring(this.requestData, this.range.controls.start.value, this.range.controls.end.value).subscribe(res =>{
       this.dataSourceBalanceMonitoring.data = res.data.result;
-      console.log(res.data.result);
         this.lengthBalanceMonitoring = res.data.count
 
     })

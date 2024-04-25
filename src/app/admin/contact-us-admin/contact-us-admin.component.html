@@ -1,0 +1,98 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-scale-pulse" [fullScreen]="true">
+    <p style="color: white"> Yüklənir... </p>
+  </ngx-spinner>
+  
+  <mat-tab-group dynamicHeight (selectedIndexChange)="tabChange($event)">
+  
+    <mat-tab label="Yeni">
+  
+      <div class="table-div">
+        <table mat-table [dataSource]="dataSource" matSort class="text-center">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element; let i = index;"> {{(paginator.pageIndex *
+              paginator.pageSize) + (i + 1)}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Başlıq</th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="note">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Borc məbləği</th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="element.debtAmount !== 0" style="color: red; font-weight: bold;">{{element.debtAmount }}
+                ₼</span>
+              <span *ngIf="element.debtAmount == 0">{{element.debtAmount }} ₼</span>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="avansAmount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Avans məbləği</th>
+            <td mat-cell *matCellDef="let element"> {{element.avansAmount }} ₼</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="paymentAmount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ödəniş məbləği</th>
+            <td mat-cell *matCellDef="let element"> {{element.paymentAmount}} ₼</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="orderAmount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifariş məbləği</th>
+            <td mat-cell *matCellDef="let element"> {{element.orderAmount}} ₼</td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" [attr.data-index]="i">
+          </tr>
+        </table>
+        <mat-paginator [length]="length" #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+          (page)="onChangePage($event)" showFirstLastButtons>
+        </mat-paginator>
+  
+      </div>
+    </mat-tab>
+  
+    <mat-tab label="Oxunulmuş">
+  
+      <div class="table-div">
+        <table mat-table [dataSource]="dataSourceReaded" matSort class="text-center">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element; let i = index;"> {{(paginator.pageIndex *
+              paginator.pageSize) + (i + 1)}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="orderAmount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifariş məbləği</th>
+            <td mat-cell *matCellDef="let element"> {{element.orderAmount}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="paymentAmount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ödəniş məbləği</th>
+            <td mat-cell *matCellDef="let element">
+  
+              <span >{{element.paymentAmount }} ₼</span>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="expectedProfit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Gözlənilən gəlir</th>
+            <td mat-cell *matCellDef="let element"> {{element.expectedProfit }} ₼</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="actualProfit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Faktiki gəlir</th>
+            <td mat-cell *matCellDef="let element"> {{element.actualProfit }} ₼</td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColmReaded"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColmReaded; let i = index" [attr.data-index]="i">
+          </tr>
+        </table>
+  
+      </div>
+  
+    </mat-tab>
+  </mat-tab-group>
