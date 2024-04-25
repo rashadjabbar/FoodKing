@@ -59,6 +59,8 @@ export class UserLoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.setItem('notificationPlayed', 'false')
+
     this.loadJsFile("../../../assets/js/login.js");
   }
 
