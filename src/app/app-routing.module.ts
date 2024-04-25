@@ -20,6 +20,7 @@ import { DailyMealComponent } from './public/daily-meal/daily-meal.component';
 import { ReportComponent } from './admin/report/report.component';
 import { ClientDashboardComponent } from './public/client-dashboard/client-dashboard.component';
 import { ContactUsAdminComponent } from './admin/contact-us-admin/contact-us-admin.component';
+import { ContactUsComponent } from './public/contact-us/contact-us.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
       { path: 'wishlist', component: WishlistComponent },
       { path: 'cart', component: CartComponent },
       { path: 'client-order', component: ClientOrderComponent },
+      { path: 'contactUs', component: ContactUsComponent },
       { path: 'daily-meal', component: DailyMealComponent },
       { path: 'client-dashboard', component: ClientDashboardComponent },
     ]
