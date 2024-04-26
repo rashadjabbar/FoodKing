@@ -80,6 +80,10 @@ export class GlobalService {
   }
 
   saveContactUs(data: any): Observable<any> {
-    return this.http.post<any>('https://localhost:7054/operations/api/Truck/TruckOperations/SaveContactUs', data);
+    return this.http.post<any>(`${environment.apiContactUsUrl}/AddContactUs`, data);
+  }
+
+  getContactUsSubjects() {
+    return this.http.get<any>(`${this.baseUrl}ComboBox/GetContactUsSubjects`);
   }
 }

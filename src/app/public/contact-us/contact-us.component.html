@@ -7,14 +7,17 @@
 
                         <form [formGroup]="contactUsForm">
                             <div class="row" style="align-items: center;">
+                                <label>*Email</label>
+                                <div class="content">
+                                   <input type="email" formControlName="email"  style="width: 100%;" [ngClass]="{'border-red': submitted && (Cf['subjectId'].errors?.['required'] || Cf['subjectId'].errors?.['email']) }">
+                                </div>
+                            </div>
+
+                            <div class="row" style="align-items: center;">
                                 <label>*Mövzu</label>
                                 <div class="content">
                                     <select formControlName="subjectId" style="width: 100%;" [ngClass]="{'border-red': submitted && Cf['subjectId'].errors?.['required'] }">
-                                        <option value="1">Təklif</option>
-                                        <option value="2">Problem</option>
-                                        <option value="3">Digər</option>
-                                        <!-- <mat-option *ngFor="let category of allUser"  (click)="contactUs()"
-                                            [value]="category.key">{{category.value}}</mat-option> -->
+                                        <option *ngFor="let subject of subjects" [value]="subject.key">{{subject.value}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -31,7 +34,9 @@
                                 <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)">
                                     <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector"
                                         >
-                                        <span (click)="openFileSelector()">Drag & Drop your files or Browse</span>
+                                        <span *ngIf="this.files.length==0" (click)="openFileSelector()">Drag & Drop your files or Browse</span>
+                                        <span *ngIf="this.files.length==1" (click)="openFileSelector()">{{fileName}}</span>
+                                        <span *ngIf="this.files.length>1" (click)="openFileSelector()">{{this.files.length + ' fayl seçilib'}}</span>
                                         <!-- <button type="button" style="display: none !important;" (click)="openFileSelector()">Browse Files</button> -->
                                     </ng-template>
                                 </ngx-file-drop>
@@ -39,7 +44,7 @@
 
                             <div class="row">
                                 <button id="save" class="save" type="button" (click)="contactUs()"
-                                    [disabled]="false">Yadda saxla</button>
+                                    [disabled]="contactUsForm.invalid">Göndər</button>
                             </div>
                         </form>
 
