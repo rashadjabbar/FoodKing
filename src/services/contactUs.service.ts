@@ -15,16 +15,13 @@ export class ContactUsService {
   
     baseUrl = environment.apiContactUsUrl;
   
-    getContactUs(request: RequestData, beginDate?: any, endDate?: any, type?: number): Observable<any> {
-      return this.http.post<any>(`${this.baseUrl}/Getdata?beginDate=${beginDate}&endDate=${endDate}&type=${type}`, request );
+    getContactUs(request: RequestData, type?: number): Observable<any> {
+      return this.http.post<any>(`${this.baseUrl}/Getdata?type=${type}`, request );
     }
-  
-    getPaymentByid(id: number){
-      return this.http.get<any>(`${this.baseUrl}Payment/GetPaymentById/${id}`);
+
+    readContactUs(contactUsId: number): Observable<any> {
+      return this.http.get<any>(`${this.baseUrl}/ChangeStatus?contactUsId=${contactUsId}`);
     }
-  
-    savePayment(payment: any): Observable<any> {
-      return this.http.post<any>(`${this.baseUrl}Payment/SavePayment`, payment);
-    }
+
   }
   

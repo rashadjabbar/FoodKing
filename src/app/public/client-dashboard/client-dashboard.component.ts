@@ -112,17 +112,17 @@ export class ClientDashboardComponent {
     end: new FormControl<string>(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!),
   });
 
-  array1: any [] = ['Bu aralar heç o deyilsən..', 'Yerlərdə sürünüyore..']; 
-  array2: any [] = ['Normalni zəifçilik..']; 
-  array3: any [] = ['Qənaətbəxş', 'Normal']; 
-  array4: any [] = ['Vəhşii', 'Dəliii', 'Crazzy', 'Partdadırsan']; 
-  array5: any [] = ['Krokodil', 'Alliqator', 'Legenda', 'You Are The Best']; 
+  //array1: any [] = ['Bu aralar heç o deyilsən..']; 
+  //array2: any [] = ['Normalni zəifçilik..']; 
+  //array3: any [] = ['Qənaətbəxş']; 
+  //array4: any [] = ['Vəhşii']; 
+  array5: any [] = ['Krokodil', 'Alliqator']; 
 
   textObject = {
-    "1":this.getRandomArrayValue(this.array1),
-    "2":this.getRandomArrayValue(this.array2),
-    "3":this.getRandomArrayValue(this.array3),
-    "4":this.getRandomArrayValue(this.array4),
+    "1":'Bu aralar heç o deyilsən..',
+    "2":'Normalni zəifçilik..',
+    "3":'Qənaətbəxş',
+    "4":'Vəhşii',
     "5":this.getRandomArrayValue(this.array5)
   }
 
@@ -143,7 +143,7 @@ export class ClientDashboardComponent {
 
     this.updateMonthlyAmountChart(this.monthlyAmounts, this.monthlyAmountDate)
     this.updateTopProductChart(this.monthlyAmounts, this.monthlyAmountDate)
-    
+
   }
 
   updateMonthlyAmountChart(monthlyAmounts: any[] , monthlyAmountDate: any[]) {

@@ -1,6 +1,10 @@
-.headerDiv, .monthlyDiv, .productDiv {
-  position: relative; /* Set position to relative */
-  background-color: rgb(238, 236, 236);
+.headerDiv,
+.monthlyDiv,
+.productDiv {
+  position: relative;
+  /* Set position to relative */
+  //background-color: rgb(238, 236, 236);
+  box-shadow: -10px 10px 25px 0px rgba(211, 211, 211, 0.75);
 }
 
 
@@ -9,50 +13,70 @@
   content: "";
   position: absolute;
   top: 0;
-  right: 0; /* Position the line to the right */
-  height: 100%; /* Make the line the full height of the box */
-  width: 1px; /* Width of the line */
-  background-color: black; /* Color of the line */
+  right: 0;
+  /* Position the line to the right */
+  height: 100%;
+  /* Make the line the full height of the box */
+  width: 1px;
+  /* Width of the line */
+  background-color: black;
+  /* Color of the line */
 }
 
-.headerDiv span{
+.headerDiv span {
   font-size: 13px;
 }
 
-.headerDiv h5{
+.headerDiv h5 {
   font-size: 26px;
 }
 
-.headerDiv{
+.headerDiv {
   height: 88px;
 }
-.productDiv{
+
+.productDiv {
   height: 78%;
 }
 
-.statusText{
-  display: flex; 
+.statusText {
+  display: flex;
   justify-content: center;
   font-size: 2rem;
 }
 
+@import url(https://fonts.googleapis.com/css?family=Saira);
+.exec {
+  display: inline-block;
+  text-align:center;
+}
 
-.typewriter-text {
+.animation {
+  display: inline-block;
   overflow: hidden;
-  border-right: .15em solid orange; /* Adjust color and size as needed */
-  white-space: nowrap;
-  margin: 0 auto; /* Center the text */
-  animation: typing 3s steps(30, end), blink-caret .5s step-end infinite;
   color: #f7b219;
-  max-width: 80vw; /* Set maximum width to 80% of the viewport width */
+  border-right: 2px solid orange;
+  padding-right: 5px;
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: typing 1s steps(20, end), cursor 0.5s step-end infinite;
 }
 
 @keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+  from {
+    width: 0
+  }
+  to {
+    width: 100%
+  }
 }
 
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: orange; }
+@keyframes cursor {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: orange;
+  }
 }

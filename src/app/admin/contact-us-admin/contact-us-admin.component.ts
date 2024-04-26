@@ -88,4 +88,10 @@ export class ContactUsAdminComponent {
     })
   }
 
+  Read(){
+    this.contactUsService.getContactUs(this.requestData, 1).subscribe(res =>{
+      this.dataSourceReaded.data = res.data.result;
+    })
+  }
+
 }
