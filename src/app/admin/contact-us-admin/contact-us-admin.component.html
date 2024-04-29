@@ -6,10 +6,8 @@
 
   <mat-tab label="Yeni">
 
-    <div class="row">
-      <button mat-raised-button color="warn" id="read" class="save" type="button" 
-      (click)="Read()" [disabled]="false">Oxudum</button>
-    </div>
+    <button mat-raised-button color="primary" id="read" class="save float-end me-2" type="button" (click)="Read()"
+      [disabled]="false">Oxudum</button>
 
     <div class="table-div">
       <table mat-table [dataSource]="dataSource" matSort class="text-center">
@@ -20,27 +18,23 @@
         </ng-container>
 
         <ng-container matColumnDef="subject">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Başlıq</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mövzu</th>
           <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
         </ng-container>
 
         <ng-container matColumnDef="content">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Borc məbləği</th>
-          <td mat-cell *matCellDef="let element">
-            <span *ngIf="element.debtAmount !== 0" style="color: red; font-weight: bold;">{{element.debtAmount }}
-              ₼</span>
-            <span *ngIf="element.debtAmount == 0">{{element.content }} ₼</span>
-          </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Məzmun</th>
+          <td mat-cell *matCellDef="let element">{{element.content }}</td>
         </ng-container>
 
         <ng-container matColumnDef="username">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Avans məbləği</th>
-          <td mat-cell *matCellDef="let element"> {{element.username }} ₼</td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>İstifadəçi</th>
+          <td mat-cell *matCellDef="let element"> {{element.username }}</td>
         </ng-container>
 
         <ng-container matColumnDef="createdDate">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ödəniş məbləği</th>
-          <td mat-cell *matCellDef="let element"> {{element.createdDate}} ₼</td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tarix</th>
+          <td mat-cell *matCellDef="let element"> {{element.createdDate}}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -65,26 +59,24 @@
         </ng-container>
 
         <ng-container matColumnDef="subject">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifariş məbləği</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mövzu</th>
           <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
         </ng-container>
 
         <ng-container matColumnDef="content">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ödəniş məbləği</th>
-          <td mat-cell *matCellDef="let element">
-
-            <span>{{element.content }} ₼</span>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Məzmun</th>
+          <td mat-cell *matCellDef="let element"><span>{{element.content }}</span>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="username">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Gözlənilən gəlir</th>
-          <td mat-cell *matCellDef="let element"> {{element.username }} ₼</td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>İstifadəçi</th>
+          <td mat-cell *matCellDef="let element"> {{element.username }} </td>
         </ng-container>
 
         <ng-container matColumnDef="createdDate">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Faktiki gəlir</th>
-          <td mat-cell *matCellDef="let element"> {{element.createdDate }} ₼</td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tarix</th>
+          <td mat-cell *matCellDef="let element"> {{element.createdDate }}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColmReaded"></tr>
