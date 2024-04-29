@@ -19,6 +19,10 @@ export class ContactUsService {
       return this.http.post<any>(`${this.baseUrl}/GetDataBrowseData?type=${type}`, request );
     }
 
+    getContactUsById(contactUsId: number): Observable<any> {
+      return this.http.get<any>(`${this.baseUrl}/GetContactUsById?contactUsId=${contactUsId}` );
+    }
+
     readContactUs(contactUsId: number): Observable<any> {
       return this.http.get<any>(`${this.baseUrl}/ChangeStatus?contactUsId=${contactUsId}`);
     }

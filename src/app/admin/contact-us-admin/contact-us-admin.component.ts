@@ -1,5 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -14,7 +15,8 @@ import { ContactUsService } from 'src/services/contactUs.service';
 export class ContactUsAdminComponent {
 
   constructor(
-    public contactUsService: ContactUsService
+    public contactUsService: ContactUsService,
+    private dialog: MatDialog
   ) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -133,6 +135,47 @@ export class ContactUsAdminComponent {
       // this.Df['directionId'].setValue(0);
       // this.Df['name'].setValue(' ');
     }
+  }
+
+  openDialog(type: number) {
+    let id = 0
+
+    if (type !== 1) {
+      id = this.selection['selected'][0].id;
+    } else id = 0
+
+    if (this.tabID == 0) {
+      const dialogRef = this.dialog.open(ContactUsAdminComponent, {
+        data: { id: id, typeView: type },
+        height: 'max-content',
+        width: '30%',
+        hasBackdrop: true,
+        panelClass: "dialog-admin-category",
+        disableClose: true
+      })
+      dialogRef.afterClosed().subscribe(result => {
+        this.selection.clear()
+        this.activeRow = -1;
+        this.selectedId = 0;
+        this.getContactUsData();
+      });
+    } else {
+      const dialogRef = this.dialog.open(ContactUsAdminComponent, {
+        data: { id: id, typeView: type },
+        height: 'max-content',
+        width: '30%',
+        hasBackdrop: true,
+        panelClass: "dialog-admin-subCategory",
+        disableClose: true
+      })
+      dialogRef.afterClosed().subscribe(result => {
+        this.selection.clear()
+        this.activeRow = -1;
+        this.selectedId = 0;
+        this.getContactUsReadData();
+      });
+    }
+
   }
 
 }
