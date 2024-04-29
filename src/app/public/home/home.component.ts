@@ -81,6 +81,10 @@ export class HomeComponent {
     this.requestData.nextPageNumber = pe.pageIndex + 1
     this.requestData.visibleItemCount = pe.pageSize
     this.getProduct(this.catId)
+    setTimeout(() => {
+      var elements = document.getElementById('products');
+      elements?.scrollIntoView();
+    }, 300);
   }
 
   getCategories() {

@@ -175,6 +175,8 @@ button[disabled] {
 
 .order-edit-items-web {
   display: block;
+  max-height: 60vh;
+    overflow: auto;
 }
 
 .add-icon-mobile {
