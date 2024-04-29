@@ -16,7 +16,7 @@ export class ContactUsService {
     baseUrl = environment.apiContactUsUrl;
   
     getContactUs(request: RequestData, type?: number): Observable<any> {
-      return this.http.post<any>(`${this.baseUrl}/Getdata?type=${type}`, request );
+      return this.http.post<any>(`${this.baseUrl}/GetDataBrowseData?type=${type}`, request );
     }
 
     readContactUs(contactUsId: number): Observable<any> {
