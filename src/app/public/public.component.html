@@ -205,7 +205,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-6 mt-4 mt-lg-0 mt-md-0">
+          <div class="col-lg-2 col-md-6 col-sm-6 mt-4 mt-lg-0 mt-md-0">
             <div class="widget">
               <h5 class="footer-title">Keçidlər</h5>
               <div class="menu-footer1-container">
@@ -232,20 +232,57 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
-            <!-- <div class="widget">
-              <h5 class="footer-title">Məlumat</h5>
-              <div class="menu-footer2-container">
-                <ul id="menu-footer2" class="menu list-inline p-0 m-0">
-                  <li class="menu-item">
-                    <a href="about-us.html"><i class="fas fa-chevron-right me-2"></i>Haqqımızda</a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="our-team.html"><i class="fas fa-chevron-right me-2"></i>Komandamız</a>
-                  </li>
-                </ul>
-              </div>
-            </div> -->
+          <div class="col-lg-4 col-md-6 col-sm-6 mt-lg-0 mt-4">
+            <div class="justify-content-center d-flex">
+
+              <form [formGroup]="contactUsForm" class="user-cabinet-form">
+                  <div class="row" style="align-items: center;">
+                      <!-- <label>*Email</label>
+                      <div class="content">
+                         <input type="email" formControlName="email"  style="width: 100%;" [ngClass]="{'border-red': submitted && (Cf['subjectId'].errors?.['required'] || Cf['subjectId'].errors?.['email']) }">
+                      </div> -->
+                      <label>*Email</label>
+                      <div class="form" [ngClass]="{'border-red': submitted && (Cf['subjectId'].errors?.['required'] || Cf['subjectId'].errors?.['email']) }">
+                          <input type="email" formControlName="email" class="input"  required   autocomplete="off">
+                      </div>
+                  </div>
+
+                  <div class="row" style="align-items: center;">
+                      <label>*Mövzu</label>
+                      <div class="form">
+                          <select formControlName="subjectId" style="width: 100%;" [ngClass]="{'border-red': submitted && Cf['subjectId'].errors?.['required'] }">
+                              <option *ngFor="let subject of subjects" [value]="subject.key">{{subject.value}}</option>
+                          </select>
+                      </div>
+                  </div>
+
+                  <div class="row" style="align-items: center;">
+                      <label>*Təsvir</label>
+                      <div class="content-textarea">
+                          <textarea [ngClass]="{'border-red': submitted && Cf['content'].errors?.['required'] }" id="content" class="input" required formControlName="content"
+                              autocomplete="off"></textarea>
+                      </div>
+                  </div>
+
+                  <div class='file-input mt-2'>
+                      <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" dropZoneClassName="drop-zone" contentClassName="drop-zone-content">
+                          <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector" 
+                              >
+                              <span *ngIf="this.files.length==0" (click)="openFileSelector()">Sürüklə & Burax və ya Fayl seç</span>
+                              <span *ngIf="this.files.length==1" (click)="openFileSelector()">{{fileName}}</span>
+                              <span *ngIf="this.files.length>1" (click)="openFileSelector()">{{this.files.length + ' fayl seçilib'}}</span>
+                              <!-- <button type="button" style="display: none !important;" (click)="openFileSelector()">Browse Files</button> -->
+                          </ng-template>
+                      </ngx-file-drop>
+                  </div>
+
+                  <div class="row">
+                      <button id="save" class="save" type="button" (click)="contactUs()"
+                          [disabled]="contactUsForm.invalid">Göndər</button>
+                  </div>
+              </form>
+
+          </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
             <div class="widget">

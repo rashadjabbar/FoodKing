@@ -7,7 +7,7 @@ import { GlobalService, User } from 'src/services/global.service';
 import { BasketService } from 'src/services/public/basket.service';
 import { MatMenuTrigger } from '@angular/material/menu';
 import jwt_decode from 'jwt-decode';
-import { showConfirmAlert, showInfoAlert } from 'src/utils/alert';
+import { showConfirmAlert, showErrorAlert, showInfoAlert } from 'src/utils/alert';
 import { SaveOrder } from 'src/models/save-order';
 import { AuthService, _isAuthenticated } from 'src/services/auth.service';
 import { ChangePasswordComponent } from './changePassword/changePassword.component';
@@ -17,6 +17,8 @@ import { UserCabinetComponent } from './user-cabinet/user-cabinet.component';
 import { environment } from 'src/environments/environments';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ToastrService } from 'ngx-toastr';
+import { NgxFileDropEntry } from 'ngx-file-drop';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-public',
@@ -32,10 +34,11 @@ export class PublicComponent {
     private basketService: BasketService,
     private categoryServices: CategoryService,
     private authService: AuthService,
-    private globalService: GlobalService,
     private dialog: MatDialog,
     private loginService: UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private fb: FormBuilder,
+    private globalService: GlobalService
   ) {
     this.imageIpUrl = environment.imageIpUrl
   }
@@ -59,7 +62,25 @@ export class PublicComponent {
 
   loginnedUser = localStorage.getItem('token')
 
+  fileName?: string = ''
+  subjects: ComboBox[] = []
+
+  formData = new FormData();
+  public files: NgxFileDropEntry[] = [];
+  submitted = false;
+
+  contactUsForm = this.fb.group({
+    subjectId: [null, Validators.required],
+    content: ['', Validators.required],
+    email: ['', [Validators.email, Validators.required]]
+  })
+
   ngOnInit() {
+    this.globalService.getContactUsSubjects().subscribe({
+      next: res => {
+        this.subjects = res.data
+      }
+    })
     this.authService.identityCheck();
     this.isAuthenticated = _isAuthenticated;
 
@@ -133,7 +154,7 @@ export class PublicComponent {
 
       if (this.basketItems.length > 0 && localStorage.getItem('notificationPlayed') == 'false') {
         setTimeout(() => {
-          if(this.basketItems.length > 0){
+          if(this.basketItems.length > 0 && localStorage.getItem('notificationPlayed') == 'false'){
             this.playNotification()
             localStorage.setItem('notificationPlayed', 'true')
             showInfoAlert('','Sifarişi təsdiqləmək zamanı gəldi😋', true, false, '', 'Ok')
@@ -235,6 +256,62 @@ export class PublicComponent {
     this.toastr.success('Ödəniş üçün kart kopyalandı!', '', {
       positionClass: 'toast-bottom-right'
     });
+  }
+
+  get Cf(): { [key: string]: AbstractControl } {
+    return this.contactUsForm.controls;
+  }
+
+  contactUs() {
+    if (this.contactUsForm.invalid) {
+      return;
+    }
+
+    showConfirmAlert('', "Göndərmək istədiyinizdən əminsinizmi?", undefined, undefined).then(res => {
+      if (res.isConfirmed) {
+        this.submitted = true;
+
+        Object.keys(this.contactUsForm.controls).forEach((key: string) => {
+          this.formData.append(key, this.contactUsForm.get(key)?.value)
+        });
+
+        this.globalService.saveContactUs(this.formData).subscribe(res => {
+          if (!res?.status) {
+            showErrorAlert('Xəta', res?.message, false, false, '', '', 1500);
+          }
+          else {
+            showInfoAlert('', 'Göndərildi', false, false, '', '', 2000);
+            this.contactUsForm.reset()
+            this.submitted = false;
+            this.formData = new FormData();
+            this.files = []
+          }
+        })
+      }
+    })
+  }
+
+
+  public dropped(files: NgxFileDropEntry[]) {
+    this.files = files;
+    this.formData = new FormData();
+    this.fileName = files[0].relativePath;
+
+    for (const droppedFile of files) {
+      // Is it a file?
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+
+        fileEntry.file((file: File) => {
+          this.formData.append('files', file, droppedFile.relativePath)
+        });
+      } else {
+        // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+        console.log(droppedFile.relativePath, fileEntry);
+      }
+    }
+
   }
 
 }
