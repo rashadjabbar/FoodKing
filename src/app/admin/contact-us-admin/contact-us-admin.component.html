@@ -6,8 +6,10 @@
 
   <mat-tab label="Yeni">
 
-    <button mat-raised-button color="primary" id="read" class="save float-end me-2" type="button" (click)="Read()"
+    <button mat-raised-button color="warn" id="read" class="save float-end me-4" type="button" (click)="Read()"
       [disabled]="false">Oxudum</button>
+    <button mat-stroked-button color="primary" id="read" class="save float-end me-4" type="button" (click)="Read()"
+    [disabled]="false">Bax</button>
 
     <div class="table-div">
       <table mat-table [dataSource]="dataSource" matSort class="text-center">
@@ -38,7 +40,8 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" [attr.data-index]="i">
+        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" [attr.data-index]="i"
+          [ngClass]="{'selected-row': isActive(i)}" (click)="selection.toggle(row); highlight(i, row.id);">
         </tr>
       </table>
       <mat-paginator [length]="length" #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
@@ -51,7 +54,7 @@
   <mat-tab label="Oxunulmuş">
 
     <div class="table-div">
-      <table mat-table [dataSource]="dataSourceReaded" matSort class="text-center">
+      <table mat-table [dataSource]="dataSourceRead" matSort class="text-center">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> No. </th>
           <td mat-cell *matCellDef="let element; let i = index;"> {{(paginator.pageIndex *
@@ -79,11 +82,14 @@
           <td mat-cell *matCellDef="let element"> {{element.createdDate }}</td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColmReaded"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColmReaded; let i = index" [attr.data-index]="i">
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" [attr.data-index]="i"
+          [ngClass]="{'selected-row': isActiveRead(i)}" (click)="selection.toggle(row); highlightRead(i, row.id);">
         </tr>
       </table>
-
+      <mat-paginator [length]="length" #paginatorRead [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="onChangePageRead($event)" showFirstLastButtons>
+      </mat-paginator>
     </div>
 
   </mat-tab>

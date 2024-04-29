@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -26,14 +27,21 @@ export class ContactUsAdminComponent {
     visibleItemCount: 25,
   }
   dataSource = new MatTableDataSource<ContactUsBrowseData>(this.contactData);
-  dataSourceReaded = new MatTableDataSource<ContactUsBrowseData>(this.contactData);
+  dataSourceRead = new MatTableDataSource<ContactUsBrowseData>(this.contactData);
   pageSize: number = this.requestData.visibleItemCount;
   pageSizeOptions: number[] = [10, 25, 50];
   pageEvent!: PageEvent;
 
   tabID: number = 0;
 
-  
+  activeRow: any = -1;
+  selectedId: any = 0;
+  selection = new SelectionModel<any>(true, []);
+
+  activeRowRead: any = -1;
+  selectedIdRead: any = 0;
+  selectionRead = new SelectionModel<any>(true, []);
+
   displayedColumns: string[] = [
     'id',
     'subject',
@@ -42,7 +50,7 @@ export class ContactUsAdminComponent {
     'createdDate'
   ];
 
-  displayedColmReaded: string[] = [
+  displayedColmRead: string[] = [
     'id',
     'subject',
     'content',
@@ -55,43 +63,76 @@ export class ContactUsAdminComponent {
     if (id == 0) {
       this.getContactUsData()
     } else
-      this.getContactUsReadedData()
+      this.getContactUsReadData()
   }
 
   onChangePage(pe: PageEvent) {
     this.requestData.nextPageNumber = pe.pageIndex + 1
     this.requestData.visibleItemCount = pe.pageSize
-    
-    if (this.tabID == 0) {
-      this.getContactUsData()
-    } else
-      this.getContactUsReadedData();
+    this.getContactUsData()
+
   }
+  onChangePageRead(pe: PageEvent) {
+    this.requestData.nextPageNumber = pe.pageIndex + 1
+    this.requestData.visibleItemCount = pe.pageSize
+    this.getContactUsReadData();
+  }
+
+  isActive = (index: number) => {return this.activeRow === index };
+  isActiveRead = (index: number) => {return this.activeRowRead === index };
 
   ngOnInit() {
     this.getContactUsData()
     //this.getReportBalanceMonitoring()
   }
 
-  getContactUsData(){
-    this.contactUsService.getContactUs(this.requestData, 0).subscribe(res =>{
-      this.dataSource = new MatTableDataSource<ContactUsBrowseData>(res.data);
-
-        this.length = res.data.count
-        this.dataSource.sort = this.sort;
+  getContactUsData() {
+    this.contactUsService.getContactUs(this.requestData, 0).subscribe(res => {
+      this.dataSource = new MatTableDataSource<ContactUsBrowseData>(res.data.result);
     })
   }
 
-  getContactUsReadedData(){
-    this.contactUsService.getContactUs(this.requestData, 1).subscribe(res =>{
-      this.dataSourceReaded.data = res.data.result;
+  getContactUsReadData() {
+    this.contactUsService.getContactUs(this.requestData, 1).subscribe(res => {
+      this.dataSourceRead.data = res.data.result;
     })
   }
 
-  Read(){
-    this.contactUsService.getContactUs(this.requestData, 1).subscribe(res =>{
-      this.dataSourceReaded.data = res.data.result;
+  Read() {
+    this.contactUsService.getContactUs(this.requestData, 1).subscribe(res => {
+      this.dataSourceRead.data = res.data.result;
     })
+  }
+
+  highlight(index: number, id: number): void {
+    if (!this.isActive(index)) {
+      this.activeRow = index;
+      this.selectedId = id;
+      // this.getLine(this.activeRow);
+    }
+    else {
+      this.activeRow = -1;
+      this.selectedId = 0;
+
+      // this.directionForm.reset()
+      // this.Df['directionId'].setValue(0);
+      // this.Df['name'].setValue(' ');
+    }
+  }
+  highlightRead(index: number, id: number): void {
+    if (!this.isActive(index)) {
+      this.activeRowRead = index;
+      this.selectedIdRead = id;
+      // this.getLine(this.activeRow);
+    }
+    else {
+      this.activeRowRead = -1;
+      this.selectedIdRead = 0;
+
+      // this.directionForm.reset()
+      // this.Df['directionId'].setValue(0);
+      // this.Df['name'].setValue(' ');
+    }
   }
 
 }
