@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ContactUsBrowseData } from 'src/models/contactUs';
 import { ContactUsService } from 'src/services/contactUs.service';
+import { ViewContactUsComponent } from './view-contact-us/view-contact-us.component';
 
 @Component({
   selector: 'app-contact-us-admin',
@@ -80,8 +81,8 @@ export class ContactUsAdminComponent {
     this.getContactUsReadData();
   }
 
-  isActive = (index: number) => {return this.activeRow === index };
-  isActiveRead = (index: number) => {return this.activeRowRead === index };
+  isActive = (index: number) => { return this.activeRow === index };
+  isActiveRead = (index: number) => { return this.activeRowRead === index };
 
   ngOnInit() {
     this.getContactUsData()
@@ -101,8 +102,8 @@ export class ContactUsAdminComponent {
   }
 
   Read() {
-    this.contactUsService.getContactUs(this.requestData, 1).subscribe(res => {
-      this.dataSourceRead.data = res.data.result;
+    this.contactUsService.readContactUs(this.selection['selected'][0].id).subscribe(res => {
+      this.getContactUsData();
     })
   }
 
@@ -110,47 +111,35 @@ export class ContactUsAdminComponent {
     if (!this.isActive(index)) {
       this.activeRow = index;
       this.selectedId = id;
-      // this.getLine(this.activeRow);
     }
     else {
       this.activeRow = -1;
       this.selectedId = 0;
-
-      // this.directionForm.reset()
-      // this.Df['directionId'].setValue(0);
-      // this.Df['name'].setValue(' ');
     }
   }
   highlightRead(index: number, id: number): void {
     if (!this.isActive(index)) {
       this.activeRowRead = index;
       this.selectedIdRead = id;
-      // this.getLine(this.activeRow);
     }
     else {
       this.activeRowRead = -1;
       this.selectedIdRead = 0;
-
-      // this.directionForm.reset()
-      // this.Df['directionId'].setValue(0);
-      // this.Df['name'].setValue(' ');
     }
   }
 
   openDialog(type: number) {
     let id = 0
 
-    if (type !== 1) {
-      id = this.selection['selected'][0].id;
-    } else id = 0
+    id = this.selection['selected'][0].id;
 
     if (this.tabID == 0) {
-      const dialogRef = this.dialog.open(ContactUsAdminComponent, {
+      const dialogRef = this.dialog.open(ViewContactUsComponent, {
         data: { id: id, typeView: type },
         height: 'max-content',
-        width: '30%',
+        width: '40%',
         hasBackdrop: true,
-        panelClass: "dialog-admin-category",
+        panelClass: "dialog-contact-us",
         disableClose: true
       })
       dialogRef.afterClosed().subscribe(result => {
@@ -160,12 +149,12 @@ export class ContactUsAdminComponent {
         this.getContactUsData();
       });
     } else {
-      const dialogRef = this.dialog.open(ContactUsAdminComponent, {
+      const dialogRef = this.dialog.open(ViewContactUsComponent, {
         data: { id: id, typeView: type },
         height: 'max-content',
-        width: '30%',
+        width: '40%',
         hasBackdrop: true,
-        panelClass: "dialog-admin-subCategory",
+        panelClass: "dialog-contact-us",
         disableClose: true
       })
       dialogRef.afterClosed().subscribe(result => {

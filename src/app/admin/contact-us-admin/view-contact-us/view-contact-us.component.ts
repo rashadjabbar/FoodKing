@@ -51,7 +51,7 @@ export class ViewContactUsComponent {
   getCommonFunc() {
     if (this.data.id !== 0) {
       this.contactUsService.getContactUsById(this.data.id).subscribe((res: any) => {
-        this.contactUsForm.patchValue(res.data[0])
+        this.contactUsForm.patchValue(res.data)
       })
     }
   }
