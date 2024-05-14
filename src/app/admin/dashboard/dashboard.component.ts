@@ -231,7 +231,7 @@ export class DashboardComponent {
         }
       },
       yaxis: {
-        min: -10,
+        min: 0,
         max: 1000,
         title: {
           text: "Məbləğ ₼",
