@@ -20,10 +20,12 @@ export class AdminComponent implements OnInit{
     ){}
 
     userData?: User;
+    data?: any;
 
   ngOnInit(){
 
     this.loadJsFile('../../../assets/admin/js/app.js')
+    this.data = jwt_decode(localStorage.getItem('token')!)
   }
 
   public loadJsFile(url) {  

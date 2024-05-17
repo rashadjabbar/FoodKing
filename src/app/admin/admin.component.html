@@ -16,28 +16,28 @@
                 <div class="right"></div>
             </div>
             <li class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >
-                <a class="nav-link" [routerLink]="['dashboard']"><i class="fas fa-poll"></i>İdarə paneli</a>
+                <a class="nav-link" [routerLink]="['dashboard']" *ngIf="this.data.userType != 4"><i class="fas fa-poll"></i>İdarə paneli</a>
             </li>
             <li class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                <a class="nav-link" [routerLink]="['products']"><i class="fas fa-utensils"></i>Məhsullar</a>
+                <a class="nav-link" [routerLink]="['products']" *ngIf="this.data.userType != 4"><i class="fas fa-utensils"></i>Məhsullar</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                <a class="nav-link" [routerLink]="['product-category']"><i class="fas fa-list-alt"></i>Kateqoriyalar</a>
+                <a class="nav-link" [routerLink]="['product-category']" *ngIf="this.data.userType != 4"><i class="fas fa-list-alt"></i>Kateqoriyalar</a>
             </li>
             <li class="nav-item"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                <a class="nav-link" [routerLink]="['payment']"><i class="fas fa-money-check-alt"></i>Ödəniş</a>
+                <a class="nav-link" [routerLink]="['payment']" *ngIf="this.data.userType != 4"><i class="fas fa-money-check-alt"></i>Ödəniş</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                <a class="nav-link" [routerLink]="['order']"><i class="fas fa-shopping-basket"></i>Sifariş</a>
+                <a class="nav-link" [routerLink]="['order']" *ngIf="this.data.userType != 4"><i class="fas fa-shopping-basket"></i>Sifariş</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                <a class="nav-link" [routerLink]="['daily-report']"><i class="fa-solid fa-calendar-days"></i>Günlük</a>
+                <a class="nav-link" [routerLink]="['daily-report']" ><i class="fa-solid fa-calendar-days"></i>Günlük</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                <a class="nav-link" [routerLink]="['contact-us-admin']"><i class="fa-regular fa-comments"></i>Kontakt</a>
+                <a class="nav-link" [routerLink]="['contact-us-admin']" *ngIf="this.data.userType != 4"><i class="fa-regular fa-comments"></i>Kontakt</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                <a class="nav-link" [routerLink]="['report']"><i class="fa-solid fa-chart-pie"></i>Report</a>
+                <a class="nav-link" [routerLink]="['report']" *ngIf="this.data.userType != 4"><i class="fa-solid fa-chart-pie"></i>Report</a>
             </li>
         </ul>
     </div>

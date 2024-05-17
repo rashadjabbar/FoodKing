@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BasketService } from 'src/services/public/basket.service';
 import { DailyProductNotesComponent } from './daily-product-notes/daily-product-notes.component';
 import { environment } from 'src/environments/environments';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-daily-report',
@@ -17,8 +18,11 @@ export class DailyReportComponent implements OnInit {
   productData: any[] =[]
   imageIpUrl: string = environment.imageIpUrl
 
+  data?: any;
+
   ngOnInit() {
-    this.basketService.getDailyOrderProductList().subscribe(res =>{
+    this.data = jwt_decode(localStorage.getItem('token')!)
+    this.basketService.getDailyOrderProductList(this.data.userType).subscribe(res =>{
       this.productData = res.data
     })
   }
@@ -33,7 +37,7 @@ export class DailyReportComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      this.basketService.getDailyOrderProductList().subscribe(res =>{
+      this.basketService.getDailyOrderProductList(this.data.userType).subscribe(res =>{
         this.productData = res.data
       })
     });

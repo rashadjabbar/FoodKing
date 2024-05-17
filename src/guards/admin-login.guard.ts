@@ -26,7 +26,7 @@ export class AdminLogin implements CanActivate{
     
     let data : any = jwt_decode(localStorage.getItem('token') as string)
     
-    if (data?.userType != '1'){
+    if (data?.userType != '1' && data?.userType != '4'){
       this.router.navigate(['']);
       return false;
     }

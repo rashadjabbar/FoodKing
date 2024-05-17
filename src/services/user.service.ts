@@ -48,12 +48,14 @@ export class UserService {
         // this.globalService.token = result.data.token!;
         localStorage.setItem('token', result.data.token);
         localStorage.setItem('notificationPlayed', 'false')
+        
 
         this.authService.identityCheck();
 
-        if (data.userType == '1') {
+        if (data.userType == '1' || data.userType == '4') {
           this.router.navigate(['/admin']);
-        } else this.router.navigate(['']);
+        } 
+        else this.router.navigate(['']);
       },
       error: (res: any) => {
         localStorage.removeItem('token')

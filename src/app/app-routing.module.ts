@@ -37,7 +37,7 @@ const routes: Routes = [
   {
     path: 'admin', component: AdminComponent, canActivate: [AdminLogin],
     children: [
-      {path: '', redirectTo: 'products', pathMatch: 'full'},
+      {path: '', redirectTo: 'daily-report', pathMatch: 'full'},
       { path: 'dashboard', component: DashboardComponent },
       { path: 'products', component: AddProductComponent },
       { path: 'product-category', component: ProductCategoryComponent },
@@ -48,6 +48,7 @@ const routes: Routes = [
       { path: 'report', component: ReportComponent },
     ]
   },
+
   {path: 'login-adminpanel' , component: LoginComponent},
   {path: 'user-login' , component: UserLoginComponent},
 ];

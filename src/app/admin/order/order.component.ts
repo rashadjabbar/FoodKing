@@ -75,11 +75,11 @@ export class OrderComponent implements OnInit {
 
   requestData: any = {
     nextPageNumber: 1,
-    visibleItemCount: 100,
+    visibleItemCount: 500,
   }
 
   pageSize: number = this.requestData.visibleItemCount;
-  pageSizeOptions: number[] = [25, 100, 250];
+  pageSizeOptions: number[] = [100, 250, 500];
   pageEvent!: PageEvent;
 
   range = new FormGroup({

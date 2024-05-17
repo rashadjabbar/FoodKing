@@ -51,11 +51,11 @@ export class AddProductComponent implements OnInit {
   selection = new SelectionModel<Product>(true, []);
   requestData: any = {
     nextPageNumber: 1,
-    visibleItemCount: 200,
+    visibleItemCount: 1000,
   }
 
   pageSize: number = this.requestData.visibleItemCount;
-  pageSizeOptions: number[] = [10, 25, 200];
+  pageSizeOptions: number[] = [10, 500, 1000];
   pageEvent!: PageEvent;
 
   isActive = (index: number) => { return this.activeRow === index };

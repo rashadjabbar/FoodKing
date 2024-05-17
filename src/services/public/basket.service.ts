@@ -47,8 +47,8 @@ export class BasketService {
     return this.http.post<any>(`${this.baseUrl}GetOrdersClient?beginDate=${beginDate}&endDate=${endDate}`, request );
   }
   
-  getDailyOrderProductList(): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}GetDailyOrderProductList`, null);
+  getDailyOrderProductList(userType: number): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}GetDailyOrderProductList?userType=${userType}`, null);
   }
 
   getDailyOrderNotes(): Observable<any> {
