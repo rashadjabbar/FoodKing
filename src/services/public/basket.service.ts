@@ -32,7 +32,7 @@ export class BasketService {
   }
 
   getOrderById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}GetOrderById?orderId=${id}`, );
+    return this.http.get<any>(`${this.baseUrl}GetOrderById?orderId=${id}`);
   }
 
   SaveOrder(request: SaveOrder): Observable<any> {
@@ -57,6 +57,10 @@ export class BasketService {
 
   GetServiceFeeByUserAndAmount(request: ServiceFeeByUserAndAmount): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}GetServiceFeeByUserAndAmount`, request );
+  }
+
+  RepeatOrder(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}RepeatToBasket?orderId=${id}`);
   }
 
 }

@@ -13,6 +13,7 @@ import { default as _rollupMoment } from 'moment';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { FormControl, FormGroup } from '@angular/forms';
+import { GlobalService } from 'src/services/global.service';
 const moment = _rollupMoment || _moment;
 
 export const MY_FORMATS = {
@@ -41,6 +42,7 @@ export class ClientOrderComponent implements OnInit {
   endDate: any = new Date()
   statusModel?: { statusId: string; ids: number[]; };
   constructor(
+    private globalService: GlobalService,
     private datePipe: DatePipe,
     private basketService: BasketService,
     private router: Router,
@@ -127,6 +129,19 @@ export class ClientOrderComponent implements OnInit {
       }
     })
 
+  }
+
+
+  repeatOrder(id: number) {
+        this.basketService.RepeatOrder(id).subscribe(res => {
+          if (!res?.status) {
+            showErrorAlert('', res?.message, false, false, '', '', 1500);
+          }
+          else {
+            showInfoAlert('', res?.message, false, false, '', '', 2000);
+          }
+          this.globalService.refreshBasket({ itemAddedToBasket: true });
+        })
   }
 
   selectToday() {
