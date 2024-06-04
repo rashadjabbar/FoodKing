@@ -45,7 +45,7 @@ export class ReportComponent implements OnInit {
   endDate: any = new Date()
 
   range = new FormGroup({
-    start: new FormControl<string>(this.datePipe.transform(this.beginDate.setMonth(this.beginDate.getMonth() - 1), 'yyyy-MM-dd')!),
+    start: new FormControl<string>(this.datePipe.transform(this.beginDate, 'yyyy-MM-dd')!),
     end: new FormControl<string>(this.datePipe.transform(this.endDate, 'yyyy-MM-dd')!),
   });
 
@@ -60,6 +60,7 @@ export class ReportComponent implements OnInit {
 
   displayedColmBalanceRep: string[] = [
     'id',
+    'orderPurchase',
     'orderAmount',
     'paymentAmount',
     'expectedProfit',

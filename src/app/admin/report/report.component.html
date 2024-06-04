@@ -95,6 +95,11 @@
             paginator.pageSize) + (i + 1)}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="orderPurchase">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifariş Alış</th>
+          <td mat-cell *matCellDef="let element"> {{element.orderPurchase}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="orderAmount">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifariş məbləği</th>
           <td mat-cell *matCellDef="let element"> {{element.orderAmount}} </td>

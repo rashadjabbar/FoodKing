@@ -7,6 +7,7 @@ export class ReportDebt {
 }
 
 export class ReportbalanceMonitoring {
+    orderPurchase?: number
     orderAmount?: number
     paymentAmount?: number
     expectedProfit?: number

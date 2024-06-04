@@ -199,7 +199,7 @@ export class ClientDashboardComponent {
       },
       yaxis: {
         min: 0,
-        max: 100,
+        max: 200,
         title: {
           text: "Məbləğ ₼",
           style: {
