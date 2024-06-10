@@ -116,7 +116,7 @@ export class AddProductComponent implements OnInit {
 
       this.productService.changeProductStatus(this.statusRequest).subscribe({
         next: res => {
-          this.getProduct()
+          //this.getProduct()
         },
         error: res => {
           if (res.status == 401) {
@@ -139,7 +139,7 @@ export class AddProductComponent implements OnInit {
 
       this.productService.changeProductCurrentAvailability(this.statusRequest).subscribe({
         next: res => {
-          this.getProduct()
+          //this.getProduct()
         },
         error: res => {
           if (res.status == 401) {
