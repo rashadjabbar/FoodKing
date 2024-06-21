@@ -93,7 +93,6 @@ export class DashboardComponent {
   date = new FormControl(moment());
   @ViewChild("chart") chart!: ChartComponent;
   @ViewChild("chartMonthly") chartMonthly!: ChartComponent;
-  public chartOptions!: Partial<ChartOptions>
   public chartOptionsDelay!: Partial<chartOptionsDelay>;
   public chartOptionsMonthly!: Partial<ChartOptionsMounthly>
   public chartOptionsProduct!: Partial<chartOptionsProduct>
