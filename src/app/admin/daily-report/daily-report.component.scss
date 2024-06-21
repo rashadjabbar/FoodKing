@@ -39,6 +39,10 @@
     margin-bottom: 20px;
   }
 
+  ::ng-deep .line-broken-tooltip {
+    white-space: pre-line;
+  }
+
 
   @media (max-width:641px) {
     ::ng-deep.cdk-overlay-pane {
