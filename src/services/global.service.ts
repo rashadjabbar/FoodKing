@@ -86,4 +86,8 @@ export class GlobalService {
   getContactUsSubjects() {
     return this.http.get<any>(`${this.baseUrl}ComboBox/GetContactUsSubjects`);
   }
+
+  getUnreadMessages() {
+    return this.http.get<any>(`${environment.apiAdminAuthUrl}Global/GetUserUnreadMessages`);
+  }
 }
