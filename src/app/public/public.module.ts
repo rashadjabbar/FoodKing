@@ -39,6 +39,7 @@ import { ClientDashboardComponent } from './client-dashboard/client-dashboard.co
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { MatSortModule } from '@angular/material/sort';
 import { NgxFileDropModule } from 'ngx-file-drop';
+import { LuckyWheelComponent } from './wheel/lucky-wheel/lucky-wheel.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     ProductDetailComponent,
     DailyMealComponent,
     ClientDashboardComponent,
+    LuckyWheelComponent,
   ],
   imports: [
     CommonModule,
