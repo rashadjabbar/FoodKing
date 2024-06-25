@@ -21,16 +21,17 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { UserLoginComponent } from './public-auth/user-login/user-login.component';
 import { OtpComponent } from './public-auth/user-login/otp/otp.component';
-import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
 import { IMaskModule } from 'angular-imask';
 import { NgOtpInputModule } from 'ng-otp-input';
 
+
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
+
 
 @NgModule({
   declarations: [
@@ -55,8 +56,6 @@ export function tokenGetter() {
     ToastrModule.forRoot(), // ToastrModule added
     MatSortModule,
     MatCheckboxModule,
-    SocialLoginModule,
-    GoogleSigninButtonModule ,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -69,24 +68,13 @@ export function tokenGetter() {
     MatDatepickerModule,
     MatNativeDateModule ,
     IMaskModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+
   ],
 
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
-    {
-      provide: "SocialAuthServiceConfig",
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider("1008280619441-jgr16sc2dkj02ih76v2q8v8rjf0a3r5d.apps.googleusercontent.com")
-          }
-        ],
-        onError: err => console.log(err)
-      } as SocialAuthServiceConfig
-    }
+
   ],
 
   bootstrap: [AppComponent],

@@ -5,9 +5,8 @@ import { Login } from 'src/models/login';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { OtpComponent } from './otp/otp.component';
 import { ComboboxModel } from 'src/models/select-model';
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-import { GoogleLoginProvider } from "@abacritt/angularx-social-login";
 import { HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -17,20 +16,17 @@ export class UserLoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private login: UserService,
-    private dialog: MatDialog,
-    private socialAuthService: SocialAuthService,
-    private httpClient: HttpClient
+    private datePipe: DatePipe,
   ) {
-    this.socialAuthService.authState.subscribe((user: SocialUser) => {
-      console.log(user);
-    });
+
    }
+
+   loggedIn: boolean | undefined;
 
   otp_dialogRef?: MatDialogRef<OtpComponent>;
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   logindata: Login = new Login();
-  private accessToken = '';
   gender?: ComboboxModel[];
 
   signUpForm = this.formBuilder.group({
@@ -77,6 +73,9 @@ export class UserLoginComponent implements OnInit {
     if (this.signUpForm.invalid) {
       return;
     }
+    const formattedDate = this.datePipe.transform(this.signUpForm.get('birthday')!.value, 'yyyy-MM-dd');
+    this.signUpForm.get('birthday')!.setValue(formattedDate);
+
     this.signUp['gender'].setValue(Boolean(this.signUp['gender'].value));
     this.login.userRegister(this.signUpForm.value)
 
