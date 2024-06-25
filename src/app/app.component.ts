@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/services/auth.service';
 import { GlobalService } from 'src/services/global.service';
 import { showInfoAlert } from 'src/utils/alert';
@@ -11,17 +12,25 @@ import { showInfoAlert } from 'src/utils/alert';
 export class AppComponent implements OnInit {
   title = 'FoodKing';
   messages: any =[]
-
-  constructor(private globalService: GlobalService, public authService: AuthService) {
+url = ''
+  constructor(private globalService: GlobalService, private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
     authService.identityCheck();
   }
 
   ngOnInit(){
-    this.globalService.getUnreadMessages().subscribe(res =>{
-      this.messages = res.data
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        this.url = e.url;
 
-      this.showUnreadMessageAlertsSequentially(0);
-    })
+        if(this.url!='/user-login' && this.url !='/login-adminpanel'){
+          this.globalService.getUnreadMessages().subscribe(res =>{
+            this.messages = res.data
+      
+            this.showUnreadMessageAlertsSequentially(0);
+          });
+        }
+      }
+    });
   }
 
   showUnreadMessageAlertsSequentially(index: number) {
