@@ -1,39 +1,55 @@
-#wheelOfFortune {
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  #wheel {
-    display: block;
-  }
-  
-  #spin {
-    font: 1.5em/0 sans-serif;
-    user-select: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 30%;
-    height: 30%;
-    margin: -15%;
-    background: #fff;
-    color: #fff;
-    box-shadow: 0 0 0 8px currentColor, 0 0px 15px 5px rgba(0, 0, 0, 0.6);
-    border-radius: 50%;
-    transition: 0.8s;
-  }
-  
-  #spin::after {
-    content: "";
-    position: absolute;
-    top: -17px;
-    border: 10px solid transparent;
-    border-bottom-color: currentColor;
-    border-top: none;
-  }
-  
+.wheel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  position: relative;
+}
+
+.wheel {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 5px solid #000;
+  position: relative;
+  transform-origin: center;
+  transition: transform 4s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 10%;
+
+}
+
+.segment {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 0;
+  left: 50%;
+  transform-origin: 0 100%;
+  text-align: center;
+  line-height: 150px; /* radius of the wheel / 2 */
+}
+
+.segment .label {
+  display: block;
+  transform: skewY(30deg) rotate(-30deg);
+  line-height: 8;
+}
+
+.pointer {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid red;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10%;
+}
+
+.prize {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}

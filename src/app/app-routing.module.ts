@@ -20,6 +20,7 @@ import { DailyMealComponent } from './public/daily-meal/daily-meal.component';
 import { ReportComponent } from './admin/report/report.component';
 import { ClientDashboardComponent } from './public/client-dashboard/client-dashboard.component';
 import { ContactUsAdminComponent } from './admin/contact-us-admin/contact-us-admin.component';
+import { LuckyWheelComponent } from './public/wheel/lucky-wheel/lucky-wheel.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: 'client-order', component: ClientOrderComponent },
       { path: 'daily-meal', component: DailyMealComponent },
       { path: 'client-dashboard', component: ClientDashboardComponent },
+      { path: 'lucky-wheel', component: LuckyWheelComponent },
     ]
   },
   {

@@ -46,6 +46,7 @@
                     <a [routerLink]="['daily-meal']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">bu günün yeməyİ</a>
                   </li>
+                  
                   <li *ngIf="isAuthenticated" class="nav-item-mobile">
                     <a [routerLink]="['wishlist']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Sevİmlİlər</a>
