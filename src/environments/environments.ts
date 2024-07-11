@@ -2,15 +2,15 @@
 // const localIp = 'http://192.168.37.49:3004'
 const localIp = 'https://foodking.program.az'
 
-const categoryIp = `${localIp}/cardoperations/api/`
-const productIp = `${localIp}/cardoperations/api/Product`
-const imageIp = `${localIp}/cardoperations/`
+const categoryIp = `${localIp}/operation/api/`
+const productIp = `${localIp}/operation/api`
+const imageIp = `${localIp}/operation/api/`
 const authIp = `${localIp}/FoodKing/system/api/`
-const commonIp = `${localIp}/common/api/`
-const basketIp = `${localIp}/basket/api/Baskets/`
-const paymentIp = `${localIp}/payment/api/`
+const commonIp = `${localIp}/operation/api/Common/`
+const basketIp = `${localIp}/operation/api/Baskets/`
+const paymentIp = `${localIp}/operation/api/`
 const reportIp = `${localIp}/report/api/`
-const contactUsIp = `${localIp}/cardoperations/api/ContactUs`
+const contactUsIp = `${localIp}/operation/api/ContactUs`
 
 
 
