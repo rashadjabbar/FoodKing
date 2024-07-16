@@ -17,7 +17,7 @@
 .search-results {
     height: 50em;
     overflow: scroll;
-  }
+}
 
 .subLi:hover {
     background-color: #3bb77e;
@@ -29,9 +29,9 @@
 .main-panel {
     max-height: 100vh !important;
     overflow-y: scroll !important;
-  }
+}
 
-  .main-panel::-webkit-scrollbar-thumb {
+.main-panel::-webkit-scrollbar-thumb {
     background: #3bb77d43;
     border-radius: 5px;
 }
@@ -49,10 +49,10 @@
 .favorite a {
     background: #ffba43;
     color: #fff !important;
-    
+
 }
 
-.oldPrice{
+.oldPrice {
     position: relative;
     display: inline-block;
 }
@@ -60,13 +60,51 @@
 .oldPrice::before {
     content: "";
     position: absolute;
-    bottom: 9px; /* xəttin yüksəkliyi */
+    bottom: 9px;
+    /* xəttin yüksəkliyi */
     left: 0;
     width: 100%;
-    height: 2px; /* xəttin eni */
-    background-color: #ffba43; /* xəttin rəngi */
-  }
+    height: 2px;
+    /* xəttin eni */
+    background-color: #ffba43;
+    /* xəttin rəngi */
+}
 
-  h6 i{
+h6 i {
     color: #ffba43;
-  }
+}
+
+
+.slider {
+    position: relative;
+    // transition: 0.7s;
+    height: 12vh;
+    background-color: #d8f1e5;
+
+}
+
+.slider-item {
+    position: absolute;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    padding: 10px 0;
+    border: 1px solid rgb(211 235 223) !important;
+    transition: 0.7s;
+    color: #434343;
+    box-shadow: 0 4px 20px #95959526;
+    opacity: 0;
+    transform: translate3d(120%, 0, 0) !important;
+}
+
+.slider li.active {
+    opacity: 1;
+    transform: translate3d(0%, 0, 0) !important;
+}
+

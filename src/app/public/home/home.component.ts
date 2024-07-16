@@ -21,6 +21,9 @@ import { PaginationDummyService } from 'src/services/public/pagination-dummy.ser
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+
+  @ViewChild('list') el!: ElementRef;
+
   constructor(
     private categoryServices: CategoryService,
     private productService: ProductService,
@@ -35,7 +38,6 @@ export class HomeComponent {
     this.imageIpUrl = environment.imageIpUrl
 
   }
-
 
   currentPage?: number = 1
   imageIpUrl!: string
@@ -60,10 +62,31 @@ export class HomeComponent {
 
 
   ngOnInit() {
-    this.globalService.data$.subscribe(res =>{this.requestData.nextPageNumber = 1
+
+    let slideIndex = 0;
+    let slider = document.querySelector('#test');
+    let slides = slider!.querySelectorAll('li');
+
+    setInterval(() => {
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('active');
+      }
+
+      slideIndex++;
+      if (slideIndex > slides.length) {
+        slideIndex = 0
+      }
+
+      slides[slideIndex - 1].classList.add('active');
+      
+    }, 5000)
+
+    this.globalService.data$.subscribe(res => {
+      this.requestData.nextPageNumber = 1
       this.getProduct(res.catId)
-    this.catId = res.catId}
-      )
+      this.catId = res.catId
+    }
+    )
     // this.dataSource.paginator = this.paginator;
     if (this.catId !== null) {
       this.router.navigate(['/'], { fragment: 'products' });
@@ -213,7 +236,4 @@ export class HomeComponent {
       }
     })
   }
-
-
-
 }
