@@ -3,8 +3,8 @@
 const localIp = 'https://foodking.program.az'
 
 const categoryIp = `${localIp}/operation/api/`
-const productIp = `${localIp}/operation/api`
-const imageIp = `${localIp}/operation/api/`
+const productIp = `${localIp}/operation/api/Product`
+const imageIp = `${localIp}/operation/`
 const authIp = `${localIp}/FoodKing/system/api/`
 const commonIp = `${localIp}/operation/api/Common/`
 const basketIp = `${localIp}/operation/api/Baskets/`

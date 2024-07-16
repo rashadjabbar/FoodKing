@@ -7,8 +7,8 @@
 
 <div class="row" style="padding: 0 2%; ">
   <div class="col-lg-2" *ngFor="let item of productData" style="margin-bottom: 20px;">
-    <div #tooltip="matTooltip" matTooltip="{{item.orderItemCount}}" matTooltipClass="line-broken-tooltip" class="product-card" [ngStyle]="{'box-shadow': item.hexColor? '' + item.hexColor +' 0px 1px 3px, '+item.hexColor +'  0px 1px 2px' : ''}">
-      <img [src]="imageIpUrl + item.imagePath" class="img-width-100" alt="no image">
+    <div  class="product-card" [ngStyle]="{'box-shadow': item.hexColor? '' + item.hexColor +' 0px 1px 3px, '+item.hexColor +'  0px 1px 2px' : ''}">
+      <img [src]="imageIpUrl + item.imagePath" class="img-width-100" #tooltip="matTooltip" matTooltip="{{item.orderItemCount}}" matTooltipClass="line-broken-tooltip" alt="no image" >
       <span >{{item.name}}</span>
       <span>{{item.count}}</span>
     </div>
