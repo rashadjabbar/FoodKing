@@ -63,9 +63,12 @@ export class HomeComponent {
 
   ngOnInit() {
 
-    let slideIndex = 0;
+    let slideIndex = 1;
     let slider = document.querySelector('#test');
     let slides = slider!.querySelectorAll('li');
+
+    // İlk yazıya "active" sınıfını ekle
+    slides[0].classList.add('active');
 
     setInterval(() => {
       for (let i = 0; i < slides.length; i++) {
