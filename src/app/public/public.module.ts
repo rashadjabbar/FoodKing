@@ -40,6 +40,9 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { MatSortModule } from '@angular/material/sort';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { LuckyWheelComponent } from './wheel/lucky-wheel/lucky-wheel.component';
+import { NewsTickerComponent } from './news-ticker/news-ticker.component';
+import { ClientPaymentComponent } from './client-payment/client-payment.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -56,10 +59,14 @@ import { LuckyWheelComponent } from './wheel/lucky-wheel/lucky-wheel.component';
     DailyMealComponent,
     ClientDashboardComponent,
     LuckyWheelComponent,
+    NewsTickerComponent,
+    ClientPaymentComponent,
+
   ],
   imports: [
     CommonModule,
     AppRoutingModule,
+    MatTableModule,
     MatExpansionModule,
     MatPaginatorModule,
     MatMenuModule,

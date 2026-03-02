@@ -63,7 +63,6 @@ import { ViewContactUsComponent } from './contact-us-admin/view-contact-us/view-
     ReportComponent,
     ContactUsAdminComponent,
     ViewContactUsComponent,
-    
 
   ],
   imports: [

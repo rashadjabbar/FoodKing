@@ -162,23 +162,167 @@ html {
     width: 35%;
     margin-left: 3%;
   }
-  
-  .table-div{
+
+  .table-div {
     overflow: auto !important;
   }
 
-  .range-date{
+  .range-date {
     flex-direction: column !important;
   }
 
-  
-  .form-container{
+
+  .form-container {
     max-height: 80vh;
     overflow: auto;
   }
 
-  .navbar-nav{
+  .navbar-nav {
     padding-right: 0 !important;
   }
 
+}
+
+.forgot-dialog .dialog-title {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.dialog-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #3bb77e, #ffba43);
+  transform: translateX(-50%);
+  border-radius: 10px;
+}
+
+.forgot-dialog .dialog-content {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.forgot-dialog .dialog-subtitle {
+  font-size: 13px;
+  color: #777;
+  text-align: center;
+}
+
+.forgot-dialog .dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 24px 20px;
+}
+
+.forgot-dialog .btn-send {
+  background: linear-gradient(135deg, #3bb77e, #2fa66f) !important;
+  color: #fff !important;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.forgot-dialog .btn-send:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(59, 183, 126, 0.25);
+}
+
+.forgot-dialog .mat-mdc-dialog-container {
+  border-radius: 14px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Dialog Container */
+.reset-dialog .mat-mdc-dialog-container {
+  border-radius: 14px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Title */
+.reset-dialog .dialog-title {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  gap: 8px;
+  position: relative;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  line-height: 1;
+  align-items: center;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Gradient line */
+.reset-dialog .dialog-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #3bb77e, #ffba43);
+  transform: translateX(-50%);
+  border-radius: 10px;
+}
+
+/* Content spacing */
+.reset-dialog .dialog-content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+}
+
+/* Actions */
+.reset-dialog .dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 24px 20px;
+}
+
+/* Buttons */
+.reset-dialog .btn-send {
+  background: linear-gradient(135deg, #3bb77e, #2fa66f) !important;
+  color: white !important;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.reset-dialog .btn-send:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(59, 183, 126, 0.25);
+}
+
+.reset-dialog .btn-cancel {
+  color: #777;
+}
+
+/* Dialog inner spacing fix */
+.reset-dialog .mat-mdc-dialog-content {
+  padding-top: 24px !important;
+}
+
+
+
+.reset-dialog .custom-field {
+  margin-top: 8px;
+}
+
+.reset-dialog .mat-mdc-form-field {
+  width: 100%;
+}
+
+.reset-dialog .mat-mdc-dialog-container {
+  padding: 10px 10px 20px 10px;
+  border-radius: 14px;
 }

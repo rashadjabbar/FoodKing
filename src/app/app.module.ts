@@ -19,13 +19,13 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ToastrModule } from 'ngx-toastr';
 import { MatSortModule } from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { UserLoginComponent } from './public-auth/user-login/user-login.component';
-import { OtpComponent } from './public-auth/user-login/otp/otp.component';
+
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
 import { IMaskModule } from 'angular-imask';
 import { NgOtpInputModule } from 'ng-otp-input';
+
 
 
 export function tokenGetter() {
@@ -35,10 +35,7 @@ export function tokenGetter() {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    UserLoginComponent,
-    OtpComponent
-
+    AppComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +46,7 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     ReactiveFormsModule,
     AdminAuthModule,
-    // PublicAuthModule,
+    PublicAuthModule,
     HttpClientModule,
     NgxSpinnerModule,
     ClipboardModule,

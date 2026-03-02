@@ -90,7 +90,8 @@ export class UserService {
           maxWidth: '100vw',
           autoFocus: false,
           data: {
-            userId: result.data
+            userId: result.data,
+            mode: 'register'
           }
         })
       },
@@ -126,4 +127,13 @@ export class UserService {
   registrationConfirmation(model: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}Auth/RegistrationConfirmation`, model);
   }
+
+  sendOtp(model: any) {
+    return this.http.post(this.baseUrl + 'Auth/ForgotPassword', model);
+  }
+
+  resetPassword(model: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}Global/ResetUserPassword`, model);
+  }
+
 }

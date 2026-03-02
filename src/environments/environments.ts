@@ -1,4 +1,5 @@
 
+// const localIp = 'https://localhost:7075'
 // const localIp = 'http://192.168.37.49:3004'
 const localIp = 'https://foodking.program.az'
 
@@ -11,6 +12,7 @@ const basketIp = `${localIp}/operation/api/Baskets/`
 const paymentIp = `${localIp}/operation/api/`
 const reportIp = `${localIp}/report/api/`
 const contactUsIp = `${localIp}/operation/api/ContactUs`
+const newsIp = `${localIp}/operation/api/News`
 
 
 
@@ -25,4 +27,6 @@ export const environment = {
   apiPaymentUrl:`${paymentIp}`,
   apiReportUrl:`${reportIp}`,
   apiContactUsUrl:`${contactUsIp}`,
+  apiNewsUrl:`${newsIp}`,
+
 };

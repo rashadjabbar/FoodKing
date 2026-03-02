@@ -7,6 +7,8 @@ import { OtpComponent } from './otp/otp.component';
 import { ComboboxModel } from 'src/models/select-model';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -14,12 +16,16 @@ import { DatePipe } from '@angular/common';
 })
 export class UserLoginComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private login: UserService,
     private datePipe: DatePipe,
+    private dialog: MatDialog
   ) {
 
    }
+
+   
 
    loggedIn: boolean | undefined;
 
@@ -45,6 +51,11 @@ export class UserLoginComponent implements OnInit {
     loginUsername: ['', Validators.required],
     loginPassword: ['', Validators.required],
   })
+
+  forgotEmail = this.formBuilder.control('', [
+    Validators.required,
+    Validators.pattern(this.emailPattern)
+  ]);
 
   get signUp(): { [key: string]: AbstractControl } {
     return this.signUpForm.controls;
@@ -90,5 +101,17 @@ export class UserLoginComponent implements OnInit {
     this.logindata.password = this.loginForm.get('loginPassword')?.value!;
     this.login.login(this.logindata)
   }
+
+  openForgotPassword() {
+
+  const dialogRef = this.dialog.open(ForgotPasswordComponent, {
+    width: '500px',
+    panelClass: 'forgot-dialog',
+    data: { type: 'forgot-password' }
+  });
+
+}
+
+
 
 }

@@ -51,10 +51,7 @@
                     <a [routerLink]="['wishlist']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Sevİmlİlər</a>
                   </li>
-                  <li *ngIf="isAuthenticated" class="nav-item-mobile">
-                    <a [routerLink]="['client-order']" [routerLinkActive]="['active-menu']"
-                      [routerLinkActiveOptions]="{ exact: true }" class="menu-item">sİfarİşlər</a>
-                  </li>
+                  
                   <!-- <li *ngIf="isAuthenticated" class="nav-item-mobile">
                     <a [routerLink]="['contactUs']" [routerLinkActive]="['active-menu']"
                       [routerLinkActiveOptions]="{ exact: true }" class="menu-item">Bizə yaz</a>
@@ -89,6 +86,16 @@
                           <div class="logOut">
                             <span (click)="showCabinetDialog()">Kabinet</span>
                           </div>
+                          <div class="logOut">
+                            <span><a [routerLink]="['client-order']" [routerLinkActive]="['active-menu']"
+                              [routerLinkActiveOptions]="{ exact: true }" style="color: #3bb77e;" >Sİfarİşlər</a></span>
+                          </div>
+                          <div class="logOut">
+                            
+                          <span><a [routerLink]="['client-payment']" [routerLinkActive]="['active-menu']"
+                              [routerLinkActiveOptions]="{ exact: true }" style="color: #3bb77e;" >Ödənişlər</a></span>
+                          </div>
+
                           <div class="logOut">
                             <span (click)="showChangePasswordDialog()">Şifrəni dəyiş</span>
                           </div>

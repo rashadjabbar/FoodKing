@@ -6,8 +6,8 @@
   <canvas id="canvas" class="canvas-back"></canvas>
   <div class="backRight">
   </div>
-  <div class="backLeft"> 
-  </div> 
+  <div class="backLeft">
+  </div>
 </div>
 
 <div id="slideBox">
@@ -58,7 +58,7 @@
           </div>
 
           <div class="form-element form-stack">
-            <label for="gender-signup" class="form-label">Cins  </label>
+            <label for="gender-signup" class="form-label">Cins </label>
             <select name="" id="" formControlName="gender">
               <option value="null" selected disabled>Seçilməyib</option>
               <option value="true">Kişi</option>
@@ -135,9 +135,10 @@
             </div>
           </div>
           <div class="form-element form-submit">
-            <p style="font-size: 14px;">Qeydiyyatdan keçməklə siz <a href="../../../assets/file/usage_conditions.pdf" target="_blank">istifadə şərtləri</a>ni qəbul etmiş olursunuz.</p>
-            <button id="signUp" class="signup" type="submit" name="signup" 
-              (click)="createUser()"  [disabled]="signUpForm.invalid">Qeydiyyatdan keç</button>
+            <p style="font-size: 14px;">Qeydiyyatdan keçməklə siz <a href="../../../assets/file/usage_conditions.pdf"
+                target="_blank">istifadə şərtləri</a>ni qəbul etmiş olursunuz.</p>
+            <button id="signUp" class="signup" type="submit" name="signup" (click)="createUser()"
+              [disabled]="signUpForm.invalid">Qeydiyyatdan keç</button>
             <button id="goLeft" class="signup off">Daxil ol</button>
           </div>
         </form>
@@ -171,14 +172,31 @@
                 <span>Şifrəniz tələb olunur</span>
                 <i class="fas fa-exclamation-circle"></i>
               </label>
-            </div> 
+            </div>
           </div>
-          <div class="form-element form-submit">
-            <button id="logIn" class="login" type="submit" name="login" (click)="loginFunc()"
-              [disabled]="loginForm.invalid">Daxil ol</button>
-            <button id="goRight" class="login off" name="signup">Qeydiyyatdan keç</button>
+          <div class="form-element login-actions">
+
+            <button type="button" class="forgot-inline forgot-btn" (click)="openForgotPassword()">
+              <i class="fas fa-unlock-alt"></i>
+              Şifrəni unutdum
+            </button>
+
+            <div class="action-buttons">
+
+              <button id="logIn" class="login" type="submit" (click)="loginFunc()" [disabled]="loginForm.invalid">
+                Daxil ol
+              </button>
+
+              <button id="goRight" class="login off" type="button">
+                Qeydiyyatdan keç
+              </button>
+
+            </div>
+
           </div>
+
         </form>
+
       </div>
     </div>
   </div>

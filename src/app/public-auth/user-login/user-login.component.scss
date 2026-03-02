@@ -379,3 +379,108 @@ button:disabled{
         display: none;
     }
 }
+
+/* Forgot Password */
+.forgot-btn {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: $theme-login;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    transition: all 0.25s ease;
+}
+
+.forgot-btn i {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.forgot-btn:hover {
+    background: rgba(59, 183, 126, 0.08);
+    transform: translateY(-1px);
+}
+
+.forgot-btn:active {
+    transform: scale(0.97);
+}
+
+.forgot-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 183, 126, 0.2);
+}
+
+.forgot-btn::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    width: 0%;
+    height: 1px;
+    background: $theme-login;
+    transition: 0.3s;
+    transform: translateX(-50%);
+}
+
+.forgot-btn:hover::after {
+    width: 60%;
+}
+
+.login-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Forgot inline */
+.forgot-inline {
+    background: transparent;
+    border: none;
+    color: $theme-login;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 8px;
+    border-radius: 20px;
+    transition: all 0.25s ease;
+}
+
+.forgot-inline:hover {
+    background: rgba(59, 183, 126, 0.08);
+}
+
+.forgot-inline i {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* Right side buttons wrapper */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+@media only screen and (max-width: 480px) {
+    .login-actions {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .action-buttons {
+        justify-content: space-between;
+    }
+
+    .forgot-inline {
+        justify-content: center;
+    }
+}

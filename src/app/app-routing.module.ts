@@ -21,6 +21,8 @@ import { ReportComponent } from './admin/report/report.component';
 import { ClientDashboardComponent } from './public/client-dashboard/client-dashboard.component';
 import { ContactUsAdminComponent } from './admin/contact-us-admin/contact-us-admin.component';
 import { LuckyWheelComponent } from './public/wheel/lucky-wheel/lucky-wheel.component';
+import { ClientPaymentComponent } from './public/client-payment/client-payment.component';
+import { ChangePasswordComponent } from './public/changePassword/changePassword.component';
 
 const routes: Routes = [
   {
@@ -34,6 +36,8 @@ const routes: Routes = [
       { path: 'daily-meal', component: DailyMealComponent },
       { path: 'client-dashboard', component: ClientDashboardComponent },
       { path: 'lucky-wheel', component: LuckyWheelComponent },
+      { path: 'client-payment', component: ClientPaymentComponent },
+      {path: 'change-password', component: ChangePasswordComponent },
     ]
   },
   {
@@ -53,6 +57,7 @@ const routes: Routes = [
 
   {path: 'login-adminpanel' , component: LoginComponent},
   {path: 'user-login' , component: UserLoginComponent},
+
 ];
 
 @NgModule({

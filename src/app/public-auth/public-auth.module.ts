@@ -14,12 +14,19 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { IMaskModule } from 'angular-imask';
 import { OtpComponent } from './user-login/otp/otp.component';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { ForgotPasswordComponent } from './user-login/forgot-password/forgot-password.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { ResetPasswordComponent } from './user-login/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
-    // UserLoginComponent,
-    UserRegisterComponent,
-    // OtpComponent
+    UserLoginComponent,
+    OtpComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +39,11 @@ import { NgOtpInputModule } from 'ng-otp-input';
     BrowserAnimationsModule,
     MatNativeDateModule ,
     IMaskModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
