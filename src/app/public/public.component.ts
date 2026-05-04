@@ -314,4 +314,9 @@ export class PublicComponent {
 
   }
 
+
+  get totalItemCount(): number {
+  return this.basketItems?.reduce((sum, item) => sum + item.count, 0) || 0;
+}
+
 }
