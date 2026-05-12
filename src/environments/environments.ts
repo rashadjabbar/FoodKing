@@ -13,6 +13,7 @@ const paymentIp = `${localIp}/operation/api/`
 const reportIp = `${localIp}/report/api/`
 const contactUsIp = `${localIp}/operation/api/ContactUs`
 const newsIp = `${localIp}/operation/api/News`
+const campaignIp = `${localIp}/operation/api/Campaign/`
 
 
 
@@ -28,5 +29,6 @@ export const environment = {
   apiReportUrl:`${reportIp}`,
   apiContactUsUrl:`${contactUsIp}`,
   apiNewsUrl:`${newsIp}`,
+  apiCampaignUrl:`${campaignIp}`
 
 };

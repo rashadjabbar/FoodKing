@@ -142,11 +142,81 @@ h6 i {
     z-index: 1000;
   }
   
-  .ticker-content {
+.ticker-content {
     display: inline-block;
     padding-left: 100%;
     animation: scroll-left 20s linear infinite;
   }
+
+.prediction-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    margin-top: 28px;
+    padding: 22px 24px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(255, 246, 219, 0.96), rgba(237, 249, 241, 0.95));
+    box-shadow: 0 18px 40px rgba(30, 62, 45, 0.08);
+}
+
+.prediction-copy h5 {
+    margin: 8px 0 6px;
+    color: #22412f;
+    font-size: 22px;
+}
+
+.prediction-copy p {
+    margin: 0;
+    color: #627165;
+}
+
+.prediction-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #fff;
+    color: #d88615;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.prediction-link {
+    min-width: 210px;
+    text-align: center;
+    padding: 14px 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #249769, #166245);
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 14px 26px rgba(36, 151, 105, 0.24);
+}
+
+@media (max-width:641px) {
+    .prediction-entry {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .prediction-link {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+::ng-deep .lucky-wheel-dialog .mat-mdc-dialog-container {
+    padding: 0 !important;
+}
+
+::ng-deep .lucky-wheel-dialog .mdc-dialog__surface {
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
   
   @keyframes scroll-left {
     0% {

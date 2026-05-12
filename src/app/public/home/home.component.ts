@@ -98,9 +98,7 @@ export class HomeComponent {
     if (localStorage.getItem("productIdForDetail")) {
       this.openDetail(Number(localStorage.getItem("productIdForDetail")))
     }
-
   }
-
 
   onChangePage(pe: PageEvent) {
     this.currentPage = pe.pageIndex + 1

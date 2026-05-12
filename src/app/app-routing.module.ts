@@ -23,6 +23,8 @@ import { ContactUsAdminComponent } from './admin/contact-us-admin/contact-us-adm
 import { LuckyWheelComponent } from './public/wheel/lucky-wheel/lucky-wheel.component';
 import { ClientPaymentComponent } from './public/client-payment/client-payment.component';
 import { ChangePasswordComponent } from './public/changePassword/changePassword.component';
+import { MatchPredictionComponent } from './public/match-prediction/match-prediction.component';
+import { CampaignWinnerComponent } from './admin/campaign-winner/campaign-winner.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,7 @@ const routes: Routes = [
       { path: 'daily-meal', component: DailyMealComponent },
       { path: 'client-dashboard', component: ClientDashboardComponent },
       { path: 'lucky-wheel', component: LuckyWheelComponent },
+      { path: 'match-prediction', component: MatchPredictionComponent },
       { path: 'client-payment', component: ClientPaymentComponent },
       {path: 'change-password', component: ChangePasswordComponent },
     ]
@@ -50,6 +53,7 @@ const routes: Routes = [
       { path: 'payment', component: PaymentComponent },
       { path: 'order', component: OrderComponent },
       { path: 'daily-report', component: DailyReportComponent },
+      { path: 'campaign-winner', component: CampaignWinnerComponent },
       { path: 'contact-us-admin', component: ContactUsAdminComponent },
       { path: 'report', component: ReportComponent },
     ]

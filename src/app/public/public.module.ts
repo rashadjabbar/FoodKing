@@ -43,6 +43,7 @@ import { LuckyWheelComponent } from './wheel/lucky-wheel/lucky-wheel.component';
 import { NewsTickerComponent } from './news-ticker/news-ticker.component';
 import { ClientPaymentComponent } from './client-payment/client-payment.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatchPredictionComponent } from './match-prediction/match-prediction.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { MatTableModule } from '@angular/material/table';
     LuckyWheelComponent,
     NewsTickerComponent,
     ClientPaymentComponent,
+    MatchPredictionComponent,
 
   ],
   imports: [

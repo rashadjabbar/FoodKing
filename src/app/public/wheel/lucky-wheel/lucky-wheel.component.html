@@ -1,19 +1,55 @@
-<div class="wheel-container">
-	<div class="wheel" [ngStyle]="{'transform': 'rotate(' + rotation + 'deg)'}">
-	  <div class="segment" *ngFor="let segment of segments; let i = index"
-		   [ngStyle]="{
-			 'background-color': segment.color,
-			 'transform': 'rotate(' + (i * (360 / segments.length)) + 'deg) skewY(-' + (90 - (360 / segments.length)) + 'deg)',
-		   }">
-		<span class="label">{{ segment.label }}</span>
-	  </div>
-	</div>
-	<div class="pointer"></div>
-	<div class="btn btn-secondary animation-btn" (click)="spinWheel()" style="margin-top: 10%;">
-	  Fırlat
-	</div>
-	<div *ngIf="showPrize" class="prize">
-	  You won: {{ prize }}!
-	</div>
+<div class="wheel-modal">
+  <button type="button" class="close-button" (click)="closeDialog()" aria-label="Bağla">×</button>
+
+  <div class="wheel-header">
+    <span class="eyebrow">Xoş gəldiniz</span>
+    <h2>Şans çarxını fırlat</h2>
+    <p>{{ eligibilityMessage || 'Bir kliklə hədiyyəni qazan və nəticəni aşağıda gör.' }}</p>
   </div>
-  
+
+  <div class="wheel-body" *ngIf="isEligible; else eligibilityBlocked">
+    <div class="wheel-hero">
+      <div class="pointer"></div>
+      <div class="wheel" [ngStyle]="{ 'transform': 'rotate(' + rotation + 'deg)' }">
+        <div
+          class="segment"
+          *ngFor="let segment of segments; let i = index"
+          [ngStyle]="{
+            'background-color': segment.color,
+            'transform': 'rotate(' + (i * (360 / segments.length)) + 'deg) skewY(-' + (90 - (360 / segments.length)) + 'deg)'
+          }"
+        >
+          <span class="label">{{ segment.name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="wheel-actions">
+      <button type="button" class="spin-button" (click)="spinWheel()" [disabled]="isSpinning || hasPlayed || isLoading || segments.length === 0">
+        {{ isLoading ? 'Yüklənir...' : hasPlayed ? 'Şans istifadə olunub' : isSpinning ? 'Fırlanır...' : 'Fırlat' }}
+      </button>
+
+      <div *ngIf="feedbackMessage" class="feedback-banner" [ngClass]="'feedback-' + feedbackType">
+        {{ feedbackMessage }}
+      </div>
+
+      <div *ngIf="showPrize" class="prize-card">
+        <div class="prize-inner">
+          <span class="prize-icon">🎉</span>
+          <span class="prize-label">Təbriklər!</span>
+          <p class="prize-name">{{ prize }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="hasPlayed" class="usage-note">
+    Bu hesab üçün şans artıq istifadə olunub.
+  </div>
+</div>
+
+<ng-template #eligibilityBlocked>
+  <div class="blocked-state">
+    Şans çarxı aktiv deyil. Doğru təxmin etdiyiniz oyun təsdiqləndikdən sonra burada aktivləşəcək.
+  </div>
+</ng-template>

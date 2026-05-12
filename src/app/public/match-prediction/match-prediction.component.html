@@ -1,0 +1,107 @@
+<section class="prediction-page section-padding-120">
+  <div class="container">
+    <div class="prediction-hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Dünya Kuboku Müsabiqəsi</span>
+        <h1>Günün oyunları üçün dəqiq hesab təxmini et</h1>
+        <p>
+          Doğru təxminlər qalib elan olunacaq və sizin üçün şans çarxı aktivləşəcək.
+          Nəticələr bazaya əlavə olunduqdan sonra qaliblər seçiləcək.
+        </p>
+      </div>
+
+      <div class="hero-status" [ngClass]="wheelEligible ? 'active' : 'pending'">
+        <h3>{{ wheelEligible ? 'Çarx aktivdir' : 'Çarx gözləmə rejimindədir' }}</h3>
+        <p *ngIf="wheelEligible">{{ wheelMessage || 'Doğru təxmininiz olduğu üçün uduş ekranınız aktivləşib.' }}</p>
+        <p *ngIf="!wheelEligible">{{ wheelMessage || 'Təxminlərinizi göndərin, nəticələr təsdiqlənəndən sonra status yenilənəcək.' }}</p>
+        <button *ngIf="wheelEligible" type="button" class="wheel-link" (click)="openLuckyWheelPopup()">
+          Çarxa keç
+        </button>
+      </div>
+    </div>
+
+    <div class="prediction-toolbar">
+      <h3>Bu günün oyunları</h3>
+      <button type="button" class="submit-button" (click)="submitPredictions()" [disabled]="isSaving || isLoading">
+        {{ isSaving ? 'Göndərilir...' : 'Təxminləri göndər' }}
+      </button>
+    </div>
+
+    <div *ngIf="isLoading" class="state-card">Oyunlar yüklənir...</div>
+
+    <div *ngIf="!isLoading && matches.length === 0" class="state-card">
+      Bugün üçün hələ oyun yoxdur.
+    </div>
+
+    <div *ngIf="!isLoading && matches.length > 0" class="matches-grid">
+      <article class="match-card" *ngFor="let match of matches; trackBy: trackByMatch">
+        <div class="match-top">
+          <span class="match-time">{{ match.matchDate | date: 'dd.MM.yyyy HH:mm' }}</span>
+          <span class="match-status">{{ match.status }}</span>
+        </div>
+
+        <div class="teams">
+          <div class="team-name">{{ match.homeTeam }}</div>
+          <div class="vs">vs</div>
+          <div class="team-name">{{ match.awayTeam }}</div>
+        </div>
+
+        <div class="score-inputs">
+          <label>
+            <span>{{ match.homeTeam }}</span>
+            <input type="number" min="0" [(ngModel)]="predictions[match.id].predictedHomeScore">
+          </label>
+
+          <label>
+            <span>{{ match.awayTeam }}</span>
+            <input type="number" min="0" [(ngModel)]="predictions[match.id].predictedAwayScore">
+          </label>
+        </div>
+      </article>
+    </div>
+
+    <div class="prediction-history">
+      <div class="prediction-toolbar history-toolbar">
+        <h3>Mənim təxminlərim</h3>
+      </div>
+
+      <div *ngIf="isHistoryLoading" class="state-card">Təxmin tarixçəsi yüklənir...</div>
+
+      <div *ngIf="!isHistoryLoading && predictionHistory.length === 0" class="state-card">
+        Hələ qeyd olunmuş təxmin yoxdur.
+      </div>
+
+      <div *ngIf="!isHistoryLoading && predictionHistory.length > 0" class="history-grid">
+        <article class="history-card" *ngFor="let item of predictionHistory; trackBy: trackByHistory">
+          <div class="match-top">
+            <span class="match-time">{{ item.matchDate | date: 'dd.MM.yyyy' }}</span>
+            <span class="history-status" [ngClass]="item.predictionStatus.toLowerCase()">
+              {{ getStatusLabel(item.predictionStatus) }}
+            </span>
+          </div>
+
+          <div class="teams">
+            <div class="team-name">{{ item.homeTeam }}</div>
+            <div class="vs">vs</div>
+            <div class="team-name">{{ item.awayTeam }}</div>
+          </div>
+
+          <div class="history-score">
+            <span>Sizin təxmininiz</span>
+            <strong>{{ item.predictedHomeScore }} - {{ item.predictedAwayScore }}</strong>
+          </div>
+
+          <div class="history-score actual" *ngIf="item.predictionStatus !== 'Pending'">
+            <span>Real nəticə</span>
+            <strong>{{ item.homeScore }} - {{ item.awayScore }}</strong>
+          </div>
+
+          <div class="history-score actual" *ngIf="item.predictionStatus === 'Pending'">
+            <span>Real nəticə</span>
+            <strong>Gözlənilir</strong>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
