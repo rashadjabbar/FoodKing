@@ -36,7 +36,7 @@
     <div *ngIf="!isLoading && matches.length > 0" class="matches-grid">
       <article class="match-card" *ngFor="let match of matches; trackBy: trackByMatch">
         <div class="match-top">
-          <span class="match-time">{{ match.matchDate | date: 'dd.MM.yyyy HH:mm' }}</span>
+          <span class="match-time">{{ match.matchDate | date: 'dd.MM.yyyy' }}</span>
           <span class="match-status">{{ match.status }}</span>
         </div>
 
@@ -63,16 +63,30 @@
     <div class="prediction-history">
       <div class="prediction-toolbar history-toolbar">
         <h3>Mənim təxminlərim</h3>
+        <div class="history-filters">
+          <select [(ngModel)]="historyFilter" (ngModelChange)="onHistoryFilterChange()">
+            <option value="all">Hamısı</option>
+            <option value="today">Bu gün</option>
+            <option value="yesterday">Dünən</option>
+            <option value="date">Tarix seç</option>
+          </select>
+
+          <input
+            *ngIf="historyFilter === 'date'"
+            type="date"
+            [(ngModel)]="selectedHistoryDate"
+          >
+        </div>
       </div>
 
       <div *ngIf="isHistoryLoading" class="state-card">Təxmin tarixçəsi yüklənir...</div>
 
-      <div *ngIf="!isHistoryLoading && predictionHistory.length === 0" class="state-card">
+      <div *ngIf="!isHistoryLoading && filteredPredictionHistory.length === 0" class="state-card">
         Hələ qeyd olunmuş təxmin yoxdur.
       </div>
 
-      <div *ngIf="!isHistoryLoading && predictionHistory.length > 0" class="history-grid">
-        <article class="history-card" *ngFor="let item of predictionHistory; trackBy: trackByHistory">
+      <div *ngIf="!isHistoryLoading && filteredPredictionHistory.length > 0" class="history-grid">
+        <article class="history-card" *ngFor="let item of filteredPredictionHistory; trackBy: trackByHistory">
           <div class="match-top">
             <span class="match-time">{{ item.matchDate | date: 'dd.MM.yyyy' }}</span>
             <span class="history-status" [ngClass]="item.predictionStatus.toLowerCase()">

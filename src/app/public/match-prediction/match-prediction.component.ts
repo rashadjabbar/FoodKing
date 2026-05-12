@@ -25,6 +25,8 @@ export class MatchPredictionComponent implements OnInit {
   isHistoryLoading = false;
   wheelEligible = false;
   wheelMessage = '';
+  historyFilter: 'all' | 'today' | 'yesterday' | 'date' = 'all';
+  selectedHistoryDate = '';
 
   constructor(
     private matchPredictionService: MatchPredictionService,
@@ -98,6 +100,36 @@ export class MatchPredictionComponent implements OnInit {
     });
   }
 
+  get filteredPredictionHistory() {
+    if (this.historyFilter === 'all') {
+      return this.predictionHistory;
+    }
+
+    const today = new Date();
+
+    if (this.historyFilter === 'today') {
+      return this.predictionHistory.filter(item => this.isSameCalendarDate(item.matchDate, today));
+    }
+
+    if (this.historyFilter === 'yesterday') {
+      const yesterday = new Date(today);
+      yesterday.setDate(today.getDate() - 1);
+      return this.predictionHistory.filter(item => this.isSameCalendarDate(item.matchDate, yesterday));
+    }
+
+    if (!this.selectedHistoryDate) {
+      return this.predictionHistory;
+    }
+
+    return this.predictionHistory.filter(item => this.isSameCalendarDate(item.matchDate, this.selectedHistoryDate));
+  }
+
+  onHistoryFilterChange() {
+    if (this.historyFilter !== 'date') {
+      this.selectedHistoryDate = '';
+    }
+  }
+
   submitPredictions() {
     if (this.isSaving) {
       return;
@@ -150,5 +182,16 @@ export class MatchPredictionComponent implements OnInit {
     }
 
     return 'Gözləmədə';
+  }
+
+  private isSameCalendarDate(matchDate: string, compareDate: string | Date) {
+    const match = new Date(matchDate);
+    const compare = typeof compareDate === 'string' ? new Date(compareDate) : compareDate;
+
+    return (
+      match.getFullYear() === compare.getFullYear() &&
+      match.getMonth() === compare.getMonth() &&
+      match.getDate() === compare.getDate()
+    );
   }
 }

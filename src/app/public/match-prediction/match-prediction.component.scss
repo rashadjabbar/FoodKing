@@ -138,6 +138,24 @@
   margin-top: 40px;
 }
 
+.history-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.history-filters select,
+.history-filters input {
+  height: 44px;
+  border: 1px solid #d9e7dc;
+  border-radius: 14px;
+  padding: 0 14px;
+  background: #fbfdfc;
+  color: #21352b;
+}
+
+
+
 .match-card {
   padding: 22px;
   border: 1px solid rgba(47, 139, 90, 0.08);
@@ -279,6 +297,11 @@
   }
 
   .prediction-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .history-filters {
     flex-direction: column;
     align-items: stretch;
   }
