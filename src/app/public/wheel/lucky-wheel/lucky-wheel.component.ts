@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LuckyWheelEligibility, LuckyWheelPrize } from 'src/models/lucky-wheel';
 import { LuckyWheelService } from 'src/services/lucky-wheel.service';
@@ -8,13 +8,15 @@ import { LuckyWheelService } from 'src/services/lucky-wheel.service';
   templateUrl: './lucky-wheel.component.html',
   styleUrls: ['./lucky-wheel.component.scss']
 })
-export class LuckyWheelComponent implements OnInit {
+export class LuckyWheelComponent implements OnInit, OnDestroy {
   constructor(
     private dialogRef: MatDialogRef<LuckyWheelComponent>,
     private luckyWheelService: LuckyWheelService
   ) {}
 
   private readonly spinStateKey = 'luckyWheelSpinState';
+  private readonly spinDurationMs = 4000;
+  private revealPrizeTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
   segments: LuckyWheelPrize[] = [];
 
@@ -33,6 +35,12 @@ export class LuckyWheelComponent implements OnInit {
 
   ngOnInit() {
     this.loadEligibility();
+  }
+
+  ngOnDestroy() {
+    if (this.revealPrizeTimeoutId) {
+      clearTimeout(this.revealPrizeTimeoutId);
+    }
   }
 
   spinWheel() {
@@ -58,9 +66,7 @@ export class LuckyWheelComponent implements OnInit {
     this.prizeId = selectedPrize.id;
     this.rotation += extraRotations + normalizedTargetAngle;
 
-    setTimeout(() => {
-      this.saveSpinResult(selectedPrize);
-    }, 4000);
+    this.saveSpinResult(selectedPrize);
   }
 
   closeDialog() {
@@ -123,22 +129,45 @@ export class LuckyWheelComponent implements OnInit {
     this.luckyWheelService.saveResult({ prizeId: selectedPrize.id }).subscribe({
       next: res => {
         if (res?.isSuccess === false) {
-          this.isSpinning = false;
-          this.setFeedback(res?.message ?? 'Nəticə yadda saxlanılmadı', 'error');
+          this.finishSpinWithError(res?.message ?? 'Nəticə yadda saxlanılmadı');
           return;
         }
 
         this.hasPlayed = true;
-        this.showPrize = true;
-        this.isSpinning = false;
         this.persistSpinState(selectedPrize);
-        this.setFeedback(res?.message ?? 'Hədiyyəniz qeyd alındı', 'success');
+        this.finishSpinWithSuccess();
       },
       error: () => {
-        this.isSpinning = false;
-        this.setFeedback('Nəticə API-yə göndərilə bilmədi', 'error');
+        this.finishSpinWithError('Nəticə API-yə göndərilə bilmədi');
       }
     });
+  }
+
+  private finishSpinWithSuccess() {
+    this.scheduleSpinCompletion(() => {
+      this.showPrize = true;
+      this.isSpinning = false;
+      this.feedbackMessage = '';
+    });
+  }
+
+  private finishSpinWithError(message: string) {
+    this.scheduleSpinCompletion(() => {
+      this.showPrize = false;
+      this.isSpinning = false;
+      this.setFeedback(message, 'error');
+    });
+  }
+
+  private scheduleSpinCompletion(callback: () => void) {
+    if (this.revealPrizeTimeoutId) {
+      clearTimeout(this.revealPrizeTimeoutId);
+    }
+
+    this.revealPrizeTimeoutId = setTimeout(() => {
+      this.revealPrizeTimeoutId = null;
+      callback();
+    }, this.spinDurationMs);
   }
 
   private restoreSpinState() {
