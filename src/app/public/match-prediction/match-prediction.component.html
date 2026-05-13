@@ -3,7 +3,7 @@
     <div class="prediction-hero">
       <div class="hero-copy">
         <span class="eyebrow">Dünya Kuboku Müsabiqəsi</span>
-        <h1>Günün oyunları üçün dəqiq hesab təxmini et</h1>
+        <h1>Günün oyunları üçün dəqiq hesab təxmin et</h1>
         <p>
           Doğru təxminlər qalib elan olunacaq və sizin üçün şans çarxı aktivləşəcək.
           Nəticələr bazaya əlavə olunduqdan sonra qaliblər seçiləcək.
@@ -13,7 +13,7 @@
       <div class="hero-status" [ngClass]="wheelEligible ? 'active' : 'pending'">
         <h3>{{ wheelEligible ? 'Çarx aktivdir' : 'Çarx gözləmə rejimindədir' }}</h3>
         <p *ngIf="wheelEligible">{{ wheelMessage || 'Doğru təxmininiz olduğu üçün uduş ekranınız aktivləşib.' }}</p>
-        <p *ngIf="!wheelEligible">{{ wheelMessage || 'Təxminlərinizi göndərin, nəticələr təsdiqlənəndən sonra status yenilənəcək.' }}</p>
+        <p *ngIf="!wheelEligible">{{ wheelMessage || 'Təxminlərinizi göndərin, nəticələr təsdiqləndikdən sonra status yenilənəcək.' }}</p>
         <button *ngIf="wheelEligible" type="button" class="wheel-link" (click)="openLuckyWheelPopup()">
           Çarxa keç
         </button>
@@ -21,16 +21,16 @@
     </div>
 
     <div class="prediction-toolbar">
-      <h3>Bu günün oyunları</h3>
+      <h3>Bu günün oyunlar</h3>
       <button type="button" class="submit-button" (click)="submitPredictions()" [disabled]="isSaving || isLoading">
         {{ isSaving ? 'Göndərilir...' : 'Təxminləri göndər' }}
       </button>
     </div>
 
-    <div *ngIf="isLoading" class="state-card">Oyunlar yüklənir...</div>
+    <div *ngIf="isLoading" class="state-card">Oyunlar y&#252;kl&#601;nir...</div>
 
     <div *ngIf="!isLoading && matches.length === 0" class="state-card">
-      Bugün üçün hələ oyun yoxdur.
+      Bu gün üçün hələ oyun yoxdur.
     </div>
 
     <div *ngIf="!isLoading && matches.length > 0" class="matches-grid">
@@ -62,7 +62,7 @@
 
     <div class="prediction-history">
       <div class="prediction-toolbar history-toolbar">
-        <h3>Mənim təxminlərim</h3>
+        <h3>{{ isAdmin ? 'İstifadəçi təxminləri' : 'Mənim təxminlərim' }}</h3>
         <div class="history-filters">
           <select [(ngModel)]="historyFilter" (ngModelChange)="onHistoryFilterChange()">
             <option value="all">Hamısı</option>
@@ -94,6 +94,11 @@
             </span>
           </div>
 
+          <div *ngIf="isAdmin" class="prediction-owner">
+            <span>İstifadəçi</span>
+            <strong>{{ getPredictionOwnerLabel(item) }}</strong>
+          </div>
+
           <div class="teams">
             <div class="team-name">{{ item.homeTeam }}</div>
             <div class="vs">vs</div>
@@ -101,7 +106,7 @@
           </div>
 
           <div class="history-score">
-            <span>Sizin təxmininiz</span>
+            <span>{{ isAdmin ? 'İstifadəçi təxmini' : 'Sizin təxmininiz' }}</span>
             <strong>{{ item.predictedHomeScore }} - {{ item.predictedAwayScore }}</strong>
           </div>
 

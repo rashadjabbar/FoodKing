@@ -30,6 +30,7 @@ export class MatchPredictionHistoryItem {
   homeScore?: number;
   awayScore?: number;
   predictionStatus!: PredictionStatus;
+  userName?: string;
 }
 
 export class WheelEligibility {

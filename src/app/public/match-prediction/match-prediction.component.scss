@@ -175,6 +175,30 @@
   box-shadow: 0 20px 45px rgba(31, 59, 43, 0.08);
 }
 
+.prediction-owner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #eef8f1;
+  color: #35684c;
+}
+
+.prediction-owner span {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.prediction-owner strong {
+  color: #21352b;
+  font-size: 14px;
+}
+
 .match-top {
   display: flex;
   justify-content: space-between;

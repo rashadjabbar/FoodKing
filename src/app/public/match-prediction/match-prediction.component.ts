@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import jwt_decode from 'jwt-decode';
 import {
   MatchPredictionHistoryItem,
   MatchPredictionItem,
@@ -7,9 +8,9 @@ import {
   SaveMatchPredictionsRequest,
   TournamentMatch
 } from 'src/models/match-prediction';
-import { LuckyWheelComponent } from '../wheel/lucky-wheel/lucky-wheel.component';
 import { MatchPredictionService } from 'src/services/match-prediction.service';
 import { showErrorAlert, showInfoAlert } from 'src/utils/alert';
+import { LuckyWheelComponent } from '../wheel/lucky-wheel/lucky-wheel.component';
 
 @Component({
   selector: 'app-match-prediction',
@@ -20,6 +21,7 @@ export class MatchPredictionComponent implements OnInit {
   matches: TournamentMatch[] = [];
   predictionHistory: MatchPredictionHistoryItem[] = [];
   predictions: Record<number, MatchPredictionItem> = {};
+  isAdmin = false;
   isLoading = false;
   isSaving = false;
   isHistoryLoading = false;
@@ -34,6 +36,7 @@ export class MatchPredictionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setUserRole();
     this.loadMatches();
     this.loadPredictionHistory();
     this.loadWheelEligibility();
@@ -44,7 +47,6 @@ export class MatchPredictionComponent implements OnInit {
 
     this.matchPredictionService.getTodayMatches().subscribe({
       next: res => {
-       
         this.matches = res?.data ?? [];
         this.matches.forEach(match => {
           this.predictions[match.id] = {
@@ -95,7 +97,7 @@ export class MatchPredictionComponent implements OnInit {
       },
       error: () => {
         this.isHistoryLoading = false;
-        showErrorAlert('', 'Təxmin tarixcesi yüklənmedi', false, false, '', '', 1800);
+        showErrorAlert('', 'Təxmin tarixçəsi yüklənmədi', false, false, '', '', 1800);
       }
     });
   }
@@ -164,13 +166,10 @@ export class MatchPredictionComponent implements OnInit {
     });
   }
 
-  trackByMatch(_: number, item: TournamentMatch) {
-    return item.id;
-  }
+  trackByMatch = (_: number, item: TournamentMatch) => item.id;
 
-  trackByHistory(_: number, item: MatchPredictionHistoryItem) {
-    return item.matchId;
-  }
+  trackByHistory = (index: number, item: MatchPredictionHistoryItem) =>
+    `${item.matchId}-${this.getPredictionOwnerLabel(item)}-${index}`;
 
   getStatusLabel(status: PredictionStatus) {
     if (status === 'Won') {
@@ -182,6 +181,26 @@ export class MatchPredictionComponent implements OnInit {
     }
 
     return 'Gözləmədə';
+  }
+
+  getPredictionOwnerLabel(item: MatchPredictionHistoryItem) {
+    return item.userName || 'İstifadəçi məlumatı yoxdur';
+  }
+
+  private setUserRole() {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      return;
+    }
+
+    try {
+      const data: any = jwt_decode(token);
+      const userType = Number(data?.userType);
+      this.isAdmin = userType === 1 || userType === 4;
+    } catch {
+      this.isAdmin = false;
+    }
   }
 
   private isSameCalendarDate(matchDate: string, compareDate: string | Date) {
