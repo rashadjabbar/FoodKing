@@ -39,7 +39,7 @@ export class NewsTickerComponent implements AfterViewInit {
     if (!content) return;
 
     const contentWidth = content.scrollWidth;
-    const speed = 60; // px/s
+    const speed = 50; // px/s
     const duration = (contentWidth / speed) * 1000;
 
     content.animate(

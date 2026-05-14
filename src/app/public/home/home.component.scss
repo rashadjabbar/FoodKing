@@ -195,6 +195,14 @@ h6 i {
     box-shadow: 0 14px 26px rgba(36, 151, 105, 0.24);
 }
 
+#banner-image-bg {
+    background: url('/assets/images/banner/banner-2-shap.png') no-repeat top center;
+    background-size: contain;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
 @media (max-width:641px) {
     .prediction-entry {
         flex-direction: column;
