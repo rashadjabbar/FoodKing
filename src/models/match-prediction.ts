@@ -1,9 +1,17 @@
+export class PopularPredictionStat {
+  matchId!: number;
+  predictedHomeScore!: number;
+  predictedAwayScore!: number;
+  percentage?: number;
+}
+
 export class TournamentMatch {
   id!: number;
   homeTeam!: string;
   awayTeam!: string;
   matchDate!: string;
   status!: 'NotStarted' | 'Started' | 'Finished';
+  popularPredictions?: PopularPredictionStat[];
 }
 
 export type PredictionStatus = 'Pending' | 'Won' | 'Lost';

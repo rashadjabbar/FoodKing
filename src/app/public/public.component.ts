@@ -95,6 +95,11 @@ export class PublicComponent {
       })
 
       this.getUserBalance();
+      this.globalService.balance$.subscribe(balance => {
+        if (balance !== null) {
+          this.balance = balance;
+        }
+      });
     }
 
     this.loadJsFile('../../../assets/js/app.js')
@@ -124,6 +129,7 @@ export class PublicComponent {
   getUserBalance() {
     this.globalService.getUserBalance().subscribe((res: any) => {
       this.balance = res.data
+      this.globalService.setUserBalance(res.data);
     })
   }
 

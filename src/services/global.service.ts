@@ -30,6 +30,8 @@ export class GlobalService {
   basketObservable$ = this.basketEmitter.asObservable();
 
   tokenValue = new BehaviorSubject(this.token);
+  private balanceValue = new BehaviorSubject<number | null>(null);
+  balance$ = this.balanceValue.asObservable();
 
   private categoryId = new BehaviorSubject({ catId: 0 });
   data$ = this.categoryId.asObservable();
@@ -57,6 +59,10 @@ export class GlobalService {
 
   getUserData(model: User) {
     this.userData.next(model)
+  }
+
+  setUserBalance(balance: number | null) {
+    this.balanceValue.next(balance);
   }
 
   getAllUser() {
