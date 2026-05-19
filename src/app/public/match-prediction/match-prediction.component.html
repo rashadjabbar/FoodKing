@@ -11,6 +11,9 @@
           Doğru təxminlər qalib elan olunacaq və sizin üçün şans çarxı aktivləşəcək.
           Nəticələr bazaya əlavə olunduqdan sonra qaliblər seçiləcək.
         </p>
+        <div class="prediction-rule-note">
+          Günlük qayda: ilk uğurlu təxmin göndərişində <strong>0.26 ₼</strong> kupon haqqı tutulur.
+        </div>
       </div>
 
       <div class="hero-status" [ngClass]="wheelEligible ? 'active' : 'pending'">
@@ -24,7 +27,17 @@
     </div>
 
     <div class="prediction-toolbar">
-      <h3>Bu günün oyunlar</h3>
+      <div class="toolbar-copy">
+        <h3>Bu günün oyunları</h3>
+        <div class="toolbar-meta">
+          <span class="prediction-summary">
+            Bu gün {{ availablePredictionCount }} oyundan {{ todayPredictionCount }}-i üçün təxmininiz var
+          </span>
+          <span class="charge-badge" [class.paid]="hasPaidPredictionFeeToday" [class.unpaid]="!hasPaidPredictionFeeToday">
+            {{ hasPaidPredictionFeeToday ? '0.26 ₼ bu gün ödənib' : '0.26 ₼ yalnız ilk göndərişdə tutulacaq' }}
+          </span>
+        </div>
+      </div>
       <button type="button" class="submit-button" (click)="submitPredictions()" [disabled]="isSaving || isLoading">
         {{ isSaving ? 'Göndərilir...' : 'Təxminləri göndər' }}
       </button>
@@ -37,10 +50,19 @@
     </div>
 
     <div *ngIf="!isLoading && matches.length > 0" class="matches-grid">
-      <article class="match-card" [class.locked]="!isPredictionAllowed(match)" *ngFor="let match of matches; trackBy: trackByMatch">
+      <article
+        class="match-card"
+        [class.locked]="!isPredictionAllowed(match)"
+        [class.saved]="hasSavedPredictionForMatch(match)"
+        [class.just-saved]="isSuccessHighlighted(match)"
+        *ngFor="let match of matches; trackBy: trackByMatch"
+      >
         <div class="match-top">
           <span class="match-time">{{ match.matchDate | date: 'dd.MM.yyyy HH:mm' }}</span>
-          <span class="match-status">{{ match.status }}</span>
+          <div class="match-top-right">
+            <span *ngIf="hasSavedPredictionForMatch(match)" class="saved-badge">Təxmin göndərilib</span>
+            <span class="match-countdown">{{ getMatchCountdownLabel(match) }}</span>
+          </div>
         </div>
 
         <div class="teams">
@@ -77,13 +99,16 @@
           </div>
 
           <div class="popular-predictions-list">
-            <div
+            <button
+              type="button"
               class="popular-prediction-item"
+              [disabled]="!isPredictionAllowed(match)"
               *ngFor="let item of getPopularPredictionItems(match); trackBy: trackByPopularPrediction"
+              (click)="fillPredictionFromPopular(match, item.scoreLabel)"
             >
               <strong class="popular-prediction-pill">{{ item.scoreLabel }}</strong>
               <span class="popular-prediction-percent">{{ item.percentageLabel }}</span>
-            </div>
+            </button>
           </div>
         </div>
 

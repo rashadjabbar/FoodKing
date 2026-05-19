@@ -38,6 +38,8 @@ export class MatchPredictionHistoryItem {
   homeScore?: number;
   awayScore?: number;
   predictionStatus!: PredictionStatus;
+  userId?: number;
+  username?: string;
   userName?: string;
 }
 

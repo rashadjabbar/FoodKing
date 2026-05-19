@@ -74,6 +74,24 @@
   max-width: 720px;
 }
 
+.prediction-rule-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255, 248, 226, 0.95), rgba(245, 250, 247, 0.92));
+  border: 1px solid rgba(201, 162, 39, 0.28);
+  color: #4c5a50;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.prediction-rule-note strong {
+  color: #21352b;
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -168,6 +186,48 @@
   letter-spacing: -0.02em;
 }
 
+.toolbar-copy {
+  display: grid;
+  gap: 8px;
+}
+
+.toolbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.prediction-summary {
+  color: #5d6c62;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.charge-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.charge-badge.paid {
+  background: #e7f7ee;
+  color: #1f7b4e;
+  border: 1px solid rgba(31, 123, 78, 0.15);
+}
+
+.charge-badge.unpaid {
+  background: #fff6e3;
+  color: #a56f08;
+  border: 1px solid rgba(201, 162, 39, 0.25);
+}
+
 .submit-button {
   border: 0;
   border-radius: 999px;
@@ -251,8 +311,6 @@
   line-height: 1.35;
 }
 
-
-
 .match-card {
   position: relative;
   padding: 22px;
@@ -276,6 +334,17 @@
 .match-card.locked {
   background: linear-gradient(180deg, #fcfcfa 0%, #f4f5f2 100%);
   border-color: rgba(26, 51, 82, 0.12);
+}
+
+.match-card.saved {
+  box-shadow:
+    0 20px 45px rgba(15, 33, 55, 0.08),
+    0 0 0 1px rgba(31, 123, 78, 0.12);
+}
+
+.match-card.just-saved {
+  animation: predictionSavedPulse 2.2s ease;
+  border-color: rgba(31, 123, 78, 0.32);
 }
 
 .match-card.locked:hover {
@@ -370,6 +439,14 @@
   color: #66756a;
 }
 
+.match-top-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .match-time {
   display: inline-flex;
   align-items: center;
@@ -396,6 +473,32 @@
   background: rgba(15, 33, 55, 0.06);
   color: var(--wc-navy-soft);
   border: 1px solid rgba(201, 162, 39, 0.2);
+}
+
+.match-countdown {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: rgba(255, 251, 240, 0.95);
+  color: #9a6f20;
+  border: 1px solid rgba(201, 162, 39, 0.18);
+}
+
+.saved-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: #1f7b4e;
+  background: #e7f7ee;
+  border: 1px solid rgba(31, 123, 78, 0.14);
 }
 
 .history-status {
@@ -532,6 +635,15 @@
   display: grid;
   justify-items: center;
   gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.popular-prediction-item:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
 }
 
 .popular-prediction-pill {
@@ -550,6 +662,18 @@
   line-height: 1;
   font-variant-numeric: tabular-nums;
   box-shadow: 0 8px 18px rgba(15, 33, 55, 0.06);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.popular-prediction-item:hover .popular-prediction-pill {
+  transform: translateY(-2px);
+  border-color: rgba(201, 162, 39, 0.38);
+  box-shadow:
+    0 12px 22px rgba(15, 33, 55, 0.1),
+    0 0 0 1px rgba(201, 162, 39, 0.1);
 }
 
 .popular-prediction-percent {
@@ -591,6 +715,26 @@
   border: 1px solid rgba(201, 162, 39, 0.2);
 }
 
+@keyframes predictionSavedPulse {
+  0% {
+    box-shadow:
+      0 20px 45px rgba(15, 33, 55, 0.08),
+      0 0 0 0 rgba(31, 123, 78, 0.22);
+  }
+
+  35% {
+    box-shadow:
+      0 24px 48px rgba(15, 33, 55, 0.12),
+      0 0 0 10px rgba(31, 123, 78, 0.08);
+  }
+
+  100% {
+    box-shadow:
+      0 20px 45px rgba(15, 33, 55, 0.08),
+      0 0 0 0 rgba(31, 123, 78, 0);
+  }
+}
+
 @media (max-width: 992px) {
   .prediction-hero,
   .matches-grid,
@@ -611,6 +755,19 @@
   .prediction-toolbar {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .toolbar-meta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .match-top {
+    align-items: flex-start;
+  }
+
+  .match-top-right {
+    justify-content: flex-start;
   }
 
   .history-filters {
