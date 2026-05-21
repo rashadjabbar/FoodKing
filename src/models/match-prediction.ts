@@ -9,6 +9,8 @@ export class TournamentMatch {
   id!: number;
   homeTeam!: string;
   awayTeam!: string;
+  homeTeamCode?: string;
+  awayTeamCode?: string;
   matchDate!: string;
   status!: 'NotStarted' | 'Started' | 'Finished';
   popularPredictions?: PopularPredictionStat[];
@@ -32,6 +34,8 @@ export class MatchPredictionHistoryItem {
   matchId!: number;
   homeTeam!: string;
   awayTeam!: string;
+  homeTeamCode?: string;
+  awayTeamCode?: string;
   matchDate!: string;
   predictedHomeScore!: number;
   predictedAwayScore!: number;
@@ -39,7 +43,6 @@ export class MatchPredictionHistoryItem {
   awayScore?: number;
   predictionStatus!: PredictionStatus;
   userId?: number;
-  username?: string;
   userName?: string;
 }
 

@@ -193,10 +193,27 @@ export class MatchPredictionComponent implements OnInit, OnDestroy {
     return this.predictionHistory.filter(item => this.isSameCalendarDate(item.matchDate, this.selectedHistoryDate));
   }
 
+  get totalPredictionHistoryCount() {
+    return this.isAdmin ? this.predictionHistory.length : this.getUserPredictionHistory().length;
+  }
+
+  get totalCorrectPredictionCount() {
+    const items = this.isAdmin ? this.predictionHistory : this.getUserPredictionHistory();
+    return items.filter(item => item.predictionStatus === this.STATUS_WON).length;
+  }
+
+  get filteredCorrectPredictionCount() {
+    return this.filteredPredictionHistory.filter(item => item.predictionStatus === this.STATUS_WON).length;
+  }
+
   onHistoryFilterChange() {
     if (this.historyFilter !== 'date') {
       this.selectedHistoryDate = '';
     }
+  }
+
+  private getUserPredictionHistory() {
+    return this.predictionHistory.filter(item => this.isPredictionOwnedByCurrentUser(item));
   }
 
   submitPredictions() {
@@ -287,6 +304,29 @@ export class MatchPredictionComponent implements OnInit, OnDestroy {
 
   getPredictionLockMessage(match: TournamentMatch) {
     return this.predictionValidator.getPredictionLockMessage(match);
+  }
+
+  getTeamDisplayName(teamValue: string) {
+    return this.parseTeamIdentity(teamValue).name;
+  }
+
+  getTeamFlagUrl(teamValue: string, teamCode?: string | null) {
+    const code = this.getNormalizedTeamCode(teamCode) ?? this.parseTeamIdentity(teamValue).code;
+    return code ? `https://flagcdn.com/${code}.svg` : null;
+  }
+
+  getTeamFlagFallback(teamValue: string, teamCode?: string | null) {
+    const parsed = this.parseTeamIdentity(teamValue);
+    const normalizedCode = this.getNormalizedTeamCode(teamCode) ?? parsed.code;
+    return normalizedCode ? normalizedCode.toUpperCase() : this.getTeamInitials(parsed.name);
+  }
+
+  onFlagImageError(event: Event) {
+    const image = event.target as HTMLImageElement | null;
+
+    if (image) {
+      image.style.display = 'none';
+    }
   }
 
   getPopularPredictionItems(match: TournamentMatch): PopularPredictionViewModel[] {
@@ -620,6 +660,48 @@ export class MatchPredictionComponent implements OnInit, OnDestroy {
     return Number.isInteger(value) ? value.toString() : value.toFixed(1);
   }
 
+  private parseTeamIdentity(teamValue: string) {
+    const normalizedValue = (teamValue ?? '').trim();
+
+    if (!normalizedValue) {
+      return { name: '', code: null as string | null };
+    }
+
+    const parts = normalizedValue.split('-');
+    const lastPart = parts[parts.length - 1]?.trim().toLowerCase();
+
+    if (parts.length > 1 && /^[a-z]{2}$/.test(lastPart)) {
+      return {
+        name: parts.slice(0, -1).join('-').trim(),
+        code: lastPart
+      };
+    }
+
+    return { name: normalizedValue, code: null as string | null };
+  }
+
+  private getNormalizedTeamCode(teamCode?: string | null) {
+    const normalizedCode = (teamCode ?? '').trim().toLowerCase();
+    return /^[a-z]{2}$/.test(normalizedCode) ? normalizedCode : null;
+  }
+
+  private getTeamInitials(teamName: string) {
+    const words = (teamName ?? '')
+      .split(/\s+/)
+      .map(part => part.trim())
+      .filter(Boolean);
+
+    if (words.length === 0) {
+      return '?';
+    }
+
+    if (words.length === 1) {
+      return words[0].slice(0, 2).toUpperCase();
+    }
+
+    return `${words[0][0]}${words[1][0]}`.toUpperCase();
+  }
+
   private isSameCalendarDate(matchDate: string, compareDate: string | Date) {
     const match = new Date(matchDate);
     const compare = typeof compareDate === 'string' ? new Date(compareDate) : compareDate;
@@ -667,6 +749,30 @@ export class MatchPredictionComponent implements OnInit, OnDestroy {
     parts.push(`${remainingSeconds} san`);
 
     return `Başlamağa qaldı: ${parts.join(' ')}`;
+  }
+
+  getMatchCountdownTone(match: TournamentMatch) {
+    const status = (match.status ?? 'not-started').toString().trim();
+
+    if (status === 'started') {
+      return 'warning';
+    }
+
+    if (status === 'finished') {
+      return 'soft';
+    }
+
+    const diffMs = new Date(match.matchDate).getTime() - this.now.getTime();
+
+    if (diffMs <= 10 * 60 * 1000) {
+      return 'danger';
+    }
+
+    if (diffMs <= 60 * 60 * 1000) {
+      return 'warning';
+    }
+
+    return 'soft';
   }
 
   private shouldShowBalanceNotice(message: string | undefined) {

@@ -15,4 +15,8 @@ export class CampaignWinnerService {
   getCampaignWinners(request: RequestData, beginDate?: any, endDate?: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}GetCampaignWinners?beginDate=${beginDate}&endDate=${endDate}`, request);
   }
+
+  completeCampaignGift(model: { id: number; status: boolean }): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}CompleteCampaignGift`, model);
+  }
 }

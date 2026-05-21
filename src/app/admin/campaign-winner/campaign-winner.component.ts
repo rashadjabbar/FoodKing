@@ -14,6 +14,7 @@ interface CampaignItem {
   campaignType: string;
   prizeType: string;
   prizeName: string;
+  status: string | boolean;
   createdDate: Date;
 }
 
@@ -28,9 +29,10 @@ export class CampaignWinnerComponent implements OnInit, AfterViewInit {
   beginDate: any = new Date();
   endDate: any = new Date();
   campaignData: CampaignItem[] = [];
+  selectedCampaign: CampaignItem | null = null;
 
   dataSource = new MatTableDataSource<CampaignItem>(this.campaignData);
-  displayedColumns: string[] = ['no', 'fullName', 'campaignType', 'prizeType', 'prizeName', 'createdDate'];
+  displayedColumns: string[] = ['no', 'fullName', 'campaignType', 'prizeType', 'prizeName', 'status', 'createdDate'];
   requestData: RequestData = {
     nextPageNumber: 1,
     visibleItemCount: 25,
@@ -57,9 +59,9 @@ export class CampaignWinnerComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.dataSource.filterPredicate = (data, filter) => {
       const normalized = filter.trim().toLowerCase();
-      return [data.fullName, data.campaignType, data.prizeType, data.prizeName].some(value =>
-        value.toLowerCase().includes(normalized)
-      );
+      const statusLabel = String(data.status ?? '').toLowerCase();
+      return [data.fullName, data.campaignType, data.prizeType, data.prizeName, statusLabel]
+        .some(value => value.toLowerCase().includes(normalized));
     };
     this.getCampaignWinners();
   }
@@ -79,12 +81,13 @@ export class CampaignWinnerComponent implements OnInit, AfterViewInit {
     this.campaignWinnerService.getCampaignWinners(this.requestData, this.beginDate!, this.endDate!).subscribe({
       next: res => {
         this.dataSource = new MatTableDataSource<CampaignItem>(res.data.result);
+        this.selectedCampaign = null;
 
         this.dataSource.filterPredicate = (data, filter) => {
           const normalized = filter.trim().toLowerCase();
-          return [data.fullName, data.campaignType, data.prizeType, data.prizeName].some(value =>
-            value.toLowerCase().includes(normalized)
-          );
+          const statusLabel = String(data.status ?? '').toLowerCase();
+          return [data.fullName, data.campaignType, data.prizeType, data.prizeName, statusLabel]
+            .some(value => value.toLowerCase().includes(normalized));
         };
         this.dataSource.paginator = this.paginator;
         this.length = res.data.count;
@@ -137,5 +140,68 @@ export class CampaignWinnerComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  selectRow(row: CampaignItem): void {
+    this.selectedCampaign = this.selectedCampaign?.id === row.id ? null : row;
+  }
+
+  completeSelectedCampaign(): void {
+    if (!this.selectedCampaign || this.isCompleted(this.selectedCampaign.status)) {
+      return;
+    }
+
+    this.campaignWinnerService.completeCampaignGift({
+      id: this.selectedCampaign.id,
+      status: true
+    }).subscribe({
+      next: res => {
+        if (res?.status === false) {
+          this.showToast('error', res?.message || 'Kampaniya tamamlanmadı.');
+          return;
+        }
+
+        this.showToast('success', 'Kampaniya hədiyyəsi tamamlandı.');
+        this.getCampaignWinners();
+      },
+      error: res => {
+        if (res.status == 401) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Icazesiz giris...',
+            text: 'Login sehifesinden daxil olun!',
+          });
+          this.router.navigate(['/user-login']);
+          return;
+        }
+
+        this.showToast('error', 'Sorğunu icra etmək mümkün olmadı.');
+      }
+    });
+  }
+
+  isCompleted(status: string | boolean): boolean {
+    if (typeof status === 'boolean') {
+      return status;
+    }
+
+    return status.toLowerCase() === 'tamamlandı';
+  }
+
+  getStatusSymbol(status: string | boolean): string {
+    return this.isCompleted(status) ? '✓' : '•';
+  }
+
+  private showToast(icon: 'success' | 'error', title: string): void {
+    Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 2200,
+      timerProgressBar: true
+    }).fire({
+      icon,
+      title
+    });
   }
 }

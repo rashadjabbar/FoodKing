@@ -7,10 +7,10 @@
           Dünya Kuboku müsabiqəsi
         </span>
         <h1>Günün oyunları üçün dəqiq hesab təxmin et</h1>
-        <p>
-          Doğru təxminlər qalib elan olunacaq və sizin üçün şans çarxı aktivləşəcək.
-          Nəticələr bazaya əlavə olunduqdan sonra qaliblər seçiləcək.
-        </p>
+        <div class="hero-note">
+          <span>Doğru təxminlər sizi şans çarxına aparacaq. Nəticələr bazaya əlavə olunduqdan sonra qaliblər müəyyən ediləcək.</span>
+          <span>Unutmayın, eyni tarixdə sifarişinizin olması zəruridir.</span>
+        </div>
         <div class="prediction-rule-note">
           Günlük qayda: ilk uğurlu təxmin göndərişində <strong>0.26 ₼</strong> kupon haqqı tutulur.
         </div>
@@ -61,19 +61,41 @@
           <span class="match-time">{{ match.matchDate | date: 'dd.MM.yyyy HH:mm' }}</span>
           <div class="match-top-right">
             <span *ngIf="hasSavedPredictionForMatch(match)" class="saved-badge">Təxmin göndərilib</span>
-            <span class="match-countdown">{{ getMatchCountdownLabel(match) }}</span>
+            <span class="match-countdown" [ngClass]="getMatchCountdownTone(match)">{{ getMatchCountdownLabel(match) }}</span>
           </div>
         </div>
 
         <div class="teams">
-          <div class="team-name">{{ match.homeTeam }}</div>
+          <div class="team-name">
+            <span class="team-flag" aria-hidden="true">
+              <span class="team-flag-fallback">{{ getTeamFlagFallback(match.homeTeam, match.homeTeamCode) }}</span>
+              <img
+                *ngIf="getTeamFlagUrl(match.homeTeam, match.homeTeamCode) as homeFlagUrl"
+                [src]="homeFlagUrl"
+                [alt]="getTeamDisplayName(match.homeTeam)"
+                (error)="onFlagImageError($event)"
+              >
+            </span>
+            <span>{{ getTeamDisplayName(match.homeTeam) }}</span>
+          </div>
           <div class="vs" aria-hidden="true"><span>vs</span></div>
-          <div class="team-name">{{ match.awayTeam }}</div>
+          <div class="team-name">
+            <span class="team-flag" aria-hidden="true">
+              <span class="team-flag-fallback">{{ getTeamFlagFallback(match.awayTeam, match.awayTeamCode) }}</span>
+              <img
+                *ngIf="getTeamFlagUrl(match.awayTeam, match.awayTeamCode) as awayFlagUrl"
+                [src]="awayFlagUrl"
+                [alt]="getTeamDisplayName(match.awayTeam)"
+                (error)="onFlagImageError($event)"
+              >
+            </span>
+            <span>{{ getTeamDisplayName(match.awayTeam) }}</span>
+          </div>
         </div>
 
         <div class="score-inputs">
           <label>
-            <span>{{ match.homeTeam }}</span>
+            <span>{{ getTeamDisplayName(match.homeTeam) }}</span>
             <input
               type="number"
               min="0"
@@ -83,7 +105,7 @@
           </label>
 
           <label>
-            <span>{{ match.awayTeam }}</span>
+            <span>{{ getTeamDisplayName(match.awayTeam) }}</span>
             <input
               type="number"
               min="0"
@@ -95,7 +117,7 @@
 
         <div *ngIf="hasPopularPredictions(match)" class="popular-predictions">
           <div class="popular-predictions-header">
-            <span>Popular Təxminlər</span>
+            <span>Populyar Təxminlər</span>
           </div>
 
           <div class="popular-predictions-list">
@@ -113,6 +135,9 @@
         </div>
 
         <p *ngIf="!isPredictionAllowed(match)" class="match-lock-message">
+          <span class="match-lock-badge" aria-hidden="true">
+            <span class="match-lock-icon"></span>
+          </span>
           {{ getPredictionLockMessage(match) }}
         </p>
       </article>
@@ -120,7 +145,17 @@
 
     <div class="prediction-history">
       <div class="prediction-toolbar history-toolbar">
-        <h3>{{ isAdmin ? 'İstifadəçi təxminləri' : 'Mənim təxminlərim' }}</h3>
+        <div class="toolbar-copy history-copy">
+          <h3>{{ isAdmin ? 'İstifadəçi təxminləri' : 'Mənim təxminlərim' }}</h3>
+          <span class="prediction-summary" *ngIf="filteredPredictionHistory.length > 0">
+            <ng-container *ngIf="historyFilter === 'all'">
+              {{ totalPredictionHistoryCount }} oyundan {{ totalCorrectPredictionCount }}-i {{ isAdmin ? 'doğru təxmin edilib' : 'doğru təxmininiz var' }}
+            </ng-container>
+            <ng-container *ngIf="historyFilter !== 'all'">
+              Seçilmiş tarixdə {{ filteredPredictionHistory.length }} oyundan {{ filteredCorrectPredictionCount }}-i {{ isAdmin ? 'doğru təxmin edilib' : 'doğru təxmininiz var' }}
+            </ng-container>
+          </span>
+        </div>
         <div class="history-filters">
           <select [(ngModel)]="historyFilter" (ngModelChange)="onHistoryFilterChange()">
             <option value="all">Hamısı</option>
@@ -158,14 +193,42 @@
           </div>
 
           <div class="teams">
-            <div class="team-name">{{ item.homeTeam }}</div>
+            <div class="team-name">
+              <span class="team-flag" aria-hidden="true">
+                <span class="team-flag-fallback">{{ getTeamFlagFallback(item.homeTeam, item.homeTeamCode) }}</span>
+                <img
+                  *ngIf="getTeamFlagUrl(item.homeTeam, item.homeTeamCode) as historyHomeFlagUrl"
+                  [src]="historyHomeFlagUrl"
+                  [alt]="getTeamDisplayName(item.homeTeam)"
+                  (error)="onFlagImageError($event)"
+                >
+              </span>
+              <span>{{ getTeamDisplayName(item.homeTeam) }}</span>
+            </div>
             <div class="vs" aria-hidden="true"><span>vs</span></div>
-            <div class="team-name">{{ item.awayTeam }}</div>
+            <div class="team-name">
+              <span class="team-flag" aria-hidden="true">
+                <span class="team-flag-fallback">{{ getTeamFlagFallback(item.awayTeam, item.awayTeamCode) }}</span>
+                <img
+                  *ngIf="getTeamFlagUrl(item.awayTeam, item.awayTeamCode) as historyAwayFlagUrl"
+                  [src]="historyAwayFlagUrl"
+                  [alt]="getTeamDisplayName(item.awayTeam)"
+                  (error)="onFlagImageError($event)"
+                >
+              </span>
+              <span>{{ getTeamDisplayName(item.awayTeam) }}</span>
+            </div>
           </div>
 
           <div class="history-score">
             <span>{{ isAdmin ? 'İstifadəçi təxmini' : 'Sizin təxmininiz' }}</span>
             <strong>{{ item.predictedHomeScore }} - {{ item.predictedAwayScore }}</strong>
+          </div>
+
+          <div class="history-compare" aria-hidden="true">
+            <span class="history-compare-line"></span>
+            <span class="history-compare-arrow">-></span>
+            <span class="history-compare-line"></span>
           </div>
 
           <div class="history-score actual" *ngIf="item.predictionStatus !== 'Pending'">
