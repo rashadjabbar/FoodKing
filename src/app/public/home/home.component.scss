@@ -195,6 +195,13 @@ h6 i {
     box-shadow: 0 14px 26px rgba(36, 151, 105, 0.24);
 }
 
+.prediction-link-disabled {
+    background: #c8d6ce;
+    color: #ffffff;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
 #banner-image-bg {
     background: url('/assets/images/banner/banner-2-shap.png') no-repeat top center;
     background-size: contain;

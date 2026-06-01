@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { ComboBox } from 'src/models/category';
 import { OrderItem, SaveOrder } from 'src/models/save-order';
 import { ComboboxModel } from 'src/models/select-model';
 import { GlobalService } from 'src/services/global.service';
@@ -26,6 +27,7 @@ export class EditOrderPopupComponent {
 
   orderForm = this.formBuilder.group({
     id: [this.data, Validators.required],
+    userId: [null, Validators.required],
     no: ['', Validators.required],
     serviceFee: [0, Validators.required],
     amount: [0, Validators.required],
@@ -44,6 +46,7 @@ export class EditOrderPopupComponent {
   })
 
   products!: any[]  //[{key:1, value:'abc'}]
+  allUser?: ComboBox[]
 
   displayedColumns: string[] = [
     'Position',
@@ -74,6 +77,7 @@ export class EditOrderPopupComponent {
   }
 
   ngOnInit() {
+    this.getAllUser()
     this.getOrderById(this.OF['id'].value)
   }
 
@@ -101,7 +105,23 @@ export class EditOrderPopupComponent {
       this.orderForm.patchValue(res.data)
       this.productItems.data = res.data.orderItems as OrderItem[];
       this.userId = res.data.userId
+      this.OF['userId'].patchValue(res.data.userId)
     })
+  }
+
+  getAllUser() {
+    this.globalService.getAllUser().subscribe(res => {
+      this.allUser = res.data
+    })
+  }
+
+  selectUser(userId: number) {
+    this.userId = userId
+    this.OF['userId'].patchValue(userId)
+
+    if (this.productItems.data.length > 0) {
+      this.calculateAmountAndServiceFee()
+    }
   }
 
   getProducts(event: any) {
@@ -170,7 +190,7 @@ export class EditOrderPopupComponent {
 
     this.OF['amount'].patchValue(this.totalAmount.toFixed(2))
 
-    this.basketService.GetServiceFeeByUserAndAmount({ userId: this.userId, amount: this.totalAmount }).subscribe(res => {
+    this.basketService.GetServiceFeeByUserAndAmount({ userId: Number(this.OF['userId'].value), amount: this.totalAmount }).subscribe(res => {
       this.OF['serviceFee'].patchValue(res.data)
     })
   }

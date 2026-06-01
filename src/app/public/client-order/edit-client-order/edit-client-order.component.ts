@@ -38,6 +38,7 @@ export class EditClientOrderComponent implements OnInit {
 
   orderForm = this.fb.group({
     id: [this.data, Validators.required],
+    userId: [null, Validators.required],
     no: ['', Validators.required],
     serviceFee: [0, Validators.required],
     amount: [0, Validators.required],

@@ -135,7 +135,7 @@ export class DashboardComponent {
       ],
       chart: {
         type: "bar",
-        height: 400
+        height: 480
       },
       plotOptions: {
         bar: {
@@ -189,7 +189,7 @@ export class DashboardComponent {
         }
       ],
       chartMonthly: {
-        height: 400,
+        height: 480,
         type: "line"
       },
       stroke: {
@@ -231,7 +231,7 @@ export class DashboardComponent {
       },
       yaxis: {
         min: 0,
-        max: 800,
+        max: 900,
         title: {
           text: "Məbləğ ₼",
           style: {
@@ -247,7 +247,8 @@ export class DashboardComponent {
     this.chartOptionsProduct = {
       series: topProductCount,
       chart: {
-        width: 500,
+        width: '100%',
+        height: 320,
         type: "pie"
       },
       labels: topProductNames,
@@ -256,7 +257,8 @@ export class DashboardComponent {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200
+              width: '100%',
+              height: 280
             },
             legend: {
               position: "bottom"
@@ -277,7 +279,7 @@ export class DashboardComponent {
       ],
       chart: {
         type: "bar",
-        height: 400
+        height: 480
       },
       plotOptions: {
         bar: {

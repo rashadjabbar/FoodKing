@@ -1,11 +1,26 @@
 <div class="ticker-container">
-  <div class="ticker-track" #tickerTrack>
+  <div
+    class="ticker-track"
+    #tickerTrack
+    (mouseenter)="onMouseEnter()"
+    (mouseleave)="onMouseLeave()"
+    (pointerdown)="onPointerDown($event)"
+    (pointermove)="onPointerMove($event)"
+    (pointerup)="onPointerUp($event)"
+    (pointercancel)="onPointerUp($event)"
+  >
     <div class="ticker-content">
       <span *ngFor="let news of newsList">
-        📰 {{ news }} &nbsp;&nbsp;&nbsp;
+        <span class="ticker-link" [attr.data-link]="news.link">
+          📰 {{ news.text }}
+        </span>
+        &nbsp;&nbsp;&nbsp;
       </span>
       <span *ngFor="let news of newsList">
-        📰 {{ news }} &nbsp;&nbsp;&nbsp;
+        <span class="ticker-link" [attr.data-link]="news.link">
+          📰 {{ news.text }}
+        </span>
+        &nbsp;&nbsp;&nbsp;
       </span>
     </div>
   </div>

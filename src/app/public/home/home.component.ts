@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild, numberAttribute } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -20,7 +20,7 @@ import { PaginationDummyService } from 'src/services/public/pagination-dummy.ser
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnDestroy {
 
   @ViewChild('list') el!: ElementRef;
 
@@ -59,9 +59,17 @@ export class HomeComponent {
   pageSizeOptions: number[] = [9, 18, 27];
   pageEvent!: PageEvent;
   dataSource = new MatTableDataSource<ProductBrowseData>(this.productData);
+  predictionTargetDate = new Date(2026, 5, 11, 0, 0, 0);
+  isPredictionAvailable = false;
+  predictionCountdown = '';
+  private predictionCountdownIntervalId?: ReturnType<typeof setInterval>;
 
 
   ngOnInit() {
+    this.updatePredictionAvailability();
+    this.predictionCountdownIntervalId = setInterval(() => {
+      this.updatePredictionAvailability();
+    }, 1000);
 
     let slideIndex = 1;
     let slider = document.querySelector('#test');
@@ -236,5 +244,31 @@ export class HomeComponent {
         this.productData[index].isFavorite = !this.productData[index].isFavorite;
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    if (this.predictionCountdownIntervalId) {
+      clearInterval(this.predictionCountdownIntervalId);
+    }
+  }
+
+  private updatePredictionAvailability(): void {
+    const now = new Date();
+    const remainingTime = this.predictionTargetDate.getTime() - now.getTime();
+
+    this.isPredictionAvailable = remainingTime <= 0;
+
+    if (this.isPredictionAvailable) {
+      this.predictionCountdown = '';
+      return;
+    }
+
+    const totalSeconds = Math.floor(remainingTime / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    this.predictionCountdown = `${days}g ${hours}s ${minutes}d ${seconds}san`;
   }
 }

@@ -1,5 +1,6 @@
 export class SaveOrder {
     id?: number = 0
+    userId?: number
     serviceFee?: number
     amount?: number
     note?: string
