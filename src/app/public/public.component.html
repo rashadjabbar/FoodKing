@@ -236,6 +236,10 @@
                     <a [routerLink]="['cart']" [routerLinkActiveOptions]="{ exact: true }"
                       routerLinkActive="active-menu"><i class="fas fa-chevron-right me-2"></i>Səbət</a>
                   </li>
+                  <li class="menu-item" *ngIf="isAuthenticated">
+                    <a [routerLink]="['news']" [routerLinkActiveOptions]="{ exact: true }"
+                      routerLinkActive="active-menu"><i class="fas fa-chevron-right me-2"></i>Xəbərlər</a>
+                  </li>
                 </ul>
               </div>
             </div>

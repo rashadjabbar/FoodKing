@@ -25,6 +25,8 @@ import { ClientPaymentComponent } from './public/client-payment/client-payment.c
 import { ChangePasswordComponent } from './public/changePassword/changePassword.component';
 import { MatchPredictionComponent } from './public/match-prediction/match-prediction.component';
 import { CampaignWinnerComponent } from './admin/campaign-winner/campaign-winner.component';
+import { NewsComponent } from './public/news/news.component';
+import { PublicLoginGuard } from 'src/guards/public-login.guard';
 
 const routes: Routes = [
   {
@@ -41,6 +43,7 @@ const routes: Routes = [
       { path: 'match-prediction', component: MatchPredictionComponent },
       { path: 'client-payment', component: ClientPaymentComponent },
       {path: 'change-password', component: ChangePasswordComponent },
+      { path: 'news', component: NewsComponent, canActivate: [PublicLoginGuard] },
     ]
   },
   {

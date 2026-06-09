@@ -1,0 +1,191 @@
+<section class="news-page">
+  <div class="container py-5">
+    <div class="news-form-card">
+      <div class="card-head">
+        <h3>{{ editingNewsId ? 'Xəbəri dəyiş' : 'Yeni xəbər əlavə et' }}</h3>
+        <span>{{ editingNewsId ? 'Mövcud xəbəri yenilə' : 'Yeni xəbər yarat' }}</span>
+      </div>
+
+      <form [formGroup]="newsForm" (ngSubmit)="saveNews()" class="news-form" novalidate>
+        <div class="field wide">
+          <label for="news-content">Məzmun</label>
+          <textarea id="news-content" rows="4" formControlName="content" placeholder="Xəbərin mətni"></textarea>
+        </div>
+
+        <div class="field wide">
+          <label for="news-link">Link</label>
+          <input id="news-link" type="url" formControlName="link" placeholder="Xəbər üçün link" />
+        </div>
+
+        <div class="form-actions">
+          <button class="news-action reset" type="button" (click)="startCreate()">
+            <i class="fas fa-eraser"></i>
+            Təmizlə
+          </button>
+          <button class="news-action save" type="submit">
+            <i class="fas" [ngClass]="editingNewsId ? 'fa-save' : 'fa-plus'"></i>
+            {{ editingNewsId ? 'Yadda saxla' : 'Əlavə et' }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="operation-div news-toolbar">
+      <div class="toolbar-left">
+        <div class="range-date">
+          <mat-form-field>
+            <mat-label>Tarix aralığı</mat-label>
+            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+              <input matStartDate formControlName="start" readonly placeholder="Başlanğıc" (click)="picker.open()">
+              <input matEndDate formControlName="end" readonly placeholder="Son" (click)="picker.open()">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker>
+              <mat-datepicker-actions>
+                <button mat-raised-button matDatepickerApply (click)="selectToday()">Bu gün</button>
+                <button mat-raised-button color="primary" matDatepickerApply (click)="search()">Tətbiq et</button>
+              </mat-datepicker-actions>
+            </mat-date-range-picker>
+          </mat-form-field>
+
+          <div class="status-filter">
+            <select id="news-status-filter" aria-label="Status filter" [value]="statusFilter" (change)="onStatusFilterChange($event)">
+              <option value="all">Hamısı</option>
+              <option value="active">Aktivlər</option>
+              <option value="inactive">Deaktivlər</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-input">
+        <mat-form-field class="example-full-width">
+          <mat-label>Axtar...</mat-label>
+          <input type="text" matInput (keyup)="handleKeyUp($event)">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="table-div news-table-wrap">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let row; let i = index">
+            {{(paginator.pageIndex * paginator.pageSize) + (i + 1)}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="content">
+          <th mat-header-cell *matHeaderCellDef>Mətn</th>
+          <td mat-cell *matCellDef="let row" class="content-cell" [title]="row.text ?? row.Text ?? row.content ?? row.news ?? '-'">
+            {{ truncateText(row.text ?? row.Text ?? row.content ?? row.news ?? '') }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="link">
+          <th mat-header-cell *matHeaderCellDef>Link</th>
+          <td mat-cell *matCellDef="let row">
+            <a *ngIf="row.link ?? row.Link ?? row.newsLink" [href]="row.link ?? row.Link ?? row.newsLink" target="_blank" rel="noopener noreferrer" [title]="row.link ?? row.Link ?? row.newsLink">
+              {{ truncateText(row.link ?? row.Link ?? row.newsLink) }}
+            </a>
+            <span *ngIf="!(row.Link ?? row.link ?? row.newsLink)">-</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef>İstifadəçi</th>
+          <td mat-cell *matCellDef="let row">{{ row.username ?? row.Username ?? row.userName ?? '-' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdDate">
+          <th mat-header-cell *matHeaderCellDef>Yaranma tarixi</th>
+          <td mat-cell *matCellDef="let row">
+            {{ getCreatedDate(row) ? (getCreatedDate(row) | date: 'dd-MM-yyyy HH:mm') : '-' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Əməliyyat</th>
+          <td mat-cell *matCellDef="let row">
+            <button
+              class="action-btn"
+              type="button"
+              (click)="editNews(row)"
+              [disabled]="!canEditNews(row)"
+              [attr.title]="canEditNews(row) ? null : 'Bu xəbəri yalnız özünüz yarada və redaktə edə bilərsiniz'"
+            >
+              <i class="fas fa-pen"></i>
+              Dəyiş
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="approval">
+          <th mat-header-cell *matHeaderCellDef>Təsdiq</th>
+          <td mat-cell *matCellDef="let row">
+            <div class="approval-cell">
+              <div *ngIf="isAdmin; else approvalText" class="approval-admin-row">
+                <div class="checkbox-wrapper-51">
+                  <input
+                    [id]="'news-approve-' + (row.id ?? row.Id ?? row.newsId)"
+                    [checked]="isApprovalActive(row)"
+                    type="checkbox"
+                    (change)="toggleApproval(row, $event)">
+                  <label class="toggle" [for]="'news-approve-' + (row.Id ?? row.newsId ?? row.id)">
+                    <span>
+                      <svg viewBox="0 0 10 10" height="10px" width="10px">
+                        <path d="M5,1 L5,1 C2.790861,1 1,2.790861 1,5 L1,5 C1,7.209139 2.790861,9 5,9 L5,9 C7.209139,9 9,7.209139 9,5 L9,5 C9,2.790861 7.209139,1 5,1 L5,9 L5,1 Z"></path>
+                      </svg>
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <ng-template #approvalText>
+                <span class="status-pill" [ngClass]="isApprovalActive(row) ? 'approved' : 'pending'">
+                  {{ getApprovalLabel(row) }}
+                </span>
+              </ng-template>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Aktiv</th>
+          <td mat-cell *matCellDef="let row">
+            <div class="checkbox-wrapper-51">
+              <input
+                [id]="'news-status-' + (row.id ?? row.Id ?? row.newsId)"
+                [checked]="(row.status ?? row.Status ?? row.isActive ?? row.active) === true || (row.status ?? row.Status ?? row.isActive ?? row.active) === 1"
+                type="checkbox"
+                (change)="toggleStatus(row, $event)">
+              <label class="toggle" [for]="'news-status-' + (row.Id ?? row.newsId ?? row.id)">
+                <span>
+                  <svg viewBox="0 0 10 10" height="10px" width="10px">
+                    <path d="M5,1 L5,1 C2.790861,1 1,2.790861 1,5 L1,5 C1,7.209139 2.790861,9 5,9 L5,9 C7.209139,9 9,7.209139 9,5 L9,5 C9,2.790861 7.209139,1 5,1 L5,9 L5,1 Z"></path>
+                  </svg>
+                </span>
+              </label>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="visibleColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: visibleColumns" 
+            [ngClass]="{'editing-row': isRowEditing(row)}"></tr>
+      </table>
+
+      <div class="empty-state" *ngIf="dataSource.filteredData.length === 0">
+        Nəticə tapılmadı
+      </div>
+
+      <mat-paginator
+        [length]="length"
+        #paginator
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onChangePage($event)"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</section>

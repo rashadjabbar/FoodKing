@@ -55,6 +55,7 @@
         [class.locked]="!isPredictionAllowed(match)"
         [class.saved]="hasSavedPredictionForMatch(match)"
         [class.just-saved]="isSuccessHighlighted(match)"
+        [ngStyle]="getMatchCardBackgroundStyle(match)"
         *ngFor="let match of matches; trackBy: trackByMatch"
       >
         <div class="match-top">
@@ -80,6 +81,7 @@
           </div>
           <div class="vs" aria-hidden="true"><span>vs</span></div>
           <div class="team-name">
+            <span>{{ getTeamDisplayName(match.awayTeam) }}</span>
             <span class="team-flag" aria-hidden="true">
               <span class="team-flag-fallback">{{ getTeamFlagFallback(match.awayTeam, match.awayTeamCode) }}</span>
               <img
@@ -89,7 +91,6 @@
                 (error)="onFlagImageError($event)"
               >
             </span>
-            <span>{{ getTeamDisplayName(match.awayTeam) }}</span>
           </div>
         </div>
 
@@ -207,6 +208,7 @@
             </div>
             <div class="vs" aria-hidden="true"><span>vs</span></div>
             <div class="team-name">
+              <span>{{ getTeamDisplayName(item.awayTeam) }}</span>
               <span class="team-flag" aria-hidden="true">
                 <span class="team-flag-fallback">{{ getTeamFlagFallback(item.awayTeam, item.awayTeamCode) }}</span>
                 <img
@@ -216,7 +218,6 @@
                   (error)="onFlagImageError($event)"
                 >
               </span>
-              <span>{{ getTeamDisplayName(item.awayTeam) }}</span>
             </div>
           </div>
 

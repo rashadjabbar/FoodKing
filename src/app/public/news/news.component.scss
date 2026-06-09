@@ -1,0 +1,575 @@
+.news-page {
+  background: linear-gradient(180deg, #f7fbf8 0%, #ffffff 100%);
+  min-height: 100%;
+  color: #1f2937;
+  font-family: inherit;
+  line-height: 1.55;
+  padding-top: 4rem;
+  padding-bottom: 1.5rem;
+}
+
+.news-form-card,
+.news-table-wrap,
+.news-toolbar {
+  background: #fff;
+  border: 1px solid rgba(59, 183, 126, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(32, 57, 43, 0.06);
+}
+
+.news-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 1.25rem;
+  margin-bottom: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+}
+
+.range-date {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+.range-date mat-form-field {
+  min-width: 220px;
+  flex: 1 1 320px;
+}
+
+.news-toolbar mat-form-field {
+  margin-bottom: -0.55rem;
+}
+
+.status-filter {
+  min-width: 160px;
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  flex: 0 0 320px;
+  min-width: 240px;
+  margin-left: auto;
+}
+
+.search-input mat-form-field {
+  width: 100%;
+}
+
+  .status-filter select {
+    width: 100%;
+    min-width: 180px;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(59, 183, 126, 0.3);
+    border-radius: 999px;
+    background: #ffffff;
+    color: #1f2937;
+    font-size: 0.95rem;
+    outline: none;
+    appearance: none;
+    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.05);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .status-filter select:focus {
+    border-color: #3bb77e;
+    box-shadow: 0 0 0 2px rgba(59, 183, 126, 0.12);
+  }
+
+/* Highlight row when editing */
+tr.editing-row {
+  background-color: #e8f5e9 !important;
+  border-left: 4px solid #3bb77e;
+  font-weight: 500;
+  box-shadow: inset 0 0 8px rgba(59, 183, 126, 0.15);
+}
+
+tr.editing-row td {
+  background-color: #e8f5e9;
+}
+
+/* Table row hover effects */
+tr[mat-row] {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: #f0f9f7 !important;
+    box-shadow: 0 2px 8px rgba(59, 183, 126, 0.12);
+    transform: translateY(-2px);
+    
+    td {
+      background-color: #f0f9f7;
+    }
+    
+    .action-btn {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+}
+
+/* Action buttons styling */
+.action-btn {
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #3bb77e;
+  background-color: transparent;
+  color: #3bb77e;
+  cursor: pointer;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  
+  &:hover {
+    background-color: #3bb77e;
+    color: white;
+    box-shadow: 0 2px 6px rgba(59, 183, 126, 0.3);
+  }
+  
+  i {
+    transition: transform 0.2s ease;
+  }
+}
+
+.search-input {
+  margin-left: auto;
+  flex: 1 1 280px;
+  max-width: 275px;
+  min-width: 0;
+}
+
+.search-input mat-form-field {
+  width: 100%;
+}
+
+.news-form-card {
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.card-head,
+.table-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+
+.card-head h3,
+.table-head h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.card-head span,
+.table-head span {
+  color: #64748b;
+  font-size: 0.92rem;
+}
+
+.news-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #1f2937;
+  font-weight: 600;
+  width: 100%;
+}
+
+.news-form input,
+.news-form textarea,
+.news-form select {
+  width: 100%;
+  border: 1px solid #dbe5dc;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  font: inherit;
+  color: inherit;
+  background: #fff;
+  outline: none;
+}
+
+.field label {
+  margin: 0;
+}
+
+.news-form textarea {
+  resize: vertical;
+}
+
+.wide {
+  grid-column: auto;
+}
+
+.status {
+  min-width: 220px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.news-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-width: 130px;
+  height: 40px;
+  padding: 0 1rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-size: 0.925rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+  text-transform: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
+.news-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.news-action:active {
+  transform: translateY(0);
+}
+
+.news-action:focus-visible {
+  outline: 2px solid #3bb77e;
+  outline-offset: 2px;
+}
+
+.news-action.reset {
+  background: #ffffff;
+  border-color: #d1e8de;
+  color: #22664d;
+  box-shadow: 0 2px 8px rgba(34, 102, 77, 0.12);
+}
+
+.news-action.reset:hover {
+  background: #f5fbf8;
+  border-color: #a9d6c2;
+  box-shadow: 0 4px 12px rgba(34, 102, 77, 0.18);
+}
+
+.news-action.reset:active {
+  background: #e8f5f0;
+}
+
+.news-action.save {
+  background: linear-gradient(135deg, #3bb77e 0%, #2d9b6f 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(59, 183, 126, 0.25);
+  font-weight: 600;
+}
+
+.news-action.save:hover {
+  box-shadow: 0 6px 16px rgba(59, 183, 126, 0.35);
+  background: linear-gradient(135deg, #35b074 0%, #27935a 100%);
+}
+
+.news-action.save:active {
+  box-shadow: 0 2px 8px rgba(59, 183, 126, 0.25);
+}
+
+.news-action i {
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 0;
+  border-radius: 8px;
+  background: #3bb77e;
+  color: #fff;
+  padding: 0.55rem 0.9rem;
+  margin-right: 0.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .action-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .action-btn.secondary {
+    background: #1e293b;
+  }
+
+  .approval-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .approval-admin-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: #475569;
+    font-weight: 600;
+    font-size: 0.85rem;
+    min-width: 120px;
+    text-align: center;
+  }
+
+  .status-pill.approved {
+    background: rgba(59, 183, 126, 0.16);
+    color: #14532d;
+  }
+
+  .status-pill.pending {
+    background: rgba(251, 191, 36, 0.14);
+    color: #92400e;
+  }
+
+  .status-pill.inactive {
+    background: rgba(248, 113, 113, 0.14);
+    color: #7f1d1d;
+  width: 100%;
+  color: #1f2937;
+}
+
+.news-table-wrap th,
+.news-table-wrap td,
+.news-table th,
+.news-table td {
+  vertical-align: top;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.news-table-wrap th,
+.news-table th {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.news-table-wrap {
+  overflow-x: auto;
+}
+
+.empty-state {
+  padding: 1.5rem;
+  text-align: center;
+  color: #64748b;
+  font-weight: 600;
+}
+
+mat-paginator {
+  border-top: 1px solid #edf2f7;
+}
+
+.checkbox-wrapper-51 {
+  position: relative;
+  display: inline-block;
+}
+
+.checkbox-wrapper-51 input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+}
+
+.checkbox-wrapper-51 .toggle {
+  display: block;
+  position: relative;
+  width: 2.7rem;
+  height: 1.6rem;
+  border-radius: 999px;
+  background: #d9e7df;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.checkbox-wrapper-51 .toggle:before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 0.16rem;
+  width: 1.26rem;
+  height: 1.26rem;
+  border-radius: 50%;
+  background: #fff;
+  transition: 0.2s ease;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
+}
+
+.checkbox-wrapper-51 .toggle span {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.checkbox-wrapper-51 .toggle span svg {
+  position: absolute;
+  left: 0.85rem;
+  top: 0.48rem;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.2;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+
+.checkbox-wrapper-51 .toggle span svg path {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+}
+
+.checkbox-wrapper-51 input[type="checkbox"]:checked + .toggle {
+  background: #3bb77e;
+}
+
+.checkbox-wrapper-51 input[type="checkbox"]:checked + .toggle:before {
+  transform: translateX(1.1rem);
+}
+
+.checkbox-wrapper-51 input[type="checkbox"]:checked + .toggle span svg {
+  opacity: 1;
+}
+
+.checkbox-wrapper-51 input[type="checkbox"]:checked + .toggle span path {
+  stroke-dashoffset: 0;
+}
+
+.content-cell {
+  max-width: 300px;
+  min-width: 0;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: help;
+  position: relative;
+  text-decoration: none;
+}
+
+.news-table-wrap a {
+  max-width: 300px;
+  white-space: normal;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+}
+
+.news-table-wrap a[title] {
+  border-bottom: 1px dotted #3bb77e;
+}
+
+.content-cell[title] {
+  text-decoration: none;
+}
+
+.news-table-wrap a[title]:hover::after,
+.content-cell[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 120%;
+  left: 0;
+  background: #1f2937;
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: normal;
+  width: max-content;
+  max-width: 300px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+@media (max-width: 992px) {
+  .news-page {
+    padding-top: 2.25rem;
+  }
+
+  .news-form,
+  .range-date {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .wide,
+  .status {
+    grid-column: auto;
+  }
+
+  .search-input {
+    margin-left: 0;
+  }
+
+  .range-date mat-form-field,
+  .search-input mat-form-field {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .form-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .news-action {
+    flex: 1 1 140px;
+  }
+
+  .card-head,
+  .table-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

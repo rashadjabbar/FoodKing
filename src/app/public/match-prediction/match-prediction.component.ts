@@ -43,6 +43,8 @@ export class MatchPredictionComponent implements OnInit, OnDestroy {
   predictionHistory: MatchPredictionHistoryItem[] = [];
   predictions: Record<number, MatchPredictionItem> = {};
   successHighlightedMatchIds = new Set<number>();
+  matchBackgroundFlagUrls: Record<number, string> = {};
+  useRandomBackgroundMode = true;
   isAdmin = false;
   isLoading = false;
   isSaving = false;
@@ -235,9 +237,14 @@ export class MatchPredictionComponent implements OnInit, OnDestroy {
       return;
     }
 
+    // 1 oyun varsa sadəcə "Davam edilsin?" göstər
+    const alertMessage = localFilledPredictions.length === 1 
+      ? 'Davam edilsin?'
+      : `Təxmin göndərildikdə balansınızdan ${this.couponPrice.toFixed(2)} ₼ kupon qiyməti silinəcək. Davam edilsin?`;
+
     showConfirmAlert(
       '',
-      `Təxmin göndərildikdə balansınızdan ${this.couponPrice.toFixed(2)} ₼ kupon qiyməti silinəcək. Davam edilsin?`,
+      alertMessage,
       'Bəli',
       'Ləğv et'
     ).then(result => {
@@ -451,7 +458,7 @@ export class MatchPredictionComponent implements OnInit, OnDestroy {
       const userType = Number(data?.userType);
       this.currentUserId = this.extractCurrentUserId(data);
       this.currentUsername = this.extractCurrentUsername(data);
-      this.isAdmin = userType === 1 || userType === 4;
+      this.isAdmin = userType === 1;
     } catch {
       this.currentUserId = null;
       this.currentUsername = '';
@@ -474,6 +481,8 @@ export class MatchPredictionComponent implements OnInit, OnDestroy {
         predictedAwayScore:
           existingPrediction?.predictedAwayScore ?? historyPrediction?.predictedAwayScore ?? null
       };
+
+      this.loadMatchBackgroundFlag(match);
     });
   }
 
@@ -849,4 +858,33 @@ export class MatchPredictionComponent implements OnInit, OnDestroy {
         predictionItem['memberID']
     );
   }
+
+  private loadMatchBackgroundFlag(match: TournamentMatch) {
+    const homeFlagUrl = this.getTeamFlagUrl(match.homeTeam, match.homeTeamCode);
+    const awayFlagUrl = this.getTeamFlagUrl(match.awayTeam, match.awayTeamCode);
+    const useHome = this.useRandomBackgroundMode ? this.getStableRandomMatchChoice(match.id) === 0 : true;
+    const selectedUrl = useHome ? homeFlagUrl : awayFlagUrl;
+
+    if (selectedUrl) {
+      this.matchBackgroundFlagUrls[match.id] = selectedUrl;
+    }
+  }
+
+  private getStableRandomMatchChoice(matchId: number): number {
+    const seed = Math.abs(Math.sin(matchId) * 10000);
+    return Math.floor(seed) % 2;
+  }
+
+  getMatchCardBackgroundStyle(match: TournamentMatch): Record<string, string> {
+    const flagUrl = this.matchBackgroundFlagUrls[match.id];
+    if (!flagUrl) {
+      return {};
+    }
+
+    return {
+      'background': `linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.88)), url('${flagUrl}') center/cover no-repeat`,
+      'background-blend-mode': 'normal'
+    };
+  }
 }
+

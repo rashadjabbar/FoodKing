@@ -34,6 +34,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -44,6 +45,7 @@ import { NewsTickerComponent } from './news-ticker/news-ticker.component';
 import { ClientPaymentComponent } from './client-payment/client-payment.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatchPredictionComponent } from './match-prediction/match-prediction.component';
+import { NewsComponent } from './news/news.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { MatchPredictionComponent } from './match-prediction/match-prediction.co
     NewsTickerComponent,
     ClientPaymentComponent,
     MatchPredictionComponent,
+    NewsComponent,
 
   ],
   imports: [
@@ -86,6 +89,7 @@ import { MatchPredictionComponent } from './match-prediction/match-prediction.co
     MatDatepickerModule,
     MatNativeDateModule ,
     MatFormFieldModule,
+    MatInputModule,
     MatButtonModule,
     NgApexchartsModule,
     NgxFileDropModule

@@ -340,7 +340,10 @@
   transition:
     transform 0.22s ease,
     box-shadow 0.22s ease,
-    border-color 0.22s ease;
+    border-color 0.22s ease,
+    background-color 0.3s ease;
+  background-size: cover !important;
+  background-position: center !important;
 }
 
 .match-card:hover {
@@ -664,11 +667,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   overflow: hidden;
   border-radius: 50%;
-  flex: 0 0 32px;
+  flex: 0 0 40px;
   background: linear-gradient(135deg, rgba(26, 51, 82, 0.08), rgba(201, 162, 39, 0.14));
   border: 1px solid rgba(26, 51, 82, 0.08);
   box-shadow: 0 6px 12px rgba(15, 33, 55, 0.06);
@@ -981,9 +984,9 @@
   }
 
   .team-flag {
-    width: 28px;
-    height: 28px;
-    flex-basis: 28px;
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
   }
 
   .popular-predictions-list {
